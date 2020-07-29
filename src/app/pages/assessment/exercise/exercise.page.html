@@ -1,0 +1,107 @@
+<ion-header mode="md">
+  
+  <ion-toolbar class="headtoolbar">
+    
+      <ion-row>
+        <ion-col size="2">
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <!-- <ion-back-button style="float:left" mode="md" color="mdblack" icon="chevron-back-outline" defaultHref="admin-sign-in"></ion-back-button> -->
+            <m-backbutton></m-backbutton>
+            </ion-buttons>
+        </ion-toolbar> 
+        </ion-col>
+        <ion-col size="8">
+          <div>
+            <ion-text color="mdblack" position="floating" id="titletag">Exercise/PT</ion-text>
+          </div> 
+        </ion-col>
+      </ion-row>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content [formGroup] = "exerciseForm">
+  <ion-grid style="padding:24px;height:fit-content">
+    <!-- Therapy-->
+
+    <div style="padding-top: 0px; margin-bottom: 15px;">
+      <ion-label style="font-size: 16px; line-height: 19px;"
+        >Type of Therapy</ion-label
+      >
+    </div>
+
+    <!-- CHECKBOX 1 -->
+
+    <ion-row style="align-items: center; margin-top: 5px;" *ngFor="let therapyType of therapyTypeList">
+      <ion-col  size="1">
+        <div style="padding-left: 3px;">
+          <ion-checkbox #therapyType color="mwhite" checked="false" [formControlName]="therapyType"></ion-checkbox>
+        </div>
+      </ion-col>
+      <ion-col
+        (click)="generateClick(therapyType)"
+        size="11"
+        style="padding-top: 0px;"
+      >
+        <div>
+          <ion-text
+            style="
+              font-size: 16px;
+              line-height: 19px;
+              font-weight: 300;
+              margin-left: 12px;
+            "
+            color="mdblack"
+            >{{therapyType}}</ion-text
+          >
+        </div>
+      </ion-col>
+    </ion-row>
+    
+    <!-- INSTRUCTIONS -->
+
+    <div class="nametag" style="margin-top: 15px;" *ngIf="readyFlag">
+      <ion-text position="floating" id="tag">Instructions(optional)</ion-text>
+    </div>
+    <div>
+      <ion-textarea
+        *ngIf="readyFlag"
+        style="height: 120px;"
+        class="input"
+        placeholder="Write here"
+        formControlName = "instructions"
+      ></ion-textarea>
+    </div>
+
+    <!-- ADD IMAGE -->
+    <app-addimage (click)="addImage()"></app-addimage>
+    <ion-text>
+      <div class="imagelist" *ngFor="let img of imageList; let j=index">
+        <ion-grid fixed class="ion-no-padding">
+          <ion-row>
+            <ion-col style="padding-top: 11px;" size="8"><span>{{img.substring(img.lastIndexOf("/") + 1) | slice:0:12}}</span></ion-col>
+            <ion-col size="4">
+              <ion-button
+              fill="clear"
+              shape="round"
+              class="dltbtn"
+              (click)="removeImg(j)"        >
+              <ion-icon slot="icon-only" src="assets/trash.svg"></ion-icon>
+              Delete
+            </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid> 
+      </div>
+    </ion-text>
+
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <div id="button">
+    <ion-button [disabled]="false" class="btnblue" type="submit"  id="signup" (click) = "save()">SAVE & PROCEED</ion-button>
+  </div>  
+</ion-footer>

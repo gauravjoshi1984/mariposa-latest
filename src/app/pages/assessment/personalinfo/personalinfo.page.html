@@ -1,0 +1,221 @@
+<ion-header mode="md">
+    <ion-toolbar class="headtoolbar">
+        <ion-row>
+            <ion-col size="2">
+                <ion-toolbar>
+                    <ion-buttons slot="start">
+                        <m-backbutton></m-backbutton>
+                    </ion-buttons>
+                </ion-toolbar>
+            </ion-col>
+            <ion-col size="8">
+                <div>
+                    <ion-text color="mdblack" position="floating" id="titletag">Personal Information</ion-text>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content scrollable>
+    <ion-grid style="
+      padding-top: 35px;
+      padding-left: 24px;
+      padding-right: 24px;
+      padding-bottom: 13px;
+      height: auto;
+      margin-bottom: 73px;
+    ">
+        <!-- FIRST NAME TAG -->
+        <div class="nametag" style="padding: 0px; margin: 0px;">
+            <ion-text position="floating" id="tag">First Name</ion-text>
+        </div>
+
+        <div>
+            <ion-input mode="md" class="input" placeholder=""></ion-input>
+        </div>
+
+        <!-- LAST NAME TAG -->
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Last Name</ion-text>
+        </div>
+
+        <div>
+            <ion-input mode="md" class="input" placeholder=""></ion-input>
+        </div>
+
+        <!-- GENDER -->
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Gender</ion-text>
+        </div>
+
+        <!-- <ion-radio-group value="Male">
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none">
+            <ion-label>MALE</ion-label>
+            <ion-radio slot="start" value="Male"></ion-radio>
+          </ion-item>
+        </ion-col>
+
+        <ion-col>
+          <ion-item lines="none">
+            <ion-label>FEMALE</ion-label>
+            <ion-radio slot="start" value="Female"></ion-radio>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-radio-group> -->
+        <ion-grid style="padding: 0; width: 231px; margin-left: 0;" fixed>
+            <ion-row>
+                <ion-col class="gencol" size="6">
+                    <ion-card class="genCard" [class.selectedGen]="gen=='M'" (click)="gen='M'">
+                        <img *ngIf="gen!='M'" src="assets/MariposaIcons/Maleicon.svg" alt="" />
+                        <img *ngIf="gen=='M'" src="assets/gender/Male.svg" alt="" />
+                    </ion-card>
+                    <span [class.selectedGentext]="gen=='M'">Male</span>
+                </ion-col>
+                <ion-col class="gencol" size="6">
+                    <ion-card class="genCard" [class.selectedGen]="gen=='F'" (click)="gen='F'">
+                        <img *ngIf="gen!='F'" src="assets/femaleicon.svg" alt="" />
+                        <img *ngIf="gen=='F'" src="assets/gender/femaleb.svg" alt="" />
+                    </ion-card>
+                    <span [class.selectedGentext]="gen=='F'">Female</span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <!-- DATE OF BIRTH -->
+
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Date of Birth</ion-text>
+        </div>
+        <ion-row>
+            <ion-col style="display: flex;" size="12" class="dobsec">
+                <ion-datetime #dobdate displayFormat="DD" [pickerOptions]="customPickerOptions1" style="display: none;"></ion-datetime>
+                <div (click)="changeDay()" class="dbdate">
+                    <div>{{dobdate1}}</div>
+                    <img src="assets/MariposaIcons/Dropdown2.svg" alt="" />
+                </div>
+                <div (click)="changeMonth()" class="dbmnth">
+                    <div>{{dobmnth}}</div>
+
+                    <img src="assets/MariposaIcons/Dropdown2.svg" alt="" />
+                </div>
+                <div (click)="changeYear()" class="dbyr">
+                    <div>{{dobyr}}</div>
+                    <img src="assets/MariposaIcons/Dropdown2.svg" alt="" />
+                </div>
+                <!-- <ion-select style="width:110%;float:left" mode="md" class="input Date" placeholder="Date"> </ion-select> -->
+            </ion-col>
+            <!-- <ion-col > -->
+            <ion-datetime style="display: none;" #dobmonth displayFormat="MMM" [pickerOptions]="customPickerOptions2"></ion-datetime>
+
+            <!-- <ion-select style="width:85%;float:right" mode="md" class="input" placeholder="Month"></ion-select> -->
+            <!-- </ion-col> -->
+            <!-- <ion-col > -->
+            <ion-datetime style="display: none;" #dobyear displayFormat="YYYY" [pickerOptions]="customPickerOptions3"></ion-datetime>
+
+            <!-- <ion-select style="width:90%;float:right;" mode="md" class="input" placeholder="Year"></ion-select> -->
+            <!-- </ion-col> -->
+        </ion-row>
+
+        <!-- LIVES WITH -->
+
+        <div style="padding: 0px; margin-top: 11px;" class="nametag">
+            <ion-text position="floating" id="tag">Lives with</ion-text>
+        </div>
+        <div>
+            <ion-select mode="md" class="input" placeholder="Select one"></ion-select>
+        </div>
+
+        <!-- PAST PROFESSION -->
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Past Profession</ion-text>
+        </div>
+
+        <div>
+            <ion-input mode="md" class="input" placeholder="Enter profession/designation"></ion-input>
+        </div>
+
+        <!-- ADDRESS -->
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Address</ion-text>
+        </div>
+
+        <div>
+            <ion-input mode="md" class="input" placeholder="Enter address"></ion-input>
+        </div>
+
+        <!-- ZIPCODE -->
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Zipcode</ion-text>
+        </div>
+
+        <div>
+            <ion-input mode="md" class="input" placeholder="Enter Zipcode"></ion-input>
+        </div>
+
+        <!-- SELCET COUNTRY -->
+
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Country</ion-text>
+        </div>
+        <div>
+            <ion-select mode="md" class="input" placeholder="Select Country"></ion-select>
+        </div>
+
+        <!-- SELCET CITY -->
+
+        <div class="nametag">
+            <ion-text position="floating" id="tag">City</ion-text>
+        </div>
+        <div>
+            <ion-select mode="md" class="input" placeholder="Select City"></ion-select>
+        </div>
+
+        <!-- EMERGENCY PERSON NAME -->
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Emergency Contact Person Name</ion-text>
+        </div>
+
+        <div>
+            <ion-input mode="md" class="input" placeholder="Enter name"></ion-input>
+        </div>
+
+        <!-- EMERGENCY CONTACT NUMBER -->
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Emergency Contact Number</ion-text>
+        </div>
+
+        <ion-row>
+            <ion-col size="3">
+                <ion-input style="width: 90%;" mode="md" class="input" placeholder="Code"></ion-input>
+            </ion-col>
+            <ion-col size="9">
+                <ion-input mode="md" class="input" placeholder="Enter Number"></ion-input>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-footer>
+    <ion-grid style="
+      padding-left: 24px;
+      padding-right: 24px;
+      padding-top: 16px;
+      padding-bottom: 16px;
+    ">
+        <!-- BUTTON -->
+        <div id="button">
+            <ion-row style="align-items: center;">
+                <ion-col size="4">
+                    <ion-button class="btn1" [disabled]="false" type="submit" id="signup">PREVIEW</ion-button>
+                </ion-col>
+
+                <ion-col size="8">
+                    <ion-button class="btn2" [disabled]="false" (click)= "save()" type="submit" id="signup">SAVE AND PROCEED</ion-button>
+                </ion-col>
+            </ion-row>
+        </div>
+    </ion-grid>
+</ion-footer>

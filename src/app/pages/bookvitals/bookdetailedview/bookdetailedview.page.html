@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar class="headtoolbar">
+    <ion-row>
+      <ion-col size="2">
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button [routerLink]="'/../'" routerDirection="backward">
+              <ion-icon slot="icon-only" src="assets/back.svg"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-col>
+      <ion-col size="8">
+        <div>
+          <ion-text color="mdblack" position="floating" id="titletag"
+            >17th January 2020</ion-text
+          >
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides pager="true" [options]="slideOpts" class="bookslider">
+    <ion-slide>
+      <img src="assets/tabs/Mask Group.svg" alt="" />
+      <!-- <h1>Slide 1</h1> -->
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/tabs/Mask Group.svg" alt="" />
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/tabs/Mask Group.svg" alt="" />
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/tabs/Mask Group.svg" alt="" />
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/tabs/Mask Group.svg" alt="" />
+    </ion-slide>
+  </ion-slides>
+  <div class="activitydiv">
+    <p class="activitytxt">Yesterday’s Activities</p>
+  </div>
+  <div class="activitydescriptiondiv">
+    <p class="activitydescription">
+      Bathing, Breakfast, Medication: Ibuprofine, Lunch, Snack, Exercise,
+      Dinner, Medication: ABCD Vitamin Syrup
+    </p>
+  </div>
+  <div class="activitynotediv">
+    <p class="activitynote">
+      Notes: This notes will be coming from care giver if she enters any
+      specific
+    </p>
+  </div>
+
+  <div class="ion-no-padding">
+    <hr />
+  </div>
+
+  <div class="hdingdiv">
+    <p class="">Vitals</p>
+  </div>
+  <div class="reportdiv">
+    <p>Blood Pressure <span class="spn1">:</span> 120/80</p>
+    <p>Temperature <span class="spn2">:</span> 98.6 F</p>
+    <p>Pulse Rate <span class="spn3">:</span> 77bpm</p>
+    <p>Respiration <span class="spn4">:</span> 16 /m</p>
+  </div>
+  <hr />
+  <div class="hdingdiv" style="padding-top: 8px;">
+    <p style="margin-top: 0;">Medication</p>
+  </div>
+  <div class="medicindetdiv">
+    <p class="medicindet">Ibuprofine MKal, ABCD Vitamin Syrup</p>
+  </div>
+</ion-content>

@@ -1,0 +1,114 @@
+<ion-header mode="md">
+    <ion-toolbar class="headtoolbar">
+        <ion-grid>
+            <ion-row style="align-items: center; margin-top: 32px;">
+                <ion-col size="10">
+                    <ion-text color="mdblack" position="floating" id="titletag">Edit Member</ion-text>
+                </ion-col>
+                <ion-col>
+                    <ion-icon style="zoom: 1.2; color: black; float: right;" name="close-outline"></ion-icon>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-grid>
+        <form>
+
+            <ion-row>
+                <ion-col>
+                    <div style="width: 52px;">
+                        <ion-img src="../assets/manlogo.png"></ion-img>
+                    </div>
+                    <ion-text>
+                        <h6 style="margin-top: 5px;">Senior</h6>
+                    </ion-text>
+                </ion-col>
+            </ion-row>
+
+            <ion-row style="align-items: center;">
+                <ion-col size="1">
+                    <div style="padding-left: 3px;">
+                        <ion-checkbox color="mwhite" mode="md" checked="false"></ion-checkbox>
+                    </div>
+                </ion-col>
+                <ion-col size="11" style="padding-top: 0px;">
+                    <div>
+                        <ion-text style="font-size:16px;margin-left: 6px;" color="mdblack">Ability to Enter Vitals</ion-text>
+                    </div>
+                </ion-col>
+            </ion-row>
+
+            <ion-row style="align-items: center;">
+                <ion-col size="1">
+                    <div style="padding-left: 3px;">
+                        <ion-checkbox color="mwhite" mode="md" checked="false"></ion-checkbox>
+                    </div>
+                </ion-col>
+                <ion-col size="11" style="padding-top: 0px;">
+                    <div>
+                        <ion-text style="font-size:16px;margin-left: 6px;" color="mdblack">Ability Schedule an Appointment</ion-text>
+                    </div>
+                </ion-col>
+            </ion-row>
+
+            <div class="nametag" style="margin-top: 17px;">
+                <ion-text position="floating" id="tag">Name of Senior</ion-text>
+            </div>
+            <div>
+                <ion-input mode="md" class="input" placeholder="Enter full Name"></ion-input>
+                <ion-item [hidden]="true" lines="none" style="margin-top:-10px;margin-left:-10px;">
+                    <ion-icon style="margin-right: 5px;" name="alert-circle"></ion-icon>
+                    <ion-text class=“warning”>Incorrect Password.</ion-text>
+                </ion-item>
+            </div>
+
+            <div class="nametag">
+                <ion-text position="floating" id="tag">Relation</ion-text>
+            </div>
+            <div>
+                <ion-select mode="md" class="input" placeholder="Select Relation">
+                    <ion-select-option value="brown">Brown</ion-select-option>
+                    <ion-select-option value="blonde">Blonde</ion-select-option>
+                    <ion-select-option value="black">Black</ion-select-option>
+                    <ion-select-option value="red">Red</ion-select-option>
+                </ion-select>
+                <ion-item [hidden]="true" lines="none" style="margin-top:-10px;margin-left:-10px;">
+                    <ion-icon style="margin-right: 5px;" name="alert-circle"></ion-icon>
+                    <ion-text class=“warning”>Incorrect Password.</ion-text>
+                </ion-item>
+            </div>
+
+            <div class="nametag">
+                <ion-text position="floating" id="tag">Email id</ion-text>
+            </div>
+            <div>
+                <ion-input mode="md" class="input" type="email" placeholder="Enter email"></ion-input>
+                <ion-item [hidden]="true" lines="none" style="margin-top:-10px;margin-left:-10px;">
+                    <ion-icon style="margin-right: 5px;" name="alert-circle"></ion-icon>
+                    <ion-text class=“warning”>Incorrect Password.</ion-text>
+                </ion-item>
+            </div>
+
+            <div class="nametag">
+                <ion-text position="floating" id="tag">Mobile Number</ion-text>
+            </div>
+            <div>
+                <ion-input mode="md" class="input" type="tel" placeholder="Enter mobile number"></ion-input>
+                <ion-item [hidden]="true" lines="none" style="margin-top:-10px;margin-left:-10px;">
+                    <ion-icon style="margin-right: 5px;" name="alert-circle"></ion-icon>
+                    <ion-text class=“warning”>Incorrect Password.</ion-text>
+                </ion-item>
+            </div>
+
+            <div id="button">
+                <ion-button [disabled]="false" [routerLink]="'/carecircle/'" class="btnblue" type="submit" id="signup">SAVE</ion-button>
+            </div>
+
+
+        </form>
+    </ion-grid>
+</ion-content>

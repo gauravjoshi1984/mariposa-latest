@@ -1,0 +1,276 @@
+<ion-header mode="md">
+  <ion-toolbar class="headtoolbar">
+    <ion-row>
+      <ion-col size="2">
+        <ion-toolbar>
+          <ion-buttons slot="start">
+           <m-backbutton></m-backbutton>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-col>
+      <ion-col size="10">
+        <div>
+          <ion-text color="mdblack" position="floating" id="titletag"
+            >Medication Management</ion-text
+          >
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid style="padding: 24px; height: fit-content; margin-bottom: 80px;">
+    <!-- ASSISTANCES-->
+
+    <div style="padding-top: 0px; margin-bottom: 15px;">
+      <ion-label style="font-size: 16px; line-height: 19px;"
+        >Allergic to these medications</ion-label
+      >
+    </div>
+
+    <!-- CHECKBOX 1 -->
+
+    <ion-row style="align-items: center; margin-top: 5px;">
+      <ion-col  size="1">
+        <div style="padding-left: 3px;">
+          <ion-checkbox #shopping mode="md" color="mwhite" checked="false"></ion-checkbox>
+        </div>
+      </ion-col>
+      <ion-col
+        (click)="generateClick(shopping)"
+        size="11"
+        style="padding-top: 0px;"
+      >
+        <div>
+          <ion-text
+            style="
+              font-size: 16px;
+              line-height: 19px;
+              font-weight: 300;
+              margin-left: 12px;
+            "
+            color="mdblack"
+            >Drug H1</ion-text
+          >
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- CHECKBOX 2 -->
+
+    <ion-row style="align-items: center; margin-top: 5px;">
+      <ion-col  size="1">
+        <div style="padding-left: 3px;">
+          <ion-checkbox #delivery mode="md" color="mwhite" checked="false"></ion-checkbox>
+        </div>
+      </ion-col>
+      <ion-col
+        (click)="generateClick(delivery)"
+        size="11"
+        style="padding-top: 0px;"
+      >
+        <div>
+          <ion-text
+            style="
+              font-size: 16px;
+              line-height: 19px;
+              font-weight: 300;
+              margin-left: 12px;
+            "
+            color="mdblack"
+            >Drug H2</ion-text
+          >
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- CHECKBOX 3 -->
+
+    <ion-row style="align-items: center; margin-top: 5px;">
+      <ion-col  size="1">
+        <div style="padding-left: 3px;">
+          <ion-checkbox #cooking mode="md" color="mwhite" checked="false"></ion-checkbox>
+        </div>
+      </ion-col>
+      <ion-col
+        (click)="generateClick(cooking)"
+        size="11"
+        style="padding-top: 0px;"
+      >
+        <div>
+          <ion-text
+            style="
+              font-size: 16px;
+              line-height: 19px;
+              font-weight: 300;
+              margin-left: 12px;
+            "
+            color="mdblack"
+            >Sample Drug 1</ion-text
+          >
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- CHECKBOX 4 -->
+
+    <ion-row style="align-items: center; margin-top: 5px;">
+      <ion-col  size="1">
+        <div style="padding-left: 3px;">
+          <ion-checkbox
+            mode="md"
+            #preparation
+            color="mwhite"
+            checked="false"
+          ></ion-checkbox>
+        </div>
+      </ion-col>
+      <ion-col
+        (click)="generateClick(preparation)"
+        size="11"
+        style="padding-top: 0px;"
+      >
+        <div>
+          <ion-text
+            style="
+              font-size: 16px;
+              line-height: 19px;
+              font-weight: 300;
+              margin-left: 12px;
+            "
+            color="mdblack"
+            >Sample Drug 2</ion-text
+          >
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- CHECKBOX 5 -->
+
+    <ion-row style="align-items: center; margin-top: 5px;">
+      <ion-col  size="1">
+        <div style="padding-left: 3px;">
+          <ion-checkbox #serving mode="md" color="mwhite" checked="false"></ion-checkbox>
+        </div>
+      </ion-col>
+      <ion-col
+        (click)="generateClick(serving)"
+        size="11"
+        style="padding-top: 0px;"
+      >
+        <div>
+          <ion-text
+            style="
+              font-size: 16px;
+              line-height: 19px;
+              font-weight: 300;
+              margin-left: 12px;
+            "
+            color="mdblack"
+            >Sample Drug 3</ion-text
+          >
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <hr style="margin-bottom: 7px;" class="solid" />
+
+    
+    <app-toggle
+      [name]="'Previous Cardiac Arrets'"
+      
+      (result)="changeToggle($event)"
+    ></app-toggle>
+
+    <hr style="margin-bottom: 7px;" class="solid" />
+
+    
+
+    
+    <app-toggle
+      [name]="'Diabetic'"
+      
+      (result)="changeToggle($event)"
+    ></app-toggle>
+    
+    <hr style="margin-bottom: 7px;" class="solid" />
+
+   
+
+    
+    <app-toggle
+      [name]="'Medication Shopping required'"
+      
+      (result)="changeToggle($event)"
+    ></app-toggle>
+    
+    <hr style="margin-bottom: 7px;" class="solid" />
+
+   
+    <!-- INSTRUCTIONS -->
+
+    <div class="nametag">
+      <ion-text position="floating" id="tag">Instructions(optional)</ion-text>
+    </div>
+    <div>
+      <ion-textarea
+        style="height: 120px;"
+        class="input"
+        placeholder="Write here"
+      ></ion-textarea>
+    </div>
+
+    <!-- ADD IMAGE -->
+
+    <!-- <ion-row style="align-items: center;">
+      <ion-col size="1">
+        <ion-icon
+          class="camera"
+          style="width: 24px; height: 21px; float: right;"
+          src="../assets/MariposaIcons/Cameraicon.svg"
+        ></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-text size="4"
+          ><h5
+            style="
+              font-weight: 600;
+              font-size: 14px;
+              line-height: 17px;
+              margin-left: 9px;
+            "
+          >
+            ADD IMAGES
+          </h5></ion-text
+        >
+      </ion-col>
+    </ion-row> -->
+    <app-addimage (click)="addImage()"></app-addimage>
+    <ion-text>
+      <div class="imagelist" *ngFor="let img of imageList; let j=index">
+        <ion-grid fixed class="ion-no-padding">
+          <ion-row>
+            <ion-col style="padding-top: 11px;" size="8"><span>{{img.substring(img.lastIndexOf("/") + 1) | slice:0:12}}</span></ion-col>
+            <ion-col size="4">
+              <ion-button
+              fill="clear"
+              shape="round"
+              class="dltbtn"
+              (click)="removeImg(j)"        >
+              <ion-icon slot="icon-only" src="assets/trash.svg"></ion-icon>
+              Delete
+            </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid> 
+      </div>
+    </ion-text>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <div id="button">
+    <ion-button [disabled]="false" class="btnblue" type="submit"  (click)= "save()" id="signup">SAVE & PROCEED</ion-button>
+  </div>  
+</ion-footer>

@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="hdcontent" style="display: flex;">
+      <img src="assets/MariposaIcons/micon.svg" alt="" />
+      <ion-title mode="md" class="title-text vitaltext">
+        Books
+      </ion-title>
+    </div>
+    <ion-buttons mode="md" slot="end">
+      <ion-button>
+        <ion-icon
+          mode="md"
+          src="assets/MariposaIcons/notification.svg"
+        ></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon
+          class="propic"
+          mode="md"
+          src="assets/MariposaIcons/profile_img.svg"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-icon slot="start" src="assets/search.svg"></ion-icon>
+          <ion-input
+            type="text"
+            placeholder="Update On Today's Schedule"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col class="placesec" size="12">
+        <img src="assets/Empty_Book.svg" />
+        <div style="padding-top: 16px;">
+          Once a Caregiver starts updating schedule,
+        </div>
+        <div>
+          you will start seeing your feed
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

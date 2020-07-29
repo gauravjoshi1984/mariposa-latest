@@ -1,0 +1,111 @@
+.menuicon{
+    padding: 0 0 0 11px;
+    font-size: 30px;
+}
+
+
+.maindiv{
+    padding:26px 24px 0px 24px;
+    p
+    {
+      margin: 0;
+    }
+   
+    .timng{
+        font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 17px;
+
+color: #1A1A1A;
+padding-top: 16px;
+    }
+    .dscrptn{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 17px;
+      
+        color: #1A1A1A;
+        padding-top: 6px;
+        padding-bottom: 20px;
+    }
+}
+.hdng{
+    font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+
+
+/* Medium Grey */
+
+color: #B8B8B8;
+}
+
+hr {
+    height: 1px;
+    border-width: 0;
+    box-sizing: content-box;
+    /* background: aquamarine; */
+    background: #e0e0e0;
+    margin: 8px 24px;
+  }
+  .maindiv2{
+    padding:0px 24px 0px 24px;
+
+    .work{
+
+    }
+    p{
+        margin: 0px;
+        
+    }  
+    
+
+}
+
+  .name{
+    
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    padding-top: 12px;
+    
+    color: #1A1A1A
+    
+  }
+
+  .hr2{
+    margin-top: 20px !important;
+  }
+
+  .maindiv3{padding:0px 24px 0px 24px;
+    .hdng{
+        padding-top: 20px !important;
+    }
+    p{
+        margin: 0px;
+        
+    } 
+    .decpt{
+        padding-top: 16px;
+        font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 17px;
+
+/* Direct Black */
+
+color: #1A1A1A;
+    }
+}
+ion-footer{
+    
+    ion-button{
+        margin: 0 0 0 26px;
+        width: 87%;
+    }
+}

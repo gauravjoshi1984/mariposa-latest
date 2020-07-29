@@ -1,0 +1,43 @@
+<ion-header mode="md">
+    <ion-toolbar class="headtoolbar">
+        <ion-grid>
+            <ion-row style="align-items: center;margin-top: 32px;">
+                <ion-col size="10">
+                    <ion-text color="mdblack" position="floating" id="titletag">Add items to shopping list</ion-text>
+                </ion-col>
+                <ion-col>
+                    <ion-icon style="zoom:1.2;color: black;float:right" name="close-outline" routerLink="/assessment/viewshoppinglist"></ion-icon>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-grid style="padding-top:32px;padding-left:24px;">
+        <form [formGroup]="shoppingForm">
+            <div class="nametag" style="margin-top: 5px;">
+                <ion-text position="floating" id="tag">Item Name</ion-text>
+            </div>
+            <div>
+                <ion-input mode="md" formControlName="name" class="input" placeholder="Item Name"></ion-input>
+                <ion-item [hidden]="checkValidity(shoppingFormControl.name)" lines="none" style="margin-top:-10px;margin-left:-10px;">
+                    <ion-icon style="margin-right: 5px;" name="alert-circle"></ion-icon>
+                    <ion-text class=“warning”>Item name is required.</ion-text>
+                </ion-item>
+            </div>
+            <div class="nametag">
+                <ion-text position="floating" id="tag">Specification (brand,shop etc.,)</ion-text>
+            </div>
+            <div>
+                <ion-input mode="md" formControlName="brand" class="input" placeholder="Add any specification"></ion-input>
+                <ion-item [hidden]="checkValidity(shoppingFormControl.brand)" lines="none" style="margin-top:-10px;margin-left:-10px;">
+                    <ion-icon style="margin-right: 5px;" name="alert-circle"></ion-icon>
+                    <ion-text class=“warning”>Specification is required</ion-text>
+                </ion-item>
+            </div>
+            <div id="button">
+                <ion-button [disabled]="false" class="btnblue" type="submit" id="signup" (click)="save()">ADD</ion-button>
+            </div>
+        </form>
+    </ion-grid>
+</ion-content>

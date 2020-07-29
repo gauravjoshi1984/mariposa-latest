@@ -1,0 +1,57 @@
+.configurecaregrid {
+  padding: 0px;
+}
+.timetext {
+  display: flex;
+}
+.timesec {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 49px;
+}
+.timemin {
+  color: #B8B8B8;
+}
+.meridiemsec {
+  display: grid;
+  padding-left: 16px;
+  span {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    text-transform: capitalize;
+    color: #B8B8B8;
+  }
+}
+.activemeridian {
+  color: #4137ff !important;
+}
+.dltbtn {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+
+  /* Direct Black */
+
+  color: #1a1a1a;
+
+  ion-icon {
+    font-size: 16px;
+    --color: #1a1a1a !important;
+  }
+}
+.dltbtn::part(native) {
+  padding: 0;
+}
+ion-icon {
+  zoom: 1;
+}
+.dltsec {
+  width: 100%;
+  text-align: end;
+}

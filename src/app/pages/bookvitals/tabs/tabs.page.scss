@@ -1,0 +1,21 @@
+ion-icon {
+  zoom: 1;
+  font-size: 20px;
+}
+
+ion-tab-button {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+
+  /* Direct Black */
+
+  --color: #1a1a1a;
+  --color-focused: #4137ff;
+  --color-selected: #4137ff;
+}
+ion-tab-button.tab-selected ion-icon {
+  --color: #4137ff;
+}

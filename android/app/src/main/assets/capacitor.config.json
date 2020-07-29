@@ -1,0 +1,13 @@
+{
+    "appId": "io.maroposa.app",
+    "appName": "Mariposa",
+    "bundledWebRuntime": false,
+    "npmClient": "npm",
+    "webDir": "www",
+    "plugins": {
+        "SplashScreen": {
+            "launchShowDuration": 6
+        }
+    },
+    "cordova": {}
+}

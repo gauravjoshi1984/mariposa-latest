@@ -1,0 +1,33 @@
+<ion-header mode="md">
+  <ion-toolbar class="headtoolbar">
+    <ion-grid>
+      <ion-row style="align-items: center; margin-top: 32px;">
+        <ion-col size="10">
+          <ion-text color="mdblack" position="floating" id="titletag"
+            >FAQs</ion-text
+          >
+        </ion-col>
+        <ion-col>
+          <ion-icon
+            style="zoom: 1.2; color: black; float: right;"
+            name="close-outline"
+          ></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="content">
+    <div *ngFor = "let items of faqlist;index as i">
+    <ion-card (click)= "show() " class= "questions" [ngStyle] = "{'border-color' : color}">
+      <ion-text >{{items.question}}</ion-text>
+      <div *ngIf = "show1">
+        <p class="para">{{items.answer}}</p>
+      </div>
+    </ion-card>
+    </div>
+
+  </ion-grid>
+</ion-content>

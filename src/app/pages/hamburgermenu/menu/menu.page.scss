@@ -1,0 +1,89 @@
+.hdcontent {
+    display: flex;
+    margin: 0 0 0 24px;
+    padding-top: 40px;
+  }
+
+  .propic {
+    font-size: 32px;
+  }
+
+  .pagebckd {
+    --background: #f8f8f8;
+  }
+
+  .logos{
+      margin-left: 8px;
+      float: left;
+  }
+  
+  .vitaltext {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+  
+    /* Mariposa Navy */
+  
+    color: #010465;
+    margin: 0 0 0 8px;
+  }
+
+
+
+  ion-text{
+      font-size: 16px;
+      line-height: 19px;
+      display: flex;
+      color: #1A1A1A;
+  }
+  .copyright{
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    color:#B8B8B8;
+    margin-left: 8px;
+    margin-top: 250px;
+  }
+
+  .solid{
+      margin-top: 26px;
+      margin-bottom:27px;
+      color:#E0E0E0;
+  }
+
+  .menugrid{
+      padding-left: 16px;
+      padding-right: 16px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+  }
+
+  .medication{
+      margin-top: 16px;
+  }
+
+  ion-row{
+      padding:0px;
+      margin:0px;
+      align-items: center;
+  }
+
+  ion-col{
+    padding:0px;
+    margin:0px;
+  }
+  ion-toolbar{
+    height: 88px;
+    
+    ion-buttons{
+      padding-top: 40px;
+      margin-right: 15px;
+    }
+  }  
+  
+  ion-icon {
+    zoom: 1;
+    font-size: 24px;
+  }

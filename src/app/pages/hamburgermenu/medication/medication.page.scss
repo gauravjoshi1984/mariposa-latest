@@ -1,0 +1,23 @@
+ion-item{
+  padding: 0px !important;
+  --ion-safe-area-right: 0;
+  --ion-safe-area-left: 0;
+  border-radius: 8px;
+  border-color: red;
+  
+ // margin-top: 8px;
+ // margin-bottom: 40px;
+ border-style: solid;
+ border-width: 1px;
+ ion-button{
+   height: 44px;
+   width: 163.5px;
+   margin: 0px;
+ }
+}
+
+.content{
+  padding-top: 24px;
+  padding-right: 24px;
+  padding-left: 24px;
+}

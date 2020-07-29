@@ -1,0 +1,22 @@
+ion-item {
+    font-weight: 500;
+    font-size: 14px;
+    color: #000000;
+    --min-height: 61px;
+    background: #FFFFFF;
+    --border-radius: 8px;
+}
+
+hr {
+    border-bottom: 1px solid #E0E0E0;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+ion-grid {
+    background: #FFFFFF;
+    margin: 0px;
+    padding: 0px;
+}

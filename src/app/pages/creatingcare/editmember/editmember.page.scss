@@ -1,0 +1,101 @@
+.cardinfo{
+
+    box-shadow: none;
+    border-style: solid;
+    border-width: thin;
+    border-radius: 8px;
+    border-color: #B8B8B8;
+    height: auto;
+    width:auto;
+    padding-bottom: 20px;
+
+    .assessment{
+        height: 44px;
+        width: auto;
+        margin-left: 16px;
+        margin-bottom: 0px;
+        margin-top:6px;
+
+    }
+
+    ion-chip{
+
+        height: 28px;
+        width: auto;
+        text-align: center;
+        margin-right: 12px;
+        margin-bottom: 0px;
+        
+        
+       
+        ion-label{
+
+            font-size:12px;
+            list-style: 14px;
+            color: mdgrey;
+        }
+
+    }
+
+    ion-text{
+
+        color:black;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    #email{
+
+        font-size: 14px;
+        line-height: 20px;
+        font-style: normal;
+        font-weight: normal;
+    }
+
+    #infolabel{
+
+        margin-left: 16px;
+        margin-top: 7px;
+        
+    }
+
+    .assesstime{
+
+        color: #7E7E7E;
+        line-height: 14px;
+        font-size: 12px;
+        margin-left: 16px;
+        margin-top: 3px;
+        margin-bottom: 5px;
+    }
+}
+
+.pending{
+    --background:#B8B8B8;
+    --border-radius:48px;
+      height: 24px;
+      width:auto;
+      font-size: 12px;
+      line-height: 14px;
+      margin-left: 16px;
+      margin-bottom:0px;
+      text-transform: none;
+
+      ion-icon{
+          zoom:0.8;
+          margin-right: 4px;
+      }
+}
+
+.pen{
+
+    ion-buttons{
+        float:right;
+    }
+    ion-icon{
+        zoom: 1;
+    }
+}
+

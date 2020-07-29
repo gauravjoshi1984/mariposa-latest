@@ -1,0 +1,87 @@
+ion-checkbox {
+    background: #ffffff;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-radius: 4px;
+    border-color: black !important;
+    --height: 24px;
+    --width: 24px;
+    --checkmark-color: #000000;
+    --background-checked: #ffffff;
+    --border-color: #ffffff;
+    --border-color-checked: #ffffff;
+  }
+
+  hr.solid {
+    border-top: 1px solid #E5E5E5;
+    margin-top: 11px;
+    margin-bottom:16px;
+    
+  }
+
+  ion-radio{
+
+    --color:black;
+    --border-width:1px;
+    
+  }
+
+  .hdtoolbar{
+    --border:none;
+    --box-shadow:none;
+  }
+
+  #button{
+    
+    height: 76px;
+    
+    background-color:white;
+     left : 0px;
+    bottom:0px;
+    position: fixed;
+    box-shadow: 0px -2px 8px rgba(65, 55, 255, 0.08);
+    z-index: 2;
+    padding:0px;
+}
+
+.btn1{
+
+    --color:#4137FF;
+    --background:#ffffff;
+    --border-radius: 8px; 
+    --border-color:#4137FF;
+    border-radius: 8px;
+    border-style: solid;
+    border-width: thin;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 17px;
+    font-weight: 600;
+    --box-shadow: none;
+    
+
+    height:44px;
+    width:77%;
+    margin-top: 11px;
+    margin-left: 24px;
+}
+
+.btn2{
+
+    outline:none;
+    border-radius: 8px;
+    color: white;
+    
+    
+    font-size: 14px;
+    font-style: normal;
+    line-height: 17px;
+    font-weight: 600;
+    --box-shadow: none;
+   
+
+    height: 44px;
+    width: 86%;
+    margin-top: 11px;
+    margin-left: 10px;
+}

@@ -1,0 +1,36 @@
+.content{
+    padding-left: 24px;
+    padding-right: 28px;
+    padding-top: 16px;
+}
+
+.questions{
+
+    min-height: 44px;
+    margin: 0px;
+    padding-top: 16px;
+    box-shadow: 0px 2px 8px rgba(65, 55, 255, 0.08);
+
+    border-style: solid;
+    border-width: 1px;
+    //border-color: transparent;
+
+    ion-text{
+        font-size: 14px;
+        line-height: 17px;
+        color : #000000;
+        
+        margin-left: 16px;
+
+    }
+
+    .para{
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+}
+
+div{
+    margin: 8px;
+    padding: 0px;
+}

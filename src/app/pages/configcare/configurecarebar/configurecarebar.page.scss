@@ -1,0 +1,259 @@
+.step {
+  padding: 0px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  background-color: cream;
+}
+
+.v-stepper {
+  position: relative;
+  padding-top: 15px;
+  /*   visibility: visible; */
+}
+
+/* regular step */
+.step .circle {
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  padding: 0;
+  text-align: center;
+
+  ion-icon {
+    font-size: 12px;
+    color: white;
+    display: inline-flex;
+    // padding-bottom: 3px;
+  }
+}
+.addbtnsec {
+  position: absolute;
+  height: 100px;
+  background: #ffffff;
+  box-shadow: 0px 2px 8px rgba(65, 55, 255, 0.08);
+  border-radius: 8px;
+  width: 327px;
+  height: 136px;
+  left: 24px;
+  z-index: 1;
+  top: 0;
+  padding: 0;
+}
+.circle-p {
+  background-color: #e0e0e0;
+  border: 3px solid #e0e0e0;
+  border-radius: 100%;
+  width: 12px;
+  height: 12px;
+  margin-left: 4px;
+  display: inline-block;
+}
+
+.step .line {
+  top: 30px !important;
+  left: 10px;
+  /*   height: 120px; */
+  height: 100%;
+
+  position: absolute;
+  border-left: 1px solid #e0e0e0;
+}
+
+.step.completed .circle {
+  visibility: visible;
+  background-color: #b058f8;
+  border-color: #b058f8;
+}
+
+.step.completed .line {
+  border-left: 1px solid #b058f8;
+}
+
+.step.active .circle {
+  visibility: visible;
+  border-color: #b058f8;
+}
+
+.step.empty .circle {
+  visibility: hidden;
+}
+
+.step.empty .line {
+  /*     visibility: hidden; */
+  /*   height: 150%; */
+  top: 0;
+  height: 100%;
+}
+
+.step:last-child .line {
+  border-left: 3px solid white;
+  z-index: -1; /* behind the circle to completely hide */
+}
+
+.content {
+  margin-left: 12px;
+  display: inline-block;
+
+ padding-bottom: 20px;
+    padding-top: 15px;
+
+  h3 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+
+    color: #000000;
+    margin: 0;
+  }
+  p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+
+    /* Dark Grey */
+
+    color: #7e7e7e;
+    margin: 0;
+    padding-top: 2px;
+  }
+}
+ion-content {
+  --padding-start: 42px !important;
+  --padding-end: 42px !important;
+  --padding-top: 14px;
+}
+.sub-content {
+  // padding-left: 34px;
+  display: flex;
+  padding-bottom: 14px;
+  padding-top: 14px;
+  h3 {
+    padding-left: 12px;
+
+    // padding-bottom: 29px;
+  }
+}
+.s-item {
+  padding-top: 29px;
+}
+.sub-circle-c {
+  background-color: #b268f8;
+  border: 3px solid #b268f8;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  padding: 0;
+  text-align: center;
+  ion-icon {
+    font-size: 12px;
+    color: white;
+    display: inline-flex;
+    padding-bottom: 3px;
+  }
+}
+.sub-circle-a {
+  margin: 4px;
+  background-color: #7e7e7e;
+  border: 3px solid #7e7e7e;
+  border-radius: 100%;
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+}
+.stepcontents {
+}
+.btnblue2 {
+  width: 120px;
+  height: 44px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  text-transform: uppercase;
+  --border-radius: 8px;
+
+  /* White */
+
+  color: #ffffff;
+}
+.sub-content-d {
+  margin: 0;
+  display: block;
+  padding-left: 45px;
+  padding-top: 4px;
+  padding-bottom: 15px;
+}
+.sub-content-p {
+  h3 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+
+    color: #000000;
+  }
+}
+.sub-circle-p {
+  margin: 4px;
+  background-color: #e0e0e0;
+  border: 3px solid #e0e0e0;
+  border-radius: 100%;
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+}
+.activecard {
+  position: absolute;
+  background: white;
+  left: 24px;
+  padding: 24px;
+  z-index: 999;
+  box-shadow: 0px 2px 8px rgba(65, 55, 255, 0.08);
+  border-radius: 8px;
+  width: 327px;
+  height: 136px;
+  margin: 0;
+}
+
+.cardheight {
+  height: 168px;
+  padding-top: 12px;
+}
+.bluebtn {
+  width: 120px;
+  height: 44px;
+  margin-left: 28px;
+  margin-top: 23px;
+  --border-radius: 8px;
+}
+ion-icon{
+  zoom:1;
+}
+
+.backbutton{
+  zoom: 0.6;
+}
+
+.circle-a{
+  margin: 2px 0px 0px 0px;
+  background-color: #7e7e7e;
+  border: 3px solid #7e7e7e;
+  border-radius: 100%;
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+}

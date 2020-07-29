@@ -1,0 +1,159 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons
+      mode="md"
+      style="margin-left: 12px; margin-right: 4px;"
+      slot="start"
+    >
+      <ion-button>
+        <ion-icon
+          mode="md"
+          slot="icon-only"
+          name="chevron-back-outline"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title mode="md" class="title-text">
+      Schedule Bathing
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="bathingForm">
+    <ion-item style="display: none;">
+      <ion-label>Date</ion-label>
+      <ion-datetime
+        [pickerOptions]="customPickerOptions"
+        #datepicker
+        displayFormat="h:mm A"
+      ></ion-datetime>
+    </ion-item>
+    <ion-grid fixed style="height: auto;" class="configurecaregrid">
+      <m-selectdate (result)="addtime($event,'timeList')"></m-selectdate>
+
+      <!-- <ion-row *ngFor="let item of timeList;let i = index">
+      <p class="label-text">Select Time</p>
+
+      <ion-col size="12" (click)="changeTime(i)">
+        <ion-text color="primary" class="timetext">
+          <div class="timesec">
+            <span>{{item.getHours()}}</span>&nbsp;&nbsp;:&nbsp;&nbsp;<span
+              class="timemin"
+              >{{item.getMinutes()}}</span
+            >
+          </div>
+          <div class="meridiemsec">
+            <span [class.activemeridian]="(item.getHours() < 12) ">AM</span>
+            <span [class.activemeridian]="(item.getHours() >= 12) ">PM</span>
+          </div>
+        </ion-text>
+      </ion-col>
+    </ion-row> -->
+      <!-- <ion-row>
+      <ion-col size="4" class="time-sec">
+        <ion-input
+          type="tel"
+          value="06"
+          max="12"
+          min="01"
+          maxlength="2"
+        ></ion-input
+        >&nbsp;
+        <p>:</p>
+        &nbsp;
+        <ion-input
+          type="tel"
+          value="00"
+          maxlength="2"
+          max="60"
+          min="00"
+        ></ion-input>
+      </ion-col>
+      <ion-col size="2" class="timecol">
+        <button class="timebtn">AM</button>
+        <button class="timebtn">PM</button>
+      </ion-col>
+      <ion-col size="6"> </ion-col>
+    </ion-row> -->
+    </ion-grid>
+    <!-- <ion-button class="btn1" fill="outline" shape="round" (click)="addDate()">
+      <ion-icon class="plusbutton" slot="start" name="add-circle"></ion-icon>Add
+    </ion-button> -->
+    <p class="label-text">Repeat</p>
+    <div class="chipdiv">
+      <ion-chip
+        color="primary"
+        mode="ios"
+        outline="true"
+        [class.selectedchip]="selectedDays.includes(day.value)"
+        *ngFor="let day of daysList"
+        (click)="addremoveDay(day)"
+      >
+        <ion-label>{{day.name}}</ion-label>
+      </ion-chip>
+      <!-- <ion-chip color="primary" mode="ios" outline="true">
+      <ion-label>M</ion-label> </ion-chip
+    ><ion-chip color="primary" mode="ios" outline="true" class="selectedchip">
+      <ion-label>T</ion-label> </ion-chip
+    ><ion-chip color="primary" mode="ios" outline="true">
+      <ion-label>W</ion-label> </ion-chip
+    ><ion-chip color="primary" mode="ios" outline="true" class="selectedchip">
+      <ion-label>T</ion-label>
+    </ion-chip>
+    <ion-chip color="primary" mode="ios" outline="true">
+      <ion-label>F</ion-label>
+    </ion-chip>
+    <ion-chip color="primary" mode="ios" outline="true" class="selectedchip">
+      <ion-label>S</ion-label>
+    </ion-chip> -->
+    </div>
+    <hr />
+    <p class="label-text">Instructions (optional)</p>
+    <ion-textarea
+      rows="5"
+      placeholder="Write if any bathing information"
+      [(ngModel)]="instructions"
+      formControlName="instructions"
+    ></ion-textarea>
+    <ion-button fill="clear" class="btn2" (click)="addImage()">
+      <ion-icon slot="start" name="camera"></ion-icon>
+      ADD IMAGES
+    </ion-button>
+    <ion-text>
+      <div class="imagelist" *ngFor="let img of imageList; let j=index">
+        <span>{{img.substring(img.lastIndexOf("/") + 1)}}</span>
+        <ion-icon slot="end" name="trash" (click)="removeImg(j)"></ion-icon>
+      </div>
+    </ion-text>
+
+    <!-- <ion-text color="primary"> -->
+
+    <!-- </ion-text> -->
+  </form>
+</ion-content>
+
+<ion-footer>
+  <!-- <ion-toolbar>
+    <ion-button
+      color="primary"
+      expand="block"
+      fill="solid"
+      class="submitbtn"
+      shape="round"
+      (click)="submit()"
+    >
+      Submit
+    </ion-button>
+  </ion-toolbar> -->
+  <div id="button">
+    <ion-button
+      [disabled]="false"
+      class="btnblue"
+      type="submit"
+      id="signup"
+      (click)="submit()"
+      >SUBMIT</ion-button
+    >
+  </div>
+</ion-footer>

@@ -1,0 +1,14 @@
+<ion-tabs #iontabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button
+      *ngFor="let tab of TabsData"
+      [tab]="tab.href"
+      (click)="changeTab(tab)"
+    >
+      <ion-icon
+        [src]="'assets/tabs/'+tab.href+'_'+tab.status+'.svg'"
+      ></ion-icon>
+      <ion-label>{{tab.name}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

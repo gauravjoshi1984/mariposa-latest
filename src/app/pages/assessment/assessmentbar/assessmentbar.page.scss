@@ -1,0 +1,409 @@
+// .wrapper {
+//   width: 330px;
+//   font-family: 'Roboto';
+//   font-size: 14px;
+// }
+// .StepProgress {
+//   position: relative;
+//   padding-left: 45px;
+//   list-style: none;
+//   height: 521px;
+//   &::before {                                 //border base before
+//     display: inline-block;
+//     content: '';
+//     position: absolute;
+//     top: 0;
+//     left: 15px;
+//     width: 10px;
+//     height: 100%;
+//     border-left: 1px solid #E0E0E0;
+//   }
+//   &-item {
+//     position: relative;
+//     counter-increment: list;
+//     &:not(:last-child) {                  //padding between elements
+//       padding-bottom: 47px;
+//     }
+//     &::before {
+//       display: inline-block;
+//       content: '';
+//       position: absolute;
+//       left: -30px;
+//       height: 100%;
+//       width: 10px;
+//     }
+//     &::after {                              //Pending
+//       content:"";
+//       display: inline-block;
+//       position: absolute;
+//       top: 02px;
+//       left: -36px;
+//       width: 9px;
+//       height: 9px;
+//       border: 2px solid #E0E0E0;
+//       border-radius: 50%;
+//       background-color: #E0E0E0;
+//     }
+//     &.is-done {
+//       &::before {
+//         border-left: 1px solid #B058F8;
+//       }
+//       &::after {
+//         content:"";
+//         font-size: 10px;
+//         color: #FFF;
+//         text-align: center;
+//         border: 2px solid #B058F8;
+//         background-color: #B058F8;
+//         zoom:1.3;
+//         left:-29px;
+//         top:-1px;
+//       }
+//     }
+//     &.current {                               // border after current process
+//       &::before {
+//         border-left: 1px solid #E0E0E0;
+//       }
+//       &::after {                //ongoing dot
+//         content: '';
+//         padding-top: 1px;
+//         width: 10px;
+//         height: 9px;
+//         top: 2px;
+//         left: -36px;
+//         font-size: 14px;
+//         text-align: center;
+//         color: green;
+//         border: 2px solid #7E7E7E;;
+//         background-color: #7E7E7E;;
+//         z-index:20 ;
+//       }
+//     }
+//   }
+//   strong {
+//     display: block;
+//     font-size: 16px;
+//     line-height: 19px;
+//   }
+// }
+// ion-button{
+//   height: 21px;
+//   width: 61px;
+//   margin-top: 40px;
+// }
+// .card{
+//   z-index: 9999;
+// }
+// ion-card{
+// }
+// ion-grid{
+//   padding-left: 40px;
+//   padding-top: 20px;
+// }
+// .box{
+//   z-index: -1;
+// }
+// .StepProgress-item.current{
+//   strong{
+//     z-index: 40;
+//     position: absolute;
+//   }
+//   height:150px;
+//   ion-card{
+//   }
+// }
+// .StepProgress-item.is-done{
+// }
+// ion-button{
+//   margin-top: 68px;
+//   margin-left:60px;
+//   width: 120px;
+//   height: 44px;
+// }
+.step {
+    padding: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: cream;
+}
+
+.v-stepper {
+    position: relative;
+    padding-top: 13px;
+    /*   visibility: visible; */
+}
+
+
+/* regular step */
+
+.step .circle {
+    background-color: white;
+    border: 3px solid gray;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    text-align: center;
+    ion-icon {
+        font-size: 11px;
+        color: white;
+        display: inline-flex;
+        position: absolute;
+        top: 2px;
+        left: 2px;
+    }
+}
+
+.circle-p {
+    background-color: #e0e0e0;
+    border: 3px solid #e0e0e0;
+    border-radius: 100%;
+    width: 12px;
+    height: 12px;
+    margin-left: 4px;
+    display: inline-block;
+}
+
+.step .line {
+    top: 28px;
+    left: 10px;
+    /*   height: 120px; */
+    height: 100%;
+    position: absolute;
+    border-left: 1px solid #e0e0e0;
+}
+
+.step.completed .circle {
+    visibility: visible;
+    background-color: #b058f8;
+    border-color: #b058f8;
+}
+
+.step.completed .line {
+    border-left: 1px solid #b058f8;
+}
+
+.step.active .circle {
+    visibility: visible;
+    border-color: #b058f8;
+}
+
+.step.empty .circle {
+    visibility: hidden;
+}
+
+.step.empty .line {
+    /*     visibility: hidden; */
+    /*   height: 150%; */
+    // top: 0;
+    height: 100%;
+}
+
+.step:last-child .line {
+    border-left: 3px solid white;
+    z-index: -1;
+    /* behind the circle to completely hide */
+}
+
+.content {
+    margin-left: 12px;
+    display: inline-block;
+    padding-bottom: 13px;
+    padding-top: 13px;
+    h3 {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 19px;
+        /* identical to box height */
+        color: #000000;
+        margin: 0;
+    }
+    p {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 17px;
+        /* identical to box height */
+        /* Dark Grey */
+        color: #7e7e7e;
+        margin: 0;
+        padding-top: 5px;
+    }
+}
+
+ion-content {
+    --padding-start: 42px !important;
+    --padding-end: 42px !important;
+    --padding-top: 34px;
+}
+
+.sub-content {
+    // padding-left: 34px;
+    display: flex;
+    padding-bottom: 14px;
+    padding-top: 14px;
+    h3 {
+        padding-left: 12px;
+        // padding-bottom: 29px;
+    }
+}
+
+.s-item {
+    padding-top: 29px;
+}
+
+.sub-circle-c {
+    background-color: #b268f8;
+    border: 3px solid #b268f8;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    ion-icon {
+        font-size: 11px;
+        color: white;
+        display: inline-flex;
+        position: absolute;
+        top: 2px;
+        left: 2px;
+    }
+}
+
+.sub-circle-a {
+    margin: 4px;
+    background-color: #7e7e7e;
+    border: 3px solid #7e7e7e;
+    border-radius: 100%;
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    padding-top: 5px;
+}
+
+.btnblue2 {
+    width: 120px;
+    height: 44px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    text-transform: uppercase;
+    --border-radius: 8px;
+    /* White */
+    color: #ffffff;
+}
+
+.sub-content-d {
+    margin: 0;
+    display: block;
+    padding-left: 45px;
+    padding-top: 4px;
+    padding-bottom: 15px;
+}
+
+.sub-content-p {
+    h3 {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        /* identical to box height */
+        color: #000000;
+    }
+}
+
+.sub-circle-p {
+    margin: 4px;
+    background-color: #e0e0e0;
+    border: 3px solid #e0e0e0;
+    border-radius: 100%;
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    padding-top: 5px;
+}
+
+.hidedot {
+    visibility: hidden !important;
+}
+
+.activecard {
+    position: absolute;
+    background: white;
+    left: 24px;
+    padding: 24px;
+    z-index: 999;
+    box-shadow: 0px 2px 8px rgba(65, 55, 255, 0.08);
+    border-radius: 8px;
+    width: 327px;
+    height: 136px;
+    margin: 0;
+}
+
+.cardheight {
+    height: 168px;
+    padding-top: 12px;
+}
+
+.bluebtn {
+    width: 120px;
+    height: 44px;
+    margin-left: 28px;
+    margin-top: 23px;
+    --border-radius: 8px;
+}
+
+ion-icon {
+    zoom: 1;
+}
+
+.backbutton {
+    zoom: 0.6;
+}
+
+.circle-a {
+    margin: 2px 0px 0px 0px;
+    background-color: #7e7e7e;
+    border: 3px solid #7e7e7e;
+    border-radius: 100%;
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+}
+
+.headtoolbar{
+    padding-left : 12px ;
+}
+
+.submitbtn {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    color: #ffffff;
+    --border-radius: 8px;
+    width: 82.5%;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    height: 44px;
+  }
+  .lbtn {
+    margin-left: 24px;
+    --border-width: 1px;
+  }
+  .rbtn {
+    margin-right: 24px;
+    float: right;
+  }
+
+  
+
+  

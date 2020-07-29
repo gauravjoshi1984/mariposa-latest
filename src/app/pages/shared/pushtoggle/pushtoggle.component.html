@@ -1,0 +1,19 @@
+<ion-row style="align-items: center;">
+  <ion-col size="8">
+      <ion-text (click)="generateClick(toggleItem)" style="font-size: 16px; line-height: 19px; font-weight: normal;">{{ name }}</ion-text>
+  </ion-col>
+  <ion-col>
+      <ion-text style="
+      font-size: 16px;
+      line-height: 19px;
+      font-weight: normal;
+      float: right;
+      margin-right: 12px;
+    ">
+          <span *ngIf="toggleItem.checked">ON</span>
+          <span *ngIf="!toggleItem.checked">OFF</span></ion-text>
+  </ion-col>
+  <ion-col>
+      <ion-toggle mode="ios" [name]="name" checked="false" color="primary" style="float: right;" #toggleItem></ion-toggle>
+  </ion-col>
+</ion-row>

@@ -1,0 +1,133 @@
+ion-title {
+  padding-left: 24px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #1a1a1a;
+}
+ion-icon {
+  font-size: 24px !important;
+  zoom: 1;
+}
+ion-chip {
+  margin: 0;
+  //   padding: 0;
+}
+.unselectchip {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  text-align: center;
+  text-transform: uppercase;
+  display: inline-block;
+
+  /* Dark Grey */
+
+  color: #7e7e7e;
+  background: white;
+  width: 14.2857142857%;
+  height: 17px;
+}
+.selectedchip {
+  font-style: normal;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  text-transform: uppercase;
+
+  /* White */
+
+  color: #ffffff;
+  background: #4137ff;
+  border-radius: 8px;
+  width: 14.2857142857%;
+  height: 32px;
+  padding-top: 7px;
+}
+.chipcol {
+  padding-left: 13px;
+  padding-right: 13px;
+}
+ion-content {
+  --padding-start: 24px !important;
+  --padding-end: 24px !important;
+  --padding-top: 16px;
+  --background: #f8f8f8;
+}
+.timelinecol {
+  display: inline-flex;
+  margin-bottom: 5px;
+}
+.hidecard {
+  visibility: hidden;
+}
+.timePer {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+  /* identical to box height, or 100% */
+
+  /* Dark Grey */
+
+  color: #7e7e7e;
+  width: 20%;
+  margin: 0;
+  padding-top: 16px;
+}
+.selectedCard {
+  background: #4137ff !important;
+  /* Medium Grey */
+
+  border: 0.4px solid #b8b8b8 !important;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.08), 0px 0px 1px rgba(0, 0, 0, 0.25) !important;
+  .cardtitle {
+    color: #ffffff !important;
+  }
+  .carddesc {
+    color: #ffffff !important;
+  }
+}
+.detailCard {
+  background: #ffffff;
+  padding: 14px 0 12px 14px;
+  border: 0.4px solid #b8b8b8;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.08), 0px 0px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  width: 278px;
+  height: 64px;
+  .cardtitle {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+
+    /* Direct Black */
+
+    color: #1a1a1a;
+    margin: 0;
+  }
+  .carddesc {
+    font-style: normal;
+    font-weight: normal;
+    padding-top: 5px;
+    font-size: 12px;
+    line-height: 14px;
+    margin: 0;
+
+    /* Dark Grey */
+
+    color: #7e7e7e;
+  }
+}
+

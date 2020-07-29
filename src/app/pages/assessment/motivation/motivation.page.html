@@ -1,0 +1,140 @@
+<ion-header mode="md">
+  
+  <ion-toolbar class="headtoolbar">
+    
+      <ion-row>
+        <ion-col size="2">
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <m-backbutton></m-backbutton>
+            </ion-buttons>
+        </ion-toolbar> 
+        
+        </ion-col>
+        <ion-col size="8">
+          <div>
+            <ion-text color="mdblack" position="floating" id="titletag">Motivation</ion-text>
+           
+          </div> 
+        </ion-col>
+       
+      </ion-row>
+   
+  </ion-toolbar>
+
+</ion-header>
+
+
+
+<ion-content>
+  <ion-grid style="padding:24px;height:fit-content;margin-bottom:48px">
+
+    <!-- MOTIVATION -->
+
+    <div style="padding-top:0px;margin-bottom:15px;">
+      <ion-label style="font-size: 16px;line-height: 19px;">Select David's motivations</ion-label>
+    </div>  
+    
+  <!-- CHECKBOX 1 -->
+
+    <ion-row style="align-items: center;margin-top:5px;">
+      <ion-col  size="1">
+        <div style="padding-left: 3px;"><ion-checkbox mode="md" #HealthFitness color="mwhite" checked="false"></ion-checkbox></div>
+      </ion-col>
+      <ion-col size="11" style="padding-top: 0px;">
+        <div><ion-text (click)="generateClick(HealthFitness)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Health & Fitness</ion-text></div>
+      </ion-col>  
+    </ion-row>
+
+    <!-- CHECKBOX 2 -->
+
+    <ion-row style="align-items: center;margin-top:5px;">
+      <ion-col  size="1">
+        <div style="padding-left: 3px;"><ion-checkbox mode="md" #FamilyCommunity color="mwhite" checked="false"></ion-checkbox></div>
+      </ion-col>
+      <ion-col size="11" style="padding-top: 0px;">
+        <div><ion-text (click)="generateClick(FamilyCommunity)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Family & Community</ion-text></div>
+      </ion-col>  
+    </ion-row>
+
+    <!-- CHECKBOX 3 -->
+
+    <ion-row style="align-items: center;margin-top:5px;">
+      <ion-col  size="1">
+        <div style="padding-left: 3px;"><ion-checkbox mode="md" #PersonalCauses color="mwhite" checked="false"></ion-checkbox></div>
+      </ion-col>
+      <ion-col size="11" style="padding-top: 0px;">
+        <div><ion-text (click)="generateClick(PersonalCauses)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Personal Causes</ion-text></div>
+      </ion-col>  
+    </ion-row>
+
+    <!-- CHECKBOX 4 -->
+
+    <ion-row style="align-items: center;margin-top:5px;">
+      <ion-col  size="1">
+        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Spirituality color="mwhite" checked="false"></ion-checkbox></div>
+      </ion-col>
+      <ion-col size="11" style="padding-top: 0px;">
+        <div><ion-text (click)="generateClick(Spirituality)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Spirituality</ion-text></div>
+      </ion-col>  
+    </ion-row>
+
+     <!-- CHECKBOX 5 -->
+
+     <ion-row style="align-items: center;margin-top:5px;">
+      <ion-col  size="1">
+        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Independence color="mwhite" checked="false"></ion-checkbox></div>
+      </ion-col>
+      <ion-col size="11" style="padding-top: 0px;">
+        <div><ion-text (click)="generateClick(Independence)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Independence</ion-text></div>
+      </ion-col>  
+    </ion-row>
+
+    <!-- CHECKBOX 6 -->
+
+    <ion-row style="align-items: center;margin-top:5px;">
+      <ion-col  size="1">
+        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Creativity color="mwhite" checked="false"></ion-checkbox></div>
+      </ion-col>
+      <ion-col size="11" style="padding-top: 0px;">
+        <div><ion-text (click)="generateClick(Creativity)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Creativity</ion-text></div>
+      </ion-col>  
+    </ion-row>
+
+    <!-- CHECKBOX 7 -->
+
+    <ion-row style="align-items: center;margin-top:5px;">
+      <ion-col  size="1">
+        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Fun color="mwhite" checked="false"></ion-checkbox></div>
+      </ion-col>
+      <ion-col size="11" style="padding-top: 0px;">
+        <div><ion-text (click)="generateClick(Fun)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Fun</ion-text></div>
+      </ion-col>  
+    </ion-row>
+
+</ion-grid>    
+</ion-content>
+
+
+<ion-footer>
+  <ion-grid style="padding-left: 24px;padding-right: 24px;padding-top: 16px;padding-bottom: 16px;">
+  <!-- BUTTON -->
+  <div id="button">
+    <ion-row style="align-items: center;">
+      <ion-col size="4">
+        
+          <ion-button class="btn1" [disabled]="false"  type="submit"  id="signup">PREVIEW</ion-button>
+          
+      </ion-col>
+       
+      <ion-col size="8">
+        
+          <ion-button class="btn2" [disabled]="false"  type="submit" (click)= "save()"  id="signup">SAVE AND PROCEED</ion-button>
+        
+      </ion-col>
+    </ion-row>
+  </div>  
+</ion-grid>
+  
+</ion-footer>
+

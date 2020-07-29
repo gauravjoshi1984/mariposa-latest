@@ -1,0 +1,33 @@
+<ion-content>
+    <ion-grid class="backbuttongrid"> 
+        <ion-toolbar style="height: 40px;">
+            <ion-buttons slot="start">
+                <m-backbutton></m-backbutton>
+            </ion-buttons>
+        </ion-toolbar>
+    </ion-grid> 
+    <ion-grid>
+        <ion-text>
+            <h5 class = "cap" style="margin-top:54px;">Hey {{userName}},<br>Create a Care Circle</h5>
+        </ion-text>
+        <div class="nametag" style="line-height: 5px;padding-top:30px;">
+            <ion-text style="line-height: 19px;font-size: 16px;font-weight: 300;" color="mdblack" position="floating" id="tag">Name of the Care circle</ion-text>
+            <ion-text style="line-height: 19px;font-size: 16px;font-weight: 300;" color="mdgrey" position="floating"><br>(Senior name is Suggested)</ion-text>
+        </div>
+        <form [formGroup]="circleForm" (ngSubmit)="createCircle()">
+            <div style="padding-top: 10px;">
+
+                <ion-input formControlName="circleName" mode="md" class="input" placeholder="Enter Name"></ion-input>
+                <ion-item [hidden]="checkValidity(circleForm.controls.circleName)['valid']" lines="none" style="margin-top:-10px;margin-left:-10px;">
+                    <ion-icon style="margin-right: 5px;" name="alert-circle"></ion-icon>
+                    <ion-text class="danger">{{checkValidity(circleForm.controls.circleName)['message']}}</ion-text>
+                </ion-item>
+            </div>
+            <div id="button">
+                <ion-button [disabled]="(circleForm.invalid || (circleForm.controls.circleName.value.length == 0))" class="btnblue" type="submit" id="signup">CREATE A CIRCLE</ion-button>
+            </div>
+        </form>
+
+    </ion-grid>
+
+</ion-content>

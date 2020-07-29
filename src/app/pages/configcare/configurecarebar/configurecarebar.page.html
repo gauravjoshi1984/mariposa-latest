@@ -1,0 +1,129 @@
+<!-- <ion-header>
+  <ion-toolbar class="headtoolbar">
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="'/../'" routerDirection="backward">
+        <ion-icon slot="icon-only" src="assets/back.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Configure Care</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-header mode="md">
+  <ion-toolbar class="headtoolbar">
+    
+      <ion-row>
+        <ion-col size="2">
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-button [routerLink]="'/../'" routerDirection="backward">
+              <ion-icon class="backbutton" slot="icon-only" src="assets/back.svg"></ion-icon>
+            </ion-button>
+            </ion-buttons>
+        </ion-toolbar> 
+        </ion-col>
+        <ion-col size="8">
+          <div>
+            <ion-text color="mdblack" position="floating" id="titletag">Configure Care</ion-text>
+          </div> 
+        </ion-col>
+      </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <!-- completed -->
+    <ng-container *ngFor="let stepItem of stepperData">
+      <div
+        class="step"
+        [ngClass]="[stepItem.status=='completed' ? 'completed' : '']"
+        [class.cardheight]="stepItem.status=='active'"
+      >
+        <div class="v-stepper">
+          <div
+            [ngClass]="[stepItem.status=='completed' ? 'circle' : 'circle-p']"
+          >
+            <ion-icon
+              style="margin-top: 2px;"
+              *ngIf="stepItem.status=='completed'"
+              src="assets/Group777.svg"
+            ></ion-icon>
+          </div>
+          <div class="line"></div>
+        </div>
+        <div class="content" [class.activecard]="stepItem.status=='active'">
+          <div *ngIf="stepItem.status=='active'" style="display: flex;align-items: baseline;">
+            <div class="circle-a" style="margin: 0px; padding: 0;"></div>
+            <h3 style="padding-left: 16px;">
+              {{stepItem.name}}
+            </h3>
+            <!-- <p *ngIf="stepItem.status!='active'">{{stepItem.desc}}</p> -->
+
+          </div>
+          <ion-button
+            *ngIf="stepItem.open"
+            class="bluebtn"
+            (click)="gotoUrl(stepItem.pathUrl)"
+          >
+            <span *ngIf="stepItem.status=='completed'">EDIT</span
+            ><span *ngIf="stepItem.status=='active'">ADD</span>
+          </ion-button>
+          <h3
+            *ngIf="stepItem.status!='active'"
+            
+          >
+            {{stepItem.name}}
+          </h3>
+          <p *ngIf="stepItem.status!='active'">{{stepItem.desc}}</p>
+          <p *ngIf="stepItem.status!='active'">{{stepItem.desc2}}</p>
+        </div>
+      </div>
+      <!-- <ng-container *ngFor="let childItem of stepItem.children">
+        <div class="step empty">
+          <div class="v-stepper">
+            <div class="circle"></div>
+            <div class="line"></div>
+          </div>
+
+          <div
+            class="content sub-content"
+            [ngClass]="[childItem.status=='pending' ? 'sub-content-p':'' ]"
+          >
+            <div
+              [ngClass]="[childItem.status=='completed' ? 'sub-circle-c' : '' ,childItem.status=='pending'?'sub-circle-p':'',childItem.status=='active'?'sub-circle-a':'']"
+            >
+              <ion-icon src="assets/Group777.svg"></ion-icon>
+            </div>
+
+            <h3 [ngClass]="childItem.status=='pending'?'p-sub':''">
+              {{childItem.name}}
+            </h3>
+          </div>
+        </div>
+        <ng-container *ngIf="childItem.open">
+          <div class="step empty">
+            <div class="v-stepper">
+              <div class="circle"></div>
+              <div class="line"></div>
+            </div>
+            <div class="sub-content-d">
+              <ion-button class="btnblue2">Add</ion-button>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container> -->
+      <!-- <ng-container *ngIf="stepItem.open">
+        <div class="step empty">
+          <div class="v-stepper">
+            <div class="circle"></div>
+            <div class="line"></div>
+          </div>
+          <div class="sub-content-d">
+            <ion-button class="btnblue2">Add</ion-button>
+          </div>
+        </div>
+      </ng-container> -->
+    </ng-container>
+  </div>
+</ion-content>

@@ -1,0 +1,65 @@
+<ion-header mode="md">
+    <ion-toolbar class="headtoolbar">
+        <ion-buttons slot="start">
+            <m-backbutton></m-backbutton>
+        </ion-buttons>
+        <ion-title class="name" color="mdblack" position="floating" id="titletag">{{careCircleName}}'s Care Circle</ion-title>
+        <ion-buttons slot="end">
+            <ion-img (click)="presentPopover($event)" src="../assets/MariposaIcons/Kebab menu.svg" style="color: black; margin-right: 10px;"></ion-img>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+    <ion-grid style="padding-top:14px;padding-left: 6px;padding-right: 6px;padding-bottom: 60px;">
+        <ion-card class="cardinfo" *ngFor="let member of memberList">
+            <ion-row>
+                <ion-col id="infolabel">
+                    <ion-text class="name"><b>{{member['userName']}}</b> {{member['relation']}}</ion-text>
+                    <ion-text id="email"><br>{{member['email']}}</ion-text>
+                </ion-col>
+                <ion-col>
+                    <ion-chip color="mmgrey" outline style="float:right;border-radius: 8px;">
+                        <ion-label>{{member['userType']}}</ion-label>
+                    </ion-chip>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <!-- <ion-text class="assesstime">Assessment Completed on: 12 May 2020</ion-text> -->
+            </ion-row>
+            <ion-row [hidden]="member['userType'] != 'SENIOR'">
+                <ion-col style="padding-bottom: 0px;">
+                    <ion-button class="assessment" (click)='navigateToAssessment()'>START ASSESSMENT</ion-button>
+                </ion-col>
+            </ion-row>
+            <ion-row [hidden]="false">
+                <ion-col style="padding-bottom: 0px;">
+                    <ion-button class="pending">
+                        <ion-icon slot="icon-only" src="assets/MariposaIcons/Error.svg"></ion-icon>
+                        Invitation Pending
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+        <!-- <ion-card class="cardinfo">
+    
+      <ion-row >
+        <ion-col id="infolabel" style="margin-bottom: 11px;">
+          <ion-text ><b>John Doe</b> Father</ion-text>
+          <ion-text id="email"><br>john.doe@gmail.com</ion-text>
+        </ion-col>
+        <ion-col>
+          <ion-chip color="mmgrey" outline style="float:right;border-radius: 8px;">
+            <ion-label color="mdgrey">ADMIN</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    
+  </ion-card> -->
+    </ion-grid>
+    <ion-grid>
+        <div id="button">
+            <ion-button type="submit" class="btnwhite" expand="block" (click)="navigateToAddMember()">ADD MEMBERS</ion-button>
+        </div>
+    </ion-grid>
+</ion-content>

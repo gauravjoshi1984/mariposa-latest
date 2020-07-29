@@ -1,0 +1,42 @@
+.add{
+    margin-top: 16px;
+    width: 120px;
+    height: 44px;
+    margin-left: 0px;
+    margin-bottom: 5px;   
+    
+    
+   border-radius: 8px;
+    
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+
+    --color:#4137FF;
+    --background:#ffffff;
+    --border-radius: 8px; 
+    --border-color:#4137FF;
+    --box-shadow: none;
+    
+    border-style: solid;
+    border-width: thin;
+  }
+
+  .btn1 {
+    --border-radius: 8px;
+    margin-top: 16px;
+    padding-top: 0;
+    --border: 1px solid #4137ff;
+    width: 120px;
+    height:44px;
+    --border-width:thin;
+  }
+
+  .plusbutton{
+
+    height: 24px;
+    width: 24px;
+    zoom: 1;
+  }
+
+  

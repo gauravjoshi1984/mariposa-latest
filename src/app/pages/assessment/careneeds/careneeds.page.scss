@@ -1,0 +1,61 @@
+.careneeds-lable {
+    ion-text {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
+
+.careneeds-card {
+    margin: 5px 0;
+    min-height: 55px;
+    box-shadow: 0px 2px 8px rgba(65, 55, 255, 0.08);
+    border-radius: 4px;
+    ion-text {
+        h5 {
+            font-size: 16px;
+            line-height: 19px;
+            color: #1A1A1A;
+            font-weight: normal;
+            padding-left: 16px;
+        }
+        ion-col {
+            padding: 0px;
+        }
+    }
+    ion-img {
+        height: 24px;
+        width: 24px;
+        float: right;
+        margin-top: 12px;
+        margin-right: 28px;
+    }
+}
+
+.careneedcontent {
+    padding-top: 4px;
+    padding-bottom: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-bottom: 55px;
+}
+
+.itemname {
+    margin-bottom: 0px;
+    margin-top: 12px;
+}
+
+.contentrow {
+    padding: 0px;
+    align-items: center;
+}
+
+.careneedheadergrid {
+    padding: 24px;
+    padding-bottom: 0px;
+    height: auto;
+}
+
+.selecttext {
+    font-size: 14px;
+}

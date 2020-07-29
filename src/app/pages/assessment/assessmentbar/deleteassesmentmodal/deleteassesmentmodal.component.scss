@@ -1,0 +1,74 @@
+ion-card {
+  width: 343px;
+  height: 249px;
+  background: #ffffff;
+  border-radius: 8px;
+}
+.mdheading {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #1a1a1a;
+  padding-top: 24px;
+  padding-left: 24px;
+  margin: 0;
+}
+
+.closebtn {
+  text-align: right;
+  ion-icon {
+    padding-top: 30px;
+    padding-right: 30px;
+    margin: 0;
+    font-size: 24px;
+    color: #1a1a1a;
+  }
+}
+.infocol {
+  padding-left: 25px;
+  padding-top: 16px;
+  padding-bottom: 32px;
+}
+.confirmqn {
+  color: #1a1a1a !important;
+  //   padding-left: 25px;
+  font-weight: 800;
+  //   padding-top: 16px;
+  margin: 0;
+  padding-bottom: 16px;
+}
+.deleteinfo {
+  font-style: normal;
+  margin: 0;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 17px;
+  //   padding-left: 25px;
+  //   padding-bottom: 32px;
+}
+
+.dltbtn {
+  width: 142px;
+  height: 44px;
+  border: 1px solid #ff002b;
+  color: #ff002b;
+  border-radius: 8px;
+  margin: 0;
+}
+.cancelbtn {
+  width: 142px;
+  height: 44px;
+  --background: #4137ff;
+  --border-radius: 8px;
+  margin: 0;
+}
+.btnsrow {
+  ion-col:first-child {
+    padding-left: 24px;
+  }
+  ion-col:nth-child(2) {
+    text-align: end;
+    padding-right: 24px;
+  }
+}
