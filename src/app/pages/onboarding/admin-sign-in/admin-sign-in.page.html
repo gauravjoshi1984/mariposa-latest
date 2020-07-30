@@ -18,10 +18,10 @@
             <ion-col class="segsec">
                 <ion-toolbar>
                     <ion-segment value="signin" [(ngModel)]="type" (ionChange)="segmentChanged($event)" scrollable="true">
-                        <ion-segment-button class="ripple" value="signin">
+                        <ion-segment-button class="ripple" value="signin"  [class.segmentborder]="type=='signup'">
                             <ion-label>SIGN IN</ion-label>
                         </ion-segment-button>
-                        <ion-segment-button class="ripple" value="signup">
+                        <ion-segment-button class="ripple" value="signup"  [class.segmentborder]="type=='signin'">
                             <ion-label>SIGN UP</ion-label>
                         </ion-segment-button>
                     </ion-segment>
