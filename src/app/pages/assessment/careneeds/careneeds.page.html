@@ -1,78 +1,113 @@
 <ion-header mode="md">
-    <ion-toolbar class="headtoolbar">
-        <ion-row>
-            <ion-col size="2">
-                <ion-toolbar>
-                    <ion-buttons slot="start">
-                        <!-- <ion-back-button style="float:left" mode="md" color="mdblack" icon="chevron-back-outline" defaultHref="admin-sign-in"></ion-back-button> -->
-                        <m-backbutton></m-backbutton>
-                        <!-- <ion-button (click)="back()">
+  <ion-toolbar class="headtoolbar">
+    <ion-row>
+      <ion-col size="2">
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <!-- <ion-back-button style="float:left" mode="md" color="mdblack" icon="chevron-back-outline" defaultHref="admin-sign-in"></ion-back-button> -->
+            <m-backbutton></m-backbutton>
+            <!-- <ion-button (click)="back()">
                             <ion-icon class="backbutton" slot="icon-only" src="assets/back.svg"></ion-icon>
                         </ion-button> -->
-                    </ion-buttons>
-                </ion-toolbar>
-            </ion-col>
-            <ion-col size="8">
-                <div>
-                    <ion-text position="floating" id="titletag">Care Needs</ion-text>
-                </div>
-            </ion-col>
-            <ion-col size="2" style="padding-right: 8px;">
-                <div>
-                    <ion-img src="../assets/threedots.svg" style="float:right;"></ion-img>
-                </div>
-            </ion-col>
-        </ion-row>
-    </ion-toolbar>
-
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-col>
+      <ion-col size="8">
+        <div>
+          <ion-text position="floating" id="titletag">Care Needs</ion-text>
+        </div>
+      </ion-col>
+      <ion-col size="2" style="padding-right: 8px;">
+        <div>
+          <ion-img
+            src="../assets/threedots.svg"
+            style="float: right;"
+          ></ion-img>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-grid class="careneedheadergrid">
-        <ion-row>
-            <ion-col style="padding:0px;">
-                <ion-text class="selecttext" color="mdgrey">Please select the care needs required along with the level of assistance required.</ion-text>
-            </ion-col>
+  <ion-grid class="careneedheadergrid">
+    <ion-row>
+      <ion-col style="padding: 0px;">
+        <ion-text class="selecttext" color="mdgrey"
+          >Please select the care needs required along with the level of
+          assistance required.</ion-text
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row style="padding-top: 24px;">
+      <ion-col size="4" style="left: 70px;" class="careneeds-lable">
+        <ion-text style="float: right;">Some</ion-text>
+      </ion-col>
+      <ion-col size="4" style="left: 50px;" class="careneeds-lable">
+        <ion-text style="float: right;">Complete</ion-text>
+      </ion-col>
+      <ion-col size="4" class="careneeds-lable">
+        <ion-text style="float: right;">None</ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="careneedcontent scrollablecontent">
+    <ion-card *ngFor="let item of careneedinfo" class="careneeds-card">
+      <ion-grid style="padding: 0px;">
+        <ion-row class="contentrow">
+          <ion-col size="5">
+            <ion-text>
+              <h5 class="itemname">{{item.name}}</h5>
+            </ion-text>
+          </ion-col>
+          <ion-col class="radioCol">
+            <ion-img
+              *ngIf="item.val=='some'"
+              src="assets/icon/radioButtonChecked.png"
+              (click)="item.val=''"
+            ></ion-img>
+            <ion-img
+              *ngIf="item.val!='some'"
+              src="assets/icon/radioButtonUnchecked.png"
+              (click)="item.val='some'"
+            ></ion-img>
+          </ion-col>
+          <ion-col class="radioCol">
+            <ion-img
+              *ngIf="item.val=='complete'"
+              src="assets/icon/radioButtonChecked.png"
+              (click)="item.val=''"
+            ></ion-img>
+            <ion-img
+              *ngIf="item.val!='complete'"
+              src="assets/icon/radioButtonUnchecked.png"
+              (click)="item.val='complete'"
+            ></ion-img>
+          </ion-col>
+          <ion-col class="radioCol">
+            <ion-img
+              *ngIf="item.val=='none'"
+              src="assets/icon/radioButtonChecked.png"
+              (click)="item.val=''"
+            ></ion-img>
+            <ion-img
+              *ngIf="item.val!='none'"
+              src="assets/icon/radioButtonUnchecked.png"
+              (click)="item.val='none'"
+            ></ion-img>
+          </ion-col>
         </ion-row>
-        <ion-row style="padding-top:24px;">
-            <ion-col size="4" style="left: 70px;" class="careneeds-lable">
-                <ion-text style="float: right;">Some</ion-text>
-            </ion-col>
-            <ion-col size="4" style="left: 50px;" class="careneeds-lable">
-                <ion-text style="float: right;">Complete</ion-text>
-            </ion-col>
-            <ion-col size="4" class="careneeds-lable">
-                <ion-text style="float: right;">None</ion-text>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
-    <ion-grid class="careneedcontent">
-        <ion-card *ngFor="let item of careneedinfo" class="careneeds-card">
-            <ion-grid style="padding:0px">
-                <ion-row class="contentrow">
-                    <ion-col size="5">
-                        <ion-text>
-                            <h5 class="itemname">{{item.name}}</h5>
-                        </ion-text>
-                    </ion-col>
-                    <ion-col>
-                        <ion-img *ngIf="item.val=='some'" src="assets/icon/radioButtonChecked.png" (click)="item.val=''"></ion-img>
-                        <ion-img *ngIf="item.val!='some'" src="assets/icon/radioButtonUnchecked.png" (click)="item.val='some'"></ion-img>
-
-                    </ion-col>
-                    <ion-col>
-                        <ion-img *ngIf="item.val=='complete'" src="assets/icon/radioButtonChecked.png" (click)="item.val=''"></ion-img>
-                        <ion-img *ngIf="item.val!='complete'" src="assets/icon/radioButtonUnchecked.png" (click)="item.val='complete'"></ion-img>
-                    </ion-col>
-                    <ion-col>
-                        <ion-img *ngIf="item.val=='none'" src="assets/icon/radioButtonChecked.png" (click)="item.val=''"></ion-img>
-                        <ion-img *ngIf="item.val!='none'" src="assets/icon/radioButtonUnchecked.png" (click)="item.val='none'"></ion-img>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-card>
-        <div id="button">
-            <ion-button [disabled]="false" class="btnblue" type="submit" id="signup" (click)="save()">SUBMIT</ion-button>
-        </div>
-    </ion-grid>
+      </ion-grid>
+    </ion-card>
+    <div id="button">
+      <ion-button
+        [disabled]="false"
+        class="btnblue"
+        type="submit"
+        id="signup"
+        (click)="save()"
+        >SUBMIT</ion-button
+      >
+    </div>
+  </ion-grid>
 </ion-content>
