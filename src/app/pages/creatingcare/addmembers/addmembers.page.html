@@ -1,108 +1,199 @@
 <ion-header mode="md">
-
-    <ion-toolbar class="headtoolbar">
-        <ion-grid>
-            <ion-row style="align-items: center;">
-                <ion-col>
-                    <div style="margin-top: 24px;">
-                        <ion-text color="mdblack" position="floating" id="titletag">Add Members</ion-text>
-                        <ion-text class="cap" style="font-size:14px;" color="mdgrey"><br>({{careCircleName}}'s Care Circle)</ion-text>
-                    </div>
-                </ion-col>
-                <ion-col>
-                    <ion-icon style="zoom:1.2;color: black;float:right;margin-top: 18px;" name="close-outline" (click)="back()"></ion-icon>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-toolbar>
-
+  <ion-toolbar class="headtoolbar">
+    <ion-grid>
+      <ion-row style="align-items: center;">
+        <ion-col>
+          <div style="margin-top: 24px;">
+            <ion-text color="mdblack" position="floating" id="titletag"
+              >Add Members</ion-text
+            >
+            <ion-text class="cap" style="font-size: 14px;" color="mdgrey"
+              ><br />({{careCircleName}}'s Care Circle)</ion-text
+            >
+          </div>
+        </ion-col>
+        <ion-col>
+          <ion-icon
+            style="zoom: 1.2; color: black; float: right; margin-top: 18px;"
+            name="close-outline"
+            (click)="back()"
+          ></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-grid style="padding-top:32px;padding-left:24px;margin-bottom: 100px;">
-        <form [formGroup]="memberForm" (ngSubmit)="saveMember()">
-            <ion-text style="font-weight:300;font-size:16px;line-height:19px;">Select Role</ion-text>
-            <ion-row style="margin-top: 2px;">
-                <ion-col class="gencol" size="3">
-                    <div style="padding-top:3px;">
-                        <ion-card class="genCard" [class.selectedGen]="selectedType=='CAREGIVER'" (click)="selectedType='CAREGIVER'">
-                            <img src="assets/MariposaIcons/Caregiveroutline.svg" alt="">
-                        </ion-card>
-                    </div>
-                </ion-col>
+  <ion-grid
+    style="padding-top: 32px; padding-left: 24px; margin-bottom: 100px;"
+  >
+    <form [formGroup]="memberForm" (ngSubmit)="saveMember()">
+      <ion-text style="font-weight: 300; font-size: 16px; line-height: 19px;"
+        >Select Role</ion-text
+      >
+      <ion-row style="margin-top: 2px;">
+        <ion-col class="gencol" size="3">
+          <div style="padding-top: 3px;">
+            <ion-card
+              class="genCard"
+              [class.selectedGen]="selectedType=='CAREGIVER'"
+              (click)="selectedType='CAREGIVER'"
+            >
+              <img
+                [src]="selectedType=='CAREGIVER'?'assets/caregiverwhite.svg':'assets/MariposaIcons/Caregiveroutline.svg'"
+                alt=""
+              />
+            </ion-card>
+          </div>
+        </ion-col>
+        <!-- Need to add white icons  -->
+        <ion-col class="gencol">
+          <div style="padding-top: 3px;">
+            <ion-card
+              class="genCard"
+              [class.selectedGen]="selectedType=='FAMILY'"
+              (click)="selectedType='FAMILY'"
+            >
+              <img
+                [src]="selectedType=='FAMILY'?'assets/familyfriends.svg':'assets/MariposaIcons/FamilyfriendsOutline.svg'"
+                alt=""
+              />
+            </ion-card>
+          </div>
+        </ion-col>
+      </ion-row>
 
-                <ion-col class="gencol">
-                    <div style="padding-top:3px;">
-                        <ion-card class="genCard" [class.selectedGen]="selectedType=='FAMILY'" (click)="selectedType='FAMILY'">
-                            <img src="assets/MariposaIcons/FamilyfriendsOutline.svg" alt="">
-                        </ion-card>
-                    </div>
-                </ion-col>
+      <ion-row>
+        <ion-col class="gencol" size="3">
+          <!-- <ion-text [class.selectedGentext]="gen=='M'"><h6 style="margin-top: 4px;font-size: 14px;line-height:17px;color:#7E7E7E;">Caregiver</h6></ion-text> -->
+          <span
+            style="
+              margin-top: 0px;
+              font-size: 14px;
+              line-height: 17px;
+              color: #7e7e7e;
+              padding-left: 0px;
+            "
+            [class.selectedGentext]="selectedType=='CAREGIVER'"
+            >Caregiver</span
+          >
+        </ion-col>
+        <ion-col class="gencol">
+          <span
+            style="
+              margin-top: 0px;
+              font-size: 14px;
+              line-height: 17px;
+              color: #7e7e7e;
+              padding-left: 0px;
+            "
+            [class.selectedGentext]="selectedType=='FAMILY'"
+            >Family & Friends</span
+          >
+          <!-- <ion-text><h6 style="margin-top: 4px;font-size: 14px;line-height:17px;color:#7E7E7E;">Family & Friends</h6></ion-text> -->
+        </ion-col>
+      </ion-row>
+      <div class="nametag" style="margin-top: 5px;">
+        <ion-text position="floating" id="tag">Name</ion-text>
+      </div>
+      <div>
+        <ion-input
+          mode="md"
+          class="input"
+          placeholder="Enter full Name"
+          formControlName="memberName"
+        ></ion-input>
+        <ion-item
+          [hidden]="checkValidity(memberForm.controls.memberName)"
+          lines="none"
+          style="margin-top: -10px; margin-left: -10px;"
+        >
+          <ion-icon style="margin-right: 5px;" name="alert-circle"></ion-icon>
+          <ion-text class="“warning”">Invalid Name.</ion-text>
+        </ion-item>
+      </div>
 
-            </ion-row>
-
-            <ion-row>
-                <ion-col class="gencol" size="3">
-
-                    <!-- <ion-text [class.selectedGentext]="gen=='M'"><h6 style="margin-top: 4px;font-size: 14px;line-height:17px;color:#7E7E7E;">Caregiver</h6></ion-text> -->
-                    <span style="margin-top: 0px;font-size: 14px;line-height:17px;color:#7E7E7E;padding-left: 0px;" [class.selectedGentext]="selectedType=='CAREGIVER'">Caregiver</span>
-                </ion-col>
-                <ion-col class="gencol">
-                    <span style="margin-top: 0px;font-size: 14px;line-height:17px;color:#7E7E7E;padding-left: 0px;" [class.selectedGentext]="selectedType=='FAMILY'">Family & Friends</span>
-                    <!-- <ion-text><h6 style="margin-top: 4px;font-size: 14px;line-height:17px;color:#7E7E7E;">Family & Friends</h6></ion-text> -->
-                </ion-col>
-            </ion-row>
-            <div class="nametag" style="margin-top: 5px;">
-                <ion-text position="floating" id="tag">Name</ion-text>
-            </div>
-            <div>
-                <ion-input mode="md" class="input" placeholder="Enter full Name" formControlName="memberName"></ion-input>
-                <ion-item [hidden]="checkValidity(memberForm.controls.memberName)" lines="none" style="margin-top:-10px;margin-left:-10px;">
-                    <ion-icon style="margin-right: 5px;" name="alert-circle"></ion-icon>
-                    <ion-text class=“warning”>Invalid Name.</ion-text>
-                </ion-item>
-            </div>
-
-            <div class="nametag">
-                <ion-text position="floating" id="tag">Relation</ion-text>
-            </div>
-            <div>
-                <ion-select mode="md" class="input" placeholder="Select Relation" formControlName="memberRelation">
-                    <ion-select-option *ngFor="let relation of relationList" [value]="relation" for="memberRelation">{{relation}}</ion-select-option>
-                    <!-- <ion-select-option value="blonde">Blonde</ion-select-option>
+      <div class="nametag">
+        <ion-text position="floating" id="tag">Relation</ion-text>
+      </div>
+      <div>
+        <ion-select
+          mode="md"
+          class="input"
+          placeholder="Select Relation"
+          formControlName="memberRelation"
+        >
+          <ion-select-option
+            *ngFor="let relation of relationList"
+            [value]="relation"
+            for="memberRelation"
+            >{{relation}}</ion-select-option
+          >
+          <!-- <ion-select-option value="blonde">Blonde</ion-select-option>
         <ion-select-option value="black">Black</ion-select-option>
         <ion-select-option value="red">Red</ion-select-option> -->
-                </ion-select>
-                <ion-item [hidden]="checkValidity(memberForm.controls.memberRelation)" lines="none" style="margin-top:-10px;margin-left:-10px;">
-                    <ion-icon style="margin-right: 5px;" name="alert-circle"></ion-icon>
-                    <ion-text class=“warning”>Select a relation.</ion-text>
-                </ion-item>
-            </div>
+        </ion-select>
+        <ion-item
+          [hidden]="checkValidity(memberForm.controls.memberRelation)"
+          lines="none"
+          style="margin-top: -10px; margin-left: -10px;"
+        >
+          <ion-icon style="margin-right: 5px;" name="alert-circle"></ion-icon>
+          <ion-text class="“warning”">Select a relation.</ion-text>
+        </ion-item>
+      </div>
 
-            <div class="nametag">
-                <ion-text position="floating" id="tag">Email ID</ion-text>
-            </div>
-            <div>
-                <ion-input mode="md" class="input" type="email" placeholder="Enter email" formControlName="memberEmail"></ion-input>
-                <ion-item [hidden]="checkValidity(memberForm.controls.memberEmail)" lines="none" style="margin-top:-10px;margin-left:-10px;">
-                    <ion-icon style="margin-right: 5px;" name="alert-circle"></ion-icon>
-                    <ion-text class=“warning”>Invalid Email.</ion-text>
-                </ion-item>
-            </div>
+      <div class="nametag">
+        <ion-text position="floating" id="tag">Email ID</ion-text>
+      </div>
+      <div>
+        <ion-input
+          mode="md"
+          class="input"
+          type="email"
+          placeholder="Enter email"
+          formControlName="memberEmail"
+        ></ion-input>
+        <ion-item
+          [hidden]="checkValidity(memberForm.controls.memberEmail)"
+          lines="none"
+          style="margin-top: -10px; margin-left: -10px;"
+        >
+          <ion-icon style="margin-right: 5px;" name="alert-circle"></ion-icon>
+          <ion-text class="“warning”">Invalid Email.</ion-text>
+        </ion-item>
+      </div>
 
-            <div class="nametag">
-                <ion-text position="floating" id="tag">Mobile Number</ion-text>
-            </div>
-            <div>
-                <ion-input mode="md" class="input" type="tel" placeholder="Enter mobile number" formControlName="memberMobileNumber"></ion-input>
-                <ion-item [hidden]="checkValidity(memberForm.controls.memberMobileNumber)" lines="none" style="margin-top:-10px;margin-left:-10px;">
-                    <ion-icon style="margin-right: 5px;" name="alert-circle"></ion-icon>
-                    <ion-text class=“warning”>Invalid Phone Number.</ion-text>
-                </ion-item>
-            </div>
-            <div id="button">
-                <ion-button [disabled]="(memberForm.invalid)" class="btnblue" type="submit" id="signup">ADD</ion-button>
-            </div>
-        </form>
-    </ion-grid>
+      <div class="nametag">
+        <ion-text position="floating" id="tag">Mobile Number</ion-text>
+      </div>
+      <div>
+        <ion-input
+          mode="md"
+          class="input"
+          type="tel"
+          placeholder="Enter mobile number"
+          formControlName="memberMobileNumber"
+        ></ion-input>
+        <ion-item
+          [hidden]="checkValidity(memberForm.controls.memberMobileNumber)"
+          lines="none"
+          style="margin-top: -10px; margin-left: -10px;"
+        >
+          <ion-icon style="margin-right: 5px;" name="alert-circle"></ion-icon>
+          <ion-text class="“warning”">Invalid Phone Number.</ion-text>
+        </ion-item>
+      </div>
+      <div id="button">
+        <ion-button
+          [disabled]="(memberForm.invalid)"
+          class="btnblue"
+          type="submit"
+          id="signup"
+          >ADD</ion-button
+        >
+      </div>
+    </form>
+  </ion-grid>
 </ion-content>
