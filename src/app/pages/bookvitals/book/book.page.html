@@ -2,7 +2,7 @@
   <ion-toolbar>
     <div class="hdcontent" style="display: flex;">
       <img src="assets/MariposaIcons/micon.svg" alt="" />
-      <ion-title mode="md" class="title-text vitaltext">
+      <ion-title mode="md" class="title-text vitaltext" (click)="toggleData()">
         Books
       </ion-title>
     </div>
@@ -36,7 +36,7 @@
           ></ion-input>
         </ion-item>
       </ion-col>
-      <ion-col class="placesec" size="12">
+      <ion-col class="placesec" size="12" *ngIf="!showData">
         <img src="assets/Empty_Book.svg" />
         <div style="padding-top: 16px;">
           Once a Caregiver starts updating schedule,
@@ -47,111 +47,75 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ng-container *ngIf="showData">
+    <div class="step completed" *ngFor="let card of Cards">
+      <div class="v-stepper">
+        <div class="timelinedate">{{card.date}}<br />{{card.month}}</div>
+        <div class="line"></div>
+      </div>
 
-  <div class="step completed">
-    <div class="v-stepper">
-      <div class="timelinedate">24<br />jun</div>
-      <div class="line"></div>
+      <div class="content">
+        <ion-card class="ion-no-padding cardCust">
+          <ion-grid class="ion-no-padding">
+            <ion-row *ngIf="card.image">
+              <ion-col size="12">
+                <img [src]="card.imageurl" alt="" />
+                <p class="imgtagline">{{card.imagetag}}</p>
+                <hr style="margin: 0 8px;" />
+              </ion-col>
+            </ion-row>
+            <ion-row class="rowpadding">
+              <ion-col size="9">
+                <p class="subtitle">{{card.title}}</p>
+                <p class="titletext">
+                  {{card.subTitle}}
+                </p>
+              </ion-col>
+              <ion-col size="3">
+                <!-- <ion-icon slot="start" src="assets/progress_done.svg"></ion-icon> -->
+                <img
+                  style="float: right;"
+                  src="assets/progress_done.svg"
+                  alt=""
+                />
+              </ion-col>
+              <ion-col size="12">
+                <hr />
+                <p class="notestext">
+                  Notes: {{card.notes}}
+                </p>
+              </ion-col>
+              <ion-col size="12">
+                <!-- <ion-buttons slot="start"> -->
+                <ion-button
+                  fill="clear"
+                  class="simplebtn"
+                  (click)="likepost(card)"
+                >
+                  <ion-icon
+                    *ngIf="card.liked"
+                    slot="start"
+                    src="assets/Heart_filled.svg"
+                  ></ion-icon>
+                  <ion-icon
+                    *ngIf="!card.liked"
+                    slot="start"
+                    src="assets/Heart_outline.svg"
+                  ></ion-icon>
+                  Like
+                </ion-button>
+                <ion-button fill="clear" class="simplebtn">
+                  <ion-icon slot="start" src="assets/Comment.svg"></ion-icon>
+                  Comment
+                </ion-button>
+                <!-- </ion-buttons> -->
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </div>
     </div>
-
-    <div class="content">
-      <ion-card class="ion-no-padding cardCust">
-        <ion-grid class="ion-no-padding">
-          <ion-row class="rowpadding">
-            <ion-col size="9">
-              <p class="subtitle">Today’s Activities</p>
-              <p class="titletext">
-                Bathing, Grooming Breakfast, Medicine, Lunch
-              </p>
-            </ion-col>
-            <ion-col size="3">
-              <!-- <ion-icon slot="start" src="assets/progress_done.svg"></ion-icon> -->
-              <img
-                style="float: right;"
-                src="assets/progress_done.svg"
-                alt=""
-              />
-            </ion-col>
-            <ion-col size="12">
-              <hr />
-              <p class="notestext">
-                Notes: Breakfast-Bread with peanut butter, Lunch-Pasta and
-                garlic bread
-              </p>
-            </ion-col>
-            <ion-col size="12">
-              <!-- <ion-buttons slot="start"> -->
-              <ion-button fill="clear" class="simplebtn">
-                <ion-icon slot="start" src="assets/Heart_filled.svg"></ion-icon>
-                Like
-              </ion-button>
-              <ion-button fill="clear" class="simplebtn">
-                <ion-icon slot="start" src="assets/Comment.svg"></ion-icon>
-                Comment
-              </ion-button>
-              <!-- </ion-buttons> -->
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-    </div>
-  </div>
-  <!-- active -->
-  <div class="step completed">
-    <div class="v-stepper">
-      <div class="timelinedate">24<br />jun</div>
-      <div class="line"></div>
-    </div>
-
-    <div class="content">
-      <ion-card class="ion-no-padding cardCust">
-        <ion-grid class="ion-no-padding">
-          <ion-row>
-            <ion-col size="12">
-              <img src="assets/bg.png" alt="" />
-              <p class="imgtagline">Watching sunset at LA gardens</p>
-              <hr style="margin: 0 8px;" />
-            </ion-col>
-          </ion-row>
-          <ion-row class="rowpadding">
-            <ion-col size="9">
-              <p class="subtitle">Today’s Activities</p>
-              <p class="titletext">
-                Bathing, Grooming Breakfast, Medicine, Lunch
-              </p>
-            </ion-col>
-            <ion-col size="3">
-              <!-- <ion-icon slot="start" src="assets/progress_done.svg"></ion-icon> -->
-              <img
-                style="float: right;"
-                src="assets/progress_done.svg"
-                alt=""
-              />
-            </ion-col>
-            <ion-col size="12">
-              <hr />
-              <p class="notestext">
-                Notes: Breakfast-Bread with peanut butter, Lunch-Pasta and
-                garlic bread
-              </p>
-            </ion-col>
-            <ion-col size="12">
-              <!-- <ion-buttons slot="start"> -->
-              <ion-button fill="clear" class="simplebtn">
-                <ion-icon slot="start" src="assets/Heart_filled.svg"></ion-icon>
-                Like
-              </ion-button>
-              <ion-button fill="clear" class="simplebtn">
-                <ion-icon slot="start" src="assets/Comment.svg"></ion-icon>
-                Comment
-              </ion-button>
-              <!-- </ion-buttons> -->
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-    </div>
-  </div>
+  </ng-container>
 </ion-content>
 <!-- <ion-content>
  

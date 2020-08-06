@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar class="toolbarshadow">
+    <ion-segment value="pizza" mode="ios">
+      <ion-segment-button value="pizza">
+        <ion-label>Activities</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="pasta">
+        <ion-label>Shifts</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <ion-buttons mode="md" slot="end">
+      <ion-button [routerLink]="'/bookvitals/notifications'">
+        <ion-icon
+          mode="md"
+          src="assets/MariposaIcons/notification.svg"
+        ></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon
+          class="propic"
+          mode="md"
+          src="assets/MariposaIcons/profile_img.svg"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="cardstyle">
+<ion-row>
+  <ion-col size="6">
+    <p class="name">Blood Pressure</p>
+  </ion-col>
+  <ion-col class="adddata" size="6">
+    <p>ADD DATA</p>
+  </ion-col>
+</ion-row>
+  </ion-card>
+  <ion-card class="cardstyle">
+    <ion-row>
+      <ion-col size="6">
+        <p class="name">Pulse</p>
+      </ion-col>
+      <ion-col class="adddata" size="6">
+        <p>ADD DATA</p>
+      </ion-col>
+    </ion-row>
+      </ion-card>
+      <ion-card class="cardstyle">
+        <ion-row>
+          <ion-col size="6">
+            <p class="name">Respitory Rate</p>
+          </ion-col>
+          <ion-col class="adddata" size="6">
+            <p>ADD DATA</p>
+          </ion-col>
+        </ion-row>
+          </ion-card>
+          <ion-card class="cardstyle">
+            <ion-row>
+              <ion-col size="6">
+                <p class="name">Temperature</p>
+              </ion-col>
+              <ion-col class="adddata" size="6">
+                <p>ADD DATA</p>
+              </ion-col>
+            </ion-row>
+              </ion-card>
+
+</ion-content>

@@ -120,6 +120,23 @@ ion-content {
   padding-bottom: 44px;
   padding-top: 22px;
 }
+.timePer2 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+  /* identical to box height, or 100% */
+
+  /* Dark Grey */
+
+  color: #7e7e7e;
+  //   width: 20%;
+  margin: 0;
+  padding-bottom: 44px;
+  padding-top: 22px;
+  padding-right: 16px;
+  width: 60px;
+}
 .selectedCard {
   background: #4137ff !important;
   /* Medium Grey */
@@ -301,4 +318,8 @@ ion-select::part(icon) {
   box-sizing: border-box;
   border-radius: 8px;
   background: white;
+}
+ion-fab-button {
+  width: 40px;
+  height: 40px;
 }

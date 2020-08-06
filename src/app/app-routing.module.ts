@@ -524,10 +524,10 @@ const routes: Routes = [
             (m) => m.NotificationsPageModule
           ),
       },
-       {
-    path: 'calendershifts',
-    loadChildren: () => import('./pages/bookvitals/calender-shifts/calender-shifts.module').then( m => m.CalenderShiftsPageModule)
-  },
+      //      {
+      //   path: 'calendershifts',
+      //   loadChildren: () => import('./pages/bookvitals/calender-shifts/calender-shifts.module').then( m => m.CalenderShiftsPageModule)
+      // },
     ],
   },
   {
@@ -610,7 +610,6 @@ const routes: Routes = [
       },
     ],
   },
- 
 ];
 
 @NgModule({

@@ -29,7 +29,7 @@ export type ChartOptions2 = {
   dataLabels: ApexDataLabels;
   grid: ApexGrid;
   yaxis: ApexYAxis;
-  colors: string[];
+  fill: ApexFill;
 
   stroke: ApexStroke;
   title: ApexTitleSubtitle;
@@ -46,7 +46,7 @@ export class VitalsPage implements OnInit {
   public chartOptions2: Partial<ChartOptions2>;
   public chartOptions3: Partial<ChartOptions2>;
   public chartOptions4: Partial<ChartOptions2>;
-
+  showData = false;
   constructor() {}
 
   ngOnInit() {
@@ -100,8 +100,8 @@ export class VitalsPage implements OnInit {
 
       chart: {
         type: "rangeBar",
-        height: 150,
-        width: 280,
+        height: 110,
+        width: 310,
         toolbar: {
           show: false,
         },
@@ -132,8 +132,8 @@ export class VitalsPage implements OnInit {
         },
       ],
       chart: {
-        height: 150,
-        width: 280,
+        height: 110,
+        width: 310,
         type: "line",
         zoom: {
           enabled: false,
@@ -159,9 +159,18 @@ export class VitalsPage implements OnInit {
         curve: "straight",
         width: 3,
       },
-      // fill: {
-      colors: ["#E229F2"],
-      // },
+      fill: {
+        type: "gradient",
+        gradient: {
+          shade: "dark",
+          gradientToColors: ["#FDD835"],
+          shadeIntensity: 1,
+          type: "horizontal",
+          opacityFrom: 1,
+          opacityTo: 1,
+          stops: [0, 100, 100, 100],
+        },
+      },
       grid: {
         row: {
           colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
@@ -180,8 +189,8 @@ export class VitalsPage implements OnInit {
         },
       ],
       chart: {
-        height: 150,
-        width: 280,
+        height: 110,
+        width: 310,
         type: "line",
         zoom: {
           enabled: false,
@@ -207,9 +216,18 @@ export class VitalsPage implements OnInit {
         curve: "straight",
         width: 3,
       },
-      // fill: {
-      colors: ["#FF002B"],
-      // },
+      fill: {
+        type: "gradient",
+        gradient: {
+          shade: "dark",
+          gradientToColors: ["#FDD835"],
+          shadeIntensity: 1,
+          type: "horizontal",
+          opacityFrom: 1,
+          opacityTo: 1,
+          stops: [0, 100, 100, 100],
+        },
+      },
       grid: {
         row: {
           colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
@@ -228,8 +246,8 @@ export class VitalsPage implements OnInit {
         },
       ],
       chart: {
-        height: 150,
-        width: 280,
+        height: 110,
+        width: 310,
         type: "line",
         zoom: {
           enabled: false,
@@ -255,9 +273,18 @@ export class VitalsPage implements OnInit {
         curve: "straight",
         width: 3,
       },
-      // fill: {
-      colors: ["#FFBC00"],
-      // },
+      fill: {
+        type: "gradient",
+        gradient: {
+          shade: "dark",
+          gradientToColors: ["#FDD835"],
+          shadeIntensity: 1,
+          type: "horizontal",
+          opacityFrom: 1,
+          opacityTo: 1,
+          stops: [0, 100, 100, 100],
+        },
+      },
       grid: {
         row: {
           colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
@@ -268,5 +295,8 @@ export class VitalsPage implements OnInit {
         categories: ["S", "M", "T", "W", "T", "F", "S"],
       },
     };
+  }
+  toggleData() {
+    this.showData = !this.showData;
   }
 }

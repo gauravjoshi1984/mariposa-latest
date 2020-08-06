@@ -1,0 +1,99 @@
+
+ion-title {
+    padding-left: 24px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+  
+    color: #1a1a1a;
+  }
+  ion-icon {
+    font-size: 24px !important;
+    zoom: 1;
+  }
+  ion-chip {
+    margin: 0;
+    //   padding: 0;
+  }
+  .unselectchip {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+  
+    text-align: center;
+    text-transform: uppercase;
+    display: inline-block;
+  
+    /* Dark Grey */
+  
+    color: #7e7e7e;
+    background: white;
+    width: 14.2857142857%;
+    height: 17px;
+  }
+  .selectedchip {
+    font-style: normal;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    text-transform: uppercase;
+  
+    /* White */
+  
+    color: #ffffff;
+    background: #4137ff;
+    border-radius: 8px;
+    width: 14.2857142857%;
+    height: 32px;
+    padding-top: 7px;
+  }
+  .chipcol {
+    //   padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+
+.cardstyle{
+    width: 343px;
+height: 72px;
+}
+
+ion-content{
+    --background:#E5E5E5;
+}
+.name{
+    font-weight: bold;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+display: flex;
+align-items: center;
+
+color: #000000;
+margin: 21px 0px 0px 16px;
+}
+
+.adddata{
+    font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 14px;
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: uppercase;
+
+/* Mariposa Vivid Blue */
+
+color: #4137FF;
+padding: 19px 0px 0px 90px;
+
+}

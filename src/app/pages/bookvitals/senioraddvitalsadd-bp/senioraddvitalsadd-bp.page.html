@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon slot="start" src="assets/back.svg"></ion-icon>
+        
+      </ion-button>
+    </ion-buttons>
+    <ion-title>senioraddvitalsaddBP</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="6">
+        <p>Date</p>
+        <button class="datetimebtn">
+          <ion-datetime displayFormat="MM/DD/YYYY" value="2012-12-15T13:47:20.789"></ion-datetime>
+          <ion-icon slot="end" name="add"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col size="6" style="    padding-left: 9px;">
+        <p>Time</p>
+        <button class="datetimebtn">
+          <ion-datetime displayFormat="HH:mm" value="2012-12-15T13:47:20.789"></ion-datetime>
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <div class="nametag">
+      <ion-text position="floating" id="tag">Systolic</ion-text>
+    </div>
+    <div >
+      <ion-textarea  class="input" placeholder="Write notes here"></ion-textarea>
+    </div>
+
+    <div class="nametag">
+      <ion-text position="floating" id="tag">Diastolic</ion-text>
+    </div>
+    <div >
+      <ion-textarea class="input" placeholder="Write notes here"></ion-textarea>
+    </div>
+    
+    <div class="nametag">
+      <ion-text position="floating" id="tag">Notes</ion-text>
+    </div>
+    <div >
+      <ion-textarea class="input input2" placeholder="Write notes here"></ion-textarea>
+    </div>
+
+    
+   
+  </ion-grid>
+
+
+
+
+</ion-content>
+
+<ion-footer>
+  <div id="button">
+    <ion-button [disabled]="false" class="btnblue" type="submit"  id="signup">SAVE & PROCEED</ion-button>
+  </div>  
+</ion-footer>
