@@ -11,12 +11,7 @@ import { NavController } from '@ionic/angular';
 })
 export class ViewshoppinglistPage implements OnInit {
 
-  shoppingitems = [
-    {name: 'Cotton', brand: 'Hightech'},
-    {name: 'Tissue Roll', brand: 'Apple'},
-    {name: 'Headphones', brand: 'Boltz'},
-
-  ];
+  shoppingitems = [];
   key;
   constructor(private dataService: DataserviceService,
               private assessmentService: AssessmentServiceService,
@@ -27,15 +22,18 @@ export class ViewshoppinglistPage implements OnInit {
   }
 
   save(){
-    this.navCtrl.navigateForward(['/assessment/assessmentbar']);
+    this.navCtrl.back();
   }
-
+  addMorePage(){
+    this.navCtrl.navigateForward(['/assessment/addshoppinglist']);
+  }
 
   async ionViewWillEnter(){
     this.key = 'SHOPPING';
     this.assessmentService.getAssessmentStateObject().then((data) => {
-      console.log(data);
-      this.shoppingitems = data.assessmentValues.CARE_NEEDS[this.key];
+      if (data.assessmentValues.CARE_NEEDS[this.key]){
+        this.shoppingitems = data.assessmentValues.CARE_NEEDS[this.key];
+      }
     });
   }
 

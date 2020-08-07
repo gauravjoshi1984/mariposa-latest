@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AddshoppinglistPageRoutingModule } from './addshoppinglist-routing.module';
 
 import { AddshoppinglistPage } from './addshoppinglist.page';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { AddshoppinglistPage } from './addshoppinglist.page';
     FormsModule,
     IonicModule,
     AddshoppinglistPageRoutingModule,
+    SharedModule,
     ReactiveFormsModule
   ],
   declarations: [AddshoppinglistPage]

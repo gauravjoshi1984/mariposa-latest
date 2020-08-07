@@ -37,10 +37,10 @@ export class ShowcarecirclePage implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
+    this._dataService.setLastVisitedPage('carecircle/showcarecircle');
     this.populateCareCircle();
   }
   createCareCircle(){
-    this._dataService.setLastVisitedPage('carecircle/showcarecircle');
     this.navCtrl.navigateForward(['/carecircle']);
   }
   getMemberNames(members){

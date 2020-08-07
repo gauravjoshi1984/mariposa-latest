@@ -1,24 +1,26 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: "app-toggle",
-  templateUrl: "./toggle.component.html",
-  styleUrls: ["./toggle.component.scss"],
+  selector: 'app-toggle',
+  templateUrl: './toggle.component.html',
+  styleUrls: ['./toggle.component.scss'],
 })
 export class ToggleComponent implements OnInit {
-  @Input() name = "";
-  @Input() value = false;
+  @Input() name;
+  @Input() value;
 
   @Output() result = new EventEmitter<boolean>();
-  constructor() {}
+  constructor() {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
   toggleVal() {
     this.result.emit(this.value);
   }
   generateClick(ev: any) {
     // ev.click();
-    if (ev.checked == true) {
+    if (ev.checked === true) {
       ev.checked = false;
     } else {
       ev.checked = true;

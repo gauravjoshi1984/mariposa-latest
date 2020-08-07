@@ -1,0 +1,101 @@
+<ion-header mode="md">
+  <ion-toolbar class="headtoolbar">
+      <ion-buttons class = "backbutton" slot="start">
+          <m-backbutton></m-backbutton>
+      </ion-buttons>
+      <ion-title class="name cap" color="mdblack" position="floating" id="titletag">{{caregiver}}'s Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid class="image">
+    <div>
+      <ion-icon [hidden]="true" slot="icon-only" class="penborder" src="../assets/MariposaIcons/penborder.svg"></ion-icon>
+        <ion-avatar class="avatar">
+          <ion-img class="imgsize" src="../assets/images/caregiver.png"></ion-img> 
+        </ion-avatar>
+    </div>        
+  </ion-grid>
+
+  <ion-grid class="personalinfo">
+    <ion-row>
+      <ion-col>
+        <ion-title class="infotag">Personal Information</ion-title>
+      </ion-col>
+      <ion-col>
+        <ion-icon [hidden]="true" class="pen" src = "../assets/MariposaIcons/penblue.svg"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <div class="inforow">
+    <ion-row  *ngFor = "let item of caregivertable">
+      <ion-col size="5.5">
+        <ion-text class="tagitems">{{item.title}}</ion-text>
+      </ion-col>
+      <ion-col>
+        <ion-text class="details">: {{item.info}}</ion-text>
+      </ion-col>
+    </ion-row>
+  </div>   
+  </ion-grid>
+
+  <ion-grid class="shifts">
+      <ion-row>
+        <ion-col>
+          <ion-title class="infotag">Shifts</ion-title>
+        </ion-col>
+        <ion-col>
+          <ion-icon [hidden]="false" class="pen" src = "../assets/MariposaIcons/pen.svg"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="timerow">
+        <ion-col size="6">
+            <p class="datelabel">Start Time</p>
+            <ion-button fill="outline" class="datebtn">
+                <ion-datetime displayFormat="HH:mm A" value="23:00"></ion-datetime>
+                <ion-icon class="timeicon" src="assets/MariposaIcons/Timeicon.svg"></ion-icon>
+            </ion-button>
+        </ion-col>
+        <ion-col size="6">
+            <p class="datelabel">End Time</p>
+            <ion-button fill="outline" class="datebtn right">
+                <ion-datetime displayFormat="HH:mm A" value="09:00" ></ion-datetime>
+                <ion-icon class="timeicon"  src="assets/MariposaIcons/Timeicon.svg"></ion-icon>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+
+      <ion-row class="daterow">
+        <ion-col size="6">
+            <p class="datelabel">Start Date</p>
+            <ion-button fill="outline" class="datebtn">
+                <ion-datetime displayFormat="DD-MMM-YYYY" value="12-May-2020"></ion-datetime>
+                <ion-icon slot="end" src="assets/MariposaIcons/Calendar icon.svg"></ion-icon>
+            </ion-button>
+        </ion-col>
+        <ion-col size="6">
+            <p class="datelabel">End Date</p>
+            <ion-button fill="outline" class="datebtn right">
+                <ion-datetime displayFormat="DD-MMM-YYYY" value="16-May-2020" ></ion-datetime>
+                <ion-icon slot="end" src="assets/MariposaIcons/Calendar icon.svg"></ion-icon>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+
+    <p class="datelabel top">Repeat</p>
+        <div class="chipdiv">
+            <ion-chip color="primary" mode="ios" outline="true" [class.selectedchip]="selectedDays.includes(day.value)" *ngFor="let day of daysList" (click)="addremoveDay(day)">
+                <ion-label>{{day.name}}</ion-label>
+            </ion-chip> 
+        </div>
+    
+        <ion-button class="addbutton" fill="outline" shape="round">
+          <ion-icon class="plusbutton" slot="start" name="add-circle"></ion-icon>ADD SHIFT
+        </ion-button>    
+
+  </ion-grid>
+
+   
+
+</ion-content>

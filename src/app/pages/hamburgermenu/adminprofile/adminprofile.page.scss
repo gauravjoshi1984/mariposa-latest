@@ -1,0 +1,290 @@
+.image{
+    padding: 24px 24px 0px 24px;
+}
+.personalinfo{
+    padding :16px 24px 24px 24px;
+}
+
+.configurecaregrid{
+    padding: 0px;
+  }
+
+.careneeds{
+    padding: 24px;
+}
+
+.shifts{
+    padding: 0px 24px 20px 24px;
+}
+
+.medicalconditions{
+    padding: 24px;
+}
+
+.home{
+    padding:24px;
+}
+
+.shopping{
+    padding: 24px;
+}
+
+.avatar{
+    height: 139px;
+    width: 139px;
+    margin: auto;
+}
+
+.infotag{
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1A1A1A;
+    float: left;
+    padding: 0px;
+}
+
+.careneedtag{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.alignright{
+    float: right;
+}
+
+.solid{
+    margin-top: 18px;
+    margin-bottom: 19px;
+}
+
+.pen{
+    float:right;
+    zoom:1;
+    height: 24px;
+    width: 24px;
+}
+
+ion-row{
+    align-items: center;
+    padding: 0px;
+    margin: 0px;
+}
+
+.inforow{
+    margin-top:24px;
+}
+
+ion-col{
+    padding: 0px;
+    margin: 0px;
+}
+
+.tagitems{
+    font-style: normal;
+    font-weight: 300;
+    font-size:16px;
+    line-height: 32px;
+}
+
+.details{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 32px;
+}
+
+.viewall{
+    margin: 0px;
+    --background: #ffffff;
+    filter: drop-shadow(0px 2px 8px rgba(65, 55, 255, 0.08));
+    border: 1px solid;
+    border-color: #e0e0e0;
+    --box-shadow:none;
+    height: 44px;
+
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 500;
+    color:#4137FF;
+}
+
+.medicaldiv{
+
+    
+
+    .tagitems{
+        font-style: normal;
+        font-weight: 300;
+        font-size:16px;
+        line-height: 19px;
+    }
+    
+    .details{
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 19px;
+    }
+
+    .medicalrow{
+        align-items:baseline;
+        margin-top:16px;
+    }
+}
+
+.medtoprow{
+    margin-bottom: 24px;
+}
+
+.shoppinglabel{
+    margin-bottom: 16px;
+}
+
+.plist{
+    font-size: 14px;
+    line-height: 17px;
+    color:#7e7e7e;
+    font-style: normal;
+    font-weight: normal;
+}
+
+.margin{
+    margin-bottom: 16px;
+    margin-top: 16px;
+}
+
+.imgsize{
+
+    height: 139px;
+    width: 139px;
+}
+
+.penborder{
+    zoom: 1;
+    height: 32px;
+    width: 32px;
+    z-index: 2;
+    position: absolute;
+    left: calc(60% - 10px);
+    top: calc(24% - 10px);
+}
+
+.datelabel {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 19px;
+    padding-bottom: 6px;
+  
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  .datebtn {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+  
+    color: #1a1a1a;
+    --border-color: #b8b8b8;
+    --border-width: 1px;
+    --border-style: solid;
+    box-sizing: border-box;
+    border-radius: 8px;
+    width: 94.5%;
+    height: 44px;
+    ion-icon {
+      font-size: 22px;
+    }
+  }
+  .datebtn::part(native) {
+    padding: 0;
+  }
+  ion-datetime {
+    padding: 0;
+  }
+  ion-icon {
+    zoom: 1;
+  }
+
+  ion-datetime{
+      margin-top: 5px;
+  }
+
+  .right{
+      float: right;
+  }
+
+  .daterow{
+      margin-top:24px;
+  }
+
+  .timerow{
+      margin-top: 22px;
+  }
+
+  .timeicon{
+    margin-left:35px;
+  }
+
+  .top{
+      margin-top: 24px;
+  }
+
+  .addbutton{
+      margin-top: 40px;
+      width:180px;
+  }
+
+  //chip
+
+  .chipdiv {
+    justify-content: space-around;
+    display: flex;
+    list-style: none;
+    padding: 0;
+  
+    ion-chip {
+      width: 26px;
+      height: 26px;
+      text-align: center;
+      display: inline-flex;
+      background: #e0e0e0;
+      color: #7e7e7e;
+      justify-content: center;
+  
+      border: none;
+  
+      ion-label {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        text-transform: capitalize;
+      }
+    }
+  }
+  .selectedchip {
+    background: #4137ff !important;
+    color: white !important;
+  }
+
+  .white {
+    --color: #4137ff;
+    --background: #ffffff;
+    --border-radius: 8px;
+    --border-color: #4137ff;
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 17px;
+    font-weight: 600;
+    --box-shadow: none;
+    margin-top: 32px;
+    height: 44px;
+}

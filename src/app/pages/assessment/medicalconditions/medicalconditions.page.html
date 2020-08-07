@@ -1,727 +1,94 @@
-
-
-<ion-header mode="md">
-  <ion-toolbar class="headtoolbar">
-    <ion-row>
-      <ion-col size="2">
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <m-backbutton></m-backbutton>
-          </ion-buttons>
-          <!-- <ion-buttons slot="start">
-            <ion-back-button
-              mode="md"
-              color="mdblack"
-              icon="chevron-back-outline"
-              defaultHref="admin-sign-in"
-            ></ion-back-button>
-          </ion-buttons> -->
-        </ion-toolbar>
-      </ion-col>
-      <ion-col size="10">
-        <div>
-          <ion-text color="mdblack" position="floating" id="titletag"
-            >Medical & Psychiatric Conditions</ion-text
-          >
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-grid style="padding:24px;margin-bottom:90px ;height:fit-content">
-    
-    <div style="padding-top:0px;margin-bottom:15px;">
-      <ion-label style="font-size: 16px;line-height: 19px;">Current Medical Conditions</ion-label>
-    </div>  
-    
-  <!-- CHECKBOX 1 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div  style="padding-left: 3px;">
-          <ion-checkbox mode="md" #Condition1 color="mwhite" checked="true">
-
-          </ion-checkbox></div>
-      </ion-col>
-      <ion-col  (click)="generateClick(Condition1)"  size="11" style="padding-top: 0px;">
-        <div><ion-text style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Condition 1</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 2 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Condition2  color="mwhite" checked="true"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Condition2)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Condition 2</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 3 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Condition3 color="mwhite" checked="true"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Condition3)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Condition 3</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <hr class="solid">
-
-    <!-- CURRENT PSYCHIATRIC CONDITION -->
-
-    <div style="padding-top:0px;margin-bottom:15px;">
-      <ion-label style="font-size: 16px;line-height: 19px;">Current Psychiatric Conditions</ion-label>
-    </div>  
-    
-  <!-- CHECKBOX 1 -->
-
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Depression color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Depression)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Depression</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 2 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Anxiety color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Anxiety)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Anxiety</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 3 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox  mode="md" #Paranoia color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Paranoia)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Paranoia</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <hr class="solid">
-
-    <!-- PAST OR CURRENT SUBSTANCE USE -->
-
-    <div style="padding-top:0px;margin-bottom:15px;">
-      <ion-label style="font-size: 16px;line-height: 19px;">Past or Current Substance Use</ion-label>
-    </div>  
-    
-  <!-- CHECKBOX 1 -->
-
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox  mode="md" #Substancename1 color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Substancename1)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Substance name 1</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 2 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Substancename2 color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Substancename2)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Substance name 2</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 3 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox  mode="md" #Substancename3 color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Substancename3)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Substance name 3</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <hr class="solid">
-
-    <!-- HOME HEALTH PROVIDERS -->
-
-    <div style="padding-top:0px;margin-bottom:15px;">
-      <ion-label style="font-size: 16px;line-height: 19px;">Home Health Providers</ion-label>
-    </div>  
-    
-  <!-- CHECKBOX 1 -->
-
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Physicaltherapist color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text  (click)="generateClick(Physicaltherapist)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Physical therapist</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 2 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Occupationaltherapist color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Occupationaltherapist)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Occupational therapist</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 3 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #SpeechTherapist color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(SpeechTherapist)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Speech Therapist</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <hr class="solid">
-
-    <!-- DNR -->
-
-    <ion-row style="align-items: center;">
-      <ion-col size=8>
-        <ion-text  style="font-size:16px;line-height:19px;font-weight:300;">DNR</ion-text>
-      </ion-col>
-      <ion-col>
-        <ion-text  style="font-size:16px;line-height:19px;font-weight:normal;float: right;margin-right:12px ;"><span *ngIf="DNR.checked">YES</span
-          ><span *ngIf="!DNR.checked">NO</span></ion-text>
-      </ion-col>
-      <ion-col>
-        <ion-toggle #DNR mode="ios" checked color="primary" style="float: right;"></ion-toggle>
-      </ion-col>
-    </ion-row>
-
-    <hr class="solid">
-
-    <!-- WEARS BRIEFS -->
-
-    <ion-row style="align-items: center;">
-      <ion-col size=8>
-        <ion-text  style="font-size:16px;line-height:19px;font-weight:300;">Wears Briefs</ion-text>
-      </ion-col>
-      <ion-col>
-        <ion-text style="font-size:16px;line-height:19px;font-weight:normal;float: right;margin-right:12px ;"><span *ngIf="WearsBriefs.checked">YES</span
-          ><span *ngIf="!WearsBriefs.checked">NO</span></ion-text>
-      </ion-col>
-      <ion-col>
-        <ion-toggle #WearsBriefs mode="ios" checked color="primary" style="float: right;"></ion-toggle>
-      </ion-col>
-    </ion-row>
-
-    <hr class="solid">
-
-    <!-- LEFT ALONE -->
-
-    <ion-row style="align-items: center;">
-      <ion-col size=8>
-        <ion-text  
-         style="font-size:16px;line-height:19px;font-weight:300;">Can Senior be left alone</ion-text>
-      </ion-col>
-      <ion-col>
-        <ion-text style="font-size:16px;line-height:19px;font-weight:normal;float: right;margin-right:12px ;"><span *ngIf="CanSeniorbeleftalone.checked">YES</span
-          ><span *ngIf="!CanSeniorbeleftalone.checked">NO</span></ion-text>
-      </ion-col>
-      <ion-col>
-        <ion-toggle #CanSeniorbeleftalone mode="ios" class="toggle-small" checked color="primary" style="float: right;"></ion-toggle>
-      </ion-col>
-    </ion-row>
-
-    <hr class="solid">
-
-    <!-- INCONTINENCE -->
-
-    <div style="padding-top:0px;margin-bottom:10px;">
-      <ion-label style="font-size: 16px;line-height: 19px;">Incontinence</ion-label>
-    </div>  
-
-    <ion-radio-group  #Urination>
-      <ion-row style="align-items: center;">
-        <ion-col size="1">
-          <ion-radio  mode="md" value="0" style="float:left;"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-          <ion-text  (click)="generateClick2(Urination,'0')" style="font-size:16px;line-height:19px;font-weight:300;float:left">Urination</ion-text>
-        </ion-col>
-        <ion-col size="1">
-          <ion-radio  mode="md" value="1" style="float:right"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-         <ion-text (click)="generateClick2(Urination,'1')" style="font-size:16px;line-height:19px;font-weight:300;margin-left:8px;">Bowels</ion-text>
-        </ion-col>  
-      </ion-row>
-    </ion-radio-group>
-
-    <hr class="solid">
-
-    <!-- HEARING -->
-
-    <div style="padding-top:0px;margin-bottom:10px;">
-      <ion-label style="font-size: 16px;line-height: 19px;">Hearing</ion-label>
-    </div>  
-
-    <ion-radio-group #Good>
-      <ion-row style="align-items: center;">
-        <ion-col size="1">
-          <ion-radio mode="md" value="0" style="float:left;"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-          <ion-text (click)="generateClick2(Good,'0')" style="font-size:16px;line-height:19px;font-weight:300;float:left">Good</ion-text>
-        </ion-col>
-        <ion-col size="1">
-          <ion-radio mode="md" value="1" style="float:right"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-         <ion-text (click)="generateClick2(Good,'1')" style="font-size:16px;line-height:19px;font-weight:300;margin-left:8px;">Fair</ion-text>
-        </ion-col>
-        <ion-col size="1">
-          <ion-radio mode="md" value="2" style="float:right"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-          <ion-text (click)="generateClick2(Good,'2')" style="font-size:16px;line-height:19px;font-weight:300;margin-left:8px;">Poor</ion-text>
-        </ion-col>
-      </ion-row>
-      
-      <ion-row style="align-items: center;">
-        <ion-col size="1">
-          <ion-radio mode="md" value="3" style="float:left;"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-          <h5 (click)="generateClick2(Good,'3')" style="font-size:16px;line-height:19px;font-weight:300;float:left">Deaf</h5>
-        </ion-col>
-        <ion-col size="1">
-          <ion-radio mode="md" value="4" style="float:right"></ion-radio>
-        </ion-col>
-        <ion-col size="4">
-         <ion-text (click)="generateClick2(Good,'4')" style="font-size:16px;line-height:19px;font-weight:300;margin-left:8px;">Hearing Aid</ion-text>
-        </ion-col>
-
-      </ion-row>
-    </ion-radio-group>
-
-    <hr style="margin-top:5px ;" class="solid">
-
-    <!-- SPEECH -->
-
-    <div style="padding-top:0px;margin-bottom:10px;">
-      <ion-label style="font-size: 16px;line-height: 19px;">Speech</ion-label>
-    </div>  
-
-    <ion-radio-group #Fair>
-      <ion-row style="align-items: center;">
-        <ion-col size="1">
-          <ion-radio mode="md" value="0" style="float:left;"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-          <ion-text (click)="generateClick2(Fair,'0')" style="font-size:16px;line-height:19px;font-weight:300;float:left">Good</ion-text>
-        </ion-col>
-        <ion-col size="1">
-          <ion-radio mode="md" value="1" style="float:right"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-         <ion-text (click)="generateClick2(Fair,'1')" style="font-size:16px;line-height:19px;font-weight:300;margin-left:8px;">Fair</ion-text>
-        </ion-col>
-        <ion-col size="1">
-          <ion-radio mode="md" value="2" style="float:right"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-          <ion-text (click)="generateClick2(Fair,'2')" style="font-size:16px;line-height:19px;font-weight:300;margin-left:8px;">Poor</ion-text>
-        </ion-col>
-      </ion-row>
-      
-      <ion-row style="align-items: center;">
-        <ion-col size="1">
-          <ion-radio mode="md" value="3" style="float:left;"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-          <h5 (click)="generateClick2(Fair,'3')" style="font-size:16px;line-height:19px;font-weight:300;float:left">Deaf</h5>
-        </ion-col>
-        
-
-      </ion-row>
-    </ion-radio-group>
-
-    <hr style="margin-top:5px ;" class="solid">
-
-    <!-- VISION -->
-
-    <div style="padding-top:0px;margin-bottom:10px;">
-      <ion-label style="font-size: 16px;line-height: 19px;">Vision</ion-label>
-    </div>  
-
-    <ion-radio-group #Poor>
-      <ion-row style="align-items: center;">
-        <ion-col size="1">
-          <ion-radio mode="md" value="0" style="float:left;"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-          <ion-text (click)="generateClick2(Poor,'0')" style="font-size:16px;line-height:19px;font-weight:300;float:left">Good</ion-text>
-        </ion-col>
-        <ion-col size="1">
-          <ion-radio mode="md" value="1" style="float:right"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-         <ion-text  (click)="generateClick2(Poor,'1')"  style="font-size:16px;line-height:19px;font-weight:300;margin-left:8px;">Fair</ion-text>
-        </ion-col>
-        <ion-col size="1">
-          <ion-radio mode="md" value="2" style="float:right"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-          <ion-text (click)="generateClick2(Poor,'2')"  style="font-size:16px;line-height:19px;font-weight:300;margin-left:8px;">Poor</ion-text>
-        </ion-col>
-      </ion-row>
-      
-      <ion-row style="align-items: center;">
-        <ion-col size="1">
-          <ion-radio mode="md" value="3" style="float:left;"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-          <h5  (click)="generateClick2(Poor,'3')" style="font-size:16px;line-height:19px;font-weight:300;float:left">Blind</h5>
-        </ion-col>
-        <ion-col size="1">
-          <ion-radio mode="md" value="4" style="float:right"></ion-radio>
-        </ion-col>
-        <ion-col size="4">
-         <ion-text (click)="generateClick2(Poor,'4')"  style="font-size:16px;line-height:19px;font-weight:300;margin-left:8px;">Glasses</ion-text>
-        </ion-col>
-
-      </ion-row>
-    </ion-radio-group>
-
-    <hr style="margin-top:5px ;" class="solid">
-
-    <!-- SMELL -->
-
-    <div style="padding-top:0px;margin-bottom:10px;">
-      <ion-label style="font-size: 16px;line-height: 19px;">Smell </ion-label>
-    </div>  
-
-    <ion-radio-group #None>
-      <ion-row style="align-items: center;">
-        <ion-col size="1">
-          <ion-radio mode="md" value="0" style="float:left;"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-          <ion-text (click)="generateClick2(None,'0')" style="font-size:16px;line-height:19px;font-weight:300;float:left">Good</ion-text>
-        </ion-col>
-        <ion-col size="1">
-          <ion-radio mode="md" value="1" style="float:right"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-         <ion-text (click)="generateClick2(None,'1')" style="font-size:16px;line-height:19px;font-weight:300;margin-left:8px;">Fair</ion-text>
-        </ion-col>
-        <ion-col size="1">
-          <ion-radio mode="md" value="2" style="float:right"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-          <ion-text (click)="generateClick2(None,'2')" style="font-size:16px;line-height:19px;font-weight:300;margin-left:8px;">Poor</ion-text>
-        </ion-col>
-      </ion-row>
-      
-      <ion-row style="align-items: center;">
-        <ion-col size="1">
-          <ion-radio mode="md" value="3" style="float:left;"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-          <h5 (click)="generateClick2(None,'3')" style="font-size:16px;line-height:19px;font-weight:300;float:left">None</h5>
-        </ion-col>
-        
-
-      </ion-row>
-    </ion-radio-group>
-
-    <hr style="margin-top:5px ;" class="solid">
-
-     <!-- SWALLOWING -->
-
-     <div style="padding-top:0px;margin-bottom:10px;">
-      <ion-label style="font-size: 16px;line-height: 19px;">Swallowing </ion-label>
-    </div>  
-
-    <ion-radio-group #Swallowing>
-      <ion-row style="align-items: center;">
-        <ion-col size="1">
-          <ion-radio mode="md" value="0" style="float:left;"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-          <ion-text (click)="generateClick2(Swallowing,'0')" style="font-size:16px;line-height:19px;font-weight:300;float:left">Good</ion-text>
-        </ion-col>
-        <ion-col size="1">
-          <ion-radio mode="md" value="1" style="float:right"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-         <ion-text (click)="generateClick2(Swallowing,'1')" style="font-size:16px;line-height:19px;font-weight:300;margin-left:8px;">Fair</ion-text>
-        </ion-col>
-        <ion-col size="1">
-          <ion-radio mode="md" value="2" style="float:right"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-          <ion-text (click)="generateClick2(Swallowing,'2')" style="font-size:16px;line-height:19px;font-weight:300;margin-left:8px;">Poor</ion-text>
-        </ion-col>
-      </ion-row>
-      
-      <ion-row style="align-items: center;">
-        <ion-col size="1">
-          <ion-radio mode="md" value="3" style="float:left;"></ion-radio>
-        </ion-col>
-        <ion-col size="3">
-          <h5 (click)="generateClick2(Swallowing,'3')" style="font-size:16px;line-height:19px;font-weight:300;float:left">None</h5>
-        </ion-col>
-        
-
-      </ion-row>
-    </ion-radio-group>
-
-    <hr style="margin-top:5px ;" class="solid">
-
-    <!-- PLEASE SELECT OTHER FACTORS -->
-
-    <div style="padding-top:0px;margin-bottom:15px;">
-      <ion-label style="font-size: 16px;line-height: 19px;">Please Select Other Factors</ion-label>
-    </div>  
-    
-  <!-- CHECKBOX 1 -->
-
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Frequentmoodchanges color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Frequentmoodchanges)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Frequent mood changes</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 2 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Shorttermmemoryloss color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Shorttermmemoryloss)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Short term memory loss</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 3 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Spaciavisualrelationships color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Spaciavisualrelationships)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Spacia/visual relationships</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 4 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md"  #Speakingconversing color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Speakingconversing)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Speaking/conversing</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 5 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Repetition color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Repetition)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Repetition</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 6 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Comatose color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Comatose)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Comatose</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 7 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Completingtasks color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Completingtasks)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Completing tasks</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 8 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Misplacingitems color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Misplacingitems)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Misplacing items</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 9 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Poorjudgment color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Poorjudgment)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Poor judgment</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 10 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Agitationaggression color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Agitationaggression)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Agitation/aggression</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 11 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Withdrawal color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Withdrawal)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Withdrawal</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 12 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Wandering color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text  (click)="generateClick(Wandering)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Wandering</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 13 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #ProblemSolving color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text  (click)="generateClick(ProblemSolving)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Problem Solving</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 14 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Sundowning color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text  (click)="generateClick(Sundowning)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Sundowning</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 15 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Poorappetite color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text  (click)="generateClick(Poorappetite)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Poor appetite</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 16 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Sleepingproblems color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Sleepingproblems)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Sleeping problems</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-    <!-- CHECKBOX 17 -->
-    
-    <ion-row style="align-items: center;margin-top:5px;">
-      <ion-col size="1">
-        <div style="padding-left: 3px;"><ion-checkbox mode="md" #Orientedtopersondattimeandplace color="mwhite" checked="false"></ion-checkbox></div>
-      </ion-col>
-      <ion-col size="11" style="padding-top: 0px;">
-        <div><ion-text (click)="generateClick(Orientedtopersondattimeandplace)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Oriented to person, date, time and place</ion-text></div>
-      </ion-col>  
-    </ion-row>
-
-   
-
-
-
-
-
-    
-
-
-
-
-  </ion-grid>
+<app-m-header-close title="Medical & Psychiatric Conditions"></app-m-header-close>
+
+<ion-content fullscreen>
+    <ion-grid style="padding:24px;margin-bottom:30px ;height:fit-content">
+        <ng-container *ngIf="formReady">
+            <div *ngFor="let question of checkboxQuestions">
+                <div style="padding-top:0px;margin-bottom:15px;">
+                    <ion-label style="font-size: 16px;line-height: 19px;">{{question.label}}</ion-label>
+                </div>
+                <ion-row style="align-items: center;margin-top:5px;" *ngFor="let option of question.options">
+                    <ion-col size="1">
+                        <div style="padding-left: 3px;">
+                            <ion-checkbox mode="md" #option color="mwhite" [(ngModel)]="medicalForm[question.key][option]">
+                            </ion-checkbox>
+                        </div>
+                    </ion-col>
+                    <ion-col (click)="generateClick(question.key, option)" size="11" style="padding-top: 0px;">
+                        <div>
+                            <ion-text style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">{{option}}</ion-text>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <hr class="solid">
+            </div>
+            <div *ngFor="let question of toggleQuestions">
+                <ion-row style="align-items: center;">
+                    <ion-col size=8>
+                        <ion-text style="font-size:16px;line-height:19px;font-weight:300;">{{question.label}}</ion-text>
+                    </ion-col>
+                    <ion-col>
+                        <ion-text style="font-size:16px;line-height:19px;font-weight:normal;float: right;margin-right:12px ;"><span *ngIf="medicalForm[question.key]">YES</span
+                  ><span *ngIf="!medicalForm[question.key]">NO</span></ion-text>
+                    </ion-col>
+                    <ion-col>
+                        <ion-toggle [(ngModel)]="medicalForm[question.key]" mode="ios" color="primary" style="float: right;"></ion-toggle>
+                    </ion-col>
+                </ion-row>
+                <hr class="solid">
+            </div>
+            <div *ngFor="let question of radioQuestions">
+                <div style="padding-top:0px;margin-bottom:10px;">
+                    <ion-label style="font-size: 16px;line-height: 19px;">{{question.label}}</ion-label>
+                </div>
+
+                <ion-radio-group [(ngModel)]="medicalForm[question.key]">
+                    <ion-row style="align-items: center;">
+                        <!-- <div *ngFor="let option of question.options"> -->
+                        <ion-col size="4" *ngFor="let option of question.options">
+                            <ion-radio mode="md" [value]="option" style="float:left; margin-right: 10px;"></ion-radio>
+                            <ion-text (click)="toggleRadio(question.key, option)" style="font-size:16px;line-height:19px;font-weight:300;float:left">{{option}}</ion-text>
+                        </ion-col>
+                    </ion-row>
+                </ion-radio-group>
+                <hr style="margin-top:5px ;" class="solid">
+            </div>
+            <div>
+                <!-- PLEASE SELECT OTHER FACTORS -->
+                <div style="padding-top:0px;margin-bottom:15px;">
+                    <ion-label style="font-size: 16px;line-height: 19px;">Please Select Other Factors</ion-label>
+                </div>
+
+                <ion-row style="align-items: center;margin-top:5px;" *ngFor="let option of otherFactors.options">
+                    <ion-col size="1">
+                        <div style="padding-left: 3px;">
+                            <ion-checkbox mode="md" color="mwhite" [(ngModel)]="medicalForm[otherFactors.key][option]"></ion-checkbox>
+                        </div>
+                    </ion-col>
+                    <ion-col size="11" style="padding-top: 0px;">
+                        <div>
+                            <ion-text (click)="generateClick(otherFactors.key, option)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">{{option}}</ion-text>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </ng-container>
+    </ion-grid>
 </ion-content>
 
 
-
-
 <ion-footer>
-  <ion-grid style="padding-left: 24px;padding-right: 24px;padding-top: 16px;padding-bottom: 16px;">
-  <!-- BUTTON -->
-  <div id="button">
-    <ion-row style="align-items: center;">
-      <ion-col size="4">
-        
-          <ion-button class="btn1" [disabled]="false"  type="submit"  id="signup">PREVIEW</ion-button>
-          
-      </ion-col>
-       
-      <ion-col size="8">
-        
-          <ion-button class="btn2" [disabled]="false"  type="submit" (click)= "save()"  id="signup">SAVE AND PROCEED</ion-button>
-        
-      </ion-col>
-    </ion-row>
-  </div>  
-</ion-grid>
-  
+    <ion-grid style="padding-left: 24px;padding-right: 24px;padding-top: 16px;padding-bottom: 16px;">
+        <!-- BUTTON -->
+        <div id="button">
+            <ion-row style="align-items: center;">
+                <ion-col size="4">
+                    <ion-button class="btn1" [disabled]="false" type="submit" id="signup">PREVIEW</ion-button>
+                </ion-col>
+                <ion-col size="8">
+                    <ion-button class="btn2" [disabled]="false" type="submit" (click)="save()" id="signup">SAVE AND PROCEED</ion-button>
+                </ion-col>
+            </ion-row>
+        </div>
+    </ion-grid>
 </ion-footer>

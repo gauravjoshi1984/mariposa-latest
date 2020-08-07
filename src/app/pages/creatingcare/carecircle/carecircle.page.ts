@@ -13,11 +13,13 @@ import { PopoverComponent } from './popover/popover.component';
 export class CarecirclePage implements OnInit {
   memberList;
   careCircleName;
+  assessmentBtnText = 'START ASSESSMENT';
+  assessmentData: any = {};
   constructor(private _dataService: DataserviceService,
               private _creatingCareService: CreatingcareService,
+              private apiService: ApiService,
               public popoverController: PopoverController,
               public modalController: ModalController,
-              private _apiService: ApiService,
               private navCtrl: NavController) {
   }
   navigateToAddMember(){
@@ -25,7 +27,12 @@ export class CarecirclePage implements OnInit {
   }
   async populateMemberList() {
     const careCircleId = await this._creatingCareService.getCareCircleID();
-    this._apiService.get('careCircle/' + careCircleId, {}).then((data: any) => {
+    const userId = await this._dataService.getUserInfo();
+    this.assessmentData = await this.apiService.get('assessment', {careCircleId, userId });
+    if (this.assessmentData.assessmentValues.CARE_NEED_PREFS !== null){
+      this.assessmentBtnText = 'CONTINUE ASSESSMENT';
+    }
+    this.apiService.get('careCircle/' + careCircleId, {}).then((data: any) => {
       if (data){
         this.memberList = data.members;
         this._creatingCareService.setCareCircleDetails(data);
@@ -47,8 +54,6 @@ export class CarecirclePage implements OnInit {
     // this._dataService.setLastVisitedPage('/assessment');
     this.navCtrl.navigateForward(['/assessment']);
   }
-
-
 
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({

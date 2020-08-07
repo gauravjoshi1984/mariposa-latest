@@ -1,0 +1,64 @@
+.content{
+    padding: 152px 51px 24px 24px;
+}
+
+.headertext{
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: bold;
+    font-style: normal;
+    color: #333333;
+}
+
+.text{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #333333;
+}
+
+.top{
+    margin-top: 40px;
+}
+
+.top1{
+    margin-top: 8px;
+}
+
+ion-input{
+    display:inline-block;
+    width:40px;
+   // height:50px;
+    margin:5px;
+    //border-radius: 50%;
+    --padding-start:15px;
+    border-bottom: 1px solid;
+    border-color: #B8B8B8;
+    }
+
+.otprow{
+    margin-top: 20px;
+}    
+
+.confirmotp{
+    font-size: 17px;
+    line-height: 19px;
+    font-weight: normal;
+    font-style: normal;
+    color:#000000;
+}
+
+.resendotp{
+
+    font-weight: 500;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color:#000000;
+    text-transform: capitalize;
+}
+
+.top3{
+    margin-top: 50px;
+}

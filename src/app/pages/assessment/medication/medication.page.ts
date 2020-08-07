@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import {
-  ImagePicker,
-  ImagePickerOptions,
-} from "@ionic-native/image-picker/ngx";
+import { AssessmentServiceService } from '../assessment-service.service';
+import { DataserviceService } from '../../dataservice.service';
 
 @Component({
   selector: 'app-medication',
@@ -11,53 +9,67 @@ import {
   styleUrls: ['./medication.page.scss'],
 })
 export class MedicationPage implements OnInit {
-
+  stateObject: any = {};
+  careCircleId;
+  userId;
+  readyFlag;
+  imageList = [];
+  allergies = [];
+  toggleQuestions = [];
+  formData: any = {};
+  validForm = false;
   constructor(private navCtrl: NavController,
-              private imagePicker: ImagePicker,) { }
+              private assessmentService: AssessmentServiceService,
+              private dataService: DataserviceService, ) { }
+
+  
+
+  medicationlist = [
+    {
+      name:"perafivir",
+      type:"capsule",
+    },
+    {
+      name:"peracitomal",
+      type:"tablet",
+    },
+  ]
 
   ngOnInit() {
   }
 
-  imageList = [];
-
-  addImage() {
-    let options: ImagePickerOptions = {
-      maximumImagesCount: 4,
-    };
-    this.imagePicker.getPictures(options).then(
-      (results) => {
-        console.log(results);
-        for (var i = 0; i < results.length; i++) {
-          this.imageList.push(results[i]);
-        }
-      },
-      (err) => {}
-    );
-  }
-  removeImg(i) {
-    console.log("*", i);
-    this.imageList.splice(i, 1);
-  }
-
   save(){
-
-    this.navCtrl.navigateForward(['/assessment/assessmentbar']);
-
-  }
-  
-
-  changeToggle(ev: any) {
-    console.log(ev);
-  }
-
-  generateClick(ev: any) {
-    // ev.click();
-    if (ev.checked == true) {
-      ev.checked = false;
-    } else {
-      ev.checked = true;
+    if (this.stateObject == null){
+      this.stateObject = {};
     }
-    console.log(ev.checked);
+    // this.formData.imageList = this.imageList;
+    this.stateObject.MEDICATION = this.formData;
+    this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
+      this.navCtrl.back();
+    });
+  }
+  async ionViewWillEnter(){
+    this.readyFlag = false;
+    this.careCircleId = await this.assessmentService.getCareCircleId();
+    this.userId = await this.dataService.getUserInfo();
+    this.userId = this.userId.userId;
+    const key = 'MEDICATION';
+    const data = await this.assessmentService.getAssessmentStateObject();
+    this.stateObject = data.assessmentValues.CARE_NEEDS;
+    this.allergies = data.assessmentConfiguration.CARE_NEEDS[key].allergies;
+    this.toggleQuestions = data.assessmentConfiguration.CARE_NEEDS[key].yn_questions;
+    if (this.stateObject != null && this.stateObject[key] != null){
+      this.formData = this.stateObject[key];
+      console.log(this.formData);
+      this.validForm = true;
+    }
+  }
+  changeToggle(key, ev: any) {
+    this.formData[key] = ev;
+  }
+
+  generateClick(key: any) {
+    this.formData[key] = !this.formData[key];
   }
 
 }

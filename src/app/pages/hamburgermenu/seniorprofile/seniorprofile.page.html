@@ -1,0 +1,151 @@
+<ion-header mode="md">
+  <ion-toolbar class="headtoolbar">
+      <ion-buttons class = "backbutton" slot="start">
+          <m-backbutton></m-backbutton>
+      </ion-buttons>
+      <ion-title class="name cap" color="mdblack" position="floating" id="titletag">{{senior}}'s Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid class="image">
+    <div>
+      <ion-icon slot="icon-only" class="penborder" src="../assets/MariposaIcons/penborder.svg"></ion-icon>
+        <ion-avatar class="avatar">
+          <ion-img class="imgsize" src="../assets/images/test1.png"></ion-img> 
+        </ion-avatar>
+    </div>    
+       
+  </ion-grid>
+  <ion-grid class="personalinfo">
+    
+    <ion-row>
+      <ion-col>
+        <ion-title class="infotag">Personal Information</ion-title>
+      </ion-col>
+      <ion-col>
+        <ion-icon class="pen" src = "../assets/MariposaIcons/penblue.svg"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <div class="inforow">
+    <ion-row  *ngFor = "let item of infotable">
+      <ion-col size="5.5">
+        <ion-text class="tagitems">{{item.title}}</ion-text>
+      </ion-col>
+      <ion-col>
+        <ion-text class="details">: {{item.info}}</ion-text>
+      </ion-col>
+    </ion-row>
+  </div>
+       
+  </ion-grid>
+
+  <ion-button class= "viewall cap" expand="full">View More</ion-button>
+
+  <ion-grid class="careneeds">
+
+    <ion-row>
+      <ion-col>
+        <ion-title class="infotag">Care Needs</ion-title>
+      </ion-col>
+      <ion-col>
+        <ion-icon class="pen" src = "../assets/MariposaIcons/penblue.svg"></ion-icon>
+      </ion-col>
+    </ion-row>
+  
+    <div class="inforow" *ngFor = "let item of careneedstable">
+    <ion-row >
+      <ion-col size="5">
+        <ion-text class="careneedtag">{{item.title}}</ion-text>
+      </ion-col>
+      <ion-col>
+        <ion-text class="careneedtag alignright">{{item.info}}</ion-text>
+      </ion-col>
+    </ion-row>
+
+    <hr class="solid">
+  </div>
+
+  </ion-grid>
+
+  <ion-button class= "viewall cap" expand="full">View All</ion-button>
+
+  <ion-grid class="medicalconditions">
+
+    <ion-row class="medtoprow">
+      <ion-col>
+        <ion-title class="infotag">Medical / Psychiatric conditions</ion-title>
+      </ion-col>
+      <ion-col>
+        <ion-icon class="pen" src = "../assets/MariposaIcons/penblue.svg"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <div class="medicaldiv">
+    <ion-row class = "medicalrow" *ngFor = "let item of medicaltable">
+      <ion-col size="5.5">
+        <ion-text class="tagitems">{{item.title}}</ion-text>
+      </ion-col>
+      <ion-col>
+        <ion-text class="details">: {{item.info}}</ion-text>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  </ion-grid>
+
+  <ion-button class= "viewall cap" expand="full">View More</ion-button>
+
+  <ion-grid class="home">
+
+    <ion-row class="medtoprow">
+      <ion-col>
+        <ion-title class="infotag">Home & Safety</ion-title>
+      </ion-col>
+      <ion-col>
+        <ion-icon class="pen" src = "../assets/MariposaIcons/penblue.svg"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <div class="medicaldiv">
+    <ion-row class = "medicalrow" *ngFor = "let item of hometable">
+      <ion-col size="5.5">
+        <ion-text class="tagitems">{{item.title}}</ion-text>
+      </ion-col>
+      <ion-col>
+        <ion-text class="details">: {{item.info}}</ion-text>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  </ion-grid>
+
+  <ion-button class= "viewall cap" expand="full">View More</ion-button>
+
+  <ion-grid class="shopping">
+
+    <ion-row class="shoppinglabel">
+      <ion-col>
+        <ion-title class="infotag">Shopping List</ion-title>
+      </ion-col>
+      <ion-col>
+        <ion-icon class="pen" src = "../assets/MariposaIcons/penblue.svg"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <ion-text class="plist">Product List</ion-text>
+
+    <div *ngFor= "let item of shoppinglist">
+      <hr class="solid margin">
+      <ion-text>{{item.item}}</ion-text>
+      <ion-text class="plist"><br>{{item.brand}}</ion-text>
+    </div>
+
+  </ion-grid>
+
+  
+
+  
+
+</ion-content>

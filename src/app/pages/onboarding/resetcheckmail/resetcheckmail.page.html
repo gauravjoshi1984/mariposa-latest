@@ -1,0 +1,38 @@
+<ion-content>
+  <ion-grid class="backbuttongrid"> 
+    <ion-toolbar style="height: 40px;">
+        <ion-buttons slot="start">
+            <m-backbutton></m-backbutton>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-grid> 
+  <ion-grid style="padding-left: 50px;padding-right: 50px;">
+      <ion-img src="../assets/icon/passwordResetSuccess.png"></ion-img>
+
+      <div style="text-align:center;">
+          <ion-text color="primary">
+              <h5 class="checkmail">Check your Email</h5>
+          </ion-text>
+      </div>
+
+      <div style="text-align:center;">
+          <ion-text>
+              <h6 class="text">we've send you a reset password link on your registered email address</h6>
+          </ion-text>
+      </div>
+
+      <div style="text-align:center;">
+        <ion-text>
+            <h4 style = "font-size: 16px;line-height: 19px; color:#7E7E7E;font-weight: normal;">{{email}}</h4>
+        </ion-text>
+    </div>
+
+     
+
+      <div id="button">
+          <ion-button [disabled]="false" class="btnblue" id="signup" routerLink="/admin-sign-in">GO TO EMAIL</ion-button>
+      </div>
+
+
+  </ion-grid>
+</ion-content>

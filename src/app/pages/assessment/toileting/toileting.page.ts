@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { DataserviceService } from '../../dataservice.service';
-import { Router } from '@angular/router';
 import { AssessmentServiceService } from '../assessment-service.service';
 import { NavController } from '@ionic/angular';
-import {
-  ImagePicker,
-  ImagePickerOptions,
-} from "@ionic-native/image-picker/ngx";
 
 @Component({
   selector: 'app-toileting',
@@ -15,47 +10,22 @@ import {
   styleUrls: ['./toileting.page.scss'],
 })
 export class ToiletingPage implements OnInit {
+  constructor(private dataService: DataserviceService,
+              private navCtrl: NavController,
+              private assessmentService: AssessmentServiceService,
+              private formBuilder: FormBuilder) { }
   toiletingForm: FormGroup;
   key;
   careCircleId;
   userId;
   formCreated = false;
   stateObject;
-  constructor(private dataService: DataserviceService,
-              private router: Router,
-              private navCtrl: NavController,
-              private imagePicker: ImagePicker,
-              private assessmentService: AssessmentServiceService,
-              private formBuilder: FormBuilder) { }
+
+  imageList = [];
 
   ngOnInit() {
 
   }
-
-  imageList = [];
-
-  addImage() {
-    let options: ImagePickerOptions = {
-      maximumImagesCount: 4,
-    };
-    this.imagePicker.getPictures(options).then(
-      (results) => {
-        console.log(results);
-        for (var i = 0; i < results.length; i++) {
-          this.imageList.push(results[i]);
-        }
-      },
-      (err) => {}
-    );
-  }
-  removeImg(i) {
-    console.log("*", i);
-    this.imageList.splice(i, 1);
-  }
-
-
-
-
 
   async ionViewWillEnter(){
     this.key = 'TOILETING';
@@ -84,7 +54,7 @@ export class ToiletingPage implements OnInit {
   changeToggle(ev: any) {
     console.log(ev);
   }
-  
+
   save(){
     if (this.stateObject == null){
       this.stateObject = {};
@@ -92,7 +62,7 @@ export class ToiletingPage implements OnInit {
     this.stateObject[this.key] = this.toiletingForm.value;
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
       console.log(response);
-      this.navCtrl.navigateForward(['/assessment/assessmentbar']);
+      this.navCtrl.back();
     });
   }
 

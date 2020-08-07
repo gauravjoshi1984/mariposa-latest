@@ -1,10 +1,10 @@
 <ion-header mode="md">
     <ion-toolbar class="headtoolbar">
-        <ion-buttons slot="start">
+        <ion-buttons class="backbutton" slot="start">
             <m-backbutton></m-backbutton>
         </ion-buttons>
         <ion-title class="name" color="mdblack" position="floating" id="titletag">{{careCircleName}}'s Care Circle</ion-title>
-        <ion-buttons slot="end">
+        <ion-buttons slot="end" class="kebab">
             <ion-img (click)="presentPopover($event)" src="../assets/MariposaIcons/Kebab menu.svg" style="color: black; margin-right: 10px;"></ion-img>
         </ion-buttons>
     </ion-toolbar>
@@ -29,10 +29,10 @@
             </ion-row>
             <ion-row [hidden]="member['userType'] != 'SENIOR'">
                 <ion-col style="padding-bottom: 0px;">
-                    <ion-button class="assessment" (click)='navigateToAssessment()'>START ASSESSMENT</ion-button>
+                    <ion-button class="assessment" (click)='navigateToAssessment()'>{{assessmentBtnText}}</ion-button>
                 </ion-col>
             </ion-row>
-            <ion-row [hidden]="false">
+            <ion-row [hidden]="member['userType'] === 'ADMIN'">
                 <ion-col style="padding-bottom: 0px;">
                     <ion-button class="pending">
                         <ion-icon slot="icon-only" src="assets/MariposaIcons/Error.svg"></ion-icon>

@@ -8,13 +8,19 @@ import { NavController } from '@ionic/angular';
 })
 export class HomeandsafetyPage implements OnInit {
 
-  constructor(private navCtrl: NavController,) { }
+  stateObject: any = {};
+  careCircleId;
+  userId;
+  key: string;
+  homeForm: any = {aids: {}, other: {}};
+
+  constructor(private navCtrl: NavController, ) { }
 
   ngOnInit() {
   }
 
   save(){
-    this.navCtrl.navigateForward(['/assessment/assessmentbar']);
+    this.navCtrl.back();
   }
 
 
@@ -28,10 +34,10 @@ export class HomeandsafetyPage implements OnInit {
     console.log(ev.checked);
   }
 
-  generateClick2(ev: any,value) {
-    ev.value=value;
-   
-   console.log(ev);
+  generateClick2(ev: any, value) {
+    ev.value = value;
+
+    console.log(ev);
  }
 
 }

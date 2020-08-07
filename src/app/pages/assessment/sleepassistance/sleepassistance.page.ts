@@ -1,12 +1,10 @@
+import { FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonDatetime } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { AssessmentServiceService } from '../assessment-service.service';
 import { DataserviceService } from '../../dataservice.service';
-import {
-  ImagePicker,
-  ImagePickerOptions,
-} from "@ionic-native/image-picker/ngx";
 
 @Component({
   selector: 'app-sleepassistance',
@@ -14,88 +12,81 @@ import {
   styleUrls: ['./sleepassistance.page.scss'],
 })
 export class SleepassistancePage implements OnInit {
-  @ViewChild('datepicker') datepicker: IonDatetime;
-  @ViewChild('datepicker1') datepicker1: IonDatetime;
-  @ViewChild('datepicker2') datepicker2: IonDatetime;
 
-  constructor( private navCtrl: NavController, private imagePicker: ImagePicker, private assessmentService: AssessmentServiceService,
-               private dataService: DataserviceService, ) { }
+  constructor(
+    private navCtrl: NavController,
+    private assessmentService: AssessmentServiceService,
+    private dataService: DataserviceService,
+    private formBuilder: FormBuilder) {
+    this.sleepForm = this.formBuilder.group({
+      bedTime: new FormControl('', [Validators.required]),
+      wakeupTime: new FormControl('', [Validators.required]),
+      nightAssistance: new FormControl(false, [Validators.required]),
+      notes: new FormControl('')
+    });
+  }
 
-  datepick: any;
-  datepick1: any;
-  datepick2: any;
+  sleepForm: FormGroup;
   key;
   careCircleId;
   userId;
   electronicList = [];
   stateObject;
+  formData: any = {sleepType: {}, naps: [{time: '', duration: '30'}]};
+  sleepType = [];
+  imageList = [];
+
   ngOnInit() {
   }
 
-  imageList = [];
-
-  addImage() {
-    let options: ImagePickerOptions = {
-      maximumImagesCount: 4,
-    };
-    this.imagePicker.getPictures(options).then(
-      (results) => {
-        console.log(results);
-        for (var i = 0; i < results.length; i++) {
-          this.imageList.push(results[i]);
-        }
-      },
-      (err) => {}
-    );
-  }
-  removeImg(i) {
-    console.log("*", i);
-    this.imageList.splice(i, 1);
-  }
-
   save(){
-
-    this.navCtrl.navigateForward(['/assessment/assessmentbar']);
-  }
-
-
-
-  generateClick(ev: any) {
-    // ev.click();
-    if (ev.checked === true) {
-      ev.checked = false;
-    } else {
-      ev.checked = true;
+    if (this.stateObject == null){
+      this.stateObject = {};
     }
+    // this.formData.imageList = this.imageList;
+    const finalData = JSON.parse(JSON.stringify({...this.sleepForm.value, ...this.formData}));
+    // if (typeof finalData.bedTime === 'string'){
+    //   finalData.bedTime = {hour: new Date(finalData.bedTime).getHours(), minute: new Date(finalData.bedTime).getMinutes()};
+    // }
+    // if (typeof finalData.wakeupTime === 'string'){
+    //   finalData.wakeupTime = {hour: new Date(finalData.wakeupTime).getHours(), minute: new Date(finalData.wakeupTime).getMinutes()};
+    // }
+    // finalData.naps.forEach(nap => {
+    //   if (typeof nap.time === 'string'){
+    //     nap.time = {hour: new Date(nap.time).getHours(), minute: new Date(nap.time).getMinutes()};
+    //     nap.duration = +nap.duration;
+    //   }
+    // });
+    this.stateObject[this.key] = finalData;
+    this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
+      this.navCtrl.back();
+    });
+    // console.log(this.sleepForm.value);
+    // console.log(this.formData);
   }
 
-  changeTime() {
-    this.datepicker.open().then((x) => {
-      console.log(x);
-      this.datepick = x;
-    });
+  setSleepTypeValue(key){
+    this.formData.sleepType[key] = !this.formData.sleepType[key];
   }
 
-  changeTime1() {
-    this.datepicker1.open().then((x) => {
-      console.log(x);
-      this.datepick1 = x;
-    });
-  }
-
-  changeTime2() {
-    this.datepicker2.open().then((x) => {
-      console.log(x);
-      this.datepick2 = x;
-    });
-  }
   addNewNap(){
-    console.log('add new nap');
+    this.formData.naps.push({time: '', duration: '30'});
   }
   async ionViewWillEnter(){
-    this.key = 'ELECTRONICS';
+    this.key = 'SLEEP';
     this.careCircleId = await this.assessmentService.getCareCircleId();
     this.userId = await this.dataService.getUserInfo();
     this.userId = this.userId.userId;
+    const data = await this.assessmentService.getAssessmentStateObject();
+    this.stateObject = data.assessmentValues.CARE_NEEDS;
+    this.sleepType = data.assessmentConfiguration.CARE_NEEDS[this.key].sleep_type;
+    if (this.stateObject != null && this.stateObject[this.key] != null){
+      this.formData.sleepType = this.stateObject[this.key].sleepType;
+      this.formData.naps = this.stateObject[this.key].naps;
+      this.sleepForm.controls.bedTime.setValue(this.stateObject[this.key].bedTime);
+      this.sleepForm.controls.wakeupTime.setValue(this.stateObject[this.key].wakeupTime);
+      this.sleepForm.controls.nightAssistance.setValue(this.stateObject[this.key].nightAssistance);
+      this.sleepForm.controls.notes.setValue(this.stateObject[this.key].notes);
+    }
   }
 }

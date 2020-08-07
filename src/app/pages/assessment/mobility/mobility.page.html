@@ -1,177 +1,104 @@
-<ion-header mode="md">
-  
-  <ion-toolbar class="headtoolbar">
-    
-      <ion-row>
-        <ion-col size="2">
-          <ion-toolbar>
-            <ion-buttons slot="start">
-             <m-backbutton></m-backbutton>
-            </ion-buttons>
-        </ion-toolbar> 
-        </ion-col>
-        <ion-col size="8">
-          <div>
-            <ion-text color="mdblack" position="floating" id="titletag">Mobility</ion-text>
-          </div> 
-        </ion-col>
-      </ion-row>
+<app-m-header-close title="Mobility"></app-m-header-close>
 
-  </ion-toolbar>
+<ion-content fullscreen>
+    <ion-grid style="padding:24px;height:fit-content;margin-bottom: 80px;">
+        <!-- Therapy-->
 
-</ion-header>
-
-<ion-content>
-  <ion-grid style="padding:24px;height:fit-content">
-    <!-- Therapy-->
-
-    <div style="padding-top: 0px; margin-bottom: 15px;">
-      <ion-label style="font-size: 16px; line-height: 19px;"
-        >Uses</ion-label
-      >
-    </div>
-
-    <!-- CHECKBOX 1 -->
-
-    <ion-row style="align-items: center; margin-top: 5px;">
-      <ion-col  size="1">
-        <div style="padding-left: 3px;">
-          <ion-checkbox #walker color="mwhite" checked="false"></ion-checkbox>
+        <div style="padding-top: 0px; margin-bottom: 15px;">
+            <ion-label style="font-size: 16px; line-height: 19px;">Uses</ion-label>
         </div>
-      </ion-col>
-      <ion-col
-        (click)="generateClick(walker)"
-        size="11"
-        style="padding-top: 0px;"
-      >
-        <div>
-          <ion-text
-            style="
-              font-size: 16px;
-              line-height: 19px;
-              font-weight: 300;
-              margin-left: 12px;
-            "
-            color="mdblack"
-            >Walker</ion-text
-          >
-        </div>
-      </ion-col>
-    </ion-row>
 
-    <!-- CHECKBOX 2 -->
-
-    <ion-row style="align-items: center; margin-top: 5px;">
-      <ion-col  size="1">
-        <div style="padding-left: 3px;">
-          <ion-checkbox #cane color="mwhite" checked="false"></ion-checkbox>
-        </div>
-      </ion-col>
-      <ion-col
-        (click)="generateClick(cane)"
-        size="11"
-        style="padding-top: 0px;"
-      >
-        <div>
-          <ion-text
-            style="
-              font-size: 16px;
-              line-height: 19px;
-              font-weight: 300;
-              margin-left: 12px;
-            "
-            color="mdblack"
-            >Cane</ion-text
-          >
-        </div>
-      </ion-col>
-    </ion-row>
-
-    <!-- CHECKBOX 3 -->
-
-    <ion-row style="align-items: center; margin-top: 5px;">
-      <ion-col  size="1">
-        <div style="padding-left: 3px;">
-          <ion-checkbox #wheelchair color="mwhite" checked="false"></ion-checkbox>
-        </div>
-      </ion-col>
-      <ion-col
-        (click)="generateClick(wheelchair)"
-        size="11"
-        style="padding-top: 0px;"
-      >
-        <div>
-          <ion-text
-            style="
-              font-size: 16px;
-              line-height: 19px;
-              font-weight: 300;
-              margin-left: 12px;
-            "
-            color="mdblack"
-            >Wheel Chair</ion-text
-          >
-        </div>
-      </ion-col>
-    </ion-row>
-
-    <!-- CHECKBOX 4 -->
-
-    <ion-row style="align-items: center; margin-top: 5px;">
-      <ion-col  size="1">
-        <div style="padding-left: 3px;">
-          <ion-checkbox #tub color="mwhite" checked="false"></ion-checkbox>
-        </div>
-      </ion-col>
-      <ion-col (click)="generateClick(tub)" size="11" style="padding-top: 0px;">
-        <div>
-          <ion-text style="font-size: 16px;line-height: 19px;font-weight: 300;margin-left: 12px;" color="mdblack">Walk-in Tub</ion-text>
-        </div>
-      </ion-col>
-    </ion-row>
-
-     
-    
-    <!-- INSTRUCTIONS -->
-
-    <div class="nametag" style="margin-top: 15px;">
-      <ion-text position="floating" id="tag">Instructions(optional)</ion-text>
-    </div>
-    <div>
-      <ion-textarea
-        style="height: 120px;"
-        class="input"
-        placeholder="Write here"
-      ></ion-textarea>
-    </div>
-
-    <!-- ADD IMAGE -->
-    <app-addimage (click)="addImage()"></app-addimage>
-    <ion-text>
-      <div class="imagelist" *ngFor="let img of imageList; let j=index">
-        <ion-grid fixed class="ion-no-padding">
-          <ion-row>
-            <ion-col style="padding-top: 11px;" size="8"><span>{{img.substring(img.lastIndexOf("/") + 1) | slice:0:12}}</span></ion-col>
-            <ion-col size="4">
-              <ion-button
-              fill="clear"
-              shape="round"
-              class="dltbtn"
-              (click)="removeImg(j)"        >
-              <ion-icon slot="icon-only" src="assets/trash.svg"></ion-icon>
-              Delete
-            </ion-button>
+        <!-- CHECKBOX 1 -->
+        <ion-row style="align-items: center; margin-top: 5px;" *ngFor="let list of uses">
+            <ion-col size="1">
+                <div style="padding-left: 3px;">
+                    <ion-checkbox color="mwhite" checked="false" [(ngModel)]="formData.uses[list]"></ion-checkbox>
+                </div>
             </ion-col>
-          </ion-row>
-        </ion-grid> 
-      </div>
-    </ion-text>
+            <ion-col (click)="setUsesValue(list)" size="11" style="padding-top: 0px;">
+                <div>
+                    <ion-text style="
+              font-size: 16px;
+              line-height: 19px;
+              font-weight: 300;
+              margin-left: 12px;
+            " color="mdblack">{{list}}</ion-text>
+                </div>
+            </ion-col>
+        </ion-row>
 
-  </ion-grid>
+        <hr style="margin-bottom: 7px;" class="solid" />
+        <app-toggle name="Fall Risk" [value]="formData['fallRisk']" (result)="changeToggle('fallRisk', $event)"></app-toggle>
+        <hr style="margin-bottom: 7px;" class="solid" />
+
+        <app-toggle name="Has safety assessment done" [value]="formData['safetyAssessment']" (result)="changeToggle('safetyAssessment', $event)"></app-toggle>
+        <hr style="margin-bottom: 7px;" class="solid" />
+
+        <div style="padding-top: 0px; margin-bottom: 5px;">
+            <ion-label style="font-size: 16px; line-height: 19px;">Transfer Type</ion-label>
+        </div>
+        <ion-grid style="padding:0">
+            <ion-radio-group mode="md" [(ngModel)]="formData.transferType">
+                <ion-row>
+                    <ion-col size="4">
+                        <ion-item class="no-ripple" lines="none">
+                            <ion-radio style="margin-right: 10px;" value="none"></ion-radio>
+                            <ion-label>None</ion-label>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size="4">
+                        <ion-item class="no-ripple" lines="none">
+                            <ion-radio style="margin-right: 10px;" value="full"></ion-radio>
+                            <ion-label>Full</ion-label>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size="4">
+                        <ion-item class="no-ripple" lines="none">
+                            <ion-radio style="margin-right: 10px;" value="partial"></ion-radio>
+                            <ion-label>Partial</ion-label>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-radio-group>
+        </ion-grid>
+
+        <div style="padding-top: 0px; margin-bottom: 15px;">
+            <ion-label style="font-size: 16px; line-height: 19px;">Other</ion-label>
+        </div>
+        <ion-row style="align-items: center; margin-top: 5px;" *ngFor="let list of other">
+            <ion-col size="1">
+                <div style="padding-left: 3px;">
+                    <ion-checkbox color="mwhite" checked="false" [(ngModel)]="formData.other[list]"></ion-checkbox>
+                </div>
+            </ion-col>
+            <ion-col (click)="setOtherValue(list)" size="11" style="padding-top: 0px;">
+                <div>
+                    <ion-text style="
+              font-size: 16px;
+              line-height: 19px;
+              font-weight: 300;
+              margin-left: 12px;
+            " color="mdblack">{{list}}</ion-text>
+                </div>
+            </ion-col>
+        </ion-row>
+
+        <!-- INSTRUCTIONS -->
+        <div class="nametag" style="margin-top: 15px;">
+            <ion-text position="floating" id="tag">Transfer Instructions & Risks (Optional)</ion-text>
+        </div>
+        <div>
+            <ion-textarea [(ngModel)]="formData.instructions" style="height: 120px;" class="input" placeholder="Write here"></ion-textarea>
+        </div>
+
+        <!-- ADD IMAGE -->
+        <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
+
+    </ion-grid>
 </ion-content>
 
 <ion-footer>
-  <div id="button">
-    <ion-button [disabled]="false" class="btnblue" type="submit"  (click)= "save()" id="signup">SAVE & PROCEED</ion-button>
-  </div>  
+    <div id="button">
+        <ion-button [disabled]="false" class="btnblue" type="submit" (click)="save()" id="signup">SAVE & PROCEED</ion-button>
+    </div>
 </ion-footer>

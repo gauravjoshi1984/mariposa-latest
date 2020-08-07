@@ -1,925 +1,920 @@
-<ion-header mode="md">
-  
-  <ion-toolbar class="headtoolbar">
-    <ion-grid>
-      <ion-row style="align-items: center;margin-top: 32px;">
-        <ion-col size="10">
-          
-            <ion-text color="mdblack" position="floating" id="titletag">Preview David's Assessment</ion-text>
-           
-        </ion-col>
-        <ion-col>
-          <ion-icon style="zoom:1.2;color: black;float:right" name="close-outline"></ion-icon>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-toolbar>
+<app-m-header-close [title]="title"></app-m-header-close>
 
-</ion-header>
+<ion-content fullscreen>
 
-<ion-content>
+    <!-- CARE NEEDS -->
 
-  <!-- CARE NEEDS -->
+    <ion-grid *ngIf="dataReady" style="padding-top:24px;padding-left:24px;padding-right:24px;padding-bottom:24px;">
+        <ion-text class="headertext">Care Needs</ion-text>
 
-<ion-grid style="padding-top:24px;padding-left:24px;padding-right:24px;padding-bottom:24px;">
-    <ion-text class="headertext">Care Needs</ion-text>
-
-    <div class="togglediv">
-    <app-toggle
-      [name]="'Companionship'"
-      [value]="true"
-      (result)="changeToggle($event)"
-    ></app-toggle>
-    </div>
-    
-
-    <ion-row>
-      <ion-col size="6">
-        <ion-text class="tags">Favorite Activities</ion-text>
-      </ion-col>
-      <ion-col>
-        <ion-text class="details">: Game,Share Stories</ion-text>
-      </ion-col>
-    </ion-row>
-
-    <hr class="solid" />
-
-    <!-- EXERCISE PT -->
-
-    <div class="togglediv1">
-      <app-toggle
-        [name]="'Exercise/PT'"
-        [value]="true"
-        (result)="changeToggle($event)"
-      ></app-toggle>
-      </div>
-      
-  
-      <ion-row>
-        <ion-col size="6">
-          <ion-text class="tags">Type of Therapy</ion-text>
-        </ion-col>
-        <ion-col>
-          <ion-text class="details">: Physical,Speech</ion-text>
-        </ion-col>
-      </ion-row>
-  
-      <hr class="solid" />
-
-      <!-- SHOPPING -->
-
-      <div class="togglediv2">
-        <app-toggle
-          [name]="'Shopping/Errands'"
-          [value]="true"
-          (result)="changeToggle($event)"
-        ></app-toggle>
+        <div class="togglediv">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Companionship</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.COMPANIONSHIP ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
         </div>
 
-      <hr class="solid" />
+        <ion-row *ngIf="assessmentData.assessmentValues.CARE_NEEDS.COMPANIONSHIP">
+            <ion-col size="6">
+                <ion-text class="tags">Favorite Activities</ion-text>
+            </ion-col>
+            <ion-col size="6">
+                <ion-text class="details"> : {{getPropertyValues(assessmentData.assessmentValues.CARE_NEEDS.COMPANIONSHIP)}}</ion-text>
+            </ion-col>
+        </ion-row>
 
-      <!-- USE OF ELECTRONICS -->
+        <hr class="solid" />
 
-      <div class="togglediv2">
-        <app-toggle
-          [name]="'Use of Electronics/Devices'"
-          [value]="true"
-          (result)="changeToggle($event)"
-        ></app-toggle>
+        <!-- EXERCISE PT -->
+
+        <div class="togglediv1">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Exercise/PT</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.EXERCISE ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
+        </div>
+        <ion-row *ngIf="assessmentData.assessmentValues.CARE_NEEDS.EXERCISE">
+            <ion-col size="6">
+                <ion-text class="tags">Type of Therapy</ion-text>
+            </ion-col>
+            <ion-col size="6">
+                <ion-text class="details"> : {{getPropertyValues(assessmentData.assessmentValues.CARE_NEEDS.EXERCISE)}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+
+        <hr class="solid" />
+
+        <!-- SHOPPING -->
+
+        <div class="togglediv2">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Shopping/Errands</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.SHOPPING ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
         </div>
 
-        <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Smart TV</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: Yes</ion-text>
-          </ion-col>
-        </ion-row>
-        <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Mobile</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: No</ion-text>
-          </ion-col>
-        </ion-row>
-        <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Alexa</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: Yes</ion-text>
-          </ion-col>
-        </ion-row>
-        <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Telehealth Apps</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: Yes</ion-text>
-          </ion-col>
-        </ion-row>
+        <hr class="solid" />
 
-        <hr class="solid"  style="margin-top:16px;"/>
+        <!-- USE OF ELECTRONICS -->
 
-      <!-- HOME REPAIR   -->
-
-      <div class="togglediv2">
-        <app-toggle
-          [name]="'Home Repair/Maintainence'"
-          [value]="true"
-          (result)="changeToggle($event)"
-        ></app-toggle>
+        <div class="togglediv2">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Use of Electronics/Devices</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.ELECTRONICS ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
         </div>
 
-        <ion-row >
-          <ion-col size="6">
-            <ion-text class="tags" style="line-height:24px;">Appliances / Equipments in use</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details" style="line-height:24px;">: Washer, Refrigerator, Air conditioner</ion-text>
-          </ion-col>
+        <ion-row style="height:30px;" *ngFor="let item of objectKeys(assessmentData.assessmentValues.CARE_NEEDS.ELECTRONICS)">
+            <ion-col size="6">
+                <ion-text class="tags">{{item}}</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.CARE_NEEDS.ELECTRONICS[item] ? 'Yes' : 'No'}}</ion-text>
+            </ion-col>
         </ion-row>
 
-        <hr class="solid"  style="margin-top:16px;"/>
+        <hr class="solid" style="margin-top:16px;" />
+
+        <!-- HOME REPAIR   -->
+
+        <div class="togglediv2">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Home Repair/Maintainence</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.HOME_REPAIR ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
+        </div>
+
+        <ion-row *ngIf="assessmentData.assessmentValues.CARE_NEEDS.HOME_REPAIR">
+            <ion-col size="6">
+                <ion-text class="tags">Appliances / Equipments in use</ion-text>
+            </ion-col>
+            <ion-col size="6">
+                <ion-text class="details"> : {{getPropertyValues(assessmentData.assessmentValues.CARE_NEEDS.HOME_REPAIR)}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+
+        <hr class="solid" style="margin-top:16px;" />
 
         <!-- GARDENING -->
 
-      <div class="togglediv2">
-        <app-toggle
-          [name]="'Gardening'"
-          [value]="true"
-          (result)="changeToggle($event)"
-        ></app-toggle>
+        <div class="togglediv2">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Gardening</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.GARDENING ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
         </div>
 
-        <ion-row >
-          <ion-col size="6">
-            <ion-text class="tags" style="line-height:24px;">Frequency</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details" style="line-height:24px;">: Small (10 to 20 plants)</ion-text>
-          </ion-col>
+        <ion-row *ngIf="assessmentData.assessmentValues.CARE_NEEDS.GARDENING">
+            <ion-col size="6">
+                <ion-text class="tags" style="line-height:24px;">Frequency</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details" style="line-height:24px;">: {{assessmentData.assessmentValues.CARE_NEEDS.GARDENING.frequency}}</ion-text>
+            </ion-col>
         </ion-row>
 
-        <hr class="solid"  style="margin-top:16px;"/>
+        <hr class="solid" style="margin-top:16px;" />
 
-         <!-- HOUSE WORK -->
+        <!-- HOUSE WORK -->
 
-      <div class="togglediv2">
-        <app-toggle
-          [name]="'House Work'"
-          [value]="true"
-          (result)="changeToggle($event)"
-        ></app-toggle>
+        <div class="togglediv2">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">House Work</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.HOUSE_WORK ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
         </div>
 
-        <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags" style="line-height:24px;">Frequency</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details" style="line-height:24px;">: Medium</ion-text>
-          </ion-col>
+        <ion-row style="height:30px;" *ngIf="assessmentData.assessmentValues.CARE_NEEDS.HOUSE_WORK">
+            <ion-col size="6">
+                <ion-text class="tags" style="line-height:24px;">Frequency</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details" style="line-height:24px;">: {{assessmentData.assessmentValues.CARE_NEEDS.HOUSE_WORK.frequency}}</ion-text>
+            </ion-col>
         </ion-row>
 
-        <hr class="solid"  style="margin-top:16px;"/>
+        <hr class="solid" style="margin-top:16px;" />
 
         <!-- LAUNDRY -->
 
-      <div class="togglediv2">
-        <app-toggle
-          [name]="'Laundry'"
-          [value]="true"
-          (result)="changeToggle($event)"
-        ></app-toggle>
+        <div class="togglediv2">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Laundry</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.LAUNDRY ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
         </div>
 
-        <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags" style="line-height:24px;">Laundry</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details" style="line-height:24px;">: High</ion-text>
-          </ion-col>
+        <ion-row style="height:30px;" *ngIf="assessmentData.assessmentValues.CARE_NEEDS.LAUNDRY">
+            <ion-col size="6">
+                <ion-text class="tags" style="line-height:24px;">Laundry</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details" style="line-height:24px;">: {{assessmentData.assessmentValues.CARE_NEEDS.LAUNDRY.frequency}}</ion-text>
+            </ion-col>
         </ion-row>
 
-        <hr class="solid"  style="margin-top:16px;"/>
+        <hr class="solid" style="margin-top:16px;" />
 
         <!-- DRIVING -->
 
-      <div class="togglediv2">
-        <app-toggle
-          [name]="'Driving/Transportation'"
-          [value]="true"
-          (result)="changeToggle($event)"
-        ></app-toggle>
+        <div class="togglediv2">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Driving/Transportation</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.DRIVING ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
         </div>
-
-        <ion-row >
-          <ion-col size="6">
-            <ion-text class="tags" style="line-height:24px;">Senior able to drive a car</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details" style="line-height:24px;">: Yes</ion-text>
-          </ion-col>
+        <ion-row *ngIf="assessmentData.assessmentValues.CARE_NEEDS.DRIVING">
+            <ion-col size="6">
+                <ion-text class="tags" style="line-height:24px;">Senior able to drive a car</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details" style="line-height:24px;">: {{assessmentData.assessmentValues.CARE_NEEDS.DRIVING.abilityToDrive ? 'Yes' : 'No'}}</ion-text>
+            </ion-col>
         </ion-row>
 
-        <hr class="solid"  style="margin-top:11px;"/>
+        <hr class="solid" style="margin-top:11px;" />
 
         <!-- COOKING/MEAL -->
 
-      <div class="togglediv2">
-        <app-toggle
-          [name]="'Cooking/Meal Preparation'"
-          [value]="true"
-          (result)="changeToggle($event)"
-        ></app-toggle>
+        <div class="togglediv2">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Cooking/Meal Preparation</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.COOKING ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
         </div>
 
+        <ion-row style="">
+            <ion-col size="6">
+                <ion-text class="tags">Assistance</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">:
+                    <ion-text class="details"> {{getPropertyValues(assessmentData.assessmentValues.CARE_NEEDS.COOKING.assistance)}}</ion-text>
+                </ion-text>
+            </ion-col>
+        </ion-row>
+
+        <!-- <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Apetite</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: Strong</ion-text>
+            </ion-col>
+        </ion-row> -->
+
         <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Assistance</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: Feeding</ion-text>
-          </ion-col>
+            <ion-col size="6">
+                <ion-text class="tags">Special Diet</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.CARE_NEEDS.COOKING.specialDiet ? 'Yes' : 'No'}}</ion-text>
+            </ion-col>
         </ion-row>
 
         <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Apetite</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: Strong</ion-text>
-          </ion-col>
+            <ion-col size="6">
+                <ion-text class="tags">Favorite Breakfast</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.CARE_NEEDS.COOKING.breakfast.length ? assessmentData.assessmentValues.CARE_NEEDS.COOKING.breakfast[0].name : 'No Favourite'}}</ion-text>
+            </ion-col>
         </ion-row>
+
+        <!-- <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Breakfast Frequency</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: 4</ion-text>
+            </ion-col>
+        </ion-row> -->
 
         <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Special Diet</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: No</ion-text>
-          </ion-col>
+            <ion-col size="6">
+                <ion-text class="tags">Favorite Lunch</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.CARE_NEEDS.COOKING.lunch.length ? assessmentData.assessmentValues.CARE_NEEDS.COOKING.lunch[0].name : 'No Favourite'}}</ion-text>
+            </ion-col>
         </ion-row>
+
+        <!-- <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Lunch Frequency</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: Medium</ion-text>
+            </ion-col>
+        </ion-row> -->
 
         <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Favorite Breakfast</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: Bread Toast</ion-text>
-          </ion-col>
+            <ion-col size="6">
+                <ion-text class="tags">Favorite Dinner</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.CARE_NEEDS.COOKING.dinner.length ? assessmentData.assessmentValues.CARE_NEEDS.COOKING.dinner[0].name : 'No Favourite'}}</ion-text>
+            </ion-col>
         </ion-row>
+
+        <!-- <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Dinner Frequency</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: Low</ion-text>
+            </ion-col>
+        </ion-row> -->
 
         <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Breakfast Frequency</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: 4</ion-text>
-          </ion-col>
+            <ion-col size="6">
+                <ion-text class="tags">Favorite Snack</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.CARE_NEEDS.COOKING.snack.length ? assessmentData.assessmentValues.CARE_NEEDS.COOKING.snack[0].name : 'No Favourite'}}</ion-text>
+            </ion-col>
         </ion-row>
 
-        <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Favorite Lunch</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: Veg food item</ion-text>
-          </ion-col>
-        </ion-row>
+        <!-- <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Snack Frequency</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: 1</ion-text>
+            </ion-col>
+        </ion-row> -->
 
-        <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Lunch Frequency</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: Medium</ion-text>
-          </ion-col>
-        </ion-row>
+        <!-- <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Shopping by</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: Caregiver</ion-text>
+            </ion-col>
+        </ion-row> -->
 
-        <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Favorite Dinner</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: Food item name</ion-text>
-          </ion-col>
-        </ion-row>
-
-        <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Dinner Frequency</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: Low</ion-text>
-          </ion-col>
-        </ion-row>
-
-        <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Favorite Snack</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: Veg Sandwich</ion-text>
-          </ion-col>
-        </ion-row>
-
-        <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Snack Frequency</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: 1</ion-text>
-          </ion-col>
-        </ion-row>
-
-        <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Shopping by</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: Caregiver</ion-text>
-          </ion-col>
-        </ion-row>
-
-        <hr class="solid"  style="margin-top:16px;"/>
+        <hr class="solid" style="margin-top:16px;" />
 
         <!-- MEDICATION -->
 
-      <div class="togglediv2">
-        <app-toggle
-          [name]="'Medication Management'"
-          [value]="true"
-          (result)="changeToggle($event)"
-        ></app-toggle>
+        <div class="togglediv2">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Medication Management</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.MEDICATION ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
         </div>
 
-        <ion-row >
-          <ion-col size="6">
-            <ion-text class="tags" style="line-height:24px;">Allergic to these medications</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details" style="line-height:24px;">: Drug H1, Sample Drug 2</ion-text>
-          </ion-col>
+        <ion-row *ngIf="assessmentData.assessmentValues.CARE_NEEDS.MEDICATION">
+            <ion-col size="6">
+                <ion-text class="tags" style="line-height:24px;">Allergic to these medications</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details"> : {{getPropertyValues(assessmentData.assessmentValues.CARE_NEEDS.MEDICATION)}}</ion-text>
+            </ion-col>
         </ion-row>
 
-        <hr class="solid"  style="margin-top:11px;"/>
+        <hr class="solid" style="margin-top:11px;" />
 
         <!-- MOBILITY -->
 
-      <div class="togglediv2">
-        <app-toggle
-          [name]="'Mobility'"
-          [value]="true"
-          (result)="changeToggle($event)"
-        ></app-toggle>
+        <div class="togglediv2">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Mobility</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.MOBILITY ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
         </div>
 
-        <ion-row style="line-height: 30px;">
-          <ion-col size="6">
-            <ion-text class="tags" style="line-height:24px;">Uses</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details" style="line-height:24px;">: Walker,Walk-in Tub</ion-text>
-          </ion-col>
+        <ion-row style="line-height: 30px;" *ngIf="assessmentData.assessmentValues.CARE_NEEDS.MOBILITY">
+            <ion-col size="6">
+                <ion-text class="tags" style="line-height:24px;">Uses</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details"> : {{getPropertyValues(assessmentData.assessmentValues.CARE_NEEDS.MOBILITY.uses)}}</ion-text>
+            </ion-col>
         </ion-row>
 
-        <hr class="solid"  style="margin-top:11px;"/>
+        <hr class="solid" style="margin-top:11px;" />
 
         <!-- BATHING -->
 
-      <div class="togglediv2">
-        <app-toggle
-          [name]="'Bathing'"
-          [value]="true"
-          (result)="changeToggle($event)"
-        ></app-toggle>
+        <div class="togglediv2">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Bathing</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.BATHING ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
         </div>
 
-        <hr class="solid"  style="margin-top:16px;"/>
+        <hr class="solid" style="margin-top:16px;" />
 
         <!-- Sleep -->
 
         <div class="togglediv2">
-        <app-toggle
-          [name]="'Sleep'"
-          [value]="true"
-          (result)="changeToggle($event)"
-        ></app-toggle>
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Sleep</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.SLEEP ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
         </div>
 
-        <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Goes to bed </ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: 10 PM</ion-text>
-          </ion-col>
+        <ion-row style="height:30px;" *ngIf="assessmentData.assessmentValues.CARE_NEEDS.SLEEP">
+            <ion-col size="6">
+                <ion-text class="tags">Goes to bed </ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{getpropertyHour(assessmentData.assessmentValues.CARE_NEEDS.SLEEP.bedTime)}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;" *ngIf="assessmentData.assessmentValues.CARE_NEEDS.SLEEP">
+            <ion-col size="6">
+                <ion-text class="tags">Wake up time</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{getpropertyHour(assessmentData.assessmentValues.CARE_NEEDS.SLEEP.wakeupTime)}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="assessmentData.assessmentValues.CARE_NEEDS.SLEEP">
+            <ion-col size="6">
+                <ion-text class="tags">Sleeping type</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details"> : {{getPropertyValues(assessmentData.assessmentValues.CARE_NEEDS.SLEEP.sleepType)}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <!-- <ion-row style="height:30px;margin-bottom: 7px;">
+            <ion-col size="6">
+                <ion-text class="tags">Favorite Breakfast</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: Bread Toast</ion-text>
+            </ion-col>
+        </ion-row> -->
+
+        <ion-row *ngIf="assessmentData.assessmentValues.CARE_NEEDS.SLEEP">
+            <ion-col size="6">
+                <ion-text style="line-height:16px ;" class="tags">Need assistance Night From Caregiver</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text style="line-height:16px ;" class="details">: {{assessmentData.assessmentValues.CARE_NEEDS.MOBILITY.nightAssistance ? 'Yes': 'No'}}</ion-text>
+            </ion-col>
         </ion-row>
 
         <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Wake up time</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: 7 AM</ion-text>
-          </ion-col>
+            <ion-col size="6">
+                <ion-text class="tags">Nap during the day</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{getpropertyHours(assessmentData.assessmentValues.CARE_NEEDS.SLEEP.naps)}}</ion-text>
+            </ion-col>
         </ion-row>
 
         <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Sleeping type</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: Sleep through night</ion-text>
-          </ion-col>
+            <ion-col size="6">
+                <ion-text class="tags">Notes</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: NA</ion-text>
+            </ion-col>
         </ion-row>
 
-        <ion-row style="height:30px;margin-bottom: 7px;">
-          <ion-col size="6">
-            <ion-text class="tags">Favorite Breakfast</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: Bread Toast</ion-text>
-          </ion-col>
-        </ion-row>
-
-        <ion-row >
-          <ion-col size="6">
-            <ion-text style = "line-height:16px ;" class="tags">Need assistance Night From Caregiver</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text style = "line-height:16px ;" class="details">: No</ion-text>
-          </ion-col>
-        </ion-row>
-
-        <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Nap during the day</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: NA</ion-text>
-          </ion-col>
-        </ion-row>
-
-        <ion-row style="height:30px;">
-          <ion-col size="6">
-            <ion-text class="tags">Notes</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details">: NA</ion-text>
-          </ion-col>
-        </ion-row>
-
-        <hr class="solid"  style="margin-top:16px;"/>
+        <hr class="solid" style="margin-top:16px;" />
 
         <!-- DRESSING -->
 
-      <div class="togglediv2">
-        <app-toggle
-          [name]="'Dressing'"
-          [value]="true"
-          (result)="changeToggle($event)"
-        ></app-toggle>
+        <div class="togglediv2">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Dressing</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.DRESSING ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
         </div>
 
         <ion-row style="line-height: 30px;">
-          <ion-col size="6">
-            <ion-text class="tags" style="line-height:24px;">Favorite Outfits</ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="details" style="line-height:24px;">: Cotton Polka Pyjamas</ion-text>
-          </ion-col>
+            <ion-col size="6">
+                <ion-text class="tags" style="line-height:24px;">Favorite Outfits</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details" style="line-height:24px;">: {{getArrayValues(assessmentData.assessmentValues.CARE_NEEDS.DRESSING.dressingPreferences, 'value')}}</ion-text>
+            </ion-col>
         </ion-row>
 
-        <hr class="solid"  style="margin-top:11px;"/>
+        <hr class="solid" style="margin-top:11px;" />
 
-         <!-- Grooming -->
+        <!-- Grooming -->
 
-      <div class="togglediv2">
-        <app-toggle
-          [name]="'Grooming'"
-          [value]="true"
-          (result)="changeToggle($event)"
-        ></app-toggle>
+        <div class="togglediv2">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Grooming</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.DRESSING ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
         </div>
 
-        <hr class="solid"  style="margin-top:16px;"/>
+        <hr class="solid" style="margin-top:16px;" />
 
         <!-- ORAL CARE -->
 
         <div class="togglediv2">
-          <app-toggle
-            [name]="'Oral Care'"
-            [value]="true"
-            (result)="changeToggle($event)"
-          ></app-toggle>
-          </div>
-
-          <ion-row style="height:30px;margin-bottom: 7px;">
-            <ion-col size="6">
-              <ion-text class="tags">Prefer Tooth Paste</ion-text>
-            </ion-col>
-            <ion-col>
-              <ion-text class="details">: Pepsodent White</ion-text>
-            </ion-col>
-          </ion-row>
-  
-          <ion-row >
-            <ion-col size="6">
-              <ion-text style = "line-height:16px ;" class="tags">Senior has tooth Senaitivity</ion-text>
-            </ion-col>
-            <ion-col>
-              <ion-text style = "line-height:16px ;" class="details">: Yes</ion-text>
-            </ion-col>
-          </ion-row>
-
-          <hr class="solid"  style="margin-top:16px;"/>
-
-          <!-- WOUND -->
-
-      <div class="togglediv2">
-        <app-toggle
-          [name]="'Wound Care'"
-          [value]="true"
-          (result)="changeToggle($event)"
-        ></app-toggle>
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Oral Care</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.ORAL ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
         </div>
 
-        <hr class="solid"  style="margin-top:16px;"/>
-  
+        <ion-row style="height:30px;margin-bottom: 7px;">
+            <ion-col size="6">
+                <ion-text class="tags">Prefer Tooth Paste</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.CARE_NEEDS.ORAL.toothpaste}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="6">
+                <ion-text style="line-height:16px ;" class="tags">Senior has tooth Senaitivity</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text style="line-height:16px ;" class="details">: {{assessmentData.assessmentValues.CARE_NEEDS.DRESSING.toothSensitivity ? 'Yes' : 'No'}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <hr class="solid" style="margin-top:16px;" />
+
+        <!-- WOUND -->
+
+        <div class="togglediv2">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Wound Care</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.WOUND_CARE ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
+        </div>
+
+        <hr class="solid" style="margin-top:16px;" />
+
         <!-- EATING -->
 
         <div class="togglediv2">
-          <app-toggle
-            [name]="'Eating'"
-            [value]="true"
-            (result)="changeToggle($event)"
-          ></app-toggle>
-          </div>
-
-          <ion-row style="height:30px;margin-bottom: 7px;">
-            <ion-col size="6">
-              <ion-text class="tags">Able to chew</ion-text>
-            </ion-col>
-            <ion-col>
-              <ion-text class="details">: Yes</ion-text>
-            </ion-col>
-          </ion-row>
-  
-          <ion-row >
-            <ion-col size="6">
-              <ion-text style = "line-height:16px ;" class="tags">Requires food to be served</ion-text>
-            </ion-col>
-            <ion-col>
-              <ion-text style = "line-height:16px ;" class="details">: Yes</ion-text>
-            </ion-col>
-          </ion-row>
-
-          <hr class="solid"  style="margin-top:16px;"/>
-
-          <!-- Toileting -->
-
-      <div class="togglediv2">
-        <app-toggle
-          [name]="'Toileting'"
-          [value]="false"
-          (result)="changeToggle($event)"
-        ></app-toggle>
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Eating</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.EATING ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
         </div>
 
-        <hr class="solid"  style="margin-top:16px;"/>
+        <ion-row style="height:30px;margin-bottom: 7px;">
+            <ion-col size="6">
+                <ion-text class="tags">Able to chew</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.CARE_NEEDS.EATING.chew ? 'Yes' : 'No'}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="6">
+                <ion-text style="line-height:16px ;" class="tags">Requires food to be served</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text style="line-height:16px ;" class="details">: {{assessmentData.assessmentValues.CARE_NEEDS.EATING.serviceRequired ? 'Yes' : 'No'}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <hr class="solid" style="margin-top:16px;" />
+
+        <!-- Toileting -->
+
+        <div class="togglediv2">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Toileting</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.TOILETING ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
+        </div>
+
+        <hr class="solid" style="margin-top:16px;" />
 
         <!-- Finances -->
 
-      <div class="togglediv2">
-        <app-toggle
-          [name]="'Management of finances'"
-          [value]="false"
-          (result)="changeToggle($event)"
-        ></app-toggle>
+        <div class="togglediv2">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Management of finances</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.FINANCES ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
         </div>
 
-        <hr class="solid"  style="margin-top:16px;"/>
+        <hr class="solid" style="margin-top:16px;" />
 
         <!-- Check Vitals -->
 
-      <div class="togglediv2">
-        <app-toggle
-          [name]="'Grooming'"
-          [value]="false"
-          (result)="changeToggle($event)"
-        ></app-toggle>
-      </div>
+        <div class="togglediv2">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text style="line-height:24px;">Check Vitals</ion-text>
+                </ion-col>
+                <ion-col style="text-align: end;">
+                    <ion-text class="details" style="line-height:24px; font-size: 16px;">{{assessmentData.assessmentValues.CARE_NEEDS.VITALS ? 'Yes' : 'No'}}</ion-text>
+                </ion-col>
+            </ion-row>
+        </div>
 
-        <hr class="solid"  style="margin-top:16px;margin-bottom: 16px;"/>
+        <hr class="solid" style="margin-top:16px;margin-bottom: 16px;" />
 
         <!-- PERSONAL INFO -->
 
-      <ion-text class="headertext">Personal Info</ion-text>
-    
-
-      <ion-row style="height:30px;margin-top: 12px;">
-        <ion-col size="6">
-          <ion-text class="tags">First Name </ion-text>
-        </ion-col>
-        <ion-col>
-          <ion-text class="details">: David</ion-text>
-        </ion-col>
-      </ion-row>
-
-      <ion-row style="height:30px;">
-        <ion-col size="6">
-          <ion-text class="tags">Last Name</ion-text>
-        </ion-col>
-        <ion-col>
-          <ion-text class="details">: Joe</ion-text>
-        </ion-col>
-      </ion-row>
-
-      <ion-row style="height:30px;">
-        <ion-col size="6">
-          <ion-text class="tags">Gender</ion-text>
-        </ion-col>
-        <ion-col>
-          <ion-text class="details">: Male</ion-text>
-        </ion-col>
-      </ion-row>
-
-      <ion-row style="height:30px;">
-        <ion-col size="6">
-          <ion-text class="tags">Date of birth</ion-text>
-        </ion-col>
-        <ion-col>
-          <ion-text class="details">: 19/05/1984</ion-text>
-        </ion-col>
-      </ion-row>
-
-      <ion-row style="height:30px;">
-        <ion-col size="6">
-          <ion-text class="tags">Lives with</ion-text>
-        </ion-col>
-        <ion-col>
-          <ion-text class="details">: Spouse</ion-text>
-        </ion-col>
-      </ion-row>
-
-      <ion-row style="height:30px;">
-        <ion-col size="6">
-          <ion-text class="tags">Past profession</ion-text>
-        </ion-col>
-        <ion-col>
-          <ion-text class="details">: Rtd Employee</ion-text>
-        </ion-col>
-      </ion-row>
-
-      <ion-row style="height:30px;">
-        <ion-col size="6">
-          <ion-text class="tags">Address</ion-text>
-        </ion-col>
-        <ion-col >
-          <ion-text class="details">: Mason,South Ave,NY</ion-text>
-        </ion-col>
-      </ion-row>
-
-      <ion-row style="height:30px;">
-        <ion-col size="6">
-          <ion-text class="tags">Emergency contact</ion-text>
-        </ion-col>
-        <ion-col >
-          <ion-text class="details">: 212 - 123 4567</ion-text>
-        </ion-col>
-      </ion-row>
-
-      <hr class="solid"  style="margin-top:24px;margin-bottom: 24px;"/>
-
-      <!-- MEDICAL CONDITIONS -->
-
-    <ion-text class="headertext">Medical & Psychiatric Conditions</ion-text>
-  
-
-    <ion-row style="margin-top:18px ;">
-      <ion-col size="6">
-        <ion-text style = "line-height:16px ;" class="tags">Current Medical Conditions</ion-text>
-      </ion-col>
-      <ion-col>
-        <ion-text style = "line-height:16px ;" class="details">: Condition 1, Condition 2</ion-text>
-      </ion-col>
-    </ion-row>
-
-    <ion-row >
-      <ion-col size="6">
-        <ion-text style = "line-height:16px ;" class="tags">Current Psychiatric Conditions</ion-text>
-      </ion-col>
-      <ion-col>
-        <ion-text style = "line-height:16px ;" class="details">: Depression, Anxiety</ion-text>
-      </ion-col>
-    </ion-row>
-
-    <ion-row >
-      <ion-col size="6">
-        <ion-text style = "line-height:16px ;" class="tags">Past or Current Substance Abuse</ion-text>
-      </ion-col>
-      <ion-col>
-        <ion-text style = "line-height:16px ;" class="details">: No</ion-text>
-      </ion-col>
-    </ion-row>
-
-    <ion-row >
-      <ion-col size="6">
-        <ion-text style = "line-height:16px ;"class="tags">Medical & Home health providers</ion-text>
-      </ion-col>
-      <ion-col>
-        <ion-text style = "line-height:16px ;" class="details">: PCP</ion-text>
-      </ion-col>
-    </ion-row>
-
-    <ion-row style="height:30px;">
-      <ion-col size="6">
-        <ion-text class="tags">DNR</ion-text>
-      </ion-col>
-      <ion-col>
-        <ion-text class="details">: Yes</ion-text>
-      </ion-col>
-    </ion-row>
-
-    <ion-row style="height:30px;">
-      <ion-col size="6">
-        <ion-text class="tags">Wears Briefs</ion-text>
-      </ion-col>
-      <ion-col>
-        <ion-text class="details">: Yes</ion-text>
-      </ion-col>
-    </ion-row>
-
-    <ion-row style="height:30px;">
-      <ion-col size="6">
-        <ion-text class="tags">Can client left alone</ion-text>
-      </ion-col>
-      <ion-col >
-        <ion-text class="details">: Yes</ion-text>
-      </ion-col>
-    </ion-row>
-
-    <ion-row style="height:30px;">
-      <ion-col size="6">
-        <ion-text class="tags">Lethargy</ion-text>
-      </ion-col>
-      <ion-col >
-        <ion-text class="details">: Yes</ion-text>
-      </ion-col>
-    </ion-row>
-
-    <ion-row style="height:30px;">
-      <ion-col size="6">
-        <ion-text class="tags">Incontinence</ion-text>
-      </ion-col>
-      <ion-col >
-        <ion-text class="details">: Urination</ion-text>
-      </ion-col>
-    </ion-row>
-
-    <ion-row style="height:30px;">
-      <ion-col size="6">
-        <ion-text class="tags">Hearing</ion-text>
-      </ion-col>
-      <ion-col >
-        <ion-text class="details">: Good</ion-text>
-      </ion-col>
-    </ion-row>
-
-    <ion-row style="height:30px;">
-      <ion-col size="6">
-        <ion-text class="tags">Speech</ion-text>
-      </ion-col>
-      <ion-col >
-        <ion-text class="details">: Fair</ion-text>
-      </ion-col>
-    </ion-row>
-          
-    <ion-row style="height:30px;">
-      <ion-col size="6">
-        <ion-text class="tags">Vision</ion-text>
-      </ion-col>
-      <ion-col >
-        <ion-text class="details">: Fair</ion-text>
-      </ion-col>
-    </ion-row>
-
-    <ion-row style="height:30px;">
-      <ion-col size="6">
-        <ion-text class="tags">Smell</ion-text>
-      </ion-col>
-      <ion-col >
-        <ion-text class="details">: Fair</ion-text>
-      </ion-col>
-    </ion-row>
-
-    <ion-row style="height:30px;">
-      <ion-col size="6">
-        <ion-text class="tags">Swallowing</ion-text>
-      </ion-col>
-      <ion-col >
-        <ion-text class="details">: Fair</ion-text>
-      </ion-col>
-    </ion-row>
-
-    <ion-row style="height:30px;">
-      <ion-col size="6">
-        <ion-text class="tags">Other factors</ion-text>
-      </ion-col>
-      <ion-col >
-        <ion-text class="details">: Withdrawal Wandering</ion-text>
-      </ion-col>
-    </ion-row>
-
-    <hr class="solid"  style="margin-top:24px;margin-bottom: 24px;"/>
-
-    <!-- Home and safety -->
-
-  <ion-text class="headertext">Home & Safety</ion-text>
-
-  <ion-row style="height:30px;margin-top: 12px;">
-    <ion-col size="6">
-      <ion-text class="tags">Home Safety</ion-text>
-    </ion-col>
-    <ion-col >
-      <ion-text style="font-size:13px ;" class="details">: Some assistance needed</ion-text>
-    </ion-col>
-  </ion-row>
-
-  <ion-row style="height:30px;">
-    <ion-col size="6">
-      <ion-text class="tags">Assessment Done</ion-text>
-    </ion-col>
-    <ion-col >
-      <ion-text class="details">: No</ion-text>
-    </ion-col>
-  </ion-row>
-
-  <ion-row style="height:30px;">
-    <ion-col size="6">
-      <ion-text class="tags">Interested in lifeline</ion-text>
-    </ion-col>
-    <ion-col >
-      <ion-text class="details">: Bedrails</ion-text>
-    </ion-col>
-  </ion-row>
-
-  <ion-row style="height:30px;">
-    <ion-col size="6">
-      <ion-text class="tags">Others</ion-text>
-    </ion-col>
-    <ion-col >
-      <ion-text class="details">: Grab Bars</ion-text>
-    </ion-col>
-  </ion-row>
-
-  <hr class="solid"  style="margin-top:24px;margin-bottom: 24px;"/>
-
-  <!-- MOTIVATION -->
-
-  <ion-text class="headertext">Motivations</ion-text>
-
-    <ion-row style="margin-top: 18px;">
-      <ion-col >
-        <ion-text >Health & Fitness</ion-text>
-      </ion-col>
-    </ion-row>
-
-    <ion-row style="margin-top: 4px;">
-      <ion-col >
-        <ion-text >Family & Community</ion-text>
-      </ion-col>
-    </ion-row>  
-
-    <ion-row style="margin-top: 4px;">
-      <ion-col >
-        <ion-text >Creativity</ion-text>
-      </ion-col>
-    </ion-row> 
-
-    <ion-row style="margin-top: 4px;">
-      <ion-col >
-        <ion-text >Fun</ion-text>
-      </ion-col>
-    </ion-row> 
-
-   
+        <ion-text class="headertext">Personal Info</ion-text>
 
 
-        
+        <ion-row style="height:30px;margin-top: 12px;">
+            <ion-col size="6">
+                <ion-text class="tags">First Name </ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.PERSONAL_INFORMATION.firstName}}</ion-text>
+            </ion-col>
+        </ion-row>
 
-        
-  
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Last Name</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.PERSONAL_INFORMATION.lastName}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Gender</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.PERSONAL_INFORMATION.gender}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Date of birth</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{getDob(assessmentData.assessmentValues.PERSONAL_INFORMATION.dobDate, assessmentData.assessmentValues.PERSONAL_INFORMATION.dobMonth, assessmentData.assessmentValues.PERSONAL_INFORMATION.dobYear)}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Lives with</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.PERSONAL_INFORMATION.livesWith}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Past profession</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.PERSONAL_INFORMATION.pastProfession}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Address</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.PERSONAL_INFORMATION.address}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Emergency contact</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.PERSONAL_INFORMATION.emergencyContactNumber}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <hr class="solid" style="margin-top:24px;margin-bottom: 24px;" />
+
+        <!-- MEDICAL CONDITIONS -->
+
+        <ion-text class="headertext">Medical & Psychiatric Conditions</ion-text>
 
 
+        <ion-row style="margin-top:18px ;">
+            <ion-col size="6">
+                <ion-text style="line-height:16px ;" class="tags">Current Medical Conditions</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text style="line-height:16px ;" class="details">: {{getPropertyValues(assessmentData.assessmentValues.MEDICAL_PSYCHIATRIC.medicalConditions)}}</ion-text>
+            </ion-col>
+        </ion-row>
 
+        <ion-row>
+            <ion-col size="6">
+                <ion-text style="line-height:16px ;" class="tags">Current Psychiatric Conditions</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text style="line-height:16px ;" class="details">: {{getPropertyValues(assessmentData.assessmentValues.MEDICAL_PSYCHIATRIC.psychiatricConditions)}}</ion-text>
+            </ion-col>
+        </ion-row>
 
-</ion-grid>
+        <ion-row>
+            <ion-col size="6">
+                <ion-text style="line-height:16px ;" class="tags">Past or Current Substance Abuse</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text style="line-height:16px ;" class="details">: {{getPropertyValues(assessmentData.assessmentValues.MEDICAL_PSYCHIATRIC.substanceUse)}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="6">
+                <ion-text style="line-height:16px ;" class="tags">Medical & Home health providers</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text style="line-height:16px ;" class="details">: {{getPropertyValues(assessmentData.assessmentValues.MEDICAL_PSYCHIATRIC.healthProviders)}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">DNR</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.MEDICAL_PSYCHIATRIC.dnr ? 'Yes' : 'No'}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Wears Briefs</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.MEDICAL_PSYCHIATRIC.wearsBriefs ? 'Yes' : 'No'}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Can be left alone</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.MEDICAL_PSYCHIATRIC.leftAlone ? 'Yes' : 'No'}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <!-- <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Lethargy</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: Yes</ion-text>
+            </ion-col>
+        </ion-row> -->
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Incontinence</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.MEDICAL_PSYCHIATRIC.incontinence}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Hearing</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.MEDICAL_PSYCHIATRIC.hearing}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Speech</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.MEDICAL_PSYCHIATRIC.speech}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Vision</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.MEDICAL_PSYCHIATRIC.vision}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Smell</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.MEDICAL_PSYCHIATRIC.smell}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Swallowing</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{assessmentData.assessmentValues.MEDICAL_PSYCHIATRIC.swallowing}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="6">
+                <ion-text class="tags">Other factors</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: {{getPropertyValues(assessmentData.assessmentValues.MEDICAL_PSYCHIATRIC.otherFactors)}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <hr class="solid" style="margin-top:24px;margin-bottom: 24px;" />
+
+        <!-- Home and safety -->
+
+        <!-- <ion-text class="headertext">Home & Safety</ion-text>
+
+        <ion-row style="height:30px;margin-top: 12px;">
+            <ion-col size="6">
+                <ion-text class="tags">Home Safety</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text style="font-size:13px ;" class="details">: Some assistance needed</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Assessment Done</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: No</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Interested in lifeline</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: Bedrails</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height:30px;">
+            <ion-col size="6">
+                <ion-text class="tags">Others</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="details">: Grab Bars</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <hr class="solid" style="margin-top:24px;margin-bottom: 24px;" /> -->
+
+        <!-- MOTIVATION -->
+        <ion-row style="margin-bottom: 18px;">
+            <ion-text class="headertext">Motivations</ion-text>
+        </ion-row>
+        <ion-row *ngFor="let item of getKeys(assessmentData.assessmentValues.MOTIVATIONS)">
+            <ion-col>
+                <ion-text>{{item}}</ion-text>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
 </ion-content>
-

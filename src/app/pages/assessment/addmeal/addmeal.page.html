@@ -1,0 +1,41 @@
+<app-m-header-close title="Add a Meal"></app-m-header-close>
+
+<ion-content fullscreen [formGroup]="addMealForm">
+    <ion-grid class="content">
+
+        <div class="nametag" id="topfield">
+            <ion-text position="floating" id="tag">Select a meal type</ion-text>
+        </div>
+        <div>
+            <ion-select mode="md" class="input" formControlName='mealType' placeholder="Select">
+                <ion-select-option *ngFor="let items of mealtype">{{items}}</ion-select-option>
+            </ion-select>
+        </div>
+
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Meal name</ion-text>
+        </div>
+        <div>
+            <ion-input formControlName="name" mode="md" class="input" placeholder="Enter meal name"></ion-input>
+        </div>
+
+        <!-- INSTRUCTIONS -->
+
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Recipe Instructions (optional)</ion-text>
+        </div>
+        <div>
+            <ion-textarea formControlName="recepie" style="height: 120px;" class="input" placeholder="Write here"></ion-textarea>
+        </div>
+
+        <!-- ADD IMAGE -->
+        <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
+
+    </ion-grid>
+</ion-content>
+
+<ion-footer [formGroup]="addMealForm">
+    <div id="button">
+        <ion-button [disabled]="addMealForm.invalid" class="btnblue" type="submit" id="signup" (click)="addmeal()">ADD</ion-button>
+    </div>
+</ion-footer>

@@ -17,11 +17,22 @@ export class MariposaAuthGuardService implements CanActivate {
     return this.dataService.getUserInfo().then(userData => {
       if (userData){
         if (state.url === '/admin-sign-in'){
-          this.router.navigate([lastPage]);
-          return false;
+            this.router.navigate([lastPage ? lastPage : '/carecircle']);
+            return false;
         }
         else{
-          return true;
+          if (state.url === '/carecircle'){
+            if (lastPage !== null){
+              this.router.navigate([lastPage]);
+              return false;
+            }
+            else{
+              return true;
+            }
+          }else{
+            return true;
+          }
+          // return true;
         }
       }
       else if (state.url !== '/admin-sign-in'){

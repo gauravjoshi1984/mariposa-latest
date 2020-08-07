@@ -1,0 +1,33 @@
+<app-m-header-close title="Add Favorite Outfit"></app-m-header-close>
+
+<ion-content fullscreen [formGroup]="addOutfitForm">
+    <ion-grid class="content">
+
+
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Name of outfit</ion-text>
+        </div>
+        <div>
+            <ion-input formControlName="name" mode="md" class="input" placeholder="Enter outfit name"></ion-input>
+        </div>
+
+        <!-- INSTRUCTIONS -->
+
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Instructions (optional)</ion-text>
+        </div>
+        <div>
+            <ion-textarea formControlName="outfitinstructions" style="height: 120px;" class="input" placeholder="Write here"></ion-textarea>
+        </div>
+
+        <!-- ADD IMAGE -->
+        <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
+
+    </ion-grid>
+</ion-content>
+
+<ion-footer [formGroup]="addOutfitForm">
+    <div id="button">
+        <ion-button [disabled]="addOutfitForm.invalid" class="btnblue" type="submit" id="signup" (click)="addoutfit()">ADD</ion-button>
+    </div>
+</ion-footer>

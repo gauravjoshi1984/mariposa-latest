@@ -1,7 +1,7 @@
 <ion-header mode="md">
     <ion-toolbar class="headtoolbar">
 
-        <ion-row>
+        <ion-row style="align-items: center;">
             <ion-col size="2">
                 <ion-toolbar>
                     <ion-buttons slot="start">
@@ -22,7 +22,7 @@
           font-size: 12px;
           line-height: 14px;
           color: #4137FF;
-          margin-top: 3px;">DELETE
+          margin-top: 3px;">EDIT
                     </ion-text>
                 </div>
             </ion-col>
@@ -32,27 +32,19 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content scrollable>
-    <ion-grid style="
-      padding-top: 24px;
-      padding-left: 16px;
-      padding-right: 16px;
-      padding-bottom: 13px;
-      height: auto;
-      margin-bottom: 73px;
-    ">
+<ion-content scrollable fullscreen>
+    <ng-container *ngIf="shoppingitems.length; else noList">
+        <ion-grid style="padding-top: 24px;padding-left: 16px;padding-right: 16px;padding-bottom: 13px;height: auto;margin-bottom: 73px;">
+            <ion-row>
+                <ion-col>
+                    <ion-text style="font-size: 14px;line-height: 17px;color: #1A1A1A;">Product Name</ion-text>
+                </ion-col>
+                <ion-col>
+                    <ion-text style="float:right;font-size: 14px;line-height: 17px;color: #1A1A1A;">Specification</ion-text>
+                </ion-col>
+            </ion-row>
 
-        <ion-row>
-            <ion-col>
-                <ion-text style="font-size: 14px;line-height: 17px;color: #1A1A1A;">Product Name</ion-text>
-            </ion-col>
-            <ion-col>
-                <ion-text style="float:right;font-size: 14px;line-height: 17px;color: #1A1A1A;">Specification</ion-text>
-            </ion-col>
-        </ion-row>
-
-        <hr class="solid">
-        <ng-container *ngIf="shoppingitems.length; else noList">
+            <hr class="solid">
             <div *ngFor="let item of shoppingitems">
                 <ion-row>
                     <ion-col class="setpadding">
@@ -64,11 +56,11 @@
                 </ion-row>
                 <hr class="solid" style="margin-top: 16px;margin-bottom:16px;">
             </div>
-        </ng-container>
-        <ng-template #noList>
-            <ion-text style="font-size: 14px;line-height: 17px;color: #1A1A1A;">No shopping list!</ion-text>
-        </ng-template>
-    </ion-grid>
+        </ion-grid>
+    </ng-container>
+    <ng-template #noList>
+        <p style="padding:10px;font-size: 17px;line-height: 17px;color: #1A1A1A; text-align: center;">No shopping list!</p>
+    </ng-template>
 </ion-content>
 
 <ion-footer>
@@ -77,7 +69,7 @@
         <div id="button">
             <ion-row style="align-items: center;">
                 <ion-col size="6">
-                    <ion-button class="btn50white" [disabled]="false" routerLink="/assessment/addshoppinglist">ADD MORE</ion-button>
+                    <ion-button class="btn50white" (click)="addMorePage()">ADD MORE</ion-button>
                 </ion-col>
                 <ion-col size="6">
                     <ion-button class="btn50blue" [disabled]="false" type="submit" (click)="save()">SAVE & PROCEED</ion-button>

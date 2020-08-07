@@ -11,6 +11,8 @@ import {
 import { MSelectdateComponent } from './m-selectdate/m-selectdate.component';
 import { MBackbuttonComponent } from './m-backbutton/m-backbutton.component';
 import { PushtoggleComponent } from './pushtoggle/pushtoggle.component';
+import { MHeaderCloseComponent } from './m-header-close/m-header-close.component';
+import { MImageSelectorComponent } from './m-image-selector/m-image-selector.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { PushtoggleComponent } from './pushtoggle/pushtoggle.component';
     MSelectdateComponent,
     MBackbuttonComponent,
     PushtoggleComponent,
+    MHeaderCloseComponent,
+    MImageSelectorComponent
 
   ],
   imports: [CommonModule, IonicModule, FormsModule, ReactiveFormsModule],
@@ -32,6 +36,8 @@ import { PushtoggleComponent } from './pushtoggle/pushtoggle.component';
     MSelectdateComponent,
     MBackbuttonComponent,
     PushtoggleComponent,
+    MHeaderCloseComponent,
+    MImageSelectorComponent
   ],
 })
 export class SharedModule {}

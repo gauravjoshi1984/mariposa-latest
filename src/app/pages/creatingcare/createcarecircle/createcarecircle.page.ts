@@ -12,53 +12,36 @@ import { NavController } from '@ionic/angular';
 export class CreatecarecirclePage implements OnInit {
   circleForm: FormGroup;
   userName;
+  formCreated = false;
   constructor(private formBuilder: FormBuilder,
               private _dataService: DataserviceService,
               private _creatingCareService: CreatingcareService,
               private navCtrl: NavController) {
-      const circleNamePattern = '^[a-zA-Z0-9_-]{5,15}$';
-      this.circleForm = this.formBuilder.group({
-        circleName: new FormControl('', [Validators.pattern(circleNamePattern)])
-      });
   }
 
   createCircle() {
-    const circleName = this.circleForm.controls.circleName.value;
-    this._creatingCareService.setCareCircleName(circleName);
-    this.navCtrl.navigateForward(['/carecircle/addSenior']);
-    // logic to create a circle goes here
+    if (this.circleForm.valid){
+      const circleName = this.circleForm.controls.circleName.value;
+      this._creatingCareService.setCareCircleName(circleName);
+      this.navCtrl.navigateForward(['/carecircle/addSenior']);
+      // logic to create a circle goes here
+    }
+    else{
+      return;
+    }
   }
 
   checkValidity(control){
-    let message = '';
     if (control.touched){
       if (control.invalid){
-        if (control.value.length < 5){
-          message = 'Name less than 5 characters';
-        }
-        else if (control.value.length > 15){
-          message = 'Name more than 15 characters';
-        }
-        else {
-          message = 'Name contains special characters';
-        }
-        return {
-          valid : false,
-          message
-        };
+        return false;
       }
       else{
-        return {
-          valid : true,
-          message
-        };
+        return true;
       }
     }
     else{
-      return {
-        valid : true,
-        message
-      };
+        return true;
     }
   }
 
@@ -67,16 +50,16 @@ export class CreatecarecirclePage implements OnInit {
   }
 
   async ionViewWillEnter(){
-    /*
-    pattern confirms to alpha numeric characters with - and _
-    min length 5 and max length 15
-  */
+    const circleNamePattern = '^[a-zA-Z0-9_-]{5,15}$';
+    this.circleForm = this.formBuilder.group({
+        // circleName: new FormControl('', [Validators.pattern(circleNamePattern)])
+        circleName: new FormControl('', [Validators.required, Validators.minLength(5)])
+      });
     const userInfo = await this._dataService.getUserInfo();
     this.userName = userInfo.userName;
+    this.formCreated = true;
   }
-  async ngOnInit() {
-    const userInfo = await this._dataService.getUserInfo();
-    this.userName = userInfo.userName;
+  ngOnInit() {
   }
 
 

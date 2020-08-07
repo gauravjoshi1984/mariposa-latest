@@ -1,24 +1,7 @@
-<ion-header mode="md">
-    <ion-toolbar class="headtoolbar">
-        <ion-row>
-            <ion-col size="1.5">
-                <ion-toolbar>
-                    <ion-buttons slot="start">
-                        <m-backbutton></m-backbutton>
-                    </ion-buttons>
-                </ion-toolbar>
-            </ion-col>
-            <ion-col size="10">
-                <div>
-                    <ion-text color="mdblack" position="floating" id="titletag">Cooking/Meals Preperation</ion-text>
-                </div>
-            </ion-col>
-        </ion-row>
-    </ion-toolbar>
-</ion-header>
+<app-m-header-close title="Cooking/Meals Preperation"></app-m-header-close>
 
-<ion-content>
-    <ion-grid style="padding: 24px; height: fit-content; margin-bottom: 48px;">
+<ion-content fullscreen>
+    <ion-grid style="padding: 24px; height: fit-content; margin-bottom: 80px;">
         <!-- ASSISTANCES-->
 
         <div style="padding-top: 0px; margin-bottom: 15px;">
@@ -27,100 +10,20 @@
 
         <!-- CHECKBOX 1 -->
 
-        <ion-row style="align-items: center; margin-top: 5px;">
+        <ion-row style="align-items: center; margin-top: 5px;" *ngFor="let list of shoppingAssistance">
             <ion-col size="1">
                 <div style="padding-left: 3px;">
-                    <ion-checkbox #shopping mode="md" color="mwhite" checked="false" [(ngModel)]="formData.shopping"></ion-checkbox>
+                    <ion-checkbox #list mode="md" color="mwhite" checked="false" [(ngModel)]="formData.assistance[list]"></ion-checkbox>
                 </div>
             </ion-col>
-            <ion-col (click)="generateClick(shopping)" size="11" style="padding-top: 0px;">
+            <ion-col (click)="generateClick(list)" size="11" style="padding-top: 0px;">
                 <div>
                     <ion-text style="
               font-size: 16px;
               line-height: 19px;
               font-weight: 300;
               margin-left: 12px;
-            " color="mdblack">Shopping</ion-text>
-                </div>
-            </ion-col>
-        </ion-row>
-
-        <!-- CHECKBOX 2 -->
-
-        <ion-row style="align-items: center; margin-top: 5px;">
-            <ion-col size="1">
-                <div style="padding-left: 3px;">
-                    <ion-checkbox #delivery mode="md" color="mwhite" checked="false" [(ngModel)]="formData.delivery"></ion-checkbox>
-                </div>
-            </ion-col>
-            <ion-col (click)="generateClick(delivery)" size="11" style="padding-top: 0px;">
-                <div>
-                    <ion-text style="
-              font-size: 16px;
-              line-height: 19px;
-              font-weight: 300;
-              margin-left: 12px;
-            " color="mdblack">Delivery</ion-text>
-                </div>
-            </ion-col>
-        </ion-row>
-
-        <!-- CHECKBOX 3 -->
-
-        <ion-row style="align-items: center; margin-top: 5px;">
-            <ion-col size="1">
-                <div style="padding-left: 3px;">
-                    <ion-checkbox #cooking mode="md" color="mwhite" checked="false" [(ngModel)]="formData.cooking"></ion-checkbox>
-                </div>
-            </ion-col>
-            <ion-col (click)="generateClick(cooking)" size="11" style="padding-top: 0px;">
-                <div>
-                    <ion-text style="
-              font-size: 16px;
-              line-height: 19px;
-              font-weight: 300;
-              margin-left: 12px;
-            " color="mdblack">Cooking</ion-text>
-                </div>
-            </ion-col>
-        </ion-row>
-
-        <!-- CHECKBOX 4 -->
-
-        <ion-row style="align-items: center; margin-top: 5px;">
-            <ion-col size="1">
-                <div style="padding-left: 3px;">
-                    <ion-checkbox mode="md" #preparation color="mwhite" checked="false" [(ngModel)]="formData.preparation"></ion-checkbox>
-                </div>
-            </ion-col>
-            <ion-col (click)="generateClick(preparation)" size="11" style="padding-top: 0px;">
-                <div>
-                    <ion-text style="
-              font-size: 16px;
-              line-height: 19px;
-              font-weight: 300;
-              margin-left: 12px;
-            " color="mdblack">Preparation</ion-text>
-                </div>
-            </ion-col>
-        </ion-row>
-
-        <!-- CHECKBOX 5 -->
-
-        <ion-row style="align-items: center; margin-top: 5px;">
-            <ion-col size="1">
-                <div style="padding-left: 3px;">
-                    <ion-checkbox #serving mode="md" color="mwhite" checked="false" [(ngModel)]="formData.serving"></ion-checkbox>
-                </div>
-            </ion-col>
-            <ion-col (click)="generateClick(serving)" size="11" style="padding-top: 0px;">
-                <div>
-                    <ion-text style="
-              font-size: 16px;
-              line-height: 19px;
-              font-weight: 300;
-              margin-left: 12px;
-            " color="mdblack">Serving</ion-text>
+            " color="mdblack">{{list}}</ion-text>
                 </div>
             </ion-col>
         </ion-row>
@@ -163,142 +66,44 @@
         <app-toggle [name]="'Special Diet'" [value]="formData.specialDiet" (result)="changeToggle('specialDiet',$event)"></app-toggle>
         <hr class="solid" />
 
-        <!-- FAV BREAKFAST -->
+        <!-- FAV MEAL -->
 
-        <div class="nametag" style="padding-top: 0px;">
-            <ion-text position="floating" id="tag">Favorite Breakfast</ion-text>
-        </div>
-        <div *ngFor="let breakfast of formData.breakfast;let i = index">
-            <ion-input mode="md" class="input" placeholder="Select Receipe" [(ngModel)]="formData.breakfast[i]"></ion-input>
-        </div>
-
-        <ion-button class="addbutton" fill="outline" shape="round" (click)="addMore('breakfast')">
-            <ion-icon class="plusbutton" slot="start" name="add-circle"></ion-icon>Add
-        </ion-button>
-
-        <!-- FAV LUNCH-->
-
-        <div class="nametag">
-            <ion-text position="floating" id="tag">Favorite Lunch</ion-text>
-        </div>
-        <div *ngFor="let lunch of formData.lunch;let i = index">
-            <ion-input mode="md" class="input" placeholder="Select Receipe" [(ngModel)]="formData.lunch[i]"></ion-input>
-        </div>
-
-        <ion-button class="addbutton" fill="outline" shape="round" (click)="addMore('lunch')">
-            <ion-icon class="plusbutton" slot="start" name="add-circle"></ion-icon>Add
-        </ion-button>
-
-        <!-- FAV DINNER -->
-
-        <div class="nametag">
-            <ion-text position="floating" id="tag">Favorite Dinner</ion-text>
-        </div>
-        <div *ngFor="let dinner of formData.dinner;let i = index">
-            <ion-input mode="md" class="input" placeholder="Select Receipe" [(ngModel)]="formData.dinner[i]"></ion-input>
-        </div>
-
-        <ion-button class="addbutton" fill="outline" shape="round" (click)="addMore('dinner')">
-            <ion-icon class="plusbutton" slot="start" name="add-circle"></ion-icon>Add
-        </ion-button>
-
-        <!-- FAV SNACK -->
-
-        <div class="nametag">
-            <ion-text position="floating" id="tag">Favorite Snack</ion-text>
-        </div>
-        <div *ngFor="let snack of formData.snack;let i = index">
-            <ion-input mode="md" class="input" placeholder="Select receipe" [(ngModel)]="formData.snack[i]"></ion-input>
-        </div>
-
-        <ion-button class="addbutton" fill="outline" shape="round" (click)="addMore('snack')">
-            <ion-icon class="plusbutton" slot="start" name="add-circle"></ion-icon>Add
-        </ion-button>
-
-        <!-- SHOPPING BY -->
-
-        <div class="nametag margin">
-            <ion-text position="floating" id="tag">Shopping By</ion-text>
-        </div>
-        <div>
-            <ion-select mode="md" class="input" placeholder="Select Person" (ngModel)="formData.shopping"></ion-select>
-        </div>
-
-        <!-- INSTRUCTIONS -->
-
-        <div class="nametag margin">
-            <ion-text position="floating" id="tag">Instructions(optional)</ion-text>
-        </div>
-        <div>
-            <ion-textarea style="height: 120px;" class="input" placeholder="Write here" [(ngModel)]="formData.instructions"></ion-textarea>
-        </div>
-
-        <!-- ADD IMAGE -->
-
-        <!-- <ion-row style="align-items: center;">
-      <ion-col size="1">
-        <ion-icon
-          class="camera"
-          style="width: 24px; height: 21px; float: right;"
-          src="../assets/MariposaIcons/Cameraicon.svg"
-        ></ion-icon>
-      </ion-col>
-      <ion-col>
-        <ion-text size="4"
-          ><h5
-            style="
-              font-weight: 600;
-              font-size: 14px;
-              line-height: 17px;
-              margin-left: 9px;
-            "
-          >
-            ADD IMAGES
-          </h5></ion-text
-        >
-      </ion-col>
-    </ion-row> -->
-    <app-addimage (click)="addImage()"></app-addimage>
-    <ion-text>
-      <div class="imagelist" *ngFor="let img of imageList; let j=index">
-        <ion-grid fixed class="ion-no-padding">
-          <ion-row>
-            <ion-col style="padding-top: 11px;" size="8"><span>{{img.substring(img.lastIndexOf("/") + 1) | slice:0:12}}</span></ion-col>
-            <ion-col size="4">
-              <ion-button
-              fill="clear"
-              shape="round"
-              class="dltbtn"
-              (click)="removeImg(j)"        >
-              <ion-icon slot="icon-only" src="assets/trash.svg"></ion-icon>
-              Delete
-            </ion-button>
+        <ion-row class="favoritemeal">
+            <ion-col>
+                <ion-text class="text">Favorite Meal</ion-text>
             </ion-col>
-          </ion-row>
-        </ion-grid> 
-      </div>
-    </ion-text>
+            <ion-col>
+                <ion-text class="add" (click)="addMeal()">ADD</ion-text>
+            </ion-col>
+        </ion-row>
+
+        <div class="favoriteitemslist" *ngFor="let item of recipebook; let i = index">
+            <ion-row class="favoriteitem" (click)="editMeal(item, item.mealType, i)">
+                <ion-col size="10">
+                    <ion-row>
+                        <ion-col>
+                            <ion-text class="itemname cap">{{item.name}}</ion-text>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <ion-text class="itemtype cap">{{item.mealType}}</ion-text>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+                <ion-col>
+                    <ion-icon class="arrow" src="../assets/MariposaIcons/arrowgrey.svg"></ion-icon>
+                </ion-col>
+            </ion-row>
+            <hr class="solid">
+        </div>
+
+
     </ion-grid>
 </ion-content>
 
 <ion-footer>
-    <ion-grid style="
-      padding-left: 24px;
-      padding-right: 24px;
-      padding-top: 16px;
-      padding-bottom: 16px;
-    ">
-        <!-- BUTTON -->
-        <div id="button">
-            <ion-row style="align-items: center;">
-                <ion-col size="4">
-                    <ion-button class="btn1" [routerLink]="'/assessment/previewassessment'" [disabled]="false" type="submit" id="signup">PREVIEW</ion-button>
-                </ion-col>
-
-                <ion-col size="8">
-                    <ion-button class="btn2" (click)="save()" [disabled]="false" type="submit" id="signup">SAVE AND PROCEED</ion-button>
-                </ion-col>
-            </ion-row>
-        </div>
-    </ion-grid>
+    <div id="button">
+        <ion-button [disabled]="false" class="btnblue" type="submit" id="signup" (click)="save()">SAVE & PROCEED</ion-button>
+    </div>
 </ion-footer>

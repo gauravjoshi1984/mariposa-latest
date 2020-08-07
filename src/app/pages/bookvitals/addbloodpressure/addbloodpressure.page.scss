@@ -1,0 +1,98 @@
+.pagebckd {
+    --background: #f8f8f8;
+  }  
+
+  .content{
+    padding:24px;
+}
+
+.datelabel {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 19px;
+    padding-bottom: 6px;
+  
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  .datebtn {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+  
+    color: #1a1a1a;
+    --border-color: #b8b8b8;
+    --border-width: 1px;
+    --border-style: solid;
+    box-sizing: border-box;
+    border-radius: 8px;
+    width: 94.5%;
+    height: 44px;
+    ion-icon {
+      font-size: 22px;
+    }
+  }
+  .datebtn::part(native) {
+    padding: 0;
+  }
+  ion-datetime {
+    padding: 0;
+  }
+  ion-icon {
+    zoom: 1;
+  }
+
+  ion-datetime{
+      margin-top: 5px;
+  }
+
+  .right{
+      float: right;
+  }
+
+  .left{
+      float:left;
+  }
+
+  .daterow{
+      margin-top:24px;
+  }
+
+  .timerow{
+      margin-top: 0px;
+  }
+  .timeicon{
+    margin-left:35px;
+  }
+
+  ion-col{
+      padding:0px;
+      margin:0px;
+  }
+
+  ion-row{
+    padding:0px;
+    margin:0px;
+    align-items: center;
+}
+
+ion-button{
+    background-color: white;
+}
+
+ion-textarea {
+    border: 1px solid #b8b8b8;
+    box-sizing: border-box;
+    border-radius: 8px;
+    --border-radius: 8px;
+    background-color: white;
+  }
+
+  ion-input{
+      background-color: white;
+  }
+
+  ::-webkit-input-placeholder { text-align:right; }

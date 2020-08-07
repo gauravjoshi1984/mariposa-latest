@@ -1,0 +1,43 @@
+<ion-header mode="md">
+  <ion-toolbar class="headtoolbar">
+      <ion-buttons class = "backbutton" slot="start">
+          <m-backbutton></m-backbutton>
+      </ion-buttons>
+      <ion-title class="name cap" color="mdblack" position="floating" id="titletag">My Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid class="image">
+    <div>
+      <ion-icon [hidden]="false" slot="icon-only" class="penborder" src="../assets/MariposaIcons/penborder.svg"></ion-icon>
+        <ion-avatar class="avatar">
+          <ion-img class="imgsize" src="../assets/images/admin.png"></ion-img> 
+        </ion-avatar>
+    </div> 
+    
+    <ion-button class="white">CHANGE PASSWORD</ion-button>
+  </ion-grid>
+
+  <ion-grid class="personalinfo">
+    <ion-row>
+      <ion-col>
+        <ion-title class="infotag">Personal Information</ion-title>
+      </ion-col>
+      <ion-col>
+        <ion-icon [hidden]="false" class="pen" src = "../assets/MariposaIcons/penblue.svg"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <div class="inforow">
+    <ion-row  *ngFor = "let item of admintable">
+      <ion-col size="5.5">
+        <ion-text class="tagitems">{{item.title}}</ion-text>
+      </ion-col>
+      <ion-col>
+        <ion-text class="details">: {{item.info}}</ion-text>
+      </ion-col>
+    </ion-row>
+  </div>   
+  </ion-grid>
+  </ion-content>

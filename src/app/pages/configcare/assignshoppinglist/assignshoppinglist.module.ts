@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AssignshoppinglistPageRoutingModule } from './assignshoppinglist-routing.module';
 
 import { AssignshoppinglistPage } from './assignshoppinglist.page';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AssignshoppinglistPageRoutingModule
+    AssignshoppinglistPageRoutingModule,
+    SharedModule,
   ],
   declarations: [AssignshoppinglistPage]
 })

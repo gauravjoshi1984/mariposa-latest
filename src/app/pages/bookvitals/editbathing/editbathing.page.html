@@ -1,0 +1,87 @@
+<ion-header mode="md">
+  <ion-toolbar class="headtoolbar">
+      <ion-buttons class = "backbutton" slot="start">
+          <m-backbutton></m-backbutton>
+      </ion-buttons>
+      <ion-title class="name" color="mdblack" position="floating" id="titletag">Edit Bathing</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <ion-grid class = "content">
+  <form [formGroup]="editbathingForm">
+    <ion-item style="display: none;">
+      <ion-label>Date</ion-label>
+      <ion-datetime
+        [pickerOptions]="customPickerOptions"
+        #datepicker
+        displayFormat="h:mm A"
+      ></ion-datetime>
+    </ion-item>
+    <ion-grid fixed style="height: auto;" class="configurecaregrid">
+      <m-selectdate (result)="addtime($event,'timeList')"></m-selectdate>
+    </ion-grid>  
+
+      
+    <p class="label-text">Repeat</p>
+    <div class="chipdiv">
+      <ion-chip
+        color="primary"
+        mode="ios"
+        outline="true"
+        [class.selectedchip]="selectedDays.includes(day.value)"
+        *ngFor="let day of daysList"
+        (click)="addremoveDay(day)"
+      >
+        <ion-label>{{day.name}}</ion-label>
+      </ion-chip>  
+    </div>
+
+    <div class="nametag" style="margin-top: 20px;">
+      <ion-text position="floating" id="tag">Assign to</ion-text>
+    </div> 
+    <div>
+      <ion-select mode="md" class="input" placeholder="Select Relation" formControlName="caregivername">
+          <ion-select-option *ngFor="let relation of caregiverList" [value]="relation" for="relation">{{relation}}</ion-select-option>
+      </ion-select>
+  </div>
+
+
+
+    <p class="label-text">Instructions (optional)</p>
+    <ion-textarea
+      rows="5"
+      placeholder="Write if any bathing information"
+      [(ngModel)]="instructions"
+      formControlName="instructions"
+    ></ion-textarea>
+    <ion-button style = "margin-top:15px" fill="clear" class="btn2" (click)="addImage()">
+      <ion-icon slot="start" name="camera"></ion-icon>
+      ADD IMAGES
+    </ion-button>
+    <ion-text>
+      <div class="imagelist" *ngFor="let img of imageList; let j=index">
+        <span>{{img.substring(img.lastIndexOf("/") + 1)}}</span>
+        <ion-icon slot="end" name="trash" (click)="removeImg(j)"></ion-icon>
+      </div>
+    </ion-text>
+
+  
+  </form>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+ 
+  <div id="button">
+    <ion-button
+      [disabled]="false"
+      class="btnblue"
+      type="submit"
+      id="signup"
+      (click)="submit()"
+      >SAVE</ion-button
+    >
+  </div>
+</ion-footer>

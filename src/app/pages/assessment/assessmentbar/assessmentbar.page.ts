@@ -7,147 +7,11 @@ import {
 } from '@ionic/angular';
 import { PopoverComponent } from './popover/popover.component';
 import { DeleteassesmentmodalComponent } from './deleteassesmentmodal/deleteassesmentmodal.component';
-import { Router, ActivatedRoute } from '@angular/router';
 import { AssessmentServiceService } from '../assessment-service.service';
 import { DataserviceService } from '../../dataservice.service';
 import { ApiService } from 'src/app/http.service';
-import { Location } from '@angular/common';
 import { CreatingcareService } from '../../creatingcare/creatingcare.service';
 
-const careNeeds = [
-  {
-    name: 'Companionship',
-    open: false,
-    status: 'completed',
-    pathUrl: 'companionship',
-  },
-  {
-    name: 'Exercise/PT',
-    open: true,
-    status: 'active',
-    pathUrl: 'exercise',
-  },
-  {
-    name: 'Shopping/Errands',
-    open: false,
-    status: 'pending',
-    pathUrl: 'viewshoppinglist',
-  },
-  {
-    name: 'Use of Electronics/Devices',
-    open: false,
-    status: 'pending',
-    pathUrl: 'useofelectronics',
-  },
-  {
-    name: 'Home Repair/Maintenance',
-    open: false,
-    status: 'pending',
-    pathUrl: 'homerepair',
-  },
-  {
-    name: 'Gardening',
-    open: false,
-    status: 'pending',
-    pathUrl: 'gardening',
-  },
-  {
-    name: 'House Work',
-    open: false,
-    status: 'pending',
-    pathUrl: 'housework',
-  },
-  {
-    name: 'Laundry',
-    open: false,
-    status: 'pending',
-    pathUrl: 'laundry',
-  },
-  {
-    name: 'Driving/Transportation',
-    open: false,
-    status: 'pending',
-    pathUrl: 'driving',
-  },
-  {
-    name: 'Cooking/Meal Preperation',
-    open: false,
-    status: 'pending',
-    pathUrl: 'meals',
-  },
-  {
-    name: 'Medication Management',
-    open: false,
-    status: 'pending',
-    pathUrl: 'medication',
-  },
-  {
-    name: 'Mobility',
-    open: false,
-    status: 'pending',
-    pathUrl: 'mobility',
-  },
-  {
-    name: 'Bathing',
-    open: false,
-    status: 'pending',
-    pathUrl: 'bathing',
-  },
-  {
-    name: 'Sleep',
-    open: false,
-    status: 'pending',
-    pathUrl: 'sleepassistance',
-  },
-  {
-    name: 'Dressing',
-    open: false,
-    status: 'pending',
-    pathUrl: 'dressing',
-  },
-  {
-    name: 'Grooming',
-    open: false,
-    status: 'pending',
-    pathUrl: 'grooming',
-  },
-  {
-    name: 'Oral Care',
-    open: false,
-    status: 'pending',
-    pathUrl: 'oralcare',
-  },
-  {
-    name: 'Wound Care',
-    open: false,
-    status: 'pending',
-    pathUrl: 'woundcare',
-  },
-  {
-    name: 'Eating',
-    open: false,
-    status: 'pending',
-    pathUrl: 'eating',
-  },
-  {
-    name: 'Toileting',
-    open: false,
-    status: 'pending',
-    pathUrl: 'toileting',
-  },
-  {
-    name: 'Management of Finances',
-    open: false,
-    status: 'pending',
-    pathUrl: 'managingfinances',
-  },
-  {
-    name: 'Check Vitals',
-    open: false,
-    status: 'pending',
-    pathUrl: 'checkvitals',
-  }
-];
 @Component({
   selector: 'app-assessmentbar',
   templateUrl: './assessmentbar.page.html',
@@ -155,15 +19,14 @@ const careNeeds = [
 })
 export class AssessmentbarPage implements OnInit {
   isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
   stepperData: any[];
   tempUrl: string;
   assessmentData: any;
+  careCircleId: string;
   careCircleName: string;
   activeItem = null;
+  validForm = false;
   constructor(
-    private _formBuilder: FormBuilder,
     public popoverController: PopoverController,
     public modalController: ModalController,
     private navCtrl: NavController,
@@ -175,69 +38,37 @@ export class AssessmentbarPage implements OnInit {
     this.stepperData = [];
 }
 
-  ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required],
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required],
-    });
-  }
+  ngOnInit() {}
   async ionViewWillEnter(){
-    const careCircleId = await this.assessmentService.getCareCircleId();
+    // this.dataService.setLastVisitedPage('/assessment/assessmentbar');
+    this.careCircleId = await this.assessmentService.getCareCircleId();
     this.careCircleName = await this._creatingCareService.getCareCircleName();
     const userData = await this.dataService.getUserInfo();
     const userId = userData.userId;
-    this.assessmentData = await this.apiService.get('assessment', {careCircleId, userId });
-    console.log(this.assessmentData);
+    this.assessmentData = await this.apiService.get('assessment', {careCircleId: this.careCircleId, userId });
+    await this.assessmentService.setAssessmentStateObject(this.assessmentData);
     const careNeedPrefs = this.assessmentData.assessmentConfiguration.CARE_NEED_PREFS.options;
     const careNeedPrefsValues = this.assessmentData.assessmentValues.CARE_NEED_PREFS;
     const careNeedValues = this.assessmentData.assessmentValues.CARE_NEEDS;
 
-    /* {
-      name: 'Companionship',
-      open: false,
-      status: 'completed',
-      pathUrl: 'companionship',
-    }, */
     let openFlag = false;
-    this.stepperData = [{
-      name: 'Care Needs',
-      desc: 'Companionship, Exercise, Shopping...',
-      open: true,
-      status: 'completed',
-      children: [],
-    },
-    {
-      name: 'Personal Information',
-      open: false,
-      status: 'pending',
-      children: [],
-      pathUrl: 'personalinfo',
-    },
-    {
-      name: 'Medical & Psychiatric Conditions',
-      open: false,
-      status: 'pending',
-      children: [],
-      pathUrl: 'medicalconditions',
-    },
-    {
-      name: 'Home Safety',
-      open: false,
-      status: 'pending',
-      children: [],
-      pathUrl: 'homeandsafety',
-    },
-    {
-      name: 'Motivations',
-      open: false,
-      status: 'pending',
-      children: [],
-      pathUrl: 'motivation',
-    },
-  ];
 
+    this.stepperData = [];
+    Object.keys(this.assessmentData.assessmentConfiguration).forEach(assessmentKey => {
+      if (assessmentKey !== 'CARE_NEED_PREFS'){
+        const properties = this.assessmentData.assessmentConfiguration[assessmentKey].properties;
+        if (properties.enabled){
+          const temp: any = {};
+          temp.name = properties.name;
+          temp.key = properties.key;
+          temp.pathUrl = properties.pathUrl;
+          temp.children = [];
+          temp.status = assessmentKey === 'CARE_NEEDS' ? 'completed' : 'pending';
+          temp.open = assessmentKey === 'CARE_NEEDS';
+          this.stepperData.push(temp);
+        }
+      }
+    });
     careNeedPrefs.forEach(careNeed => {
       if (careNeedPrefsValues !== null && careNeed.key in careNeedPrefsValues && careNeedPrefsValues[careNeed.key] !== null && (careNeedPrefsValues[careNeed.key] !== '' && careNeedPrefsValues[careNeed.key] !== 'none')){
         const temp = {name: careNeed.label, open: false, status: 'pending', pathUrl: careNeed.pathUrl};
@@ -255,6 +86,20 @@ export class AssessmentbarPage implements OnInit {
         this.stepperData[0].children.push(temp);
       }
     });
+    for (let i = 1; i < this.stepperData.length; i++){
+      if (!openFlag){
+        if (this.assessmentData.assessmentValues[this.stepperData[i].key] === null){
+          this.stepperData[i].status = 'active';
+          this.stepperData[i].open = true;
+          openFlag = true;
+          this.activeItem = this.stepperData[i];
+        }
+        else{
+          this.stepperData[i].status = 'completed';
+        }
+      }
+    }
+    this.validForm = !openFlag;
     this.stepperData[0].desc = this.stepperData[0].children.map(child => child.name).slice(0, 2).join(', ') + '...';
     // this.changetoActive();
   }
@@ -325,6 +170,18 @@ export class AssessmentbarPage implements OnInit {
       item.open = true;
     }
   }
+  activateStepper(item){
+    if (item.key !== 'CARE_NEEDS'){
+      if (item.status !== 'pending'){
+        if (this.activeItem){
+          this.activeItem.open = false;
+        }
+        this.activeItem = item;
+        item.open = true;
+        // item.status = 'active';
+      }
+    }
+  }
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: PopoverComponent,
@@ -345,9 +202,14 @@ export class AssessmentbarPage implements OnInit {
     const modal = await this.modalController.create({
       component: DeleteassesmentmodalComponent,
       cssClass: 'deletemodalclass',
+      componentProps: {careCircleName: this.careCircleName},
       backdropDismiss: true,
     });
-
+    modal.onDidDismiss().then(response => {
+      if (response.data === 'delete'){
+        this.deleteAssessment();
+      }
+    });
     return await modal.present();
   }
   gotoUrl(path) {
@@ -355,5 +217,13 @@ export class AssessmentbarPage implements OnInit {
   }
   back(){
     this.navCtrl.navigateBack('/assessment');
+  }
+  deleteAssessment(){
+    this.apiService.post('deleteAssessment/?careCircleId=' + this.careCircleId, {}).then((response: any) => {
+      if (response){
+        this.assessmentService.setAssessmentStateObject(null);
+        this.navCtrl.navigateBack(['/carecircle/showcarecircle']);
+      }
+    });
   }
 }

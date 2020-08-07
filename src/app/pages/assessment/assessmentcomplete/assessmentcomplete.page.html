@@ -1,24 +1,26 @@
-<ion-content>
-  <ion-grid style="padding-top:113px ;">
-    <ion-img src="../assets/MariposaIcons/Assessment_Complete.svg"></ion-img>
+<ion-content fullscreen>
+    <ion-grid style="padding-top:113px ;">
+        <ion-img src="../assets/MariposaIcons/Assessment_Complete.svg"></ion-img>
 
-    <div style="text-align: center;">
-      <ion-text color="primary"><h5 style="font-weight:bold;font-size:16px;line-height: 19px;">Awesome!</h5></ion-text>
-    </div>
+        <div style="text-align: center;">
+            <ion-text color="primary">
+                <h5 style="font-weight:bold;font-size:16px;line-height: 19px;">Awesome!</h5>
+            </ion-text>
+        </div>
+        <div>
+            <ion-text>
+                <h6 style="text-align:center;font-size:16px;font-weight: 300;margin-top:0px ;line-height: 19px;">Your have successfully completed<br>{{careCircleName}}'s assessment</h6>
+            </ion-text>
+        </div>
 
-    <div>
-      <ion-text><h6 style="text-align:center;font-size:16px;font-weight: 300;margin-top:0px ;line-height: 19px;">Your have successfully completed<br>Mr David's assessment</h6></ion-text>
-    </div>
+        <div style="text-align: center;margin-top: 14px;">
+            <ion-button class="btnwhite1" (click)="back()">EDIT ASSESSMENT</ion-button>
+        </div>
 
-    <div style="text-align: center;margin-top: 14px;">
-      <ion-button class="btnwhite1">EDIT ASSESSMENT</ion-button>
-    </div>
-
-    <div id="button">
-      <ion-button [disabled]="false" class="btnblue" id="signup">CONFIGURE CARE</ion-button>
-    </div>
+        <div id="button">
+            <ion-button [disabled]="false" class="btnblue" id="signup" (click)="goToConfigureCare()">CONFIGURE CARE</ion-button>
+        </div>
 
 
-  </ion-grid>
+    </ion-grid>
 </ion-content>
-

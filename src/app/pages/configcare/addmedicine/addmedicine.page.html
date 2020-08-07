@@ -1,116 +1,32 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title class="title-text">
-      Add Medicine
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header> -->
-<ion-header mode="md">
-    <ion-toolbar class="headtoolbar">
-        <ion-grid>
-            <ion-row style="align-items: center; margin-top: 32px;">
-                <ion-col size="10">
-                    <ion-text color="mdblack" position="floating" id="titletag">Add Medicine</ion-text>
-                </ion-col>
-                <ion-col>
-                    <ion-icon style="zoom: 1.2; color: black; float: right;" name="close-outline"></ion-icon>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-toolbar>
-</ion-header>
+
+<app-m-header-close title="Add Medicine"></app-m-header-close>
 
 <ion-content>
     <form [formGroup]="medicineForm">
         <p class="listtitle">Medicine Type</p>
-        <app-m-select [value]="'Capsule'" [selectOptions]="selectData" (result)="setData($event,'medicineType')"></app-m-select>
+        <ion-select mode="md" class="input" placeholder="Select" formControlName="medicineType" (result)="setData($event,'medicineType')">
+          <ion-select-option *ngFor="let Option of selectData" value="{{Option.value}}" selected>{{Option.name}}</ion-select-option>
+        </ion-select>
         <p class="listtitle listtitle2">Medicine Name</p>
         <ion-input mode="md" class="input" value="Ibuprofine MKal 100mg" formControlName="medicineName"></ion-input>
         <ion-grid fixed class="configurecaregrid">
-            <!-- <ion-row *ngFor="let item of timeList;let i = index">
-      <p class="label-text">Select Time</p>
-
-      <ion-col size="12" (click)="changeTime(i)">
-        <ion-text color="primary" class="timetext">
-          <div class="timesec">
-            <span>{{item.getHours()}}</span>&nbsp;&nbsp;:&nbsp;&nbsp;<span
-              class="timemin"
-              >{{item.getMinutes()}}</span
-            >
-          </div>
-          <div class="meridiemsec">
-            <span [class.activemeridian]="(item.getHours() < 12) ">AM</span>
-            <span [class.activemeridian]="(item.getHours() >= 12) ">PM</span>
-          </div>
-        </ion-text>
-      </ion-col>
-    </ion-row> -->
-            <m-selectdate></m-selectdate>
-            <!-- <ion-row>
-      <ion-col size="4" class="time-sec">
-        <ion-input
-          type="tel"
-          value="06"
-          max="12"
-          min="01"
-          maxlength="2"
-        ></ion-input
-        >&nbsp;
-        <p>:</p>
-        &nbsp;
-        <ion-input
-          type="tel"
-          value="00"
-          maxlength="2"
-          max="60"
-          min="00"
-        ></ion-input>
-      </ion-col>
-      <ion-col size="2" class="timecol">
-        <button class="timebtn">AM</button>
-        <button class="timebtn">PM</button>
-      </ion-col>
-      <ion-col size="6"> </ion-col>
-    </ion-row> -->
+           
+            <m-selectdate [times] = "initialTimeList" (result)="addtime($event,'timeList')"></m-selectdate>
+            
         </ion-grid>
-        <!-- <ion-datetime
-    style="display: none;"
-    [pickerOptions]="customPickerOptions"
-    #datepicker
-    displayFormat="h:mm A"
-  ></ion-datetime> -->
-        <!-- <ion-button class="btn1" fill="outline" shape="round" (click)="addDate()">
-    <ion-icon slot="start" name="add-circle"></ion-icon>Add
-  </ion-button> -->
+        
 
         <p class="label-text">Repeat</p>
         <div class="chipdiv">
             <ion-chip color="primary" mode="ios" outline="true" [class.selectedchip]="selectedDays.includes(day.value)" *ngFor="let day of daysList" (click)="addremoveDay(day)">
                 <ion-label>{{day.name}}</ion-label>
             </ion-chip>
-            <!-- <ion-chip color="primary" mode="ios" outline="true">
-      <ion-label>M</ion-label> </ion-chip
-    ><ion-chip color="primary" mode="ios" outline="true" class="selectedchip">
-      <ion-label>T</ion-label> </ion-chip
-    ><ion-chip color="primary" mode="ios" outline="true">
-      <ion-label>W</ion-label> </ion-chip
-    ><ion-chip color="primary" mode="ios" outline="true" class="selectedchip">
-      <ion-label>T</ion-label>
-    </ion-chip>
-    <ion-chip color="primary" mode="ios" outline="true">
-      <ion-label>F</ion-label>
-    </ion-chip>
-    <ion-chip color="primary" mode="ios" outline="true" class="selectedchip">
-      <ion-label>S</ion-label>
-    </ion-chip> -->
+            
         </div>
         <p class="listtitle listtitle3">Dosage</p>
-        <app-m-select value="1" [selectOptions]="selectData2" (result)="setData($event,'dosage')"></app-m-select>
+        <ion-select mode="md" class="input" placeholder="Select" formControlName="dosage" (result)="setData($event,'dosage')">
+          <ion-select-option *ngFor="let Option of selectData2" value="{{Option.value}}" selected>{{Option.name}}</ion-select-option>
+        </ion-select>
         <p class="listtitle listtitle4">Medication Duration</p>
         <ion-grid class="configurecaregrid">
             <ion-row>
@@ -132,23 +48,12 @@
         </ion-grid>
 
         <p class="label-text">Instructions (optional)</p>
-        <ion-textarea rows="5" placeholder="Write if any bathing information" [(ngModel)]="instructions" formControlName="instructions"></ion-textarea>
-        <app-addimage (click)="addImage()"></app-addimage>
-        <ion-text>
-            <div class="imagelist" *ngFor="let img of imageList; let j=index">
-                <ion-grid fixed class="ion-no-padding">
-                    <ion-row>
-                        <ion-col style="padding-top: 11px;" size="8"><span>{{img.substring(img.lastIndexOf("/") + 1) | slice:0:12}}</span></ion-col>
-                        <ion-col size="4">
-                            <ion-button fill="clear" shape="round" class="dltbtn" (click)="removeImg(j)">
-                                <ion-icon slot="icon-only" src="assets/trash.svg"></ion-icon>
-                                Delete
-                            </ion-button>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </div>
-        </ion-text>
+        <ion-textarea rows="5" placeholder="Write if any bathing information" formControlName="instructions"></ion-textarea>
+        
+         <!-- ADD IMAGE -->
+         <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
+
+
     </form>
 </ion-content>
 <ion-footer>

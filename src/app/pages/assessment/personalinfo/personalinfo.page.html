@@ -1,30 +1,7 @@
-<ion-header mode="md">
-    <ion-toolbar class="headtoolbar">
-        <ion-row>
-            <ion-col size="2">
-                <ion-toolbar>
-                    <ion-buttons slot="start">
-                        <m-backbutton></m-backbutton>
-                    </ion-buttons>
-                </ion-toolbar>
-            </ion-col>
-            <ion-col size="8">
-                <div>
-                    <ion-text color="mdblack" position="floating" id="titletag">Personal Information</ion-text>
-                </div>
-            </ion-col>
-        </ion-row>
-    </ion-toolbar>
-</ion-header>
+<app-m-header-close title="Personal Information"></app-m-header-close>
 
-<ion-content scrollable>
-    <ion-grid style="
-      padding-top: 35px;
-      padding-left: 24px;
-      padding-right: 24px;
-      padding-bottom: 13px;
-      height: auto;
-      margin-bottom: 73px;
+<ion-content fullscreen scrollable [formGroup]="personalInfoForm">
+    <ion-grid style="padding-top: 35px;padding-left: 24px;padding-right: 24px;padding-bottom: 13px;height: auto;margin-bottom: 73px;
     ">
         <!-- FIRST NAME TAG -->
         <div class="nametag" style="padding: 0px; margin: 0px;">
@@ -32,7 +9,7 @@
         </div>
 
         <div>
-            <ion-input mode="md" class="input" placeholder=""></ion-input>
+            <ion-input formControlName="firstName" mode="md" class="input" placeholder=""></ion-input>
         </div>
 
         <!-- LAST NAME TAG -->
@@ -41,7 +18,7 @@
         </div>
 
         <div>
-            <ion-input mode="md" class="input" placeholder=""></ion-input>
+            <ion-input formControlName="lastName" mode="md" class="input" placeholder=""></ion-input>
         </div>
 
         <!-- GENDER -->
@@ -69,18 +46,18 @@
         <ion-grid style="padding: 0; width: 231px; margin-left: 0;" fixed>
             <ion-row>
                 <ion-col class="gencol" size="6">
-                    <ion-card class="genCard" [class.selectedGen]="gen=='M'" (click)="gen='M'">
-                        <img *ngIf="gen!='M'" src="assets/MariposaIcons/Maleicon.svg" alt="" />
-                        <img *ngIf="gen=='M'" src="assets/gender/Male.svg" alt="" />
+                    <ion-card class="genCard" [class.selectedGen]="personalInfoForm.controls.gender.value === 'M'" (click)="selectGender('M')">
+                        <img *ngIf="personalInfoForm.controls.gender.value !== 'M'" src="assets/MariposaIcons/Maleicon.svg" alt="" />
+                        <img *ngIf="personalInfoForm.controls.gender.value ==='M'" src="assets/gender/Male.svg" alt="" />
                     </ion-card>
-                    <span [class.selectedGentext]="gen=='M'">Male</span>
+                    <span [class.selectedGentext]="personalInfoForm.controls.gender.value=='M'">Male</span>
                 </ion-col>
                 <ion-col class="gencol" size="6">
-                    <ion-card class="genCard" [class.selectedGen]="gen=='F'" (click)="gen='F'">
-                        <img *ngIf="gen!='F'" src="assets/femaleicon.svg" alt="" />
-                        <img *ngIf="gen=='F'" src="assets/gender/femaleb.svg" alt="" />
+                    <ion-card class="genCard" [class.selectedGen]="personalInfoForm.controls.gender.value === 'F'" (click)="selectGender('F')">
+                        <img *ngIf="personalInfoForm.controls.gender.value !== 'F'" src="assets/femaleicon.svg" alt="" />
+                        <img *ngIf="personalInfoForm.controls.gender.value ==='F'" src="assets/gender/femaleb.svg" alt="" />
                     </ion-card>
-                    <span [class.selectedGentext]="gen=='F'">Female</span>
+                    <span [class.selectedGentext]="personalInfoForm.controls.gender.value=='F'">Female</span>
                 </ion-col>
             </ion-row>
         </ion-grid>
@@ -91,32 +68,19 @@
         </div>
         <ion-row>
             <ion-col style="display: flex;" size="12" class="dobsec">
-                <ion-datetime #dobdate displayFormat="DD" [pickerOptions]="customPickerOptions1" style="display: none;"></ion-datetime>
-                <div (click)="changeDay()" class="dbdate">
-                    <div>{{dobdate1}}</div>
-                    <img src="assets/MariposaIcons/Dropdown2.svg" alt="" />
+                <div class="dbdate">
+                    <ion-datetime formControlName="dobDate" mode="ios" slot="start" displayFormat="DD" placeholder="Day"></ion-datetime>
+                    <!-- <img src="assets/MariposaIcons/Dropdown2.svg" alt="" /> -->
                 </div>
-                <div (click)="changeMonth()" class="dbmnth">
-                    <div>{{dobmnth}}</div>
-
-                    <img src="assets/MariposaIcons/Dropdown2.svg" alt="" />
+                <div class="dbmnth">
+                    <ion-datetime formControlName="dobMonth" mode="ios" slot="start" displayFormat="MM" placeholder="Month"></ion-datetime>
+                    <!-- <img src="assets/MariposaIcons/Dropdown2.svg" alt="" /> -->
                 </div>
-                <div (click)="changeYear()" class="dbyr">
-                    <div>{{dobyr}}</div>
-                    <img src="assets/MariposaIcons/Dropdown2.svg" alt="" />
+                <div class="dbyr">
+                    <ion-datetime formControlName="dobYear" mode="ios" slot="start" style="float:left" displayFormat="YYYY" placeholder="Year"></ion-datetime>
+                    <!-- <img src="assets/MariposaIcons/Dropdown2.svg" alt="" /> -->
                 </div>
-                <!-- <ion-select style="width:110%;float:left" mode="md" class="input Date" placeholder="Date"> </ion-select> -->
             </ion-col>
-            <!-- <ion-col > -->
-            <ion-datetime style="display: none;" #dobmonth displayFormat="MMM" [pickerOptions]="customPickerOptions2"></ion-datetime>
-
-            <!-- <ion-select style="width:85%;float:right" mode="md" class="input" placeholder="Month"></ion-select> -->
-            <!-- </ion-col> -->
-            <!-- <ion-col > -->
-            <ion-datetime style="display: none;" #dobyear displayFormat="YYYY" [pickerOptions]="customPickerOptions3"></ion-datetime>
-
-            <!-- <ion-select style="width:90%;float:right;" mode="md" class="input" placeholder="Year"></ion-select> -->
-            <!-- </ion-col> -->
         </ion-row>
 
         <!-- LIVES WITH -->
@@ -125,7 +89,9 @@
             <ion-text position="floating" id="tag">Lives with</ion-text>
         </div>
         <div>
-            <ion-select mode="md" class="input" placeholder="Select one"></ion-select>
+            <ion-select formControlName="livesWith" mode="md" class="input" placeholder="Select one">
+                <ion-select-option [value]="item" *ngFor="let item of livesWith">{{item}}</ion-select-option>
+            </ion-select>
         </div>
 
         <!-- PAST PROFESSION -->
@@ -134,7 +100,7 @@
         </div>
 
         <div>
-            <ion-input mode="md" class="input" placeholder="Enter profession/designation"></ion-input>
+            <ion-input formControlName="pastProfession" mode="md" class="input" placeholder="Enter profession/designation"></ion-input>
         </div>
 
         <!-- ADDRESS -->
@@ -143,7 +109,7 @@
         </div>
 
         <div>
-            <ion-input mode="md" class="input" placeholder="Enter address"></ion-input>
+            <ion-input formControlName="address" mode="md" class="input" placeholder="Enter address"></ion-input>
         </div>
 
         <!-- ZIPCODE -->
@@ -152,7 +118,7 @@
         </div>
 
         <div>
-            <ion-input mode="md" class="input" placeholder="Enter Zipcode"></ion-input>
+            <ion-input type="number" formControlName="zipCode" mode="md" class="input" placeholder="Enter Zipcode"></ion-input>
         </div>
 
         <!-- SELCET COUNTRY -->
@@ -161,7 +127,7 @@
             <ion-text position="floating" id="tag">Country</ion-text>
         </div>
         <div>
-            <ion-select mode="md" class="input" placeholder="Select Country"></ion-select>
+            <ion-select formControlName="country" mode="md" class="input" placeholder="Select Country"></ion-select>
         </div>
 
         <!-- SELCET CITY -->
@@ -170,7 +136,7 @@
             <ion-text position="floating" id="tag">City</ion-text>
         </div>
         <div>
-            <ion-select mode="md" class="input" placeholder="Select City"></ion-select>
+            <ion-select formControlName="city" mode="md" class="input" placeholder="Select City"></ion-select>
         </div>
 
         <!-- EMERGENCY PERSON NAME -->
@@ -179,7 +145,7 @@
         </div>
 
         <div>
-            <ion-input mode="md" class="input" placeholder="Enter name"></ion-input>
+            <ion-input formControlName="emergencyContactPerson" mode="md" class="input" placeholder="Enter name"></ion-input>
         </div>
 
         <!-- EMERGENCY CONTACT NUMBER -->
@@ -189,22 +155,17 @@
 
         <ion-row>
             <ion-col size="3">
-                <ion-input style="width: 90%;" mode="md" class="input" placeholder="Code"></ion-input>
+                <ion-input type="tel" formControlName="emergencyContactNumberCode" style="width: 90%;" mode="md" class="input" placeholder="Code"></ion-input>
             </ion-col>
             <ion-col size="9">
-                <ion-input mode="md" class="input" placeholder="Enter Number"></ion-input>
+                <ion-input type="tel" formControlName="emergencyContactNumber" mode="md" class="input" placeholder="Enter Number"></ion-input>
             </ion-col>
         </ion-row>
     </ion-grid>
 </ion-content>
 
-<ion-footer>
-    <ion-grid style="
-      padding-left: 24px;
-      padding-right: 24px;
-      padding-top: 16px;
-      padding-bottom: 16px;
-    ">
+<ion-footer [formGroup]="personalInfoForm">
+    <ion-grid style="padding-left: 24px;padding-right: 24px;padding-top: 16px;padding-bottom: 16px;">
         <!-- BUTTON -->
         <div id="button">
             <ion-row style="align-items: center;">
@@ -213,7 +174,7 @@
                 </ion-col>
 
                 <ion-col size="8">
-                    <ion-button class="btn2" [disabled]="false" (click)= "save()" type="submit" id="signup">SAVE AND PROCEED</ion-button>
+                    <ion-button class="btn2" [disabled]="!personalInfoForm.valid" (click)="save()" type="submit" id="signup">SAVE AND PROCEED</ion-button>
                 </ion-col>
             </ion-row>
         </div>
