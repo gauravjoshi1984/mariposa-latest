@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar class="headtoolbar">
+  <!-- <ion-toolbar class="headtoolbar">
     <ion-row>
       <ion-col size="2">
         <ion-toolbar>
@@ -18,6 +18,14 @@
         </div>
       </ion-col>
     </ion-row>
+  </ion-toolbar> -->
+  <ion-toolbar
+    ><ion-buttons slot="start">
+      <ion-button [routerLink]="'/../'" routerDirection="backward">
+        <ion-icon slot="icon-only" src="assets/back.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>17th January 2020</ion-title>
   </ion-toolbar>
 </ion-header>
 

@@ -2,13 +2,17 @@
   <ion-toolbar>
     <ion-title>Notifications(1)</ion-title>
     <ion-buttons slot="end">
-      <ion-button class="hdbuttn" (click)="onClick()">
-        <ion-icon slot="start" src="assets/MariposaIcons/Settings icon.svg"></ion-icon>
-       
+      <ion-button class="hdbuttn">
+        <ion-icon
+          slot="start"
+          src="assets/MariposaIcons/Settings icon.svg"
+        ></ion-icon>
       </ion-button>
-      <ion-button class="hdbuttn" (click)="onClick()">
-        <ion-icon slot="start" src="assets/MariposaIcons/Close icon.svg"></ion-icon>
-        
+      <ion-button class="hdbuttn">
+        <ion-icon
+          slot="start"
+          src="assets/MariposaIcons/Close icon.svg"
+        ></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -17,105 +21,114 @@
 <ion-content>
   <ion-list style="padding: 0;">
     <ion-list-header>Today</ion-list-header>
-    <ion-item >
+    <ion-item class="unreaditem">
       <ion-avatar slot="start">
-        <img src="assets/MariposaIcons/img1.svg">
+        <img src="assets/MariposaIcons/img1.svg" />
       </ion-avatar>
       <!-- <ion-label>David’s bathing is scheduled to you... at 8:00 am today</ion-label> -->
       <div>
-      <p clss="notfndtl">David’s bathing is scheduled to you... at 8:00 am today</p>
-      <p class="notfntime">Today, 10:00 PM</p>
-    </div>
+        <p class="notfndtl">
+          David’s bathing is scheduled to you... at 8:00 am today
+        </p>
+        <p class="notfntime">Today, 10:00 PM</p>
+      </div>
     </ion-item>
-    
+
     <ion-item class="slctclr">
       <ion-avatar slot="start">
-        <img src="assets/MariposaIcons/img2.svg">
+        <img src="assets/MariposaIcons/img2.svg" />
       </ion-avatar>
       <div>
-      <p clss="notfndtl" >Mary has updated today’s schedule</p>
-       <p class="notfntime">Today, 10:00 PM</p>
+        <p class="notfndtl">Mary has updated today’s schedule</p>
+        <p class="notfntime">Today, 10:00 PM</p>
       </div>
     </ion-item>
     <ion-item class="slctclr">
       <ion-avatar slot="start">
-        <img src="assets/MariposaIcons/img3.svg">
+        <img src="assets/MariposaIcons/img3.svg" />
       </ion-avatar>
       <div>
-      <p clss="notfndtl">David posted a new comment: “Yes! Truly enjoying, John<p>
-         <p class="notfntime">Today, 10:00 PM</p>
-        </div>
+        <p class="notfndtl">
+          David posted a new comment: “Yes! Truly enjoying, John
+        </p>
+        <p></p>
+        <p class="notfntime">Today, 10:00 PM</p>
+      </div>
     </ion-item>
-</ion-list>
+  </ion-list>
 
-<ion-list style="padding: 0;">
-  <ion-list-header class="slctclr">Earlier</ion-list-header>
-  <ion-item class="slctclr">
-    <ion-avatar slot="start">
-      <img src="assets/MariposaIcons/img4.svg">
-    </ion-avatar>
-    <div>
-    <!-- <ion-label>David’s bathing is scheduled to you... at 8:00 am today</ion-label> -->
-    <p clss="notfndtl">Shopping List has been updated by Mary</p>
-     <p class="notfntime">Today, 10:00 PM</p>
-    </div>
-    
-  </ion-item>
-  
-  <ion-item class="slctclr">
-    <ion-avatar slot="start">
-      <img src="assets/MariposaIcons/img2.svg">
-    </ion-avatar>
-    <div>
-    <p clss="notfndtl">Mary has updated today’s schedule<p>
-       <p class="notfntime">Today, 10:00 PM</p>
+  <ion-list style="padding: 0;">
+    <ion-list-header class="slctclr">Earlier</ion-list-header>
+    <ion-item class="slctclr">
+      <ion-avatar slot="start">
+        <img src="assets/MariposaIcons/img4.svg" />
+      </ion-avatar>
+      <div>
+        <!-- <ion-label>David’s bathing is scheduled to you... at 8:00 am today</ion-label> -->
+        <p class="notfndtl">Shopping List has been updated by Mary</p>
+        <p class="notfntime">Today, 10:00 PM</p>
       </div>
-  </ion-item>
-  <ion-item class="slctclr">
-    <ion-avatar slot="start">
-      <img src="assets/MariposaIcons/img4.svg">
-    </ion-avatar>
-    <div>
-    <p clss="notfndtl">David has made some changes in his profile<p>
-       <p class="notfntime">Today, 10:00 PM</p>
-      </div>
-  </ion-item>
-  <ion-item class="slctclr">
-    <ion-avatar slot="start">
-      <img src="assets/MariposaIcons/img4.svg">
-    </ion-avatar>
-    <div>
-    <p clss="notfndtl">David has made some changes in his profile<p>
-       <p class="notfntime">Today, 10:00 PM</p>
-      </div>
-  </ion-item>
-  <ion-item class="slctclr">
-    <ion-avatar slot="start">
-      <img src="assets/MariposaIcons/img4.svg">
-    </ion-avatar>
-    <div>
-    <p clss="notfndtl">David has made some changes in his profile<p>
-       <p class="notfntime">Today, 10:00 PM</p>
-      </div>
-  </ion-item>
-  <ion-item class="slctclr">
-    <ion-avatar slot="start">
-      <img src="assets/MariposaIcons/img4.svg">
-    </ion-avatar>
-    <div>
-    <p clss="notfndtl">David has made some changes in his profile<p>
-       <p class="notfntime">Today, 10:00 PM</p>
-      </div>
-  </ion-item>
-  <ion-item class="slctclr">
-    <ion-avatar slot="start">
-      <img src="assets/MariposaIcons/img4.svg">
-    </ion-avatar>
-    <div>
-    <p clss="notfndtl">David has made some changes in his profile<p>
-       <p class="notfntime">Today, 10:00 PM</p>
-      </div>
-  </ion-item>
-</ion-list>
+    </ion-item>
 
+    <ion-item class="slctclr">
+      <ion-avatar slot="start">
+        <img src="assets/MariposaIcons/img2.svg" />
+      </ion-avatar>
+      <div>
+        <p class="notfndtl">Mary has updated today’s schedule</p>
+        <p></p>
+        <p class="notfntime">Today, 10:00 PM</p>
+      </div>
+    </ion-item>
+    <ion-item class="slctclr">
+      <ion-avatar slot="start">
+        <img src="assets/MariposaIcons/img4.svg" />
+      </ion-avatar>
+      <div>
+        <p class="notfndtl">David has made some changes in his profile</p>
+        <p></p>
+        <p class="notfntime">Today, 10:00 PM</p>
+      </div>
+    </ion-item>
+    <ion-item class="slctclr">
+      <ion-avatar slot="start">
+        <img src="assets/MariposaIcons/img4.svg" />
+      </ion-avatar>
+      <div>
+        <p class="notfndtl">David has made some changes in his profile</p>
+        <p></p>
+        <p class="notfntime">Today, 10:00 PM</p>
+      </div>
+    </ion-item>
+    <ion-item class="slctclr">
+      <ion-avatar slot="start">
+        <img src="assets/MariposaIcons/img4.svg" />
+      </ion-avatar>
+      <div>
+        <p class="notfndtl">David has made some changes in his profile</p>
+        <p></p>
+        <p class="notfntime">Today, 10:00 PM</p>
+      </div>
+    </ion-item>
+    <ion-item class="slctclr">
+      <ion-avatar slot="start">
+        <img src="assets/MariposaIcons/img4.svg" />
+      </ion-avatar>
+      <div>
+        <p class="notfndtl">David has made some changes in his profile</p>
+        <p></p>
+        <p class="notfntime">Today, 10:00 PM</p>
+      </div>
+    </ion-item>
+    <ion-item class="slctclr">
+      <ion-avatar slot="start">
+        <img src="assets/MariposaIcons/img4.svg" />
+      </ion-avatar>
+      <div>
+        <p class="notfndtl">David has made some changes in his profile</p>
+        <p></p>
+        <p class="notfntime">Today, 10:00 PM</p>
+      </div>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -26,8 +26,12 @@
         </div>
       </ion-col>
       <ion-col size="2">
-        <div >
-          <ion-icon class="shareicon" src="assets/MariposaIcons/Share icon.svg" slot="end"></ion-icon>
+        <div>
+          <ion-icon
+            class="shareicon"
+            src="assets/MariposaIcons/Share icon.svg"
+            slot="end"
+          ></ion-icon>
         </div>
       </ion-col>
     </ion-row>
@@ -42,147 +46,169 @@
         <!-- <ion-select-option value="f">Female</ion-select-option>
         <ion-select-option value="m">Male</ion-select-option> -->
       </ion-select>
-      
     </ion-item>
     <p>This week</p>
   </div>
 
-  <div class="bpchart">
-
-  </div>
+  <ion-card class="reportcard">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="6">
+          <span class="cardhead">Blood Pressure</span>
+        </ion-col>
+        <ion-col size="6"><span class="timesec">110/60</span></ion-col>
+        <ion-col size="12">
+          <!-- <p class="nodatatxt">No data</p> -->
+          <apx-chart
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [dataLabels]="chartOptions.dataLabels"
+            [plotOptions]="chartOptions.plotOptions"
+            [yaxis]="chartOptions.yaxis"
+            [fill]="chartOptions.fill"
+            [grid]="chartOptions.grid"
+          ></apx-chart>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
   <div class="dtldreport">
     <div class="dtldreportdate">
-    <p>Friday, 22 May 2020</p>
-  </div>
-  <ion-row>
-    <ion-col size="8">
-      <p>116/70 mm Hg</p>
-    </ion-col>
-    <ion-col size="4">
-      <p class="dtldtime">9:30 am</p>
-      
-    </ion-col>
-    <p class="dtldnote">Notes details here. Notes about the entry taken at the time of measurement can be seen here</p>
+      <p>Friday, 22 May 2020</p>
+    </div>
+    <ion-row>
+      <ion-col size="8">
+        <p>116/70 mm Hg</p>
+      </ion-col>
+      <ion-col size="4">
+        <p class="dtldtime">9:30 am</p>
+      </ion-col>
+      <p class="dtldnote">
+        Notes details here. Notes about the entry taken at the time of
+        measurement can be seen here
+      </p>
     </ion-row>
-      
-
   </div>
   <div class="ion-no-padding">
     <hr />
   </div>
   <div class="dtldreport2">
-  <ion-row>
-    <ion-col size="8">
-      <p>120/75 mm Hg</p>
-    </ion-col>
-    <ion-col size="4">
-      <p class="dtldtime">6:35 am</p>
-      
-    </ion-col>
-    <p class="dtldnote">Notes details here. Notes about the entry taken at the time of measurement can be seen here</p>
-    </ion-row>
-  </div>
-
-
-  <div class="dtldreport">
-    <div class="dtldreportdate">
-    <p>Friday, 22 May 2020</p>
-  </div>
-  <ion-row>
-    <ion-col size="8">
-      <p>116/70 mm Hg</p>
-    </ion-col>
-    <ion-col size="4">
-      <p class="dtldtime">9:30 am</p>
-      
-    </ion-col>
-    <p class="dtldnote">Notes details here. Notes about the entry taken at the time of measurement can be seen here</p>
-    </ion-row>
-      
-
-  </div>
-  <div class="ion-no-padding">
-    <hr />
-  </div>
-  <div class="dtldreport2">
-  <ion-row>
-    <ion-col size="8">
-      <p>120/75 mm Hg</p>
-    </ion-col>
-    <ion-col size="4">
-      <p class="dtldtime">6:35 am</p>
-      
-    </ion-col>
-    <p class="dtldnote">Notes details here. Notes about the entry taken at the time of measurement can be seen here</p>
+    <ion-row>
+      <ion-col size="8">
+        <p>120/75 mm Hg</p>
+      </ion-col>
+      <ion-col size="4">
+        <p class="dtldtime">6:35 am</p>
+      </ion-col>
+      <p class="dtldnote">
+        Notes details here. Notes about the entry taken at the time of
+        measurement can be seen here
+      </p>
     </ion-row>
   </div>
 
   <div class="dtldreport">
     <div class="dtldreportdate">
-    <p>Friday, 22 May 2020</p>
-  </div>
-  <ion-row>
-    <ion-col size="8">
-      <p>116/70 mm Hg</p>
-    </ion-col>
-    <ion-col size="4">
-      <p class="dtldtime">9:30 am</p>
-      
-    </ion-col>
-    <p class="dtldnote">Notes details here. Notes about the entry taken at the time of measurement can be seen here</p>
+      <p>Friday, 22 May 2020</p>
+    </div>
+    <ion-row>
+      <ion-col size="8">
+        <p>116/70 mm Hg</p>
+      </ion-col>
+      <ion-col size="4">
+        <p class="dtldtime">9:30 am</p>
+      </ion-col>
+      <p class="dtldnote">
+        Notes details here. Notes about the entry taken at the time of
+        measurement can be seen here
+      </p>
     </ion-row>
-      
-
   </div>
   <div class="ion-no-padding">
     <hr />
   </div>
   <div class="dtldreport2">
-  <ion-row>
-    <ion-col size="8">
-      <p>120/75 mm Hg</p>
-    </ion-col>
-    <ion-col size="4">
-      <p class="dtldtime">6:35 am</p>
-      
-    </ion-col>
-    <p class="dtldnote">Notes details here. Notes about the entry taken at the time of measurement can be seen here</p>
+    <ion-row>
+      <ion-col size="8">
+        <p>120/75 mm Hg</p>
+      </ion-col>
+      <ion-col size="4">
+        <p class="dtldtime">6:35 am</p>
+      </ion-col>
+      <p class="dtldnote">
+        Notes details here. Notes about the entry taken at the time of
+        measurement can be seen here
+      </p>
     </ion-row>
   </div>
 
   <div class="dtldreport">
     <div class="dtldreportdate">
-    <p>Friday, 22 May 2020</p>
-  </div>
-  <ion-row>
-    <ion-col size="8">
-      <p>116/70 mm Hg</p>
-    </ion-col>
-    <ion-col size="4">
-      <p class="dtldtime">9:30 am</p>
-      
-    </ion-col>
-    <p class="dtldnote">Notes details here. Notes about the entry taken at the time of measurement can be seen here</p>
+      <p>Friday, 22 May 2020</p>
+    </div>
+    <ion-row>
+      <ion-col size="8">
+        <p>116/70 mm Hg</p>
+      </ion-col>
+      <ion-col size="4">
+        <p class="dtldtime">9:30 am</p>
+      </ion-col>
+      <p class="dtldnote">
+        Notes details here. Notes about the entry taken at the time of
+        measurement can be seen here
+      </p>
     </ion-row>
-      
-
   </div>
   <div class="ion-no-padding">
     <hr />
   </div>
   <div class="dtldreport2">
-  <ion-row>
-    <ion-col size="8">
-      <p>120/75 mm Hg</p>
-    </ion-col>
-    <ion-col size="4">
-      <p class="dtldtime">6:35 am</p>
-      
-    </ion-col>
-    <p class="dtldnote">Notes details here. Notes about the entry taken at the time of measurement can be seen here</p>
+    <ion-row>
+      <ion-col size="8">
+        <p>120/75 mm Hg</p>
+      </ion-col>
+      <ion-col size="4">
+        <p class="dtldtime">6:35 am</p>
+      </ion-col>
+      <p class="dtldnote">
+        Notes details here. Notes about the entry taken at the time of
+        measurement can be seen here
+      </p>
     </ion-row>
   </div>
- 
- 
 
+  <div class="dtldreport">
+    <div class="dtldreportdate">
+      <p>Friday, 22 May 2020</p>
+    </div>
+    <ion-row>
+      <ion-col size="8">
+        <p>116/70 mm Hg</p>
+      </ion-col>
+      <ion-col size="4">
+        <p class="dtldtime">9:30 am</p>
+      </ion-col>
+      <p class="dtldnote">
+        Notes details here. Notes about the entry taken at the time of
+        measurement can be seen here
+      </p>
+    </ion-row>
+  </div>
+  <div class="ion-no-padding">
+    <hr />
+  </div>
+  <div class="dtldreport2">
+    <ion-row>
+      <ion-col size="8">
+        <p>120/75 mm Hg</p>
+      </ion-col>
+      <ion-col size="4">
+        <p class="dtldtime">6:35 am</p>
+      </ion-col>
+      <p class="dtldnote">
+        Notes details here. Notes about the entry taken at the time of
+        measurement can be seen here
+      </p>
+    </ion-row>
+  </div>
 </ion-content>
