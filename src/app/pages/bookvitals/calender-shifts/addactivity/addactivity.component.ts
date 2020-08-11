@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: "app-addactivity",
@@ -25,7 +26,11 @@ export class AddactivityComponent implements OnInit {
     { name: "Shopping" },
     { name: "Other Tasks" },
   ];
-  constructor() {}
+  constructor(private moalCtrl:ModalController) {}
 
   ngOnInit() {}
+  close(){
+    this.moalCtrl.dismiss();
+
+  }
 }

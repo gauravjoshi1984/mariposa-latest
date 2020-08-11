@@ -547,11 +547,11 @@ ion-footer {
 
 .addactivity-class {
     .modal-wrapper {
-      position: absolute;
-      width: 766px !important;
-      height: 500px !important;
-      top: calc(100% - (500px));
-      left: calc(100% - (766px)) !important;
+        height: 590px;
+      
+        bottom: 0%;
+        
+        position: absolute;
     }
   
     .popover-content {

@@ -1,3 +1,12 @@
+
+ion-title{
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+ 
+  color: #1A1A1A; 
+}
 .shareicon {
   font-size: 28px;
   padding: 0 0 0 25px;
@@ -59,8 +68,8 @@
   .dtldreportdate {
     width: 140px;
     height: 26px;
-    background: #2ae4f0;
-    opacity: 0.1;
+    background: #EAFCFD;
+    
     border-radius: 4px;
     p {
       font-style: normal;

@@ -1,19 +1,25 @@
-<!-- <ion-content> -->
 <ion-toolbar>
   <ion-buttons slot="end">
-    <ion-button class="closebtn" shape="round">
+    <ion-button (click)="close()" class="closebtn" shape="round">
       <ion-icon name="close-outline" slot="icon-only"></ion-icon>
     </ion-button>
   </ion-buttons>
 </ion-toolbar>
+
+<ion-content>
+
+  <p class="addactivity">Add Activity</p>
 <ion-list>
   <!-- <ion-list-header>
     <ion-label>Add Activity</ion-label>
     <ion-button>See All</ion-button>
   </ion-list-header> -->
   <ion-item *ngFor="let item of listItems" lines="none">
-    <ion-icon slot="start" name="add"></ion-icon>
+    <div class="rndbtn">
+      <ion-icon slot="start" name="add"></ion-icon>
+    </div>
+    
     <ion-label>{{ item.name }}</ion-label>
   </ion-item>
 </ion-list>
-<!-- </ion-content> -->
+</ion-content>
