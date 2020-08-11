@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  ImagePicker,
-  ImagePickerOptions,
-} from "@ionic-native/image-picker/ngx";
+import { FormGroup, FormControl } from "@angular/forms";
 
 @Component({
   selector: 'app-addmeals',
@@ -11,11 +8,71 @@ import {
 })
 export class AddmealsPage implements OnInit {
 
+  mealForm = new FormGroup({
+    mealType: new FormControl(""),
+    timeList: new FormControl([]),
+    frequency: new FormControl(""),
+    favbreakfast: new FormControl(""),
+    repeatDays: new FormControl([]),
+    instructions: new FormControl(""),
+    images: new FormControl([]),
+  });
+
   timeList = [];
   customPickerOptions: any;
   timeindex: number;
   instructions = "";
   imageList = [];
+  mealData = [
+      {
+        name:"Breakfast",
+        value:"breakfast"
+      },
+      {
+        name:"Lunch",
+        value:"lunch"
+      },
+      {
+        name:"Dinner",
+        value:"dinner"
+      },
+      {
+        name:"Snack",
+        value:"snack"
+      },
+  ]
+  frequencyData = [
+    {
+      name:"Once",
+      value:"1"
+    },
+    {
+      name:"Twice",
+      value:"2"
+    },
+    {
+      name:"Thrice",
+      value:"3"
+    },
+]
+
+breakfastData = [
+  {
+    name:"Peanut butter with jam",
+    value:"Peanut butter with jam"
+  },
+  {
+    name:"Pancakes",
+    value:"pancakes",
+  },
+  {
+    name:"Boiled Eggs",
+    value:"boiled eggs"
+  },
+]
+
+
+
   daysList = [
     {
       name: "s",
@@ -47,35 +104,8 @@ export class AddmealsPage implements OnInit {
     },
   ];
   selectedDays = [];
-  constructor(private imagePicker: ImagePicker) {
-    // this.customPickerOptions = {
-    //   buttons: [
-    //     {
-    //       text: "Submit",
-    //       handler: (x) => {
-    //         console.log("Clicked Save!", x);
-    //         if (this.timeList[this.timeindex]) {
-    //           let dateVar = new Date();
-    //           dateVar.setHours(
-    //             x.ampm.value == "pm" ? x.hour.value + 12 : x.hour.value
-    //           );
-    //           dateVar.setMinutes(x.minute.value);
-    //           this.timeList[this.timeindex] = dateVar;
-
-    //           console.log(this.timeList[this.timeindex]);
-    //         }
-    //       },
-    //     },
-    //     {
-    //       text: "Delete",
-    //       handler: () => {
-    //         console.log("Clicked Log. Do not Dismiss.");
-    //         // return false;
-    //         this.timeList.splice(this.timeindex, 1);
-    //       },
-    //     },
-    //   ],
-    // };
+  constructor() {
+    
   }
 
   refresh(ev) {
@@ -90,30 +120,8 @@ export class AddmealsPage implements OnInit {
   addDate() {
     this.timeList.push(new Date());
   }
-  // changeTime(i) {
-  //   this.datepicker.open().then((x) => {
-  //     console.log(x);
-  //     this.timeindex = i;
-  //   });
-  // }
-  addImage() {
-    let options: ImagePickerOptions = {
-      maximumImagesCount: 4,
-    };
-    this.imagePicker.getPictures(options).then(
-      (results) => {
-        console.log(results);
-        for (var i = 0; i < results.length; i++) {
-          this.imageList.push(results[i]);
-        }
-      },
-      (err) => {}
-    );
-  }
-  removeImg(i) {
-    console.log("*", i);
-    this.imageList.splice(i, 1);
-  }
+  
+  
   addremoveDay(item) {
     if (this.selectedDays.includes(item.value)) {
       let index = this.selectedDays.indexOf(item.value);
@@ -122,4 +130,21 @@ export class AddmealsPage implements OnInit {
       this.selectedDays.push(item.value);
     }
   }
+
+  setData(ev: any, formname) {
+    console.log(ev, "|||||");
+    this.mealForm.patchValue({ [formname]: ev });
+  }
+
+
+  submit() {
+    this.mealForm.patchValue({ timeList: this.timeList });
+    this.mealForm.patchValue({ repeatDays: this.selectedDays });
+    this.mealForm.patchValue({ images: this.imageList });
+    console.log(this.mealForm.value);
+  }
+
+  addtime(ev, key){
+    this.timeList = ev;
+      }
 }

@@ -54,6 +54,7 @@ export class CarecircleaddseniorPage implements OnInit {
     };
     this._apiService.post('createCareCircle', apiRequestBody).then((data: any) => {
       this._creatingCareService.setCareCircleId(data.careCircleId);
+      this._dataService.setLastVisitedPage('carecircle/showcarecircle');
       this._router.navigate(['carecircle/list']);
     });
   }

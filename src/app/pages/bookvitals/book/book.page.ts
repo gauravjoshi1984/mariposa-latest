@@ -6,7 +6,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./book.page.scss"],
 })
 export class BookPage implements OnInit {
-  showData = false;
+  showData = true;
   Cards: any = [
     {
       id: 0,

@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  ImagePicker,
-  ImagePickerOptions,
-} from "@ionic-native/image-picker/ngx";
+import { FormGroup, FormControl } from "@angular/forms";
 
 
 @Component({
@@ -11,6 +8,16 @@ import {
   styleUrls: ['./addothertasks.page.scss'],
 })
 export class AddothertasksPage implements OnInit {
+
+  taskForm = new FormGroup({
+    taskName: new FormControl(),
+    timeList: new FormControl([]),
+    repeatDays: new FormControl([]),
+    startDate: new FormControl("2020-05-12T13:47:20.789"),
+    endDate: new FormControl("2020-05-12T13:47:20.789"),
+    instructions: new FormControl(""),
+    images: new FormControl([]),
+  });
 
   timeList = [];
   customPickerOptions: any;
@@ -48,35 +55,8 @@ export class AddothertasksPage implements OnInit {
     },
   ];
   selectedDays = [];
-  constructor(private imagePicker: ImagePicker) {
-    // this.customPickerOptions = {
-    //   buttons: [
-    //     {
-    //       text: "Submit",
-    //       handler: (x) => {
-    //         console.log("Clicked Save!", x);
-    //         if (this.timeList[this.timeindex]) {
-    //           let dateVar = new Date();
-    //           dateVar.setHours(
-    //             x.ampm.value == "pm" ? x.hour.value + 12 : x.hour.value
-    //           );
-    //           dateVar.setMinutes(x.minute.value);
-    //           this.timeList[this.timeindex] = dateVar;
-
-    //           console.log(this.timeList[this.timeindex]);
-    //         }
-    //       },
-    //     },
-    //     {
-    //       text: "Delete",
-    //       handler: () => {
-    //         console.log("Clicked Log. Do not Dismiss.");
-    //         // return false;
-    //         this.timeList.splice(this.timeindex, 1);
-    //       },
-    //     },
-    //   ],
-    // };
+  constructor() {
+    
   }
 
   refresh(ev) {
@@ -91,30 +71,8 @@ export class AddothertasksPage implements OnInit {
   addDate() {
     this.timeList.push(new Date());
   }
-  // changeTime(i) {
-  //   this.datepicker.open().then((x) => {
-  //     console.log(x);
-  //     this.timeindex = i;
-  //   });
-  // }
-  addImage() {
-    let options: ImagePickerOptions = {
-      maximumImagesCount: 4,
-    };
-    this.imagePicker.getPictures(options).then(
-      (results) => {
-        console.log(results);
-        for (var i = 0; i < results.length; i++) {
-          this.imageList.push(results[i]);
-        }
-      },
-      (err) => {}
-    );
-  }
-  removeImg(i) {
-    console.log("*", i);
-    this.imageList.splice(i, 1);
-  }
+  
+  
   addremoveDay(item) {
     if (this.selectedDays.includes(item.value)) {
       let index = this.selectedDays.indexOf(item.value);
@@ -123,4 +81,19 @@ export class AddothertasksPage implements OnInit {
       this.selectedDays.push(item.value);
     }
   }
+
+  setData(ev: any, formname) {
+    console.log(ev, "|||||");
+    this.taskForm.patchValue({ [formname]: ev });
+  }
+  submit() {
+    this.taskForm.patchValue({ timeList: this.timeList });
+    this.taskForm.patchValue({ repeatDays: this.selectedDays });
+    this.taskForm.patchValue({ images: this.imageList });
+    console.log(this.taskForm.value);
+  }
+
+  addtime(ev, key){
+    this.timeList = ev;
+      }
 }

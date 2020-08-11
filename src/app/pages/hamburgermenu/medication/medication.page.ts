@@ -7,33 +7,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MedicationPage implements OnInit {
 
-  segmentChanged(ev: any) {
-    console.log('Segment changed', ev);
-  }
+  type: string;
 
   constructor() { }
-  selectedDay = "Mon";
-  timeLine = [{}];
-  daysList = [
+  
+  
+  medtable = [
     {
-      name: "Mon",
+      name:"Ibuprofile MKal",
+      dosage:"2",
+      timing:["9:00 am","10:00 pm"],
+      notes:"Medicine should be taken with warm water",
+    },
+  ]
+
+  medalltable = [
+    {
+      name:"Ibuprofile MKal",
+      dosage:"2",
+      timing:["9:00 am","10:00 pm"],
+      notes:"Medicine should be taken with warm water",
     },
     {
-      name: "Tue",
+      name:"Aspirin",
+      dosage:"2",
+      timing:["8:00 am","12:00 pm"],
+      notes:"Medicine should be taken before meals",
     },
-  ];
+  ]
+
+  
 
   ngOnInit() {
   }
 
-  selectChip(item) {
-    this.selectedDay = item.name;
-    this.timeLine.forEach(element => {
-      //if(element.name){
-      //  element.card=!element.card
-      //}
-      
-    });
+  segmentChanged(ev: any) {
+    console.log('Segment changed', ev);
   }
 
 }

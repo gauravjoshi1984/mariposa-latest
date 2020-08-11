@@ -1,9 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonDatetime } from '@ionic/angular';
-import {
-  ImagePicker,
-  ImagePickerOptions,
-} from '@ionic-native/image-picker/ngx';
 import { FormGroup, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-bathing',
@@ -56,7 +52,7 @@ export class BathingPage {
     },
   ];
   selectedDays = [];
-  constructor(private imagePicker: ImagePicker) {
+  constructor() {
     this.customPickerOptions = {
       buttons: [
         {
@@ -105,24 +101,7 @@ export class BathingPage {
       this.timeindex = i;
     });
   }
-  addImage() {
-    const options: ImagePickerOptions = {
-      maximumImagesCount: 4,
-    };
-    this.imagePicker.getPictures(options).then(
-      (results) => {
-        console.log(results);
-        for (let i = 0; i < results.length; i++) {
-          this.imageList.push(results[i]);
-        }
-      },
-      (err) => {}
-    );
-  }
-  removeImg(i) {
-    console.log('*', i);
-    this.imageList.splice(i, 1);
-  }
+  
   // submit() {
   // let imgList = [];
   // for (let img of this.imageList) {

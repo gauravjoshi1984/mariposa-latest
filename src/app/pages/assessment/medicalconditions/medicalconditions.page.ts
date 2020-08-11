@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { AssessmentServiceService } from '../assessment-service.service';
+import { DataserviceService } from '../../dataservice.service';
 
 @Component({
   selector: 'app-medicalconditions',
@@ -8,29 +11,67 @@ import { NavController } from '@ionic/angular';
 })
 export class MedicalconditionsPage implements OnInit {
 
-  constructor(private navCtrl: NavController,) { }
+  stateObject: any = {};
+  careCircleId;
+  userId;
+  key: string;
+  medicalForm: any = {otherFactors: {}};
+  otherFactors: any = {};
+  toggleQuestions: any = [];
+  radioQuestions: any = [];
+  checkboxQuestions: any = [];
+  formReady = false;
+
+  constructor(
+    private navCtrl: NavController,
+    private assessmentService: AssessmentServiceService,
+    private dataService: DataserviceService) {
+    }
 
   ngOnInit() {
   }
 
   save(){
-    this.navCtrl.navigateForward(['/assessment/assessmentbar']);
+    this.stateObject = this.medicalForm;
+    this.assessmentService.saveAssessmentState(this.careCircleId, this.key, this.userId, this.stateObject).then((response) => {
+      console.log(response);
+      this.navCtrl.back();
+    });
   }
 
-  generateClick(ev: any) {
-    // ev.click();
-    if (ev.checked == true) {
-      ev.checked = false;
-    } else {
-      ev.checked = true;
+  generateClick(key, option) {
+    this.medicalForm[key][option] = !this.medicalForm[key][option];
+  }
+
+  async ionViewWillEnter(){
+    this.careCircleId = await this.assessmentService.getCareCircleId();
+    this.userId = await this.dataService.getUserInfo();
+    this.userId = this.userId.userId;
+    this.key = 'MEDICAL_PSYCHIATRIC';
+    const data = await this.assessmentService.getAssessmentStateObject();
+    this.otherFactors = data.assessmentConfiguration[this.key].other_factors;
+    this.toggleQuestions = data.assessmentConfiguration[this.key].yn_questions;
+    this.radioQuestions = data.assessmentConfiguration[this.key].radiobutton_questions;
+    this.checkboxQuestions = data.assessmentConfiguration[this.key].checkbox_questions;
+    this.stateObject = data.assessmentValues[this.key];
+    if (this.stateObject != null){
+      this.medicalForm = this.stateObject;
+    }else{
+      this.checkboxQuestions.forEach(question => {
+        this.medicalForm[question.key] = {};
+      });
+      this.radioQuestions.forEach(question => {
+        this.medicalForm[question.key] = null;
+      });
+      this.toggleQuestions.forEach(question => {
+        this.medicalForm[question.key] = null;
+      });
     }
-    console.log(ev.checked);
+    this.formReady = true;
   }
 
-  generateClick2(ev: any,value) {
-     ev.value=value;
-    
-    console.log(ev);
+  toggleRadio(key, value) {
+    this.medicalForm[key] = value;
   }
 
 }

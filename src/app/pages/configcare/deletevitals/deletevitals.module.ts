@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { DeletevitalsPageRoutingModule } from './deletevitals-routing.module';
 
 import { DeletevitalsPage } from './deletevitals.page';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DeletevitalsPageRoutingModule
+    DeletevitalsPageRoutingModule,
+    SharedModule,
   ],
   declarations: [DeletevitalsPage]
 })

@@ -8,13 +8,15 @@ import { BathingdetailsPageRoutingModule } from './bathingdetails-routing.module
 
 import { BathingdetailsPage } from './bathingdetails.page';
 import { DltbathingpopoverComponent } from './dltbathingpopover/dltbathingpopover.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BathingdetailsPageRoutingModule
+    BathingdetailsPageRoutingModule,
+    SharedModule,
   ],
   declarations: [BathingdetailsPage, DltbathingpopoverComponent]
 })

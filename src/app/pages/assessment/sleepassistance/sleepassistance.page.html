@@ -1,24 +1,6 @@
-<ion-header mode="md">
-    <ion-toolbar class="headtoolbar">
-        <ion-row>
-            <ion-col size="2">
-                <ion-toolbar>
-                    <ion-buttons slot="start">
-                        <m-backbutton></m-backbutton>
-                    </ion-buttons>
-                </ion-toolbar>
-            </ion-col>
-            <ion-col size="8">
-                <div>
-                    <ion-text color="mdblack" position="floating" id="titletag">Sleep Assistance</ion-text>
-                </div>
-            </ion-col>
-        </ion-row>
-    </ion-toolbar>
-</ion-header>
+<app-m-header-close title="Sleep Assistance"></app-m-header-close>
 
-
-<ion-content>
+<ion-content fullscreen [formGroup]="sleepForm">
     <ion-grid style="padding:24px;height:fit-content;margin-bottom:80px">
 
         <!-- GOES TO BED -->
@@ -30,8 +12,8 @@
             <ion-col>
                 <ion-buttons style="float: right;">
                     <ion-button color="mdblack" class="jumbo">
-                        <ion-datetime mode="ios" slot="start" #datepicker style="float:left" displayFormat="HH:mm" placeholder="HH:MM"></ion-datetime>
-                        <ion-icon (click)="changeTime()" slot="end" style="float:right;width:30px;height: 30px;" src="assets/MariposaIcons/Timeicon.svg"></ion-icon>
+                        <ion-datetime formControlName="bedTime" mode="ios" slot="start" style="float:left" displayFormat="HH:mm" placeholder="HH:MM"></ion-datetime>
+                        <ion-icon slot="end" style="float:right;width:30px;height: 30px;" src="assets/MariposaIcons/Timeicon.svg"></ion-icon>
                     </ion-button>
                 </ion-buttons>
             </ion-col>
@@ -48,8 +30,8 @@
             <ion-col>
                 <ion-buttons style="float: right;">
                     <ion-button color="mdblack" class="jumbo">
-                        <ion-datetime mode="ios" #datepicker1 style="float:left" displayFormat="HH:mm" placeholder="HH:MM"></ion-datetime>
-                        <ion-icon (click)="changeTime1()" style="float:right;width:30px;height: 30px;" src="assets/MariposaIcons/Timeicon.svg"></ion-icon>
+                        <ion-datetime mode="ios" formControlName="wakeupTime" style="float:left" displayFormat="HH:mm" placeholder="HH:MM"></ion-datetime>
+                        <ion-icon style="float:right;width:30px;height: 30px;" src="assets/MariposaIcons/Timeicon.svg"></ion-icon>
                     </ion-button>
                 </ion-buttons>
             </ion-col>
@@ -64,8 +46,20 @@
         </div>
 
         <!-- CHECKBOX 1 -->
+        <ion-row style="align-items: center; margin-top: 5px;" *ngFor="let sleep of sleepType">
+            <ion-col size="1">
+                <div style="padding-left: 3px;">
+                    <ion-checkbox color="mwhite" checked="false" [(ngModel)]="formData.sleepType[sleep]" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+                </div>
+            </ion-col>
+            <ion-col (click)="setSleepTypeValue(sleep)" size="11" style="padding-top: 0px;">
+                <div>
+                    <ion-text style="font-size: 16px;line-height: 19px;font-weight: 300;margin-left: 12px;" color="mdblack">{{sleep}}</ion-text>
+                </div>
+            </ion-col>
+        </ion-row>
 
-        <ion-row style="align-items: center;margin-top:5px;">
+        <!-- <ion-row style="align-items: center;margin-top:5px;">
             <ion-col size="1">
                 <div style="padding-left: 3px;">
                     <ion-checkbox #Sleepthroughnight color="mwhite" checked="false"></ion-checkbox>
@@ -76,11 +70,11 @@
                     <ion-text (click)="generateClick(Sleepthroughnight)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Sleep through night</ion-text>
                 </div>
             </ion-col>
-        </ion-row>
+        </ion-row> -->
 
         <!-- CHECKBOX 2 -->
 
-        <ion-row style="align-items: center;margin-top:5px;">
+        <!-- <ion-row style="align-items: center;margin-top:5px;">
             <ion-col size="1">
                 <div style="padding-left: 3px;">
                     <ion-checkbox #Frequentlyawakens color="mwhite" checked="false"></ion-checkbox>
@@ -91,11 +85,11 @@
                     <ion-text (click)="generateClick(Frequentlyawakens)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Frequently awakens</ion-text>
                 </div>
             </ion-col>
-        </ion-row>
+        </ion-row> -->
 
         <!-- CHECKBOX 3 -->
 
-        <ion-row style="align-items: center;margin-top:5px;">
+        <!-- <ion-row style="align-items: center;margin-top:5px;">
             <ion-col size="1">
                 <div style="padding-left: 3px;">
                     <ion-checkbox #Getsupfortoileting color="mwhite" checked="false"></ion-checkbox>
@@ -106,11 +100,11 @@
                     <ion-text (click)="generateClick(Getsupfortoileting)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Gets up for toileting</ion-text>
                 </div>
             </ion-col>
-        </ion-row>
+        </ion-row> -->
 
         <!-- CHECKBOX 4 -->
 
-        <ion-row style="align-items: center;margin-top:5px;">
+        <!-- <ion-row style="align-items: center;margin-top:5px;">
             <ion-col size="1">
                 <div style="padding-left: 3px;">
                     <ion-checkbox #Difficultyreturningtosleep color="mwhite" checked="false"></ion-checkbox>
@@ -121,7 +115,7 @@
                     <ion-text (click)="generateClick(Difficultyreturningtosleep)" style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">Difficulty returning to sleep</ion-text>
                 </div>
             </ion-col>
-        </ion-row>
+        </ion-row> -->
 
         <hr class="solid">
 
@@ -136,7 +130,7 @@
           ><span *ngIf="!Needassistanceatnight.checked">NO</span></ion-text>
             </ion-col>
             <ion-col>
-                <ion-toggle #Needassistanceatnight mode="ios" checked color="primary" style="float: right;"></ion-toggle>
+                <ion-toggle #Needassistanceatnight formControlName="nightAssistance" mode="ios" checked color="primary" style="float: right;"></ion-toggle>
             </ion-col>
         </ion-row>
 
@@ -145,34 +139,35 @@
         <!-- NAP DURING DAY -->
 
         <ion-text style="font-size:16px;line-height:19px;">Nap during the day</ion-text>
+        <div *ngFor="let nap of formData.naps">
+            <ion-row style="align-items: center;margin-top: 17px;">
+                <ion-col>
+                    <ion-text>Time</ion-text>
+                </ion-col>
+                <ion-col>
+                    <ion-buttons style="float: right;">
+                        <ion-button color="mdblack" class="jumbo">
+                            <ion-datetime [(ngModel)]="nap.time" [ngModelOptions]="{standalone: true}" mode="ios" style="float:left" displayFormat="HH:mm" placeholder="HH:MM"></ion-datetime>
+                            <ion-icon style="float:right;width:30px;height: 30px;" src="assets/MariposaIcons/Timeicon.svg"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                </ion-col>
+            </ion-row>
 
-        <ion-row style="align-items: center;margin-top: 17px;">
-            <ion-col>
-                <ion-text>Time</ion-text>
-            </ion-col>
-            <ion-col>
-                <ion-buttons style="float: right;">
-                    <ion-button color="mdblack" class="jumbo">
-                        <ion-datetime mode="ios" #datepicker2 style="float:left" displayFormat="HH:mm" placeholder="HH:MM"></ion-datetime>
-                        <ion-icon (click)="changeTime2()" style="float:right;width:30px;height: 30px;" src="assets/MariposaIcons/Timeicon.svg"></ion-icon>
-                    </ion-button>
-                </ion-buttons>
-            </ion-col>
-        </ion-row>
-
-        <ion-row style="align-items: center;margin-top: 15px;">
-            <ion-col>
-                <ion-text>Duration</ion-text>
-            </ion-col>
-            <ion-col>
-                <ion-select class="duration" style="float:right;width:140px;height:40px">
-                    <ion-select-option value="30">30 Minutes</ion-select-option>
-                    <ion-select-option value="60">1 Hour</ion-select-option>
-                    <ion-select-option value="90">1.5 Hours</ion-select-option>
-                    <ion-select-option value="120">2 Hours</ion-select-option>
-                </ion-select>
-            </ion-col>
-        </ion-row>
+            <ion-row style="align-items: center;margin-top: 15px;">
+                <ion-col>
+                    <ion-text>Duration</ion-text>
+                </ion-col>
+                <ion-col>
+                    <ion-select [(ngModel)]="nap.duration" [ngModelOptions]="{standalone: true}" class="duration" style="float:right;width:140px;height:40px">
+                        <ion-select-option value="30">30 Minutes</ion-select-option>
+                        <ion-select-option value="60">1 Hour</ion-select-option>
+                        <ion-select-option value="90">1.5 Hours</ion-select-option>
+                        <ion-select-option value="120">2 Hours</ion-select-option>
+                    </ion-select>
+                </ion-col>
+            </ion-row>
+        </div>
 
         <!-- ADD BUTTON -->
 
@@ -190,37 +185,17 @@
             <ion-text position="floating" id="tag">Notes(optional)</ion-text>
         </div>
         <div>
-            <ion-textarea style="height: 120px;" class="input" placeholder="Write here"></ion-textarea>
+            <ion-textarea formControlName="notes" style="height: 120px;" class="input" placeholder="Write here"></ion-textarea>
         </div>
 
         <!--ADD IMAGE-->
-        <app-addimage (click)="addImage()"></app-addimage>
-    <ion-text>
-      <div class="imagelist" *ngFor="let img of imageList; let j=index">
-        <ion-grid fixed class="ion-no-padding">
-          <ion-row>
-            <ion-col style="padding-top: 11px;" size="8"><span>{{img.substring(img.lastIndexOf("/") + 1) | slice:0:12}}</span></ion-col>
-            <ion-col size="4">
-              <ion-button
-              fill="clear"
-              shape="round"
-              class="dltbtn"
-              (click)="removeImg(j)"        >
-              <ion-icon slot="icon-only" src="assets/trash.svg"></ion-icon>
-              Delete
-            </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid> 
-      </div>
-    </ion-text>
-
+        <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
 
     </ion-grid>
 </ion-content>
 
-<ion-footer>
+<ion-footer [formGroup]="sleepForm">
     <div id="button">
-        <ion-button [disabled]="false" class="btnblue" (click)="save()" type="submit" id="signup">SAVE & PROCEED</ion-button>
+        <ion-button [disabled]="!sleepForm.valid" class="btnblue" (click)="save()" type="submit" id="signup">SAVE & PROCEED</ion-button>
     </div>
 </ion-footer>

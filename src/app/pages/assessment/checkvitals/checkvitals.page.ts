@@ -1,15 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ApiService } from 'src/app/http.service';
 import { AssessmentServiceService } from '../assessment-service.service';
-import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { DataserviceService } from '../../dataservice.service';
 import { NavController } from '@ionic/angular';
-import {
-  ImagePicker,
-  ImagePickerOptions,
-} from '@ionic-native/image-picker/ngx';
 
 @Component({
   selector: 'app-checkvitals',
@@ -18,11 +11,7 @@ import {
 })
 export class CheckvitalsPage implements OnInit {
   constructor(private dataService: DataserviceService,
-              private router: Router,
-              private apiService: ApiService,
-              private location: Location,
               private navCtrl: NavController,
-              private imagePicker: ImagePicker,
               private assessmentService: AssessmentServiceService,
               private formBuilder: FormBuilder) { }
   checkVitalsForm: FormGroup;
@@ -36,34 +25,13 @@ export class CheckvitalsPage implements OnInit {
   ngOnInit() {
   }
 
-  addImage() {
-    const options: ImagePickerOptions = {
-      maximumImagesCount: 4,
-    };
-    this.imagePicker.getPictures(options).then(
-      (results) => {
-        console.log(results);
-        for (let i = 0; i < results.length; i++) {
-          this.imageList.push(results[i]);
-        }
-      },
-      (err) => {}
-    );
-  }
-  removeImg(i) {
-    console.log('*', i);
-    this.imageList.splice(i, 1);
-  }
-
-
-
   save(){
     if (this.stateObject == null){
       this.stateObject = {};
     }
     this.stateObject[this.key] = this.checkVitalsForm.value;
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
-      this.navCtrl.navigateBack(['/assessment/assessmentbar']);
+      this.navCtrl.back();
     });
 
   }
@@ -71,7 +39,6 @@ export class CheckvitalsPage implements OnInit {
   changeToggle(key, ev: any) {
     this.checkVitalsForm.controls[key].setValue(ev);
   }
-
 
   async ionViewWillEnter(){
     this.readyFlag = false;

@@ -1,0 +1,73 @@
+<ion-content [fullscreen]="true">
+  <ion-grid class="content">   
+
+    <div>
+      <ion-text class="headertext">{{name}} has invited you</ion-text>
+    </div>
+    <div class="top1">
+      <ion-text class="headertext">to join {{carecircle}}</ion-text>
+    </div>
+
+    <div class="rolediv">
+      <ion-text style="font-weight:300;font-size:16px;line-height:19px">Assigned Role</ion-text>
+    </div>
+   
+            <ion-row style="margin-top: 2px;">
+
+              <ion-col class="gencol" size="3">
+                <div style="padding-top:3px;">
+                    <ion-card class="genCard" [class.selectedGen]="selectedType=='SENIOR'" (click)="selectedType='SENIOR'">
+                        <img [src]="selectedType=='SENIOR'?'assets/MariposaIcons/seniorwhite2.svg':'assets/MariposaIcons/seniorgrey.svg'"
+                        alt="">
+                    </ion-card>
+                </div>
+            </ion-col>
+
+                <ion-col class="gencol" size="3">
+                    <div style="padding-top:3px;">
+                        <ion-card class="genCard" [class.selectedGen]="selectedType=='CAREGIVER'" (click)="selectedType='CAREGIVER'">
+                            <img [src]="selectedType=='CAREGIVER'?'assets/MariposaIcons/Caregiver_white.svg':'assets/MariposaIcons/Caregiveroutline.svg'"
+                            alt="">
+                        </ion-card>
+                    </div>
+                </ion-col>
+
+                <ion-col class="gencol">
+                    <div style="padding-top:3px;">
+                        <ion-card class="genCard" [class.selectedGen]="selectedType=='FAMILY'" (click)="selectedType='FAMILY'">
+                            <img [src]="selectedType=='FAMILY'?'assets/MariposaIcons/Family_white .svg':'assets/MariposaIcons/FamilyfriendsOutline.svg'"
+                            alt="">
+                        </ion-card>
+                    </div>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col class="gencol" size="3">
+                <span style="margin-top: 0px;font-size: 14px;line-height:17px;color:#7E7E7E;padding-left: 0px;" [class.selectedGentext]="selectedType=='SENIOR'">Senior</span>
+            </ion-col>
+              <ion-col class="gencol" size="3">
+                  <span style="margin-top: 0px;font-size: 14px;line-height:17px;color:#7E7E7E;padding-left: 0px;" [class.selectedGentext]="selectedType=='CAREGIVER'">Caregiver</span>
+              </ion-col>
+              <ion-col class="gencol">
+                  <span style="margin-top: 0px;font-size: 14px;line-height:17px;color:#7E7E7E;padding-left: 0px;" [class.selectedGentext]="selectedType=='FAMILY'">Family & Friends</span>
+              </ion-col>
+          </ion-row>
+
+          <div class="top">
+            <ion-text class="emailtag">Email</ion-text>
+          </div>
+          <div>
+            <ion-text class="email">{{email}}</ion-text>
+          </div>
+    
+   
+    
+   
+     
+          <div id="button">
+              <ion-button type="submit" class="btnblue" [disabled]="false" expand="block">ACCEPT & PROCEED</ion-button>
+          </div>
+     
+  </ion-grid>
+</ion-content>

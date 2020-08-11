@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ConfigurecarebarPageRoutingModule } from './configurecarebar-routing.module';
 
 import { ConfigurecarebarPage } from './configurecarebar.page';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ConfigurecarebarPageRoutingModule
+    ConfigurecarebarPageRoutingModule,
+    SharedModule,
   ],
   declarations: [ConfigurecarebarPage]
 })

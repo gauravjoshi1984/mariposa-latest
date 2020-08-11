@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -7,13 +7,12 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./deleteassesmentmodal.component.scss'],
 })
 export class DeleteassesmentmodalComponent implements OnInit {
-
+  @Input() careCircleName;
   constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {}
 
-  closemodal(){
-    this.modalCtrl.dismiss();
+  closemodal(status= null){
+    this.modalCtrl.dismiss(status);
   }
-
 }

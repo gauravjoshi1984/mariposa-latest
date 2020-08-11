@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  ImagePicker,
-  ImagePickerOptions,
-} from "@ionic-native/image-picker/ngx";
+import { FormGroup, FormControl } from "@angular/forms";
 
 @Component({
   selector: 'app-addvitals',
@@ -11,11 +8,32 @@ import {
 })
 export class AddvitalsPage implements OnInit {
 
+  vitalForm = new FormGroup({
+    vitalType: new FormControl(""),
+    timeList: new FormControl([]),
+    repeatDays: new FormControl([]),
+    instructions: new FormControl(""),
+    images: new FormControl([]),
+  });
+
+
+
   timeList = [];
   customPickerOptions: any;
   timeindex: number;
   instructions = "";
   imageList = [];
+
+  vitalData = [
+    {
+      name:"Blood Pressure",
+      value:"bloodpressure",
+    },
+    {
+      name:"Pulse",
+      value:"pulse",
+    },
+  ]
   daysList = [
     {
       name: "s",
@@ -47,35 +65,8 @@ export class AddvitalsPage implements OnInit {
     },
   ];
   selectedDays = [];
-  constructor(private imagePicker: ImagePicker) {
-    // this.customPickerOptions = {
-    //   buttons: [
-    //     {
-    //       text: "Submit",
-    //       handler: (x) => {
-    //         console.log("Clicked Save!", x);
-    //         if (this.timeList[this.timeindex]) {
-    //           let dateVar = new Date();
-    //           dateVar.setHours(
-    //             x.ampm.value == "pm" ? x.hour.value + 12 : x.hour.value
-    //           );
-    //           dateVar.setMinutes(x.minute.value);
-    //           this.timeList[this.timeindex] = dateVar;
-
-    //           console.log(this.timeList[this.timeindex]);
-    //         }
-    //       },
-    //     },
-    //     {
-    //       text: "Delete",
-    //       handler: () => {
-    //         console.log("Clicked Log. Do not Dismiss.");
-    //         // return false;
-    //         this.timeList.splice(this.timeindex, 1);
-    //       },
-    //     },
-    //   ],
-    // };
+  constructor() {
+   
   }
 
   refresh(ev) {
@@ -90,30 +81,8 @@ export class AddvitalsPage implements OnInit {
   addDate() {
     this.timeList.push(new Date());
   }
-  // changeTime(i) {
-  //   this.datepicker.open().then((x) => {
-  //     console.log(x);
-  //     this.timeindex = i;
-  //   });
-  // }
-  addImage() {
-    let options: ImagePickerOptions = {
-      maximumImagesCount: 4,
-    };
-    this.imagePicker.getPictures(options).then(
-      (results) => {
-        console.log(results);
-        for (var i = 0; i < results.length; i++) {
-          this.imageList.push(results[i]);
-        }
-      },
-      (err) => {}
-    );
-  }
-  removeImg(i) {
-    console.log("*", i);
-    this.imageList.splice(i, 1);
-  }
+  
+  
   addremoveDay(item) {
     if (this.selectedDays.includes(item.value)) {
       let index = this.selectedDays.indexOf(item.value);
@@ -122,4 +91,19 @@ export class AddvitalsPage implements OnInit {
       this.selectedDays.push(item.value);
     }
   }
+
+  setData(ev: any, formname) {
+    console.log(ev, "|||||");
+    this.vitalForm.patchValue({ [formname]: ev });
+  }
+  submit() {
+    this.vitalForm.patchValue({ timeList: this.timeList });
+    this.vitalForm.patchValue({ repeatDays: this.selectedDays });
+    this.vitalForm.patchValue({ images: this.imageList });
+    console.log(this.vitalForm.value);
+  }
+
+  addtime(ev, key){
+    this.timeList = ev;
+      }
 }

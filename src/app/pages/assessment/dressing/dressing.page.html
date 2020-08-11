@@ -1,77 +1,28 @@
-<ion-header mode="md">
+<app-m-header-close title="Dressing"></app-m-header-close>
 
-    <ion-toolbar class="headtoolbar">
+<ion-content fullscreen>
+    <ion-grid style="padding:24px;height:fit-content">
 
-        <ion-row>
-            <ion-col size="2">
-                <ion-toolbar>
-                    <ion-buttons slot="start">
-                        <m-backbutton></m-backbutton>
-                    </ion-buttons>
-                </ion-toolbar>
+        <ion-row class="favoritemeal">
+            <ion-col>
+                <ion-text class="text">Favorite Outfit</ion-text>
             </ion-col>
-            <ion-col size="8">
-                <div>
-                    <ion-text color="mdblack" position="floating" id="titletag">Dressing</ion-text>
-                </div>
+            <ion-col>
+                <ion-text class="add" >ADD</ion-text>
             </ion-col>
         </ion-row>
 
-    </ion-toolbar>
-
-</ion-header>
-
-<ion-content>
-    <ion-grid style="padding:24px;height:fit-content">
-
-        <div class="nametag" style="padding-top: 0px;">
-            <ion-text position="floating" id="tag">Favorite Outfits</ion-text>
+        <div class="favoriteitemslist" *ngFor="let item of outfit; let i = index">
+            <ion-row class="favoriteitem">
+                <ion-col size="10">  
+                            <ion-text class="itemname cap">{{item.name}}</ion-text>
+                </ion-col>
+                <ion-col>
+                    <ion-icon class="arrow" src="../assets/MariposaIcons/arrowgrey.svg"></ion-icon>
+                </ion-col>
+            </ion-row>
+            <hr class="solid">
         </div>
-        <div *ngFor="let dinner of formData.dressingPreferences;let i = index">
-            <ion-input mode="md" class="input" placeholder="" [(ngModel)]="formData.dressingPreferences[i]"></ion-input>
-        </div>
-
-        <!-- ADD BUTTON -->
-
-        <ion-button class="btn1" fill="outline" shape="round" (click)="addMore('dressingPreferences')">
-            <ion-icon class="plusbutton" slot="start" name="add-circle"></ion-icon>Add
-        </ion-button>
-
-        <hr class="solid">
-
-
-
-        <!-- INSTRUCTIONS -->
-
-        <div class="nametag" style="margin-top: 16px;">
-            <ion-text position="floating" id="tag">Instructions(optional)</ion-text>
-        </div>
-        <div>
-            <ion-textarea style="height: 120px;" class="input" placeholder="Write here" [(ngModel)]="formData.instructions"></ion-textarea>
-        </div>
-
-        <!-- ADD IMAGE -->
-        <app-addimage (click)="addImage()"></app-addimage>
-    <ion-text>
-      <div class="imagelist" *ngFor="let img of imageList; let j=index">
-        <ion-grid fixed class="ion-no-padding">
-          <ion-row>
-            <ion-col style="padding-top: 11px;" size="8"><span>{{img.substring(img.lastIndexOf("/") + 1) | slice:0:12}}</span></ion-col>
-            <ion-col size="4">
-              <ion-button
-              fill="clear"
-              shape="round"
-              class="dltbtn"
-              (click)="removeImg(j)"        >
-              <ion-icon slot="icon-only" src="assets/trash.svg"></ion-icon>
-              Delete
-            </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid> 
-      </div>
-    </ion-text>
-
 
     </ion-grid>
 </ion-content>

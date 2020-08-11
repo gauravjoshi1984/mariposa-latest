@@ -2,13 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { DataserviceService } from '../../dataservice.service';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/http.service';
-import { Location } from '@angular/common';
 import { AssessmentServiceService } from '../assessment-service.service';
-import {
-  ImagePicker,
-  ImagePickerOptions,
-} from '@ionic-native/image-picker/ngx';
 
 @Component({
   selector: 'app-gardening',
@@ -18,9 +12,6 @@ import {
 export class GardeningPage implements OnInit {
   constructor(private dataService: DataserviceService,
               private router: Router,
-              private apiService: ApiService,
-              private location: Location,
-              private imagePicker: ImagePicker,
               private assessmentService: AssessmentServiceService,
               private navCtrl: NavController) { }
   gardeningList = ['a', 'b'];
@@ -35,25 +26,6 @@ export class GardeningPage implements OnInit {
   ngOnInit() {
   }
 
-
-  addImage() {
-    const options: ImagePickerOptions = {
-      maximumImagesCount: 4,
-    };
-    this.imagePicker.getPictures(options).then(
-      (results) => {
-        console.log(results);
-        for (let i = 0; i < results.length; i++) {
-          this.imageList.push(results[i]);
-        }
-      },
-      (err) => {}
-    );
-  }
-  removeImg(i) {
-    console.log('*', i);
-    this.imageList.splice(i, 1);
-  }
   save(){
     if (this.stateObject == null){
       this.stateObject = {};
@@ -61,7 +33,7 @@ export class GardeningPage implements OnInit {
     this.stateObject.GARDENING = this.formData;
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
       console.log(response);
-      this.navCtrl.navigateForward(['/assessment/assessmentbar']);
+      this.navCtrl.back();
     });
     console.log('called Save', this.formData);
   }

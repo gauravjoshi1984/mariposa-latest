@@ -11,6 +11,6 @@ export class MBackbuttonComponent implements OnInit {
 
   ngOnInit() {}
   goBack() {
-    this.navCtrl.pop();
+    this.navCtrl.back();
   }
 }

@@ -2,10 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AssessmentServiceService } from '../assessment-service.service';
 import { DataserviceService } from '../../dataservice.service';
-import {
-  ImagePicker,
-  ImagePickerOptions,
-} from "@ionic-native/image-picker/ngx";
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -22,7 +18,6 @@ export class CompanionshipPage implements OnInit {
   constructor(private dataService: DataserviceService,
               private assessmentService: AssessmentServiceService,
               private navCtrl: NavController,
-              private imagePicker: ImagePicker,
               private formBuilder: FormBuilder) {
     this.companionshipForm = this.formBuilder.group({ });
    }
@@ -32,36 +27,12 @@ export class CompanionshipPage implements OnInit {
   ngOnInit() {
   }
 
-
-  
-
-  addImage() {
-    let options: ImagePickerOptions = {
-      maximumImagesCount: 4,
-    };
-    this.imagePicker.getPictures(options).then(
-      (results) => {
-        console.log(results);
-        for (var i = 0; i < results.length; i++) {
-          this.imageList.push(results[i]);
-        }
-      },
-      (err) => {}
-    );
-  }
-  removeImg(i) {
-    console.log("*", i);
-    this.imageList.splice(i, 1);
-  }
-
-
-
-
-
   generateClick(item: any) {
     this.companionshipForm.controls[item].setValue(!this.companionshipForm.controls[item].value);
   }
-
+  back(){
+    this.navCtrl.back();
+  }
   save(){
     if (this.stateObject == null){
       this.stateObject = {};
@@ -69,11 +40,9 @@ export class CompanionshipPage implements OnInit {
     this.stateObject.COMPANIONSHIP = this.companionshipForm.value;
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
       console.log(response);
-      this.navCtrl.navigateForward(['/assessment/assessmentbar']);
+      this.navCtrl.back();
     });
   }
-
-  
 
   async ionViewWillEnter(){
     this.careCircleId = await this.assessmentService.getCareCircleId();

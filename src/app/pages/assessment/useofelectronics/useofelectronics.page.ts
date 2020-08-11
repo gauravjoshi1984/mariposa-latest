@@ -17,6 +17,7 @@ export class UseofelectronicsPage implements OnInit {
   careCircleId;
   userId;
   readyFlag = false;
+  imageList = [];
   formData: any = {
 
   };
@@ -28,9 +29,6 @@ export class UseofelectronicsPage implements OnInit {
               private dataService: DataserviceService) { }
 
   ngOnInit() {
-  }
-  addImage() {
-    console.log('X');
   }
   changeToggle(formItem: any , ev: any) {
     this.formData[formItem] = ev;
@@ -69,7 +67,6 @@ export class UseofelectronicsPage implements OnInit {
       data.assessmentConfiguration.CARE_NEEDS[key].yn_questions.forEach(element => {
         this.equipmentList.push(element.label);
       });
-      console.log(this.equipmentList);
       this.readyFlag = true;
     });
   }

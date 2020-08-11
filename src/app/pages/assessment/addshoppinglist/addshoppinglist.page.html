@@ -1,18 +1,6 @@
-<ion-header mode="md">
-    <ion-toolbar class="headtoolbar">
-        <ion-grid>
-            <ion-row style="align-items: center;margin-top: 32px;">
-                <ion-col size="10">
-                    <ion-text color="mdblack" position="floating" id="titletag">Add items to shopping list</ion-text>
-                </ion-col>
-                <ion-col>
-                    <ion-icon style="zoom:1.2;color: black;float:right" name="close-outline" routerLink="/assessment/viewshoppinglist"></ion-icon>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-toolbar>
-</ion-header>
-<ion-content>
+<app-m-header-close title="Add items to shopping list"></app-m-header-close>
+
+<ion-content fullscreen>
     <ion-grid style="padding-top:32px;padding-left:24px;">
         <form [formGroup]="shoppingForm">
             <div class="nametag" style="margin-top: 5px;">

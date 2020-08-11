@@ -18,10 +18,10 @@
             <ion-col class="segsec">
                 <ion-toolbar>
                     <ion-segment value="signin" [(ngModel)]="type" (ionChange)="segmentChanged($event)" scrollable="true">
-                        <ion-segment-button class="ripple" value="signin"  [class.segmentborder]="type=='signup'">
+                        <ion-segment-button class="ripple" value="signin" [class.segmentborder]="type=='signup'">
                             <ion-label>SIGN IN</ion-label>
                         </ion-segment-button>
-                        <ion-segment-button class="ripple" value="signup"  [class.segmentborder]="type=='signin'">
+                        <ion-segment-button class="ripple" value="signup" [class.segmentborder]="type=='signin'">
                             <ion-label>SIGN UP</ion-label>
                         </ion-segment-button>
                     </ion-segment>
@@ -30,13 +30,8 @@
         </ion-row>
     </ion-grid>
 
-
-
     <ion-grid style="padding-top: 0px;padding-bottom: 65px;">
-
-
         <!-- SIGN IN -->
-
         <div [ngSwitch]="type">
             <ion-row *ngSwitchCase="'signin'">
                 <ion-col>
@@ -46,7 +41,7 @@
                         </div>
 
                         <div>
-                            <ion-input autofocus="true" formControlName="email" type="email" mode="md" class="input" placeholder="Enter Email ID"></ion-input>
+                            <ion-input formControlName="email" type="email" mode="md" class="input" placeholder="Enter Email ID"></ion-input>
                             <ion-item class="warningitems" [hidden]="checkValidity(loginFormControl.email)" lines="none" style="margin-top:-7px;margin-left:-10px;">
                                 <ion-icon style="margin-right: 5px;" src="../assets/MariposaIcons/erroricon.svg"></ion-icon>
                                 <ion-text class="warning">Incorrect Email ID</ion-text>
@@ -110,7 +105,7 @@
                                 <ion-input formControlName="mobile" type="tel" mode="md" class="input" placeholder="Enter Mobile Number"></ion-input>
                                 <ion-item class="warningitems" [hidden]="checkValidity(registrationFormControl.mobile)" lines="none" style="margin-top:-7px;margin-left:-10px;">
                                     <ion-icon style="margin-right: 5px;" src="../assets/MariposaIcons/erroricon.svg"></ion-icon>
-                                    <ion-text class="warning">Mobile is required!.</ion-text>
+                                    <ion-text class="warning">Mobile is Invalid!.</ion-text>
                                 </ion-item>
                             </div>
 
@@ -146,11 +141,11 @@
         </div>
     </ion-grid>
 </ion-content>
-<div [ngSwitch]="type">
+<div [ngSwitch]="type" *ngIf="!isKeyboardOpen">
     <ion-footer *ngSwitchCase="'signin'">
         <form flex layout="column" [formGroup]="loginForm" (ngSubmit)="loginUser()">
             <div id="button">
-                <ion-button [disabled]="loginForm.invalid" [formGroup]="loginForm" type="submit" class="btnblue" expand="block">SIGN IN</ion-button>
+                <ion-button [disabled]="loginForm.invalid" type="submit" class="btnblue" expand="block">SIGN IN</ion-button>
             </div>
         </form>
     </ion-footer>
@@ -161,5 +156,4 @@
             </div>
         </form>
     </ion-footer>
-
 </div>

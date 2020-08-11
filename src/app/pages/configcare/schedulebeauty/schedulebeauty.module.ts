@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { SchedulebeautyPageRoutingModule } from './schedulebeauty-routing.module';
 
 import { SchedulebeautyPage } from './schedulebeauty.page';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SchedulebeautyPageRoutingModule
+    SchedulebeautyPageRoutingModule,
+    SharedModule,
   ],
   declarations: [SchedulebeautyPage]
 })

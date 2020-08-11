@@ -1,26 +1,4 @@
-.add{
-    margin-top: 16px;
-    width: 120px;
-    height: 44px;
-    margin-left: 0px;
-    margin-bottom: 5px;   
-    
-    
-   border-radius: 8px;
-    
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
 
-    --color:#4137FF;
-    --background:#ffffff;
-    --border-radius: 8px; 
-    --border-color:#4137FF;
-    --box-shadow: none;
-    
-    border-style: solid;
-    border-width: thin;
-  }
 
   .btn1 {
     --border-radius: 8px;
@@ -38,5 +16,80 @@
     width: 24px;
     zoom: 1;
   }
+
+  .favoritemeal{
+
+    align-items: center;
+    padding: 0px;
+    margin: 0px 0px 24px 0px;
+  
+    ion-col{
+      padding: 0px;
+      margin: 0px;
+    }
+  
+    .text{
+      font-size: 14px;
+      line-height: 17px;
+      color:#1A1A1A;
+      float: left;
+    }
+  
+    .add{
+      font-weight: 600;
+      font-size:14px;
+      line-height: 17px;
+      color:#4137FF;
+      text-transform: uppercase;
+      float: right;
+    }
+  
+   } 
+    
+   .solid{
+     margin-bottom: 24px;
+   }
+  
+   .favoriteitemslist{
+  
+      margin-top: 0px;
+  
+      ion-row{
+        align-items: center;
+        padding: 0px;
+        margin: 0px;
+      }
+  
+      ion-col{
+        padding: 0px;
+        margin: 0px;
+      }
+  
+      ion-icon{
+        zoom: 1;
+        height: 24px;
+        width:24px;
+        float: right;
+      }
+  
+      .itemname{
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: #1A1A1A;
+      }
+  
+      .itemtype{
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 17px;
+        color:#7E7E7E;
+      }
+  
+      .solid{
+        margin-top: 16px;
+        margin-bottom: 16px;
+      }
+   }
 
   

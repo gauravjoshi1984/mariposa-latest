@@ -1,0 +1,61 @@
+<app-m-header-close title="Schedule Wound Care"></app-m-header-close>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="woundcareForm">
+  
+  
+  <ion-grid fixed class="configurecaregrid">
+    
+    <m-selectdate (result)="addtime($event,'timeList')"></m-selectdate>
+    
+  </ion-grid>
+
+  
+  
+
+  <p class="label-text">Repeat</p>
+  <div class="chipdiv">
+    <ion-chip
+      color="primary"
+      mode="ios"
+      outline="true"
+      [class.selectedchip]="selectedDays.includes(day.value)"
+      *ngFor="let day of daysList"
+      (click)="addremoveDay(day)"
+    >
+      <ion-label>{{day.name}}</ion-label>
+    </ion-chip>
+    
+  </div>
+
+  <p class="listtitle listtitle2">Wound place on body</p>
+        <ion-input mode="md" class="input" value="" formControlName="woundplace"></ion-input>
+  
+  
+  <p class="instruction">Instructions (optional)</p>
+  <ion-textarea
+    rows="5"
+    placeholder="Write here"
+    formControlName="instructions"
+  ></ion-textarea>
+  
+  <!-- ADD IMAGE -->
+  <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
+    
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button
+      color="primary"
+      expand="block"
+      fill="solid"
+      class="submitbtn"
+      shape="round"
+      (click) = "submit()"
+    >
+      ADD
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

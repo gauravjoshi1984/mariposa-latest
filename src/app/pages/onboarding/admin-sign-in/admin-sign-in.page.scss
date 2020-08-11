@@ -14,9 +14,7 @@ ion-img {
 #segment {
     top: -20px;
 }
-.segmentborder {
-    border-bottom: 2px solid #b8b8b8;
-  }
+
 //ion-text {
 //    font-size: x-small;
 //}
@@ -81,3 +79,7 @@ ion-input.ng-invalid.ng-touched {
 ion-segment-button {
   --indicator-color-unchecked : grey;
   }
+
+  .segmentborder {
+    border-bottom: 2px solid #b8b8b8;
+  }  

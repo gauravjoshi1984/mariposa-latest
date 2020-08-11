@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +17,7 @@ import { SharedModule } from '../../shared/shared.module';
     IonicModule,
     CareneedsPageRoutingModule,
     SharedModule,
+    ReactiveFormsModule
   ],
   declarations: [CareneedsPage]
 })

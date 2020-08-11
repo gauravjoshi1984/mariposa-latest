@@ -2,12 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AssessmentServiceService } from '../assessment-service.service';
 import { DataserviceService } from '../../dataservice.service';
-import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import {
-  ImagePicker,
-  ImagePickerOptions,
-} from "@ionic-native/image-picker/ngx";
 
 @Component({
   selector: 'app-woundcare',
@@ -15,6 +10,7 @@ import {
   styleUrls: ['./woundcare.page.scss'],
 })
 export class WoundcarePage implements OnInit {
+  constructor(private dataService: DataserviceService, private navCtrl: NavController, private assessmentService: AssessmentServiceService) { }
 
   woundForm: FormGroup;
   careCircleId;
@@ -22,31 +18,10 @@ export class WoundcarePage implements OnInit {
   stateObject: any;
   key: string;
   createdForm = false;
-  constructor(private dataService: DataserviceService,private imagePicker: ImagePicker, private navCtrl: NavController, private assessmentService: AssessmentServiceService, private router: Router) { }
-  ngOnInit() {
-  }
 
   imageList = [];
-
-  addImage() {
-    let options: ImagePickerOptions = {
-      maximumImagesCount: 4,
-    };
-    this.imagePicker.getPictures(options).then(
-      (results) => {
-        console.log(results);
-        for (var i = 0; i < results.length; i++) {
-          this.imageList.push(results[i]);
-        }
-      },
-      (err) => {}
-    );
+  ngOnInit() {
   }
-  removeImg(i) {
-    console.log("*", i);
-    this.imageList.splice(i, 1);
-  }
-
 
   async ionViewWillEnter(){
     this.key = 'WOUND_CARE';
@@ -75,8 +50,8 @@ export class WoundcarePage implements OnInit {
     this.stateObject[this.key] = this.woundForm.value;
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
       console.log(response);
-      this.navCtrl.navigateForward(['/assessment/assessmentbar']);
+      this.navCtrl.back();
     });
   }
-  
+
 }

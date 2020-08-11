@@ -1,0 +1,63 @@
+<ion-header mode="md">
+  <ion-toolbar class="headtoolbar">
+      <ion-buttons class="backbutton" slot="start">
+          <m-backbutton></m-backbutton>
+      </ion-buttons>
+      <ion-title class="name cap" color="mdblack" position="floating" id="titletag">Add Blood Pressure</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+  <ion-content class= "pagebckd"[fullscreen]="true">
+    <ion-grid class="content">
+
+      <ion-row class="timerow">
+        <ion-col size="6">
+          <p class="datelabel">Date</p>
+          <ion-button fill="outline" class="datebtn left">
+              <ion-datetime displayFormat="DD-MMM-YYYY" value="16-May-2020" ></ion-datetime>
+              <ion-icon slot="end" src="assets/MariposaIcons/Calendar icon.svg"></ion-icon>
+          </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <p class="datelabel">Time</p>
+        <ion-button fill="outline" class="datebtn right">
+            <ion-datetime displayFormat="HH:mm A" value="23:00"></ion-datetime>
+            <ion-icon class="timeicon" src="assets/MariposaIcons/Timeicon.svg"></ion-icon>
+        </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <div class="nametag">
+    <ion-text position="floating" id="tag">Systolic</ion-text>
+</div>
+<div>
+    <ion-input  mode="md" class="input" placeholder="Enter value"></ion-input>
+</div>
+
+<div class="nametag">
+  <ion-text position="floating" id="tag">Diastolic</ion-text>
+</div>
+<div>
+  <ion-input  mode="md" class="input" placeholder="Enter value"></ion-input>
+</div>
+
+<!-- INSTRUCTIONS -->
+
+<div class="nametag">
+    <ion-text position="floating" id="tag">Notes</ion-text>
+</div>
+<div>
+    <ion-textarea  style="height: 120px;" class="input" placeholder="Enter Notes"></ion-textarea>
+</div>
+
+
+
+
+    </ion-grid>
+</ion-content>
+  <ion-footer>
+    <div id="button">
+        <ion-button [disabled]="false" class="btnblue" type="submit" id="signup">SUMBIT</ion-button>
+    </div>
+</ion-footer>

@@ -1,17 +1,16 @@
 <ion-row *ngFor="let item of timeList; let i = index">
   <p class="label-text">Select Time</p>
-
   <ion-col size="12" (click)="changeTime(i)">
     <ion-text color="primary" class="timetext">
       <div class="timesec">
-        <span>{{ getTimeHR(item.getHours()) }}</span
+        <span>{{ getTimeHR(item.hours) }}</span
         >&nbsp;&nbsp;:&nbsp;&nbsp;<span class="timemin">{{
-          getMinFormat(item.getMinutes())
+          getMinFormat(item.minutes)
         }}</span>
       </div>
       <div class="meridiemsec">
-        <span [class.activemeridian]="item.getHours() < 12">AM</span>
-        <span [class.activemeridian]="item.getHours() >= 12">PM</span>
+        <span [class.activemeridian]="item.hours < 12">AM</span>
+        <span [class.activemeridian]="item.hours >= 12">PM</span>
       </div>
       <div class="dltsec" *ngIf="i != 0">
         <ion-button
@@ -28,8 +27,8 @@
     </ion-text>
   </ion-col>
 </ion-row>
-<ion-button class="addbutton" fill="outline" shape="round" (click)="addDate()">
-  <ion-icon class="plusbutton" slot="start" name="add-circle"></ion-icon>Add
+<ion-button class="addbutton" fill="outline" shape="round" (click)="addDate({})">
+  <ion-icon class="plusbutton" slot="start" name="add-circle"></ion-icon>ADD
 </ion-button>
 <ion-datetime
   style="display: none;"

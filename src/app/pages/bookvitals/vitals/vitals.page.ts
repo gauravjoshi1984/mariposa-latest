@@ -46,7 +46,7 @@ export class VitalsPage implements OnInit {
   public chartOptions2: Partial<ChartOptions2>;
   public chartOptions3: Partial<ChartOptions2>;
   public chartOptions4: Partial<ChartOptions2>;
-  showData = false;
+  showData = true;
   constructor() {}
 
   ngOnInit() {

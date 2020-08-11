@@ -1,14 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { DataserviceService } from '../../dataservice.service';
-import { Router } from '@angular/router';
-import { ApiService } from 'src/app/http.service';
-import { Location } from '@angular/common';
 import { AssessmentServiceService } from '../assessment-service.service';
-import {
-  ImagePicker,
-  ImagePickerOptions,
-} from '@ionic-native/image-picker/ngx';
 
 @Component({
   selector: 'app-grooming',
@@ -17,14 +10,10 @@ import {
 })
 export class GroomingPage implements OnInit {
   constructor(private dataService: DataserviceService,
-              private router: Router,
-              private apiService: ApiService,
-              private location: Location,
-              private imagePicker: ImagePicker,
               private navCtrl: NavController,
               private assessmentService: AssessmentServiceService) { }
 
-  formData = {instructions:''};
+  formData = {instructions: ''};
   careCircleId;
   userId;
   stateObject;
@@ -35,25 +24,6 @@ export class GroomingPage implements OnInit {
   ngOnInit() {
   }
 
-  addImage() {
-    let options: ImagePickerOptions = {
-      maximumImagesCount: 4,
-    };
-    this.imagePicker.getPictures(options).then(
-      (results) => {
-        console.log(results);
-        for (var i = 0; i < results.length; i++) {
-          this.imageList.push(results[i]);
-        }
-      },
-      (err) => {}
-    );
-  }
-  removeImg(i) {
-    console.log("*", i);
-    this.imageList.splice(i, 1);
-  }
-
   save(){
     if (this.stateObject == null){
       this.stateObject = {};
@@ -61,11 +31,11 @@ export class GroomingPage implements OnInit {
     this.stateObject.GROOMING = this.formData;
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
       console.log(response);
-      this.navCtrl.navigateForward(['/assessment/assessmentbar']);
+      this.navCtrl.back();
     });
     console.log('called Save', this.formData);
   }
-  
+
   async ionViewWillEnter(){
     this.readyFlag = false;
     this.careCircleId = await this.assessmentService.getCareCircleId();

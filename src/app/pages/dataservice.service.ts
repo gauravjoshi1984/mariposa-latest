@@ -16,7 +16,7 @@ export class DataserviceService {
   }
   async getlastVisitedPage(){
     const lastVisited = await this.storage.get('lastVisited');
-    return lastVisited ? lastVisited : '/admin-sign-in';
+    return lastVisited;
   }
   setUserInfo(userData: any){
     this.data.userData = userData;

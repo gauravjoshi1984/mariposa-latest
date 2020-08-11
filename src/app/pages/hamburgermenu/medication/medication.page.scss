@@ -1,23 +1,74 @@
-ion-item{
-  padding: 0px !important;
-  --ion-safe-area-right: 0;
-  --ion-safe-area-left: 0;
-  border-radius: 8px;
-  border-color: red;
-  
- // margin-top: 8px;
- // margin-bottom: 40px;
- border-style: solid;
- border-width: 1px;
- ion-button{
-   height: 44px;
-   width: 163.5px;
-   margin: 0px;
- }
-}
 
 .content{
   padding-top: 24px;
   padding-right: 24px;
   padding-left: 24px;
+  padding-bottom: 0px;
+}
+
+.info{
+  padding:24px;
+}
+
+ion-segment{
+  height: 40px;
+}
+
+ion-row{
+padding: 0px;
+margin-left: 0px;
+align-items: center;
+}
+
+ion-row{
+  padding: 0px;
+  margin-left: 0px;
+  }
+
+ion-icon{
+  zoom: 1;
+  height:24px;
+  width: 24px;
+  float:right;
+}  
+
+.medname{
+
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: bold;
+  font-style: normal;
+  color:#1a1a1a;
+
+
+}
+
+.dosage{
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: normal;
+  font-style: normal;
+  color:#1a1a1a;
+}
+
+.note{
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: normal;
+  font-style: normal;
+  color:#7E7E7E;
+}
+
+.time{
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: bold;
+  font-style: normal;
+  color:#1a1a1a;
+  float: right;
+}
+
+.solid{
+  margin-bottom: 16px;
+  margin-top: 16px;
 }
