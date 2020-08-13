@@ -25,57 +25,9 @@
 </ion-header>
 
 <ion-content class="pagebckd">
-  <ng-container *ngIf="!showData">
+  <!-- <ng-container *ngIf="!showData">
     <ion-card class="reportcard">
-      <!-- <div> -->
-      <!-- <p>Blood Pressure</p>
-    <ion-icon
     
-          mode="md"
-          src="assets/MariposaIcons/status.svg"
-        ></ion-icon>-->
-      <!-- </div>  -->
-      <ion-grid class="ion-no-padding">
-        <ion-row>
-          <ion-col size="6">
-            <span class="cardhead">Blood Pressure</span>
-          </ion-col>
-          <ion-col size="6"><span class="timesec">--/--</span></ion-col>
-          <ion-col size="12">
-            <p class="nodatatxt">No data</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
-    <ion-card class="reportcard">
-      <!-- <div> -->
-      <!-- <p>Blood Pressure</p>
-    <ion-icon
-    
-          mode="md"
-          src="assets/MariposaIcons/status.svg"
-        ></ion-icon>-->
-      <!-- </div>  -->
-      <ion-grid class="ion-no-padding">
-        <ion-row>
-          <ion-col size="6">
-            <span class="cardhead">Temperature</span>
-          </ion-col>
-          <ion-col size="6"><span class="timesec">--/--</span></ion-col>
-          <ion-col size="12">
-            <p class="nodatatxt">No data</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid> </ion-card
-    ><ion-card class="reportcard">
-      <!-- <div> -->
-      <!-- <p>Blood Pressure</p>
-    <ion-icon
-    
-          mode="md"
-          src="assets/MariposaIcons/status.svg"
-        ></ion-icon>-->
-      <!-- </div>  -->
       <ion-grid class="ion-no-padding">
         <ion-row>
           <ion-col size="6">
@@ -90,14 +42,6 @@
     </ion-card>
 
     <ion-card class="reportcard">
-      <!-- <div> -->
-      <!-- <p>Blood Pressure</p>
-    <ion-icon
-    
-          mode="md"
-          src="assets/MariposaIcons/status.svg"
-        ></ion-icon>-->
-      <!-- </div>  -->
       <ion-grid class="ion-no-padding">
         <ion-row>
           <ion-col size="6">
@@ -110,13 +54,16 @@
         </ion-row>
       </ion-grid>
     </ion-card>
-  </ng-container>
-  <ng-container *ngIf="showData">
+  </ng-container> -->
+
+  <!-- Blood Pressure -->
+
+  <ng-container *ngIf="chartCardData.bloodpressure.hasValue; else bpnull">
     <ion-card class="reportcard">
       <ion-grid class="ion-no-padding">
         <ion-row>
           <ion-col size="6">
-            <span class="cardhead">Blood Pressure</span>
+            <span class="cardhead">{{chartCardData.bloodpressure.title}}</span>
           </ion-col>
           <ion-col size="6"><span class="timesec">110/60</span></ion-col>
           <ion-col size="12">
@@ -134,74 +81,167 @@
         </ion-row>
       </ion-grid>
     </ion-card>
+  </ng-container>
+
+  <ng-template #bpnull>
     <ion-card class="reportcard">
       <ion-grid class="ion-no-padding">
         <ion-row>
           <ion-col size="6">
-            <span class="cardhead">Temperature</span>
+            <span class="cardhead">Blood Pressure</span>
           </ion-col>
-          <ion-col size="6"><span class="timesec">98.7</span></ion-col>
+          <ion-col size="6"><span class="timesec">--/--</span></ion-col>
           <ion-col size="12">
-            <!-- <p class="nodatatxt">No data</p> -->
-            <apx-chart
-              [series]="chartOptions2.series"
-              [chart]="chartOptions2.chart"
-              [xaxis]="chartOptions2.xaxis"
-              [dataLabels]="chartOptions2.dataLabels"
-              [yaxis]="chartOptions2.yaxis"
-              [grid]="chartOptions2.grid"
-              [stroke]="chartOptions2.stroke"
-              [fill]="chartOptions4.fill"
-            ></apx-chart>
+            <p class="nodatatxt">No data</p>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card>
+  </ng-template>
+
+  <!-- Pulse -->
+
+  <ng-container *ngIf="chartCardData.temparature.hasValue; else tempnull">
     <ion-card class="reportcard">
       <ion-grid class="ion-no-padding">
         <ion-row>
           <ion-col size="6">
-            <span class="cardhead">Pulse</span>
+            <span class="cardhead">{{chartCardData.temparature.title}}</span>
           </ion-col>
-          <ion-col size="6"><span class="timesec">120</span></ion-col>
+          <ion-col size="6"
+            ><span class="timesec"
+              >{{chartCardData.temparature.value}}</span
+            ></ion-col
+          >
           <ion-col size="12">
-            <!-- <p class="nodatatxt">No data</p> -->
             <apx-chart
-              [series]="chartOptions3.series"
-              [chart]="chartOptions3.chart"
-              [xaxis]="chartOptions3.xaxis"
-              [dataLabels]="chartOptions3.dataLabels"
-              [yaxis]="chartOptions3.yaxis"
-              [grid]="chartOptions3.grid"
-              [fill]="chartOptions4.fill"
-              [stroke]="chartOptions3.stroke"
-            ></apx-chart>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
-    <ion-card class="reportcard">
-      <ion-grid class="ion-no-padding">
-        <ion-row>
-          <ion-col size="6">
-            <span class="cardhead">Blood Glucose</span>
-          </ion-col>
-          <ion-col size="6"><span class="timesec">100</span></ion-col>
-          <ion-col size="12">
-            <!-- <p class="nodatatxt">No data</p> -->
-            <apx-chart
-              [series]="chartOptions4.series"
-              [chart]="chartOptions4.chart"
-              [xaxis]="chartOptions4.xaxis"
-              [dataLabels]="chartOptions4.dataLabels"
-              [yaxis]="chartOptions4.yaxis"
-              [grid]="chartOptions4.grid"
-              [fill]="chartOptions4.fill"
-              [stroke]="chartOptions4.stroke"
+              [series]="chartOptions5.series"
+              [chart]="chartOptions5.chart"
+              [xaxis]="chartOptions5.xaxis"
+              [stroke]="chartOptions5.stroke"
+              [dataLabels]="chartOptions5.dataLabels"
+              [yaxis]="chartOptions5.yaxis"
+              [labels]="chartOptions5.labels"
+              [legend]="chartOptions5.legend"
+              [fill]="chartOptions5.fill"
             ></apx-chart>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card>
   </ng-container>
+  <ng-template #tempnull>
+    <ion-card class="reportcard">
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col size="6">
+            <span class="cardhead">{{chartCardData.temparature.title}}</span>
+          </ion-col>
+          <ion-col size="6"><span class="timesec">--/--</span></ion-col>
+          <ion-col size="12">
+            <p class="nodatatxt">No data</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ng-template>
+
+  <!-- End Temperature -->
+  <!-- Pulse -->
+
+  <ng-container *ngIf="chartCardData.pulse.hasValue; else pulsenull">
+    <ion-card class="reportcard">
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col size="6">
+            <span class="cardhead">{{chartCardData.pulse.title}}</span>
+          </ion-col>
+          <ion-col size="6"
+            ><span class="timesec">{{chartCardData.pulse.value}}</span></ion-col
+          >
+          <ion-col size="12">
+            <apx-chart
+              [series]="chartOptions5.series"
+              [chart]="chartOptions5.chart"
+              [xaxis]="chartOptions5.xaxis"
+              [stroke]="strokepulse"
+              [dataLabels]="chartOptions5.dataLabels"
+              [yaxis]="chartOptions5.yaxis"
+              [labels]="chartOptions5.labels"
+              [legend]="chartOptions5.legend"
+              [fill]="fillpulse"
+            ></apx-chart>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ng-container>
+  <ng-template #pulsenull>
+    <ion-card class="reportcard">
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col size="6">
+            <span class="cardhead">{{chartCardData.pulse.title}}</span>
+          </ion-col>
+          <ion-col size="6"><span class="timesec">--/--</span></ion-col>
+          <ion-col size="12">
+            <p class="nodatatxt">No data</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ng-template>
+
+  <!-- End Pulse -->
+
+  <!-- Blood Glucose -->
+
+  <ng-container
+    *ngIf="chartCardData.bloodglucose.hasValue; else bloodglucosenull"
+  >
+    <ion-card class="reportcard">
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col size="6">
+            <span class="cardhead">{{chartCardData.bloodglucose.title}}</span>
+          </ion-col>
+          <ion-col size="6"
+            ><span class="timesec"
+              >{{chartCardData.bloodglucose.value}}</span
+            ></ion-col
+          >
+          <ion-col size="12">
+            <apx-chart
+              [series]="chartOptions5.series"
+              [chart]="chartOptions5.chart"
+              [xaxis]="chartOptions5.xaxis"
+              [stroke]="strokebg"
+              [dataLabels]="chartOptions5.dataLabels"
+              [yaxis]="chartOptions5.yaxis"
+              [labels]="chartOptions5.labels"
+              [legend]="chartOptions5.legend"
+              [fill]="fillbg"
+            ></apx-chart>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ng-container>
+  <ng-template #bloodglucosenull>
+    <ion-card class="reportcard">
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col size="6">
+            <span class="cardhead">{{chartCardData.bloodglucose.title}}</span>
+          </ion-col>
+          <ion-col size="6"><span class="timesec">--/--</span></ion-col>
+          <ion-col size="12">
+            <p class="nodatatxt">No data</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ng-template>
+
+  <!-- End Blood Glucose -->
 </ion-content>

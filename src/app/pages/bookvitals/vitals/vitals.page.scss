@@ -22,7 +22,7 @@
 
 .reportcard {
   background: #ffffff;
-  /* Medium Grey */
+  min-height: 178px;
   padding: 16px;
 
   border: 0.4px solid #b8b8b8;
@@ -86,11 +86,11 @@ ion-icon {
   font-size: 32px;
 }
 
-ion-toolbar{
+ion-toolbar {
   height: 88px;
-  
-  ion-buttons{
+
+  ion-buttons {
     padding-top: 40px;
     margin-right: 15px;
   }
-}  
+}

@@ -12,6 +12,7 @@ import {
   ApexXAxis,
   ApexStroke,
   ApexTitleSubtitle,
+  ApexLegend,
 } from "ng-apexcharts";
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -34,6 +35,19 @@ export type ChartOptions2 = {
   stroke: ApexStroke;
   title: ApexTitleSubtitle;
 };
+export type ChartOptions3 = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  stroke: ApexStroke;
+  dataLabels: ApexDataLabels;
+  yaxis: ApexYAxis;
+  title: ApexTitleSubtitle;
+  labels: string[];
+  legend: ApexLegend;
+  subtitle: ApexTitleSubtitle;
+  fill: ApexFill;
+};
 @Component({
   selector: "app-vitals",
   templateUrl: "./vitals.page.html",
@@ -46,7 +60,60 @@ export class VitalsPage implements OnInit {
   public chartOptions2: Partial<ChartOptions2>;
   public chartOptions3: Partial<ChartOptions2>;
   public chartOptions4: Partial<ChartOptions2>;
+  public chartOptions5: Partial<ChartOptions3>;
+  strokepulse: ApexStroke = {
+    curve: "straight",
+    colors: ["#FF002B"],
+    width: 2,
+  };
+  fillpulse: ApexFill = {
+    colors: ["#FF002B"],
+  };
+  strokebg: ApexStroke = {
+    curve: "straight",
+    colors: ["#FFBC00"],
+    width: 2,
+  };
+  fillbg: ApexFill = {
+    colors: ["#FFBC00"],
+  };
   showData = true;
+  series = {
+    monthDataSeries1: {
+      prices: [97.85, 98.0, 99.9, 98.5, 98.0, 97.5, 97.0],
+      dates: ["S", "M", "T", "W", "T", "F", "S"],
+    },
+    monthDataSeries2: {
+      prices: [8423.7, 8423.5, 8514.3, 8481.85],
+      dates: ["13 Nov 2017", "14 Nov 2017", "15 Nov 2017", "16 Nov 2017"],
+    },
+    monthDataSeries3: {
+      prices: [7114.25, 7126.6, 7116.95, 7203.7],
+      dates: ["02 Jun 2017", "05 Jun 2017", "06 Jun 2017", "07 Jun 2017"],
+    },
+  };
+  chartCardData = {
+    bloodpressure: {
+      value: "11/60",
+      hasValue: true,
+      title: "Blood Pressure",
+    },
+    temparature: {
+      value: "98.7",
+      hasValue: true,
+      title: "Temperature",
+    },
+    pulse: {
+      value: "120",
+      hasValue: true,
+      title: "Pulse",
+    },
+    bloodglucose: {
+      value: "100",
+      hasValue: false,
+      title: "Blood Glucose",
+    },
+  };
   constructor() {}
 
   ngOnInit() {
@@ -92,7 +159,7 @@ export class VitalsPage implements OnInit {
         labels: {
           formatter: function (value) {
             if (value == 60 || value == 100 || value == 140) {
-              return value + "$MMHG";
+              return value + "MMHG";
             }
           },
         },
@@ -101,7 +168,7 @@ export class VitalsPage implements OnInit {
       chart: {
         type: "rangeBar",
         height: 110,
-        width: 310,
+        width: "100%",
         toolbar: {
           show: false,
         },
@@ -122,19 +189,26 @@ export class VitalsPage implements OnInit {
         xaxis: {
           lines: { show: true },
         },
+        padding: {
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+        },
       },
     };
-    this.chartOptions2 = {
+
+    this.chartOptions5 = {
       series: [
         {
-          name: "Desktops",
-          data: [98, 98.5, 104, 97, 98, 98.5, 97],
+          name: "STOCK ABC",
+          data: this.series.monthDataSeries1.prices,
         },
       ],
       chart: {
+        type: "area",
         height: 110,
-        width: 310,
-        type: "line",
+        width: "100%",
         zoom: {
           enabled: false,
         },
@@ -145,154 +219,41 @@ export class VitalsPage implements OnInit {
       dataLabels: {
         enabled: false,
       },
+      stroke: {
+        curve: "straight",
+        colors: ["#E229F2"],
+        width: 2,
+      },
+
+      title: {
+        text: "Fundamental Analysis of Stocks",
+        align: "left",
+      },
+      subtitle: {
+        text: "Price Movements",
+        align: "left",
+      },
+      labels: this.series.monthDataSeries1.dates,
+      xaxis: {
+        type: "category",
+      },
       yaxis: {
         opposite: true,
+
         labels: {
-          formatter: function (value) {
+          formatter: function (value: any, opt) {
             if (value == 96 || value == 100 || value == 104) {
-              return value + "°F";
+              return value;
             }
           },
         },
       },
-      stroke: {
-        curve: "straight",
-        width: 3,
+
+      legend: {
+        horizontalAlign: "left",
       },
       fill: {
-        type: "gradient",
-        gradient: {
-          shade: "dark",
-          gradientToColors: ["#FDD835"],
-          shadeIntensity: 1,
-          type: "horizontal",
-          opacityFrom: 1,
-          opacityTo: 1,
-          stops: [0, 100, 100, 100],
-        },
-      },
-      grid: {
-        row: {
-          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-          opacity: 0.5,
-        },
-      },
-      xaxis: {
-        categories: ["S", "M", "T", "W", "T", "F", "S"],
-      },
-    };
-    this.chartOptions3 = {
-      series: [
-        {
-          name: "Desktops",
-          data: [98, 98.5, 104, 97, 98, 98.5, 97],
-        },
-      ],
-      chart: {
-        height: 110,
-        width: 310,
-        type: "line",
-        zoom: {
-          enabled: false,
-        },
-        toolbar: {
-          show: false,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      yaxis: {
-        opposite: true,
-        labels: {
-          formatter: function (value) {
-            if (value == 96 || value == 100 || value == 104) {
-              return value + "°F";
-            }
-          },
-        },
-      },
-      stroke: {
-        curve: "straight",
-        width: 3,
-      },
-      fill: {
-        type: "gradient",
-        gradient: {
-          shade: "dark",
-          gradientToColors: ["#FDD835"],
-          shadeIntensity: 1,
-          type: "horizontal",
-          opacityFrom: 1,
-          opacityTo: 1,
-          stops: [0, 100, 100, 100],
-        },
-      },
-      grid: {
-        row: {
-          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-          opacity: 0.5,
-        },
-      },
-      xaxis: {
-        categories: ["S", "M", "T", "W", "T", "F", "S"],
-      },
-    };
-    this.chartOptions4 = {
-      series: [
-        {
-          name: "Desktops",
-          data: [98, 98.5, 104, 97, 98, 98.5, 97],
-        },
-      ],
-      chart: {
-        height: 110,
-        width: 310,
-        type: "line",
-        zoom: {
-          enabled: false,
-        },
-        toolbar: {
-          show: false,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      yaxis: {
-        opposite: true,
-        labels: {
-          formatter: function (value) {
-            if (value == 96 || value == 100 || value == 104) {
-              return value + "°F";
-            }
-          },
-        },
-      },
-      stroke: {
-        curve: "straight",
-        width: 3,
-      },
-      fill: {
-        type: "gradient",
-        gradient: {
-          shade: "dark",
-          gradientToColors: ["#FDD835"],
-          shadeIntensity: 1,
-          type: "horizontal",
-          opacityFrom: 1,
-          opacityTo: 1,
-          stops: [0, 100, 100, 100],
-        },
-      },
-      grid: {
-        row: {
-          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-          opacity: 0.5,
-        },
-      },
-      xaxis: {
-        categories: ["S", "M", "T", "W", "T", "F", "S"],
+        colors: ["#E229F2"],
       },
     };
   }
