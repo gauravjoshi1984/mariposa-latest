@@ -8,6 +8,7 @@ import { CalenderShiftsPageRoutingModule } from "./calender-shifts-routing.modul
 
 import { CalenderShiftsPage } from "./calender-shifts.page";
 import { AddactivityComponent } from "./addactivity/addactivity.component";
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { AddactivityComponent } from "./addactivity/addactivity.component";
     FormsModule,
     IonicModule,
     CalenderShiftsPageRoutingModule,
+    SharedModule,
   ],
   declarations: [CalenderShiftsPage, AddactivityComponent],
 })
