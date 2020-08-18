@@ -22,17 +22,17 @@
         <!-- <div style="text-align: justify; width: 100%;"> -->
         <table style="width: 100%;">
           <tr>
-            <td *ngFor="let item of daysList">
+            <td *ngFor="let item of dates">
               <div
                 color="primary"
                 mode="ios"
                 class="circlestyle"
-                [class.inactivecircle]="item.status == 'disable'"
-                [class.selectedcircle]="item.status == 'selected'"
-                [class.activecircle]="item.status == 'active'"
+                [class.inactivecircle]="item.diff > 0"
+                [class.selectedcircle]="item.diff == 0"
+                [class.activecircle]="item.diff < 0"
               >
-                <div class="daylabel">{{ item.name }}</div>
-                <div class="datelabel">{{ item.date }}</div>
+                <div class="daylabel">{{ item.date | date: "EEE" }}</div>
+                <div class="datelabel">{{ item.date | date: "dd" }}</div>
               </div>
             </td>
           </tr>

@@ -174,7 +174,15 @@ export class CalenderShiftsPage implements OnInit {
       time: "06 PM",
     },
   ];
-
+  timeLineShifts = [
+    {
+      startDate: "",
+      endDate: "",
+      startTime: "",
+      endTime: "",
+      title: "Mary",
+    },
+  ];
   daysList = [
     {
       name: "Mon",
