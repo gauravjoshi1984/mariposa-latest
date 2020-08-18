@@ -249,12 +249,11 @@ ion-segment {
   width: 188px;
   margin: 0;
   margin-left: 24px;
-  /* opacity: 0.6; */
-  border: 0.6px solid #4137ff;
-  /* box-sizing: border-box; */
+  border-left: 0.6px solid #4137ff;
+  /* box-shadow: 0 0 0 2px #4137ff; */
   border-radius: 8px;
-  /* box-shadow: inset 0 0 1px #4137FF; */
   padding: 0;
+  background: #4137ff;
 }
 ion-segment-button {
   margin: 0;
@@ -262,24 +261,21 @@ ion-segment-button {
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
-  /* identical to box height */
-
   display: flex;
   align-items: center;
   text-align: center;
-
-  /* Dark Grey */
-
   --color: #7e7e7e;
   --padding-top: 8px;
   --padding-bottom: 7px;
-  //   --background-checked: #4137ff;
   --indicator-color: #4137ff;
   --color-checked: white;
   --color-focused: white;
   --color-hover: white;
-  //   --background: #fff;
+  --background: white;
   --border-radius: 0;
+  border-top: 0.1px solid #4137ff;
+  border-bottom: 0.1px solid #4137ff;
+  border-right: 0.1px solid #4137ff;
 }
 .secondtoolbar {
   height: 96px;
