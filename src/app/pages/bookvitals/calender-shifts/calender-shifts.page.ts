@@ -116,6 +116,50 @@ export class CalenderShiftsPage implements OnInit {
     },
   ];
 
+  timeLineActivity = [
+    {
+      startDate: "",
+      endDate: "",
+      startTime: moment("07:00:00 am", "HH:mm:ss a"),
+      endTime: moment("08:00:00 pm", "HH:mm:ss a"),
+      name: "Wake Up",
+      desc: "message or instructions will be shown here",
+    },
+    {
+      startDate: "",
+      endDate: "",
+      startTime: moment("08:00:00 pm", "HH:mm:ss a"),
+      endTime: moment("09:00:00 pm", "HH:mm:ss a"),
+      name: "Bathing",
+      desc: "message or instructions will be shown here",
+    },
+    {
+      startDate: "",
+      endDate: "",
+      startTime: moment("11:00:00 am", "HH:mm:ss a"),
+      endTime: moment("12:00:00 pm", "HH:mm:ss a"),
+      name: "Medication: Ibuprofine MKal",
+      desc: "Dosage: 1 with warm water, Daily",
+    },
+    {
+      startDate: "",
+      endDate: "",
+      startTime: moment("11:00:00 am", "HH:mm:ss a"),
+      endTime: moment("12:00:00 pm", "HH:mm:ss a"),
+      name: "Shopping: Milk Tin",
+      desc: "Every wednesday (10 Ltrs)",
+    },
+    {
+      startDate: "",
+      endDate: "",
+      startTime: moment("01:00:00 pm", "HH:mm:ss a"),
+      endTime: moment("02:00:00 pm", "HH:mm:ss a"),
+      name: "Lunch",
+      desc: "Every wednesday (beard trimming)",
+    },
+   
+  ];
+
   selectedDay = "Mon";
   endTimeTemp: any;
   constructor(private modalController: ModalController) {}
