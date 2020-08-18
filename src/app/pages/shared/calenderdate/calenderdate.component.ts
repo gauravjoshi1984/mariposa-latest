@@ -63,11 +63,7 @@ export class CalenderdateComponent implements OnInit {
 
     const from_date = moment().startOf("isoWeek");
     const to_date = moment().endOf("isoWeek");
-    console.log({
-      from_date: from_date.toString(),
-      today: moment().toString(),
-      to_date: to_date.toString(),
-    });
+
     this.dates = [];
     let dates = [];
     this.dates.push({
@@ -76,7 +72,6 @@ export class CalenderdateComponent implements OnInit {
     });
 
     while (from_date.add(1, "days").diff(to_date) < 0) {
-      console.log(from_date.toDate());
       let diff = moment().diff(from_date.clone().toDate(), "days");
       if (diff == 0) {
         if (moment().isSame(from_date.clone().toDate(), "day")) {
@@ -90,8 +85,6 @@ export class CalenderdateComponent implements OnInit {
         diff: diff,
       });
     }
-
-    console.log(this.dates);
   }
   changeMonth() {
     let dayCount = this.daysInMonth(
@@ -105,7 +98,6 @@ export class CalenderdateComponent implements OnInit {
     );
   }
   getDays(dayCount, month, year) {
-    console.log(this.selectedDay, month, year);
     for (let index = 1; index <= dayCount; index++) {
       let date = new Date(year, month, index);
     }
@@ -129,7 +121,6 @@ export class CalenderdateComponent implements OnInit {
     return new Date(year, month, 0).getDate();
   }
   checkDate(item) {
-    console.log(moment().diff(item));
     return moment().diff(item);
   }
 }
