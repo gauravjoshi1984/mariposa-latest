@@ -62,8 +62,7 @@
             <ion-col size="1">
                 <div style="padding-left: 3px;">
                     <ion-checkbox mode="md"
-                    formControlName = "checkbox1"
-                    color="mwhite">
+                    color="mwhite" [checked]="status1"  (ionChange)="addCheckbox($event)">
                 </ion-checkbox>
                 </div>
             </ion-col>
@@ -77,12 +76,12 @@
         <ion-row style="align-items: center;margin-top:16px;margin-bottom: 24px;">
             <ion-col size="1">
                 <div style="padding-left: 3px;">
-                    <ion-checkbox mode="md" color="mwhite"></ion-checkbox>
+                    <ion-checkbox mode="md" [checked]="status2" [disabled]="status1"   color="mwhite"></ion-checkbox>
                 </div>
             </ion-col>
             <ion-col size="11" style="padding-top: 0px;">
                 <div>
-                    <ion-text  style="font-size:16px;line-height:19px;font-weight:300;margin-left:5px" color="mdblack">Ability to enter vitals</ion-text>
+                    <ion-text  style="font-size:16px;line-height:19px;font-weight:300;margin-left:5px" [class.disabledlabel]="status1" color="mdblack">Ability to enter vitals</ion-text>
                 </div>
             </ion-col>
         </ion-row>
@@ -128,7 +127,20 @@
               <ion-text position="floating" id="tag">Mobile Number</ion-text>
           </div>
           <div class="">
+              <ion-grid class="ion-no-padding">
+                  <ion-row>
+              <!-- <ion-input mode="md" class="input" type="tel" placeholder="000" formControlName="memberMobileNumber"></ion-input> -->
+                      <ion-col size="3">
               <ion-input mode="md" class="input" type="tel" placeholder="000" formControlName="memberMobileNumber"></ion-input>
+
+                      </ion-col>
+                      <ion-col style="padding-left: 7px;" size="9">
+              <ion-input mode="md" class="input" type="tel" placeholder="000" formControlName="memberMobileNumber"></ion-input>
+
+                      </ion-col>
+                  </ion-row>
+              </ion-grid>
+              <!-- <ion-input mode="md" class="input" type="tel" placeholder="000" formControlName="memberMobileNumber"></ion-input> -->
               <ion-item [hidden]="checkValidity(memberForm.controls.memberMobileNumber)" lines="none" style="margin-top:-10px;margin-left:-10px;">
                   <ion-icon style="margin-right: 5px;" name="alert-circle"></ion-icon>
                   <ion-text class=“warning”>Invalid Phone Number.</ion-text>
@@ -142,11 +154,12 @@
                 <ion-text class=“warning”>Invalid Phone Number.</ion-text>
             </ion-item>
           </div>    -->
-          <div>
-            <div class= "shifttiming" *ngIf="selectedType=='CAREGIVER'">
-                    <ion-row>
+          <div  *ngIf="selectedType=='CAREGIVER'" [formGroup]="shifttimeform">
+            <div class= "shifttiming" [hidden]="status1" formArrayName="timeshift" *ngFor="let item of shifttimeform.controls.timeshift?.value;let i=index" >
+                <ng-container [formGroupName]="i">
+                <ion-row>
                       <ion-col>
-                        <ion-title class="infotag">Shifts Timings</ion-title>
+                        <ion-title class="infotag">Shift <span *ngIf="i>0">-{{i+1}}</span> Timings</ion-title>
                       </ion-col>
                       <ion-col>
                         <ion-icon [hidden]="true" class="pen" src = "../assets/MariposaIcons/pen.svg"></ion-icon>
@@ -174,29 +187,31 @@
                       <ion-col size="6">
                           <p class="datelabel">Start Date</p>
                           <ion-button fill="outline" class="datebtn">
-                              <ion-datetime displayFormat="DD-MMM-YYYY" value="12-May-2020"></ion-datetime>
+                              <ion-datetime (ionChange)="changestartdate(i)" formControlName="startDate" displayFormat="DD-MMM-YYYY" ></ion-datetime>
                               <ion-icon slot="end" src="assets/MariposaIcons/Calendar icon.svg"></ion-icon>
                           </ion-button>
                       </ion-col>
                       <ion-col size="6">
                           <p class="datelabel">End Date</p>
                           <ion-button fill="outline" class="datebtn right">
-                              <ion-datetime displayFormat="DD-MMM-YYYY" value="16-May-2020" ></ion-datetime>
+                              <ion-datetime formControlName="endDate" displayFormat="DD-MMM-YYYY"  ></ion-datetime>
                               <ion-icon slot="end" src="assets/MariposaIcons/Calendar icon.svg"></ion-icon>
                           </ion-button>
                       </ion-col>
                   </ion-row>
-              
+              <ng-container *ngIf="item.startDate!=item.endtDate">
                   <p class="datelabel top">Repeat</p>
                       <div class="chipdiv">
                           <ion-chip color="primary" mode="ios" outline="true" [class.selectedchip]="selectedDays.includes(day.value)" *ngFor="let day of daysList" (click)="addremoveDay(day)">
                               <ion-label>{{day.name}}</ion-label>
                           </ion-chip> 
                       </div>
+                    </ng-container>
                   
-                      <ion-button class="addbutton" fill="outline" shape="round">
+                      <ion-button (click)="addtimeshift()" class="addbutton" fill="outline" shape="round">
                         <ion-icon class="plusbutton" slot="start" name="add-circle"></ion-icon>ADD SHIFT
-                      </ion-button>    
+                      </ion-button>   
+                    </ng-container>     
             </div>
         </div>
             
