@@ -9,7 +9,7 @@ import * as moment from "moment";
   styleUrls: ["./calender-shifts.page.scss"],
 })
 export class CalenderShiftsPage implements OnInit {
-  segValue = "shifts";
+  segValue = "activities";
   lowesttimeper: any;
   highesttimeper: any;
   timeLine = [];
@@ -124,23 +124,23 @@ export class CalenderShiftsPage implements OnInit {
       startDate: "",
       endDate: "",
       startTime: moment("07:00:00 am", "HH:mm:ss a"),
-      endTime: moment("08:00:00 pm", "HH:mm:ss a"),
+      endTime: moment("08:00:00 am", "HH:mm:ss a"),
       title: "Wake Up",
       desc: "message or instructions will be shown here",
     },
     {
       startDate: "",
       endDate: "",
-      startTime: moment("08:00:00 pm", "HH:mm:ss a"),
-      endTime: moment("09:00:00 pm", "HH:mm:ss a"),
+      startTime: moment("08:00:00 am", "HH:mm:ss a"),
+      endTime: moment("09:00:00 am", "HH:mm:ss a"),
       title: "Bathing",
       desc: "message or instructions will be shown here",
     },
     {
       startDate: "",
       endDate: "",
-      startTime: moment("11:00:00 am", "HH:mm:ss a"),
-      endTime: moment("12:00:00 pm", "HH:mm:ss a"),
+      startTime: moment("09:00:00 am", "HH:mm:ss a"),
+      endTime: moment("10:00:00 am", "HH:mm:ss a"),
       title: "Medication: Ibuprofine MKal",
       desc: "Dosage: 1 with warm water, Daily",
     },
@@ -152,14 +152,14 @@ export class CalenderShiftsPage implements OnInit {
       title: "Shopping: Milk Tin",
       desc: "Every wednesday (10 Ltrs)",
     },
-    {
-      startDate: "",
-      endDate: "",
-      startTime: moment("01:00:00 pm", "HH:mm:ss a"),
-      endTime: moment("02:00:00 pm", "HH:mm:ss a"),
-      title: "Lunch",
-      desc: "Every wednesday (beard trimming)",
-    },
+    // {
+    //   startDate: "",
+    //   endDate: "",
+    //   startTime: moment("01:00:00 pm", "HH:mm:ss a"),
+    //   endTime: moment("02:00:00 pm", "HH:mm:ss a"),
+    //   title: "Lunch",
+    //   desc: "Every wednesday (beard trimming)",
+    // },
   ];
   timeLineData = [];
 
@@ -169,8 +169,10 @@ export class CalenderShiftsPage implements OnInit {
   constructor(private modalController: ModalController) {}
 
   ngOnInit() {
-    this.timeLineData = this.timeLineActivity;
+    // this.timeLineData = this.timeLineActivity;
+    this.initCalenderActivity();
     this.initCalenderShift();
+
   }
   initCalenderShift() {
     this.lowesttimeper = this.timeLineShifts[0].startTime;
@@ -188,7 +190,7 @@ export class CalenderShiftsPage implements OnInit {
         let hrs: any = dur.asHours();
         let tempData: any = {
           // emptyspace: hrs,
-          emptyheight: hrs * 85,
+          emptyheight: hrs * 84.6,
         };
         this.timeLineShifts.splice(i, 0, tempData);
       }
@@ -198,7 +200,7 @@ export class CalenderShiftsPage implements OnInit {
         // duration in hours
         let hours: any = duration.asHours();
         element["hours"] = hours;
-        element["height"] = hours * 85;
+        element["height"] = (hours * 84.6)-8;
 
         this.endTimeTemp = element.endTime;
       }
@@ -237,7 +239,7 @@ export class CalenderShiftsPage implements OnInit {
         let hrs: any = dur.asHours();
         let tempData: any = {
           // emptyspace: hrs,
-          emptyheight: hrs * 85,
+          emptyheight: hrs * 84.6,
         };
         this.timeLineActivity.splice(i, 0, tempData);
       }
@@ -247,7 +249,7 @@ export class CalenderShiftsPage implements OnInit {
         // duration in hours
         let hours: any = duration.asHours();
         element["hours"] = hours;
-        element["height"] = hours * 85;
+        element["height"] = (hours * 84.6)-8;
 
         this.endTimeTemp2 = element.endTime;
       }

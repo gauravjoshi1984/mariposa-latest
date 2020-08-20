@@ -1,10 +1,3 @@
-ion-content {
-  --padding-start: 24px !important;
-  --padding-end: 24px !important;
-  --padding-top: 16px;
-  --background: #f8f8f8;
-}
-
 ion-title {
   padding-left: 24px;
   font-style: normal;
@@ -20,18 +13,181 @@ ion-icon {
 }
 ion-chip {
   margin: 0;
-
+  //   padding: 0;
 }
+.unselectchip {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
 
+  text-align: center;
+  text-transform: uppercase;
+  display: inline-block;
 
+  /* Dark Grey */
+
+  color: #7e7e7e;
+  background: white;
+  width: 14.2857142857%;
+  height: 17px;
+}
+.selectedchip {
+  font-style: normal;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  text-transform: uppercase;
+
+  /* White */
+
+  color: #ffffff;
+  background: #4137ff;
+  border-radius: 8px;
+  width: 14.2857142857%;
+  height: 32px;
+  padding-top: 7px;
+}
+.chipcol {
+  //   padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.circlestyle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  margin: 0 0.8px;
+  padding: 11px 8px 9px 5px;
+  text-transform: uppercase;
+  display: inline-block;
+  .daylabel {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    /* or 117% */
+
+    text-align: center;
+
+    /* White */
+
+    // color: #ffffff;
+  }
+  .datelabel {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    /* or 117% */
+
+    text-align: center;
+
+    /* White */
+
+    // color: #ffffff;
+  }
+}
+ion-content {
+  --padding-start: 24px !important;
+  --padding-end: 24px !important;
+  --padding-top: 16px;
+  --background: #f8f8f8;
+}
 .timelinecol {
   display: inline-flex;
   margin-bottom: 5px;
 }
+.hidecard {
+  visibility: hidden;
+}
+.timePer {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+  /* identical to box height, or 100% */
 
+  /* Dark Grey */
+
+  color: #7e7e7e;
+  //   width: 20%;
+  margin: 0;
+  padding-bottom: 44px;
+  padding-top: 22px;
+}
+.timePer2 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+  /* identical to box height, or 100% */
+
+  /* Dark Grey */
+
+  color: #7e7e7e;
+  //   width: 20%;
+  margin: 0;
+  padding-bottom: 44px;
+  padding-top: 22px;
+  padding-right: 16px;
+  width: 60px;
+}
+.selectedCard {
+  background: #4137ff !important;
+  /* Medium Grey */
+
+  border: 0.4px solid #b8b8b8 !important;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.08), 0px 0px 1px rgba(0, 0, 0, 0.25) !important;
+  .cardtitle {
+    color: #ffffff !important;
+  }
+  .carddesc {
+    color: #ffffff !important;
+  }
+}
+.detailCard {
+  background: #ffffff;
+  padding: 14px 0 12px 14px;
+  border: 0.4px solid #b8b8b8;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.08), 0px 0px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  width: 278px;
+  height: 64px;
+  .cardtitle {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+
+    /* Direct Black */
+
+    color: #1a1a1a;
+    margin: 0;
+  }
+  .carddesc {
+    font-style: normal;
+    font-weight: normal;
+    padding-top: 5px;
+    font-size: 12px;
+    line-height: 14px;
+    margin: 0;
+
+    /* Dark Grey */
+
+    color: #7e7e7e;
+  }
+}
 .timelinecard {
   background: #ffffff;
-  
+  /* Mariposa Vivid Blue */
 
   border: 0.4px solid #4137ff;
   box-sizing: border-box;
@@ -41,12 +197,15 @@ ion-chip {
   height: 440px;
   padding: 14px 22px;
   margin: 0;
+  margin-bottom: 8px;
   h1 {
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
     line-height: 19px;
-   
+    /* identical to box height */
+
+    /* Direct Black */
 
     color: #1a1a1a;
     margin: 0;
@@ -57,185 +216,109 @@ ion-chip {
     font-size: 12px;
     line-height: 14px;
 
+    /* Direct Black */
 
     color: #1a1a1a;
     margin: 0;
     padding-top: 5px;
   }
 }
-
-
 // .emptyspace {
 //   height: 68px;
 // }
-
-
-.timePer {
+.selectlabel {
   font-style: normal;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 14px;
-  line-height: 14px;
- 
-  color: #7e7e7e;
-  
-  margin: 0;
-  padding-bottom: 44px;
-  padding-top: 22px;
+  line-height: 17px;
+  /* identical to box height */
+
+  /* Direct Black */
+
+  color: #1a1a1a;
 }
+ion-icon {
+  zoom: 1;
+  font-size: 24px;
+}
+.propic {
+  font-size: 32px;
+}
+ion-segment {
+  height: 32px;
+  min-height: 32px;
+  width: 188px;
+  margin: 0;
+  margin-left: 24px;
+  border-left: 0.6px solid #4137ff;
+  border-right: 0.6px solid #4137ff;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// .unselectchip {
-//   font-style: normal;
-//   font-weight: 600;
-//   font-size: 14px;
-//   line-height: 17px;
-
-
-//   text-align: center;
-//   text-transform: uppercase;
-//   display: inline-block;
-
-  
-
-//   color: #7e7e7e;
-//   background: white;
-//   width: 14.2857142857%;
-//   height: 17px;
-// }
-// .selectedchip {
-//   font-style: normal;
-//   display: inline-block;
-//   font-weight: 600;
-//   font-size: 14px;
-//   line-height: 17px;
-//   text-align: center;
-//   text-transform: uppercase;
-
- 
-
-//   color: #ffffff;
-//   background: #4137ff;
-//   border-radius: 8px;
-//   width: 14.2857142857%;
-//   height: 32px;
-//   padding-top: 7px;
-// }
-// .chipcol {
-//   padding-left: 13px;
-//   padding-right: 13px;
-// }
-// ion-content {
-//   --padding-start: 24px !important;
-//   --padding-end: 24px !important;
-//   --padding-top: 16px;
-//   --background: #f8f8f8;
-// }
-// .timelinecol {
-//   display: inline-flex;
-//   margin-bottom: 5px;
-// }
-// .hidecard {
-//   visibility: hidden;
-// }
-// .timePer {
-//   font-style: normal;
-//   font-weight: normal;
-//   font-size: 14px;
-//   line-height: 14px;
-  
-
-//   color: #7e7e7e;
-//   width: 20%;
-//   margin: 0;
-//   padding-top: 16px;
-// }
-// .selectedCard {
-//   background: #4137ff !important;
-
-//   border: 0.4px solid #b8b8b8 !important;
-//   box-sizing: border-box;
-//   box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.08), 0px 0px 1px rgba(0, 0, 0, 0.25) !important;
-//   .cardtitle {
-//     color: #ffffff !important;
-//   }
-//   .carddesc {
-//     color: #ffffff !important;
-//   }
-// }
-// .detailCard {
-//   background: #ffffff;
-//   padding: 14px 0 12px 14px;
-//   border: 0.4px solid #b8b8b8;
-//   box-sizing: border-box;
-//   box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.08), 0px 0px 1px rgba(0, 0, 0, 0.25);
-//   border-radius: 8px;
-//   width: 278px;
-//   height: 64px;
-//   .cardtitle {
-//     font-style: normal;
-//     font-weight: normal;
-//     font-size: 16px;
-//     line-height: 19px;
-   
-
-//     color: #1a1a1a;
-//     margin: 0;
-//   }
-//   .carddesc {
-//     font-style: normal;
-//     font-weight: normal;
-//     padding-top: 5px;
-//     font-size: 12px;
-//     line-height: 14px;
-//     margin: 0;
-
-   
-
-//     color: #7e7e7e;
-//   }
-// }
-
-
-
-
+  /* box-shadow: 0 0 0 2px #4137ff; */
+  border-radius: 8px;
+  padding: 0;
+  background: #4137ff;
+}
+ion-segment-button {
+  margin: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  --color: #7e7e7e;
+  --padding-top: 8px;
+  --padding-bottom: 7px;
+  --indicator-color: #4137ff;
+  --color-checked: white;
+  --color-focused: white;
+  --color-hover: white;
+  --background: white;
+  --border-radius: 0;
+  border-top: 0.1px solid #4137ff;
+  border-bottom: 0.1px solid #4137ff;
+  // border-right: 0.1px solid #4137ff;
+}
+.secondtoolbar {
+  height: 96px;
+  box-shadow: 0px 2px 8px rgba(65, 55, 255, 0.08);
+  ion-item {
+    --height: 24px;
+    margin-top: 8px;
+    padding: 0;
+    ion-select {
+      margin: 0;
+      padding: 0;
+      --height: 24px;
+    }
+  }
+}
+ion-select::part(icon) {
+  color: #000000;
+  opacity: 1;
+  width: 8px;
+  height: 8px;
+  padding-right: 18px;
+  margin-left: 8px;
+}
+.inactivecircle {
+  color: #b8b8b8;
+}
+.selectedcircle {
+  color: #ffffff;
+  background: #4137ff;
+}
+.activecircle {
+  color: #000000;
+}
+.custSelect {
+  border: 1px solid #b8b8b8;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: white;
+}
+ion-fab-button {
+  width: 40px;
+  height: 40px;
+}

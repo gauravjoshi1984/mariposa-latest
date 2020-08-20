@@ -145,14 +145,7 @@ export class CalenderviewPage implements OnInit {
       title: "Lunch",
       desc: "Less sugar food is prescribed by the Dr.",
     },
-    {
-      startDate: "",
-      endDate: "",
-      startTime: moment("04:00:00 pm", "HH:mm:ss a"),
-      endTime: moment("05:00:00 pm", "HH:mm:ss a"),
-      title: "Exercise",
-          desc: "Therapy will be needed for muscle...",
-    },
+   
 ];
 
   ngOnInit() {
