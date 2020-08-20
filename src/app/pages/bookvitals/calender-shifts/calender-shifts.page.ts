@@ -157,20 +157,24 @@ export class CalenderShiftsPage implements OnInit {
       name: "Lunch",
       desc: "Every wednesday (beard trimming)",
     },
-   
   ];
+  timeLineData = [];
 
   selectedDay = "Mon";
   endTimeTemp: any;
   constructor(private modalController: ModalController) {}
 
   ngOnInit() {
-    this.lowesttimeper = this.timeLineShifts[0].startTime;
-    this.highesttimeper = this.timeLineShifts[
-      this.timeLineShifts.length - 1
+    this.timeLineData = this.timeLineActivity;
+    this.initCalender();
+  }
+  initCalender() {
+    this.lowesttimeper = this.timeLineData[0].startTime;
+    this.highesttimeper = this.timeLineData[
+      this.timeLineData.length - 1
     ].endTime;
 
-    this.timeLineShifts.forEach((element, i) => {
+    this.timeLineData.forEach((element, i) => {
       if (
         this.endTimeTemp &&
         this.endTimeTemp.format("HH:mm:ss") !=
@@ -182,7 +186,7 @@ export class CalenderShiftsPage implements OnInit {
           // emptyspace: hrs,
           emptyheight: hrs * 85,
         };
-        this.timeLineShifts.splice(i, 0, tempData);
+        this.timeLineData.splice(i, 0, tempData);
       }
       if (element.title) {
         let duration = moment.duration(element.endTime.diff(element.startTime));
@@ -220,5 +224,15 @@ export class CalenderShiftsPage implements OnInit {
       cssClass: "addactivity-class",
     });
     return await modal.present();
+  }
+  changeSeg(ev: any) {
+    console.log("CalenderShiftsPage -> changeSeg -> ev", ev);
+    if (ev.detail.value == "activities") {
+      this.timeLineData = this.timeLineActivity;
+      this.initCalender();
+    } else {
+      this.timeLineData = this.timeLineShifts;
+      this.initCalender();
+    }
   }
 }
