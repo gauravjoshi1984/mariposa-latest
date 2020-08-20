@@ -13,92 +13,95 @@ export class CalenderShiftsPage implements OnInit {
   lowesttimeper: any;
   highesttimeper: any;
   timeLine = [];
-  timeLine2 = [
-    {
-      name: "Wake Up",
-      desc: "message or instructions will be shown here",
-      card: true,
-      selected: false,
-      time: "7 AM",
-    },
-    {
-      name: "Bathing",
-      desc: "message or instructions will be shown here",
-      card: true,
-      selected: false,
-      time: "8 AM",
-    },
-    {
-      name: "Medication: Ibuprofine MKal",
-      desc: "Dosage: 1 with warm water, Daily",
-      card: true,
-      selected: false,
-      time: "9 AM",
-    },
-    {
-      name: "",
-      desc: "",
-      card: false,
-      selected: false,
-      time: "10 AM",
-    },
-    {
-      name: "Grooming",
-      desc: "Every wednesday (beard trimming)",
-      card: true,
-      selected: false,
-      time: "11 AM",
-    },
-    {
-      name: "",
-      desc: "",
-      card: false,
-      selected: false,
-      time: "12 PM",
-    },
-    {
-      name: "Lunch",
-      desc: "Less sugar food is prescribed by the Dr.",
-      card: true,
-      selected: false,
-      time: "01 PM",
-    },
-    {
-      name: "",
-      desc: "",
-      card: false,
-      selected: false,
-      time: "02 PM",
-    },
-    {
-      name: "",
-      desc: "",
-      card: false,
-      selected: false,
-      time: "03 PM",
-    },
-    {
-      name: "Exercise",
-      desc: "Therapy will be needed for muscle...",
-      card: true,
-      selected: false,
-      time: "04 PM",
-    },
-    {
-      name: "",
-      desc: "",
-      card: false,
-      selected: false,
-      time: "05 PM",
-    },
-    {
-      name: "",
-      desc: "",
-      card: false,
-      selected: false,
-      time: "06 PM",
-    },
-  ];
+  lowesttimeper2: any;
+  highesttimeper2: any;
+  timeLine2 = [];
+  // timeLine2 = [
+  //   {
+  //     name: "Wake Up",
+  //     desc: "message or instructions will be shown here",
+  //     card: true,
+  //     selected: false,
+  //     time: "7 AM",
+  //   },
+  //   {
+  //     name: "Bathing",
+  //     desc: "message or instructions will be shown here",
+  //     card: true,
+  //     selected: false,
+  //     time: "8 AM",
+  //   },
+  //   {
+  //     name: "Medication: Ibuprofine MKal",
+  //     desc: "Dosage: 1 with warm water, Daily",
+  //     card: true,
+  //     selected: false,
+  //     time: "9 AM",
+  //   },
+  //   {
+  //     name: "",
+  //     desc: "",
+  //     card: false,
+  //     selected: false,
+  //     time: "10 AM",
+  //   },
+  //   {
+  //     name: "Grooming",
+  //     desc: "Every wednesday (beard trimming)",
+  //     card: true,
+  //     selected: false,
+  //     time: "11 AM",
+  //   },
+  //   {
+  //     name: "",
+  //     desc: "",
+  //     card: false,
+  //     selected: false,
+  //     time: "12 PM",
+  //   },
+  //   {
+  //     name: "Lunch",
+  //     desc: "Less sugar food is prescribed by the Dr.",
+  //     card: true,
+  //     selected: false,
+  //     time: "01 PM",
+  //   },
+  //   {
+  //     name: "",
+  //     desc: "",
+  //     card: false,
+  //     selected: false,
+  //     time: "02 PM",
+  //   },
+  //   {
+  //     name: "",
+  //     desc: "",
+  //     card: false,
+  //     selected: false,
+  //     time: "03 PM",
+  //   },
+  //   {
+  //     name: "Exercise",
+  //     desc: "Therapy will be needed for muscle...",
+  //     card: true,
+  //     selected: false,
+  //     time: "04 PM",
+  //   },
+  //   {
+  //     name: "",
+  //     desc: "",
+  //     card: false,
+  //     selected: false,
+  //     time: "05 PM",
+  //   },
+  //   {
+  //     name: "",
+  //     desc: "",
+  //     card: false,
+  //     selected: false,
+  //     time: "06 PM",
+  //   },
+  // ];
   timeLineShifts = [
     {
       startDate: "",
@@ -122,7 +125,7 @@ export class CalenderShiftsPage implements OnInit {
       endDate: "",
       startTime: moment("07:00:00 am", "HH:mm:ss a"),
       endTime: moment("08:00:00 pm", "HH:mm:ss a"),
-      name: "Wake Up",
+      title: "Wake Up",
       desc: "message or instructions will be shown here",
     },
     {
@@ -130,7 +133,7 @@ export class CalenderShiftsPage implements OnInit {
       endDate: "",
       startTime: moment("08:00:00 pm", "HH:mm:ss a"),
       endTime: moment("09:00:00 pm", "HH:mm:ss a"),
-      name: "Bathing",
+      title: "Bathing",
       desc: "message or instructions will be shown here",
     },
     {
@@ -138,7 +141,7 @@ export class CalenderShiftsPage implements OnInit {
       endDate: "",
       startTime: moment("11:00:00 am", "HH:mm:ss a"),
       endTime: moment("12:00:00 pm", "HH:mm:ss a"),
-      name: "Medication: Ibuprofine MKal",
+      title: "Medication: Ibuprofine MKal",
       desc: "Dosage: 1 with warm water, Daily",
     },
     {
@@ -146,7 +149,7 @@ export class CalenderShiftsPage implements OnInit {
       endDate: "",
       startTime: moment("11:00:00 am", "HH:mm:ss a"),
       endTime: moment("12:00:00 pm", "HH:mm:ss a"),
-      name: "Shopping: Milk Tin",
+      title: "Shopping: Milk Tin",
       desc: "Every wednesday (10 Ltrs)",
     },
     {
@@ -154,7 +157,7 @@ export class CalenderShiftsPage implements OnInit {
       endDate: "",
       startTime: moment("01:00:00 pm", "HH:mm:ss a"),
       endTime: moment("02:00:00 pm", "HH:mm:ss a"),
-      name: "Lunch",
+      title: "Lunch",
       desc: "Every wednesday (beard trimming)",
     },
   ];
@@ -162,19 +165,20 @@ export class CalenderShiftsPage implements OnInit {
 
   selectedDay = "Mon";
   endTimeTemp: any;
+  endTimeTemp2: any;
   constructor(private modalController: ModalController) {}
 
   ngOnInit() {
     this.timeLineData = this.timeLineActivity;
-    this.initCalender();
+    this.initCalenderShift();
   }
-  initCalender() {
-    this.lowesttimeper = this.timeLineData[0].startTime;
-    this.highesttimeper = this.timeLineData[
-      this.timeLineData.length - 1
+  initCalenderShift() {
+    this.lowesttimeper = this.timeLineShifts[0].startTime;
+    this.highesttimeper = this.timeLineShifts[
+      this.timeLineShifts.length - 1
     ].endTime;
 
-    this.timeLineData.forEach((element, i) => {
+    this.timeLineShifts.forEach((element, i) => {
       if (
         this.endTimeTemp &&
         this.endTimeTemp.format("HH:mm:ss") !=
@@ -186,7 +190,7 @@ export class CalenderShiftsPage implements OnInit {
           // emptyspace: hrs,
           emptyheight: hrs * 85,
         };
-        this.timeLineData.splice(i, 0, tempData);
+        this.timeLineShifts.splice(i, 0, tempData);
       }
       if (element.title) {
         let duration = moment.duration(element.endTime.diff(element.startTime));
@@ -217,6 +221,55 @@ export class CalenderShiftsPage implements OnInit {
       }
     }
   }
+  initCalenderActivity() {
+    this.lowesttimeper2 = this.timeLineActivity[0].startTime;
+    this.highesttimeper2 = this.timeLineActivity[
+      this.timeLineActivity.length - 1
+    ].endTime;
+
+    this.timeLineActivity.forEach((element, i) => {
+      if (
+        this.endTimeTemp2 &&
+        this.endTimeTemp2.format("HH:mm:ss") !=
+          element.startTime.format("HH:mm:ss")
+      ) {
+        let dur = moment.duration(element.startTime.diff(this.endTimeTemp2));
+        let hrs: any = dur.asHours();
+        let tempData: any = {
+          // emptyspace: hrs,
+          emptyheight: hrs * 85,
+        };
+        this.timeLineActivity.splice(i, 0, tempData);
+      }
+      if (element.title) {
+        let duration = moment.duration(element.endTime.diff(element.startTime));
+
+        // duration in hours
+        let hours: any = duration.asHours();
+        element["hours"] = hours;
+        element["height"] = hours * 85;
+
+        this.endTimeTemp2 = element.endTime;
+      }
+    });
+    let duration = moment.duration(
+      this.highesttimeper2.diff(this.lowesttimeper2)
+    );
+
+    // duration in hours
+    let hours: any = duration.asHours();
+
+    for (let index = 0; index < hours; index++) {
+      if (index == 0) {
+        this.timeLine2.push(this.lowesttimeper2.format("hh A"));
+      } else {
+        let temp = this.lowesttimeper;
+        this.timeLine2.push(
+          this.lowesttimeper2.clone().add(index, "hours").format("hh A")
+        );
+      }
+    }
+  }
   // segmentChanged() {}
   async presentModal() {
     const modal = await this.modalController.create({
@@ -225,14 +278,14 @@ export class CalenderShiftsPage implements OnInit {
     });
     return await modal.present();
   }
-  changeSeg(ev: any) {
-    console.log("CalenderShiftsPage -> changeSeg -> ev", ev);
-    if (ev.detail.value == "activities") {
-      this.timeLineData = this.timeLineActivity;
-      this.initCalender();
-    } else {
-      this.timeLineData = this.timeLineShifts;
-      this.initCalender();
-    }
-  }
+  // changeSeg(ev: any) {
+  //   console.log("CalenderShiftsPage -> changeSeg -> ev", ev);
+  //   if (ev.detail.value == "activities") {
+  //     this.timeLineData = this.timeLineActivity;
+  //     this.initCalender();
+  //   } else {
+  //     this.timeLineData = this.timeLineShifts;
+  //     this.initCalender();
+  //   }
+  // }
 }
