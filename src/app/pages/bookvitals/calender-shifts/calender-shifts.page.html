@@ -24,7 +24,10 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <app-calenderdate [showMonth]="true"></app-calenderdate>
+  <app-calenderdate
+    (dayselected)="ChangeData($event)"
+    [showMonth]="true"
+  ></app-calenderdate>
 </ion-header>
 
 <ion-content>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import * as moment from "moment";
 
 @Component({
@@ -8,6 +8,8 @@ import * as moment from "moment";
 })
 export class CalenderdateComponent implements OnInit {
   @Input() showMonth: boolean;
+  @Output() dayselected = new EventEmitter<number>();
+
   daysList = [
     {
       name: "Mon",
@@ -47,6 +49,8 @@ export class CalenderdateComponent implements OnInit {
       this.monthVar
     );
     this.getWeekDays();
+    // moment().da
+    this.dayselected.emit(this.today.clone().format("D"));
   }
   getWeekDays() {
     const from_date = moment().startOf("isoWeek");
@@ -112,5 +116,7 @@ export class CalenderdateComponent implements OnInit {
   selectDay(item) {
     this.today = moment(item.date);
     this.getWeekDays();
+    this.dayselected.emit(item.date.getDate());
+    // console.log(item.date.getData());
   }
 }

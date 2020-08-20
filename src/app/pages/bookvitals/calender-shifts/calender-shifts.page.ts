@@ -16,152 +16,364 @@ export class CalenderShiftsPage implements OnInit {
   lowesttimeper2: any;
   highesttimeper2: any;
   timeLine2 = [];
-  // timeLine2 = [
-  //   {
-  //     name: "Wake Up",
-  //     desc: "message or instructions will be shown here",
-  //     card: true,
-  //     selected: false,
-  //     time: "7 AM",
-  //   },
-  //   {
-  //     name: "Bathing",
-  //     desc: "message or instructions will be shown here",
-  //     card: true,
-  //     selected: false,
-  //     time: "8 AM",
-  //   },
-  //   {
-  //     name: "Medication: Ibuprofine MKal",
-  //     desc: "Dosage: 1 with warm water, Daily",
-  //     card: true,
-  //     selected: false,
-  //     time: "9 AM",
-  //   },
-  //   {
-  //     name: "",
-  //     desc: "",
-  //     card: false,
-  //     selected: false,
-  //     time: "10 AM",
-  //   },
-  //   {
-  //     name: "Grooming",
-  //     desc: "Every wednesday (beard trimming)",
-  //     card: true,
-  //     selected: false,
-  //     time: "11 AM",
-  //   },
-  //   {
-  //     name: "",
-  //     desc: "",
-  //     card: false,
-  //     selected: false,
-  //     time: "12 PM",
-  //   },
-  //   {
-  //     name: "Lunch",
-  //     desc: "Less sugar food is prescribed by the Dr.",
-  //     card: true,
-  //     selected: false,
-  //     time: "01 PM",
-  //   },
-  //   {
-  //     name: "",
-  //     desc: "",
-  //     card: false,
-  //     selected: false,
-  //     time: "02 PM",
-  //   },
-  //   {
-  //     name: "",
-  //     desc: "",
-  //     card: false,
-  //     selected: false,
-  //     time: "03 PM",
-  //   },
-  //   {
-  //     name: "Exercise",
-  //     desc: "Therapy will be needed for muscle...",
-  //     card: true,
-  //     selected: false,
-  //     time: "04 PM",
-  //   },
-  //   {
-  //     name: "",
-  //     desc: "",
-  //     card: false,
-  //     selected: false,
-  //     time: "05 PM",
-  //   },
-  //   {
-  //     name: "",
-  //     desc: "",
-  //     card: false,
-  //     selected: false,
-  //     time: "06 PM",
-  //   },
-  // ];
-  timeLineShifts = [
-    {
-      startDate: "",
-      endDate: "",
-      startTime: moment("08:00:00 am", "HH:mm:ss a"),
-      endTime: moment("01:00:00 pm", "HH:mm:ss a"),
-      title: "Mary",
-    },
-    {
-      startDate: "",
-      endDate: "",
-      startTime: moment("02:00:00 pm", "HH:mm:ss a"),
-      endTime: moment("03:00:00 pm", "HH:mm:ss a"),
-      title: "Mary",
-    },
-  ];
 
-  timeLineActivity = [
-    {
-      startDate: "",
-      endDate: "",
-      startTime: moment("07:00:00 am", "HH:mm:ss a"),
-      endTime: moment("08:00:00 am", "HH:mm:ss a"),
-      title: "Wake Up",
-      desc: "message or instructions will be shown here",
-    },
-    {
-      startDate: "",
-      endDate: "",
-      startTime: moment("08:00:00 am", "HH:mm:ss a"),
-      endTime: moment("09:00:00 am", "HH:mm:ss a"),
-      title: "Bathing",
-      desc: "message or instructions will be shown here",
-    },
-    {
-      startDate: "",
-      endDate: "",
-      startTime: moment("09:00:00 am", "HH:mm:ss a"),
-      endTime: moment("10:00:00 am", "HH:mm:ss a"),
-      title: "Medication: Ibuprofine MKal",
-      desc: "Dosage: 1 with warm water, Daily",
-    },
-    {
-      startDate: "",
-      endDate: "",
-      startTime: moment("11:00:00 am", "HH:mm:ss a"),
-      endTime: moment("12:00:00 pm", "HH:mm:ss a"),
-      title: "Shopping: Milk Tin",
-      desc: "Every wednesday (10 Ltrs)",
-    },
-    // {
-    //   startDate: "",
-    //   endDate: "",
-    //   startTime: moment("01:00:00 pm", "HH:mm:ss a"),
-    //   endTime: moment("02:00:00 pm", "HH:mm:ss a"),
-    //   title: "Lunch",
-    //   desc: "Every wednesday (beard trimming)",
-    // },
-  ];
-  timeLineData = [];
+  shiftsDataArray = {
+    17: [
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("08:00:00 am", "HH:mm:ss a"),
+        endTime: moment("01:00:00 pm", "HH:mm:ss a"),
+        title: "Mary-17",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("02:00:00 pm", "HH:mm:ss a"),
+        endTime: moment("03:00:00 pm", "HH:mm:ss a"),
+        title: "Mary-17",
+      },
+    ],
+    18: [
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("08:00:00 am", "HH:mm:ss a"),
+        endTime: moment("01:00:00 pm", "HH:mm:ss a"),
+        title: "Mary-18",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("02:00:00 pm", "HH:mm:ss a"),
+        endTime: moment("03:00:00 pm", "HH:mm:ss a"),
+        title: "Mary*18",
+      },
+    ],
+    19: [
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("08:00:00 am", "HH:mm:ss a"),
+        endTime: moment("01:00:00 pm", "HH:mm:ss a"),
+        title: "Mary-19",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("02:00:00 pm", "HH:mm:ss a"),
+        endTime: moment("03:00:00 pm", "HH:mm:ss a"),
+        title: "Mary*19",
+      },
+    ],
+    20: [
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("08:00:00 am", "HH:mm:ss a"),
+        endTime: moment("01:00:00 pm", "HH:mm:ss a"),
+        title: "Mary-20",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("02:00:00 pm", "HH:mm:ss a"),
+        endTime: moment("03:00:00 pm", "HH:mm:ss a"),
+        title: "Mary*20",
+      },
+    ],
+    21: [
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("08:00:00 am", "HH:mm:ss a"),
+        endTime: moment("01:00:00 pm", "HH:mm:ss a"),
+        title: "Mary-21",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("02:00:00 pm", "HH:mm:ss a"),
+        endTime: moment("03:00:00 pm", "HH:mm:ss a"),
+        title: "Mary*21",
+      },
+    ],
+    22: [
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("08:00:00 am", "HH:mm:ss a"),
+        endTime: moment("01:00:00 pm", "HH:mm:ss a"),
+        title: "Mary-22",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("02:00:00 pm", "HH:mm:ss a"),
+        endTime: moment("03:00:00 pm", "HH:mm:ss a"),
+        title: "Mary*22",
+      },
+    ],
+    23: [
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("08:00:00 am", "HH:mm:ss a"),
+        endTime: moment("01:00:00 pm", "HH:mm:ss a"),
+        title: "Mary-23",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("02:00:00 pm", "HH:mm:ss a"),
+        endTime: moment("03:00:00 pm", "HH:mm:ss a"),
+        title: "Mary*23",
+      },
+    ],
+  };
+  activityDataArray = {
+    17: [
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("07:00:00 am", "HH:mm:ss a"),
+        endTime: moment("08:00:00 am", "HH:mm:ss a"),
+        title: "Wake Up - 17",
+        desc: "message or instructions will be shown here",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("08:00:00 am", "HH:mm:ss a"),
+        endTime: moment("09:00:00 am", "HH:mm:ss a"),
+        title: "Bathing",
+        desc: "message or instructions will be shown here",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("09:00:00 am", "HH:mm:ss a"),
+        endTime: moment("10:00:00 am", "HH:mm:ss a"),
+        title: "Medication: Ibuprofine MKal",
+        desc: "Dosage: 1 with warm water, Daily",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("11:00:00 am", "HH:mm:ss a"),
+        endTime: moment("12:00:00 pm", "HH:mm:ss a"),
+        title: "Shopping: Milk Tin",
+        desc: "Every wednesday (10 Ltrs)",
+      },
+    ],
+    18: [
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("07:00:00 am", "HH:mm:ss a"),
+        endTime: moment("08:00:00 am", "HH:mm:ss a"),
+        title: "Wake Up - 18",
+        desc: "message or instructions will be shown here",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("08:00:00 am", "HH:mm:ss a"),
+        endTime: moment("09:00:00 am", "HH:mm:ss a"),
+        title: "Bathing",
+        desc: "message or instructions will be shown here",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("09:00:00 am", "HH:mm:ss a"),
+        endTime: moment("10:00:00 am", "HH:mm:ss a"),
+        title: "Medication: Ibuprofine MKal",
+        desc: "Dosage: 1 with warm water, Daily",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("11:00:00 am", "HH:mm:ss a"),
+        endTime: moment("12:00:00 pm", "HH:mm:ss a"),
+        title: "Shopping: Milk Tin",
+        desc: "Every wednesday (10 Ltrs)",
+      },
+    ],
+    19: [
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("07:00:00 am", "HH:mm:ss a"),
+        endTime: moment("08:00:00 am", "HH:mm:ss a"),
+        title: "Wake Up -19",
+        desc: "message or instructions will be shown here",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("08:00:00 am", "HH:mm:ss a"),
+        endTime: moment("09:00:00 am", "HH:mm:ss a"),
+        title: "Bathing",
+        desc: "message or instructions will be shown here",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("09:00:00 am", "HH:mm:ss a"),
+        endTime: moment("10:00:00 am", "HH:mm:ss a"),
+        title: "Medication: Ibuprofine MKal",
+        desc: "Dosage: 1 with warm water, Daily",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("11:00:00 am", "HH:mm:ss a"),
+        endTime: moment("12:00:00 pm", "HH:mm:ss a"),
+        title: "Shopping: Milk Tin",
+        desc: "Every wednesday (10 Ltrs)",
+      },
+    ],
+    20: [
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("07:00:00 am", "HH:mm:ss a"),
+        endTime: moment("08:00:00 am", "HH:mm:ss a"),
+        title: "Wake Up - 20 ",
+        desc: "message or instructions will be shown here",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("08:00:00 am", "HH:mm:ss a"),
+        endTime: moment("09:00:00 am", "HH:mm:ss a"),
+        title: "Bathing",
+        desc: "message or instructions will be shown here",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("09:00:00 am", "HH:mm:ss a"),
+        endTime: moment("10:00:00 am", "HH:mm:ss a"),
+        title: "Medication: Ibuprofine MKal",
+        desc: "Dosage: 1 with warm water, Daily",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("11:00:00 am", "HH:mm:ss a"),
+        endTime: moment("12:00:00 pm", "HH:mm:ss a"),
+        title: "Shopping: Milk Tin",
+        desc: "Every wednesday (10 Ltrs)",
+      },
+    ],
+    21: [
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("07:00:00 am", "HH:mm:ss a"),
+        endTime: moment("08:00:00 am", "HH:mm:ss a"),
+        title: "Wake Up -21",
+        desc: "message or instructions will be shown here",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("08:00:00 am", "HH:mm:ss a"),
+        endTime: moment("09:00:00 am", "HH:mm:ss a"),
+        title: "Bathing",
+        desc: "message or instructions will be shown here",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("09:00:00 am", "HH:mm:ss a"),
+        endTime: moment("10:00:00 am", "HH:mm:ss a"),
+        title: "Medication: Ibuprofine MKal",
+        desc: "Dosage: 1 with warm water, Daily",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("11:00:00 am", "HH:mm:ss a"),
+        endTime: moment("12:00:00 pm", "HH:mm:ss a"),
+        title: "Shopping: Milk Tin",
+        desc: "Every wednesday (10 Ltrs)",
+      },
+    ],
+    22: [
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("07:00:00 am", "HH:mm:ss a"),
+        endTime: moment("08:00:00 am", "HH:mm:ss a"),
+        title: "Wake Up - 22",
+        desc: "message or instructions will be shown here",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("08:00:00 am", "HH:mm:ss a"),
+        endTime: moment("09:00:00 am", "HH:mm:ss a"),
+        title: "Bathing",
+        desc: "message or instructions will be shown here",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("09:00:00 am", "HH:mm:ss a"),
+        endTime: moment("10:00:00 am", "HH:mm:ss a"),
+        title: "Medication: Ibuprofine MKal",
+        desc: "Dosage: 1 with warm water, Daily",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("11:00:00 am", "HH:mm:ss a"),
+        endTime: moment("12:00:00 pm", "HH:mm:ss a"),
+        title: "Shopping: Milk Tin",
+        desc: "Every wednesday (10 Ltrs)",
+      },
+    ],
+    23: [
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("07:00:00 am", "HH:mm:ss a"),
+        endTime: moment("08:00:00 am", "HH:mm:ss a"),
+        title: "Wake Up - 23",
+        desc: "message or instructions will be shown here",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("08:00:00 am", "HH:mm:ss a"),
+        endTime: moment("09:00:00 am", "HH:mm:ss a"),
+        title: "Bathing",
+        desc: "message or instructions will be shown here",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("09:00:00 am", "HH:mm:ss a"),
+        endTime: moment("10:00:00 am", "HH:mm:ss a"),
+        title: "Medication: Ibuprofine MKal",
+        desc: "Dosage: 1 with warm water, Daily",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("11:00:00 am", "HH:mm:ss a"),
+        endTime: moment("12:00:00 pm", "HH:mm:ss a"),
+        title: "Shopping: Milk Tin",
+        desc: "Every wednesday (10 Ltrs)",
+      },
+    ],
+  };
+  timeLineShifts = [];
+
+  timeLineActivity = [];
 
   selectedDay = "Mon";
   endTimeTemp: any;
@@ -170,9 +382,8 @@ export class CalenderShiftsPage implements OnInit {
 
   ngOnInit() {
     // this.timeLineData = this.timeLineActivity;
-    this.initCalenderActivity();
-    this.initCalenderShift();
-
+    // this.initCalenderActivity();
+    // this.initCalenderShift();
   }
   initCalenderShift() {
     this.lowesttimeper = this.timeLineShifts[0].startTime;
@@ -200,7 +411,7 @@ export class CalenderShiftsPage implements OnInit {
         // duration in hours
         let hours: any = duration.asHours();
         element["hours"] = hours;
-        element["height"] = (hours * 84.6)-8;
+        element["height"] = hours * 84.6 - 8;
 
         this.endTimeTemp = element.endTime;
       }
@@ -249,7 +460,7 @@ export class CalenderShiftsPage implements OnInit {
         // duration in hours
         let hours: any = duration.asHours();
         element["hours"] = hours;
-        element["height"] = (hours * 84.6)-8;
+        element["height"] = hours * 84.6 - 8;
 
         this.endTimeTemp2 = element.endTime;
       }
@@ -290,4 +501,19 @@ export class CalenderShiftsPage implements OnInit {
   //     this.initCalender();
   //   }
   // }
+  ChangeData(ev: any) {
+    this.endTimeTemp = null;
+    this.endTimeTemp2 = null;
+    this.timeLine2 = [];
+    this.timeLine = [];
+    this.timeLineActivity = [];
+    this.timeLineActivity = Object.assign([], this.activityDataArray[ev]);
+
+    this.initCalenderActivity();
+    this.timeLine = [];
+    this.timeLineShifts = [];
+    this.timeLineShifts = Object.assign([], this.shiftsDataArray[ev]);
+
+    this.initCalenderShift();
+  }
 }
