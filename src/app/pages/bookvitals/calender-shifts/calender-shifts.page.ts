@@ -303,6 +303,7 @@ export class CalenderShiftsPage implements OnInit {
       },
     ],
     22: [
+     
       {
         startDate: "",
         endDate: "",
@@ -335,6 +336,7 @@ export class CalenderShiftsPage implements OnInit {
         title: "Shopping: Milk Tin",
         desc: "Every wednesday (10 Ltrs)",
       },
+   
     ],
     23: [
       {

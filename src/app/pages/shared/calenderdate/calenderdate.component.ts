@@ -43,7 +43,7 @@ export class CalenderdateComponent implements OnInit {
   ngOnInit() {
     // this.getMonthArray();
     this.today = moment().minute(0).hour(0).second(0);
-    this.monthVar = moment().format("MMM");
+    this.monthVar = moment().format("MMMM");
     console.log(
       "CalenderdateComponent -> ngOnInit -> this.monthVar",
       this.monthVar
