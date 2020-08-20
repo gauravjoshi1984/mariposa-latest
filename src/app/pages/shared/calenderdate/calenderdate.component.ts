@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import * as moment from "moment";
 
 @Component({
@@ -7,6 +7,7 @@ import * as moment from "moment";
   styleUrls: ["./calenderdate.component.scss"],
 })
 export class CalenderdateComponent implements OnInit {
+  @Input() showMonth: boolean;
   daysList = [
     {
       name: "Mon",
@@ -34,57 +35,42 @@ export class CalenderdateComponent implements OnInit {
   // daysList:any=[];
   selectedDay: any;
   dates: any = [];
+  monthVar: any;
   constructor() {}
 
   ngOnInit() {
-    this.getMonthArray();
-    this.today = moment().isoWeekday(1);
-
-    // let begin = moment(this.today).isoWeekday(1);
-    // let begin = moment(today).isoWeekday(1);
-    // begin.startOf("isoWeek");
-    // moment().startOf("isoWeek");
-
-    // console.log(this.today);
-    // this.selectedMonth = this.today.toLocaleString("default", {
-    //   month: "numeric",
-    // });
-    // this.selectedDay = this.today.toLocaleString("default", {
-    //   day: "numeric",
-    // });
-    // let todayMonth = this.today.getMonth();
-    // let todayYear = this.today.getFullYear();
-    // let dayCount = this.daysInMonth(todayMonth, todayYear);
-    // this.getDays(
-    //   dayCount,
-    //   parseInt(this.selectedMonth) - 1,
-    //   this.today.getFullYear()
-    // );
-
+    // this.getMonthArray();
+    this.today = moment().minute(0).hour(0).second(0);
+    this.monthVar = moment().format("MMM");
+    console.log(
+      "CalenderdateComponent -> ngOnInit -> this.monthVar",
+      this.monthVar
+    );
+    this.getWeekDays();
+  }
+  getWeekDays() {
     const from_date = moment().startOf("isoWeek");
     const to_date = moment().endOf("isoWeek");
 
     this.dates = [];
-    let dates = [];
-    this.dates.push({
-      date: from_date.clone().toDate(),
-      diff: moment().diff(from_date.clone().toDate(), "days"),
-    });
+    // this.dates.push({
+    //   date: from_date.clone().toDate(),
+    //   diff: moment().diff(from_date.clone().toDate(), "days"),
+    // });
 
-    while (from_date.add(1, "days").diff(to_date) < 0) {
-      let diff = moment().diff(from_date.clone().toDate(), "days");
-      if (diff == 0) {
-        if (moment().isSame(from_date.clone().toDate(), "day")) {
-          diff = 0;
-        } else {
-          diff = -1;
-        }
-      }
-      this.dates.push({
+    do {
+      let future = moment().subtract(1, "days").isBefore(from_date);
+      let x = {
         date: from_date.clone().toDate(),
-        diff: diff,
-      });
-    }
+        futvar: future,
+        selected: false,
+      };
+      if (this.today.isSame(from_date, "day")) {
+        x.selected = true;
+      }
+
+      this.dates.push(x);
+    } while (from_date.add(1, "days").diff(to_date) <= 0);
   }
   changeMonth() {
     let dayCount = this.daysInMonth(
@@ -122,5 +108,9 @@ export class CalenderdateComponent implements OnInit {
   }
   checkDate(item) {
     return moment().diff(item);
+  }
+  selectDay(item) {
+    this.today = moment(item.date);
+    this.getWeekDays();
   }
 }
