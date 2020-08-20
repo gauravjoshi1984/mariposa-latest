@@ -8,12 +8,16 @@ import { CalenderviewPageRoutingModule } from './calenderview-routing.module';
 
 import { CalenderviewPage } from './calenderview.page';
 
+import { SharedModule } from "../../shared/shared.module";
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CalenderviewPageRoutingModule
+    CalenderviewPageRoutingModule,
+    SharedModule
   ],
   declarations: [CalenderviewPage]
 })

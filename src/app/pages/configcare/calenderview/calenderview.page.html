@@ -13,7 +13,7 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar>
+  <!-- <ion-toolbar>
     <ion-grid fixed class="ion-no-padding">
       <ion-row>
         <ion-col size="12" class="chipcol">
@@ -31,11 +31,12 @@
         <ion-col size="6"></ion-col>
       </ion-row>
     </ion-grid>
-  </ion-toolbar>
+  </ion-toolbar> -->
+  <app-calenderdate></app-calenderdate>
 </ion-header>
 
 <ion-content>
-  <ion-grid fixed class="ion-no-padding">
+  <!-- <ion-grid fixed class="ion-no-padding">
     <ion-row>
       <ion-col size="12" class="timelinecol" *ngFor="let item of timeLine">
         <h2 class="timePer">{{item.time}}</h2>
@@ -49,5 +50,45 @@
         </div>
       </ion-col>
     </ion-row>
+  </ion-grid> -->
+
+
+  <ion-grid fixed class="ion-no-padding" >
+    <ion-row>
+      <ion-col size="2">
+        <ion-row>
+          <ion-col size="12" class="timelinecol" *ngFor="let item of timeLine">
+            <h2 class="timePer">{{item}}</h2>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="10">
+        <ng-container *ngFor="let item of timeLineShifts">
+          <ion-card
+            class="timelinecard"
+            [style.height.px]="item['height']"
+            *ngIf="item.title;else emptyspace"
+          >
+            <h1>{{item.title}}</h1>
+            <h4>
+              {{item.startTime | date:'hh:mm aa'}} - {{item.endTime| date:'hh:mm aa' }}
+            </h4>
+          </ion-card>
+          <ng-template #emptyspace>
+            <div
+              class="emptyspace"
+              [style.height.px]="item['emptyheight']"
+            ></div>
+          </ng-template>
+        </ng-container>
+        <!-- <ion-card class="timelinecard">
+          <h1>Johnson</h1>
+          <h4>2:00 pm - 8:30 pm</h4>
+        </ion-card> -->
+      </ion-col>
+    </ion-row>
   </ion-grid>
+
+
+
 </ion-content>
