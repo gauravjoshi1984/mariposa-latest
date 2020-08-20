@@ -380,11 +380,7 @@ export class CalenderShiftsPage implements OnInit {
   endTimeTemp2: any;
   constructor(private modalController: ModalController) {}
 
-  ngOnInit() {
-    // this.timeLineData = this.timeLineActivity;
-    // this.initCalenderActivity();
-    // this.initCalenderShift();
-  }
+  ngOnInit() {}
   initCalenderShift() {
     this.lowesttimeper = this.timeLineShifts[0].startTime;
     this.highesttimeper = this.timeLineShifts[
