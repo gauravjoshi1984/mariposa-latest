@@ -20,6 +20,8 @@ export type ChartOptions = {
   dataLabels: ApexDataLabels;
   plotOptions: ApexPlotOptions;
   yaxis: ApexYAxis;
+  legend: ApexLegend;
+
   fill: ApexFill;
   grid: ApexGrid;
 };
@@ -110,10 +112,48 @@ export class VitalsPage implements OnInit {
     },
     bloodglucose: {
       value: "100",
-      hasValue: false,
+      hasValue: true,
       title: "Blood Glucose",
     },
   };
+  yaxisTemp: ApexYAxis = {
+    opposite: true,
+
+    labels: {
+      formatter: function (value: any) {
+        if (value == 96 || value == 100 || value == 104) {
+          return value + "°F";
+        }
+      },
+      align: "right",
+    },
+  };
+  yaxisPulse: ApexYAxis = {
+    opposite: true,
+
+    labels: {
+      formatter: function (value: any) {
+        if (value == 96 || value == 100 || value == 104) {
+          return value + " Bpm";
+        }
+      },
+      align: "right",
+    },
+  };
+
+  yaxisBloodGlucose: ApexYAxis = {
+    opposite: true,
+
+    labels: {
+      formatter: function (value: any) {
+        if (value == 96 || value == 100 || value == 104) {
+          return value + " mg/dl";
+        }
+      },
+      align: "right",
+    },
+  };
+
   constructor() {}
 
   ngOnInit() {
@@ -162,13 +202,17 @@ export class VitalsPage implements OnInit {
               return value + "MMHG";
             }
           },
+          align: "center",
         },
+      },
+      legend: {
+        horizontalAlign: "right",
       },
 
       chart: {
         type: "rangeBar",
         height: 110,
-        width: "100%",
+        width: "98%",
         toolbar: {
           show: false,
         },
@@ -208,7 +252,7 @@ export class VitalsPage implements OnInit {
       chart: {
         type: "area",
         height: 110,
-        width: "100%",
+        width: "98%",
         zoom: {
           enabled: false,
         },
@@ -243,14 +287,15 @@ export class VitalsPage implements OnInit {
         labels: {
           formatter: function (value: any, opt) {
             if (value == 96 || value == 100 || value == 104) {
-              return value;
+              return value + "°F";
             }
           },
+          align: "right",
         },
       },
 
       legend: {
-        horizontalAlign: "left",
+        horizontalAlign: "right",
       },
       fill: {
         colors: ["#E229F2"],
