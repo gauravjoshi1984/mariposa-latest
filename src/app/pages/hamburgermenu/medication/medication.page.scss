@@ -1,74 +1,87 @@
-
-.content{
+.content {
   padding-top: 24px;
   padding-right: 24px;
   padding-left: 24px;
   padding-bottom: 0px;
 }
 
-.info{
-  padding:24px;
+.info {
+  padding: 24px;
 }
 
-ion-segment{
+ion-segment {
   height: 40px;
 }
 
-ion-row{
-padding: 0px;
-margin-left: 0px;
-align-items: center;
-}
-
-ion-row{
+ion-row {
   padding: 0px;
   margin-left: 0px;
-  }
+  align-items: center;
+}
 
-ion-icon{
+ion-row {
+  padding: 0px;
+  margin-left: 0px;
+}
+
+ion-icon {
   zoom: 1;
-  height:24px;
+  height: 24px;
   width: 24px;
-  float:right;
-}  
+  float: right;
+}
 
-.medname{
-
+.medname {
   font-size: 16px;
   line-height: 19px;
   font-weight: bold;
   font-style: normal;
-  color:#1a1a1a;
-
-
+  color: #1a1a1a;
 }
 
-.dosage{
+.dosage {
   font-size: 16px;
   line-height: 19px;
   font-weight: normal;
   font-style: normal;
-  color:#1a1a1a;
+  color: #1a1a1a;
 }
 
-.note{
+.note {
   font-size: 14px;
   line-height: 17px;
   font-weight: normal;
   font-style: normal;
-  color:#7E7E7E;
+  color: #7e7e7e;
 }
 
-.time{
+.time {
   font-size: 16px;
   line-height: 19px;
   font-weight: bold;
   font-style: normal;
-  color:#1a1a1a;
+  color: #1a1a1a;
   float: right;
 }
 
-.solid{
+.solid {
   margin-bottom: 16px;
   margin-top: 16px;
+}
+ion-segment-button {
+  --indicator-color: #4137ff;
+  --color: #7e7e7e;
+  --color-checked: white;
+
+  // :#4137ff ;
+  ion-label {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: capitalize;
+  }
 }

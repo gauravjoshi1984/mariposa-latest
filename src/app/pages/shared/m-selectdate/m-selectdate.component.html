@@ -18,7 +18,6 @@
           shape="round"
           class="dltbtn"
           (click)="deleteTime(i)"
-          
         >
           <ion-icon slot="icon-only" src="assets/trash.svg"></ion-icon>
           Delete
@@ -27,7 +26,12 @@
     </ion-text>
   </ion-col>
 </ion-row>
-<ion-button class="addbutton" fill="outline" shape="round" (click)="addDate({})">
+<ion-button
+  class="addbutton"
+  fill="outline"
+  shape="round"
+  (click)="addDate({})"
+>
   <ion-icon class="plusbutton" slot="start" name="add-circle"></ion-icon>ADD
 </ion-button>
 <ion-datetime
@@ -35,4 +39,5 @@
   [pickerOptions]="customPickerOptions"
   #datepicker
   displayFormat="h:mm A"
+  minuteValues="0,15,30,45"
 ></ion-datetime>
