@@ -124,25 +124,32 @@ export class VitalsPage implements OnInit {
     labels: {
       formatter: function (value: any) {
         if (value == 96 || value == 100 || value == 104) {
-          return " " + value + "°F";
+          return value + "°F";
         }
       },
-      align: "right",
+      show:true,
+      maxWidth: 200,
+      align: 'right',
+      style:{fontSize:'8px',colors:'#000000'},
+      offsetX: 8,
     },
   };
   yaxisPulse: ApexYAxis = {
     opposite: true,
 
     labels: {
+      show:true,
+      maxWidth: 200,
+      
+      style:{fontSize:'8px',colors:'#000000'},
       formatter: function (value: any) {
         if (value == 96 || value == 100 || value == 104) {
-          return " " + value + " Bpm";
+          return  value + "Bpm";
         }
       },
       align: "right",
-      style: {
-        cssClass: "apexcharts-yaxis-label",
-      },
+      offsetX: 8,
+      
     },
   };
 
@@ -150,13 +157,18 @@ export class VitalsPage implements OnInit {
     opposite: true,
 
     labels: {
+      show:true,
+      maxWidth: 200,
+      align: 'right',
+      style:{fontSize:'8px',colors:'#000000'},
       formatter: function (value: any) {
         if (value == 96 || value == 100 || value == 104) {
-          return " " + value + " mg/dl";
+          return value + "mg/dl";
+          
         }
       },
-
-      offsetX: 10,
+      // align:"center",
+      offsetX: 8,
     },
   };
   userInfo: any = {};
@@ -226,12 +238,17 @@ export class VitalsPage implements OnInit {
         opposite: true,
 
         labels: {
+          show:true,
+      maxWidth: 200,
+      align: 'right',
+      style:{fontSize:'8px',colors:'#000000'},
           formatter: function (value) {
             if (value == 60 || value == 100 || value == 140) {
-              return " " + value + "MMHG";
+              return value + "MMHG";
             }
           },
-          align: "center",
+          offsetX: -5,
+          
         },
       },
       legend: {
@@ -241,7 +258,7 @@ export class VitalsPage implements OnInit {
       chart: {
         type: "rangeBar",
         height: 110,
-        width: "95%",
+        width: "100%",
         toolbar: {
           show: false,
         },
@@ -280,7 +297,7 @@ export class VitalsPage implements OnInit {
       ],
       chart: {
         type: "area",
-        height: 100,
+        height: 110,
         width: "100%",
         zoom: {
           enabled: false,
