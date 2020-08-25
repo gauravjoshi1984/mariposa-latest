@@ -8,6 +8,8 @@ import { VitalsPageRoutingModule } from "./vitals-routing.module";
 
 import { VitalsPage } from "./vitals.page";
 import { NgApexchartsModule } from "ng-apexcharts";
+import { AddvitalComponent } from "./addvital/addvital.component";
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -16,7 +18,8 @@ import { NgApexchartsModule } from "ng-apexcharts";
     IonicModule,
     VitalsPageRoutingModule,
     NgApexchartsModule,
+    SharedModule,
   ],
-  declarations: [VitalsPage],
+  declarations: [VitalsPage, AddvitalComponent],
 })
 export class VitalsPageModule {}

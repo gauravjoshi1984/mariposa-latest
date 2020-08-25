@@ -1,6 +1,26 @@
 <ion-header>
   <ion-toolbar>
-    <div class="hdcontent" style="display: flex;">
+    <!-- <ng-template #ionsegment> -->
+    <ion-segment
+      value="addvitals"
+      mode="ios"
+      style="margin-top: 40px;"
+      *ngIf="userInfo&&userInfo.type=='senior'"
+      [(ngModel)]="segmentVar"
+    >
+      <ion-segment-button value="addvitals">
+        Add Vitals
+      </ion-segment-button>
+      <ion-segment-button value="reports">
+        Reports
+      </ion-segment-button>
+    </ion-segment>
+    <!-- </ng-template> -->
+    <div
+      class="hdcontent"
+      style="display: flex;"
+      *ngIf="userInfo&&userInfo.type=='admin'"
+    >
       <img src="assets/MariposaIcons/micon.svg" alt="" />
       <ion-title mode="md" class="title-text vitaltext" (click)="toggleData()">
         Vital Reports
@@ -24,7 +44,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="pagebckd">
+<ion-content
+  class="pagebckd"
+  *ngIf="userInfo.type=='admin'|| segmentVar=='reports'"
+>
   <!-- <ng-container *ngIf="!showData">
     <ion-card class="reportcard">
     
@@ -245,4 +268,53 @@
   </ng-template>
 
   <!-- End Blood Glucose -->
+</ion-content>
+<ion-content
+  class="pagebckd"
+  *ngIf="userInfo.type=='senior'&& segmentVar=='addvitals'"
+>
+  <ion-card class="cardstyle" *ngFor="let item of vitalCards">
+    <ion-row>
+      <ion-col size="6">
+        <p class="name">{{item.name}}</p>
+      </ion-col>
+      <ion-col class="adddata" size="6" *ngIf="!item.value">
+        <p (click)="gotoModel(item)">ADD DATA</p>
+      </ion-col>
+      <ion-col size="6" class="valuecol" *ngIf="item.value.length>0">
+        <div class="valueitem">{{item.value}}</div>
+        <div class="unititem">{{item.unit}}</div>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <!-- <ion-card class="cardstyle">
+    <ion-row>
+      <ion-col size="6">
+        <p class="name">Pulse</p>
+      </ion-col>
+      <ion-col class="adddata" size="6">
+        <p>ADD DATA</p>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <ion-card class="cardstyle">
+    <ion-row>
+      <ion-col size="6">
+        <p class="name">Respitory Rate</p>
+      </ion-col>
+      <ion-col class="adddata" size="6">
+        <p>ADD DATA</p>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <ion-card class="cardstyle">
+    <ion-row>
+      <ion-col size="6">
+        <p class="name">Temperature</p>
+      </ion-col>
+      <ion-col class="adddata" size="6">
+        <p>ADD DATA</p>
+      </ion-col>
+    </ion-row>
+  </ion-card> -->
 </ion-content>

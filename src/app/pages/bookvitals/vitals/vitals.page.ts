@@ -14,6 +14,8 @@ import {
   ApexTitleSubtitle,
   ApexLegend,
 } from "ng-apexcharts";
+import { ModalController } from "@ionic/angular";
+import { AddvitalComponent } from "./addvital/addvital.component";
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -122,7 +124,7 @@ export class VitalsPage implements OnInit {
     labels: {
       formatter: function (value: any) {
         if (value == 96 || value == 100 || value == 104) {
-          return value + "°F";
+          return " " + value + "°F";
         }
       },
       align: "right",
@@ -134,10 +136,13 @@ export class VitalsPage implements OnInit {
     labels: {
       formatter: function (value: any) {
         if (value == 96 || value == 100 || value == 104) {
-          return value + " Bpm";
+          return " " + value + " Bpm";
         }
       },
       align: "right",
+      style: {
+        cssClass: "apexcharts-yaxis-label",
+      },
     },
   };
 
@@ -147,14 +152,38 @@ export class VitalsPage implements OnInit {
     labels: {
       formatter: function (value: any) {
         if (value == 96 || value == 100 || value == 104) {
-          return value + " mg/dl";
+          return " " + value + " mg/dl";
         }
       },
-      align: "right",
+
+      offsetX: 10,
     },
   };
-
-  constructor() {}
+  userInfo: any = {};
+  segmentVar = "addvitals";
+  vitalCards = [
+    {
+      name: "Blood Pressure",
+      value: "120/70",
+      unit: "mHg",
+    },
+    {
+      name: "Pulse",
+      value: "",
+      unit: "mHg",
+    },
+    {
+      name: "Respitory Rate",
+      value: "",
+      unit: "mHg",
+    },
+    {
+      name: "Temperature",
+      value: "",
+      unit: "mHg",
+    },
+  ];
+  constructor(private modalCtrl: ModalController) {}
 
   ngOnInit() {
     this.chartOptions = {
@@ -199,7 +228,7 @@ export class VitalsPage implements OnInit {
         labels: {
           formatter: function (value) {
             if (value == 60 || value == 100 || value == 140) {
-              return value + "MMHG";
+              return " " + value + "MMHG";
             }
           },
           align: "center",
@@ -212,7 +241,7 @@ export class VitalsPage implements OnInit {
       chart: {
         type: "rangeBar",
         height: 110,
-        width: "98%",
+        width: "95%",
         toolbar: {
           show: false,
         },
@@ -251,8 +280,8 @@ export class VitalsPage implements OnInit {
       ],
       chart: {
         type: "area",
-        height: 110,
-        width: "98%",
+        height: 100,
+        width: "100%",
         zoom: {
           enabled: false,
         },
@@ -287,7 +316,7 @@ export class VitalsPage implements OnInit {
         labels: {
           formatter: function (value: any, opt) {
             if (value == 96 || value == 100 || value == 104) {
-              return value + "°F";
+              return " " + value + "°F";
             }
           },
           align: "right",
@@ -301,8 +330,30 @@ export class VitalsPage implements OnInit {
         colors: ["#E229F2"],
       },
     };
+    this.userInfo = this.getUserinfo();
   }
   toggleData() {
     this.showData = !this.showData;
+  }
+  getUserinfo() {
+    let user = {
+      type: "senior",
+    };
+    return user;
+  }
+  async gotoModel(item: any) {
+    const modal = await this.modalCtrl.create({
+      component: AddvitalComponent,
+      componentProps: {
+        title: item.name,
+      },
+    });
+    modal.onDidDismiss().then((data: any) => {
+      console.log("VitalsPage -> gotoModel -> data", data.data);
+      if (data.data && data.data.Diastolic && data.data.Systolic) {
+        item.value = data.data.Diastolic + "/" + data.data.Systolic;
+      }
+    });
+    return await modal.present();
   }
 }

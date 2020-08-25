@@ -94,3 +94,110 @@ ion-toolbar {
     margin-right: 15px;
   }
 }
+ion-segment {
+  height: 32px;
+  min-height: 32px;
+  width: 188px;
+  margin: 0;
+  margin-left: 24px;
+  border-left: 0.6px solid #4137ff;
+  border-right: 0.6px solid #4137ff;
+
+  /* box-shadow: 0 0 0 2px #4137ff; */
+  border-radius: 8px;
+  padding: 0;
+  background: #4137ff;
+}
+ion-segment-button {
+  margin: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  --color: #7e7e7e;
+  --padding-top: 8px;
+  --padding-bottom: 7px;
+  --indicator-color: #4137ff;
+  --color-checked: white;
+  --color-focused: white;
+  --color-hover: white;
+  --background: white;
+  --border-radius: 0;
+  border-top: 0.1px solid #4137ff;
+  border-bottom: 0.1px solid #4137ff;
+  // border-right: 0.1px solid #4137ff;
+}
+
+.cardstyle {
+  height: 72px;
+  margin: 0;
+  margin-bottom: 8px;
+  margin-top: 16px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+}
+.name {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+
+  color: #000000;
+  margin: 21px 0px 0px 16px;
+}
+
+.adddata {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+
+  /* Mariposa Vivid Blue */
+
+  color: #4137ff;
+  padding: 19px 0px 0px 90px;
+}
+.valueitem {
+  padding-top: 19px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  // display: flex;
+  align-items: center;
+  text-align: right;
+  margin: 0;
+  /* Direct Black */
+
+  color: #1a1a1a;
+}
+.unititem {
+  font-style: normal;
+  font-size: 16px;
+  line-height: 19px;
+  align-items: center;
+  text-align: right;
+  margin: 0;
+  color: #7e7e7e;
+}
+.valuecol {
+  text-align: right;
+  padding-right: 24px;
+  margin: 0;
+  padding: 0;
+  padding-right: 24px;
+}
+.apexcharts-yaxis-label {
+  width: 207px;
+  min-width: 112px;
+}

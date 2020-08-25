@@ -3,7 +3,8 @@ import {
   ImagePickerOptions,
   ImagePicker,
 } from "@ionic-native/image-picker/ngx";
-
+import { Plugins, CameraResultType } from "@capacitor/core";
+const { Camera } = Plugins;
 @Component({
   selector: "app-seniorprofile",
   templateUrl: "./seniorprofile.page.html",
@@ -18,6 +19,7 @@ export class SeniorprofilePage implements OnInit {
     medical: false,
     homesafty: false,
   };
+  imageList: any = [];
   infotable = [
     {
       title: "First Name",
@@ -158,6 +160,21 @@ export class SeniorprofilePage implements OnInit {
       },
       (err) => {}
     );
+  }
+  async addCapImage() {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        resultType: CameraResultType.Base64,
+      });
+      this.imageList.push("data:image/jpeg;base64," + image.base64String);
+      console.log(
+        "SeniorprofilePage -> addCapImage -> this.imageList",
+        this.imageList
+      );
+    } catch (error) {
+      console.log("Catch statement ------------------------", error);
+    }
   }
   viewMore(i, index, array) {
     if (array.length != index + 1) {
