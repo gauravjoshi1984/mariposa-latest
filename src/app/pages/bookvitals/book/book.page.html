@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="headtoolbar">
     <div class="hdcontent" style="display: flex;">
       <img src="assets/MariposaIcons/micon.svg" alt="" />
       <ion-title mode="md" class="title-text vitaltext" (click)="toggleData()">
@@ -25,16 +25,18 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="ion-no-padding">
-    <ion-row>
-      <ion-col size="12">
-        <ion-item>
-          <ion-icon slot="start" src="assets/search.svg"></ion-icon>
-          <ion-input
-            type="text"
-            placeholder="Update On Today's Schedule"
-          ></ion-input>
-        </ion-item>
+  <ion-grid class="buttons">
+    <ion-row style="align-items:center;padding:0px;margin:0px">
+      <ion-col style="padding:0px;margin:0px" size="7">
+          <ion-button [routerLink]="'/bookvitals/updateschedule'" class="activity" expand="block">
+            <ion-icon style="margin-right: 4px;" src="assets/activity.svg"></ion-icon> TODAYS ACTIVITY
+          </ion-button>
+      </ion-col>
+      <ion-col style="padding:0px;margin:0px" size="5">
+        <ion-button [routerLink]="'/bookvitals/addpost'" expand="block" class="post"> 
+          <ion-icon src="assets/post.svg"></ion-icon> ADD POST
+        </ion-button>
+
       </ion-col>
       <ion-col class="placesec" size="12" *ngIf="!showData">
         <img src="assets/Empty_Book.svg" />
@@ -47,6 +49,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-grid class="content">
   <ng-container *ngIf="showData">
     <div class="step completed" *ngFor="let card of Cards">
       <div class="v-stepper">
@@ -116,6 +119,7 @@
       </div>
     </div>
   </ng-container>
+  </ion-grid>
 </ion-content>
 <!-- <ion-content>
  
