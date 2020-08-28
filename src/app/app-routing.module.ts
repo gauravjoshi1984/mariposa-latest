@@ -459,6 +459,10 @@ const routes: Routes = [
     path: 'senioraddvitals',
     loadChildren: () => import('./pages/bookvitals/senioraddvitals/senioraddvitals.module').then( m => m.SenioraddvitalsPageModule)
   },
+  {
+    path: 'comments',
+    loadChildren: () => import('./pages/bookvitals/comments/comments.module').then( m => m.CommentsPageModule)
+  },
   
   
   

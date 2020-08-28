@@ -1,0 +1,75 @@
+<app-m-header-close title="Comments">
+</app-m-header-close>
+
+<ion-content>
+  <ion-slides pager="true" [options]="slideOpts" class="bookslider">
+    <ion-slide>
+      <img src="assets/tabs/Mask Group.svg" alt="" />
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/tabs/Mask Group.svg" alt="" />
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/tabs/Mask Group.svg" alt="" />
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/tabs/Mask Group.svg" alt="" />
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/tabs/Mask Group.svg" alt="" />
+    </ion-slide>
+  </ion-slides>
+  <div class="activitydiv">
+    <p class="activitytxt">Yesterday’s Activities</p>
+  </div>
+  <div class="activitydescriptiondiv">
+    <p class="activitydescription">
+      {{activitylist}}
+    </p>
+  </div>
+  <div class="activitynotediv">
+    <p class="activitynote">
+      Notes: {{notes}}
+    </p>
+  </div>
+
+  <div class="ion-no-padding">
+    <hr />
+  </div>
+
+  <ion-grid class="commentgrid">
+    <div class="commentdiv">
+      <ion-text class="commentheader">Comments</ion-text>
+    </div>
+    <div *ngFor = "let comment of chatmessages">
+    <ion-row>
+      <ion-col size=1.8>
+        <ion-img src="assets/chatimages/senior.png"></ion-img>
+      </ion-col>
+      <ion-col>
+        <div><ion-text class="username">{{comment.name}} </ion-text><ion-text class="time"> 3h</ion-text></div> 
+        <div style="margin-top: 4px;"><ion-text class="chatmsg">{{comment.message}}</ion-text></div>
+      </ion-col>
+    </ion-row>
+  
+  <hr class="solid">
+  </div>
+  
+  </ion-grid>
+
+  
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="postcomment">
+    <ion-grid class=chatinputgrid>
+    <ion-row>
+      <ion-col size="9">
+        <ion-input placeholder = "Comment as {{username}}..."></ion-input>
+      </ion-col>
+      <ion-col size="3">
+        <ion-text style="float: right;" class="post">POST</ion-text>
+      </ion-col>
+    </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
