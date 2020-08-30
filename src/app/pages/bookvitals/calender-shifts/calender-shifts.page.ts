@@ -372,6 +372,32 @@ export class CalenderShiftsPage implements OnInit {
         desc: "Every wednesday (10 Ltrs)",
       },
     ],
+    31: [
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("01:00:00 am", "HH:mm:ss a"),
+        endTime: moment("02:00:00 am", "HH:mm:ss a"),
+        title: "Wake Up",
+        desc: "message or instructions will be shown here",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("05:00:00 am", "HH:mm:ss a"),
+        endTime: moment("06:00:00 am", "HH:mm:ss a"),
+        title: "Bathing",
+        desc: "message or instructions will be shown here",
+      },
+      {
+        startDate: "",
+        endDate: "",
+        startTime: moment("10:00:00 am", "HH:mm:ss a"),
+        endTime: moment("11:00:00 am", "HH:mm:ss a"),
+        title: "Medication: Ibuprofine MKal",
+        desc: "Dosage: 1 with warm water, Daily",
+      },
+    ],
   };
   timeLineShifts = [];
 
@@ -387,11 +413,16 @@ export class CalenderShiftsPage implements OnInit {
 
   ngOnInit() {}
   initCalenderShift() {
+    console.log(this.timeLineShifts);
     this.lowesttimeper = this.timeLineShifts[0].startTime;
     this.highesttimeper = this.timeLineShifts[
       this.timeLineShifts.length - 1
     ].endTime;
 
+    console.log(
+      "CalenderShiftsPage -> initCalenderShift -> highesttimeper",
+      this.highesttimeper
+    );
     this.timeLineShifts.forEach((element, i) => {
       if (
         this.endTimeTemp &&
@@ -402,7 +433,7 @@ export class CalenderShiftsPage implements OnInit {
         let hrs: any = dur.asHours();
         let tempData: any = {
           // emptyspace: hrs,
-          emptyheight: hrs * 84.6,
+          emptyheight: hrs * 85,
         };
         this.timeLineShifts.splice(i, 0, tempData);
       }
@@ -412,7 +443,7 @@ export class CalenderShiftsPage implements OnInit {
         // duration in hours
         let hours: any = duration.asHours();
         element["hours"] = hours;
-        element["height"] = hours * 84.6 - 8;
+        element["height"] = hours * 85 - 10;
 
         this.endTimeTemp = element.endTime;
       }
@@ -424,7 +455,7 @@ export class CalenderShiftsPage implements OnInit {
     // duration in hours
     let hours: any = duration.asHours();
 
-    for (let index = 0; index < hours; index++) {
+    for (let index = 0; index <= hours; index++) {
       if (index == 0) {
         this.timeLine.push(this.lowesttimeper.format("hh A"));
       } else {
@@ -441,6 +472,7 @@ export class CalenderShiftsPage implements OnInit {
       this.timeLineActivity.length - 1
     ].endTime;
 
+    let emptycount = 0;
     this.timeLineActivity.forEach((element, i) => {
       if (
         this.endTimeTemp2 &&
@@ -449,11 +481,19 @@ export class CalenderShiftsPage implements OnInit {
       ) {
         let dur = moment.duration(element.startTime.diff(this.endTimeTemp2));
         let hrs: any = dur.asHours();
+        console.log("CalenderShiftsPage -> initCalenderActivity -> hrs", hrs);
         let tempData: any = {
           // emptyspace: hrs,
-          emptyheight: hrs * 84.6,
+          emptyheight: hrs * 85,
         };
-        this.timeLineActivity.splice(i, 0, tempData);
+        if (emptycount == 0) {
+          this.timeLineActivity.splice(i, 0, tempData);
+          emptycount = emptycount + 1;
+        } else {
+          // debugger;
+          this.timeLineActivity.splice(i + emptycount, 0, tempData);
+          emptycount = emptycount + 1;
+        }
       }
       if (element.title) {
         let duration = moment.duration(element.endTime.diff(element.startTime));
@@ -461,7 +501,7 @@ export class CalenderShiftsPage implements OnInit {
         // duration in hours
         let hours: any = duration.asHours();
         element["hours"] = hours;
-        element["height"] = hours * 84.6 - 8;
+        element["height"] = hours * 85 - 10;
 
         this.endTimeTemp2 = element.endTime;
       }
@@ -473,7 +513,7 @@ export class CalenderShiftsPage implements OnInit {
     // duration in hours
     let hours: any = duration.asHours();
 
-    for (let index = 0; index < hours; index++) {
+    for (let index = 0; index <= hours; index++) {
       if (index == 0) {
         this.timeLine2.push(this.lowesttimeper2.format("hh A"));
       } else {
@@ -483,6 +523,7 @@ export class CalenderShiftsPage implements OnInit {
         );
       }
     }
+    // console.log(this.highesttimeper2.clone().format("hh A"));
   }
 
   async presentModal() {
