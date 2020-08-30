@@ -1,7 +1,11 @@
 <ion-header mode="md">
   <ion-toolbar class="headtoolbar">
     <ion-buttons class="backbutton" slot="start">
-      <m-backbutton></m-backbutton>
+      
+      <ion-button  (click)="dismiss()">
+        <ion-icon class="bckbtn" slot="icon-only" src="assets/back.svg"></ion-icon>
+      </ion-button>
+      
     </ion-buttons>
     <ion-title
       class="name cap"
@@ -40,11 +44,21 @@
         </ion-button>
       </ion-col>
     </ion-row>
-
-    <div class="nametag">
+    <div class="nametag" *ngIf="title!='Blood Pressure'">
+      <ion-text position="floating" id="tag">Value</ion-text>
+    </div>
+    <div *ngIf="title!='Blood Pressure'">
+      <ion-input
+        mode="md"
+        class="input"
+        placeholder="Enter value"
+        [(ngModel)]="Systolic"
+      ></ion-input>
+    </div>
+    <div class="nametag" *ngIf="title=='Blood Pressure'">
       <ion-text position="floating" id="tag">Systolic</ion-text>
     </div>
-    <div>
+    <div *ngIf="title=='Blood Pressure'">
       <ion-input
         mode="md"
         class="input"
@@ -53,10 +67,10 @@
       ></ion-input>
     </div>
 
-    <div class="nametag">
+    <div class="nametag" *ngIf="title=='Blood Pressure'">
       <ion-text position="floating" id="tag">Diastolic</ion-text>
     </div>
-    <div>
+    <div *ngIf="title=='Blood Pressure'">
       <ion-input
         mode="md"
         class="input"
