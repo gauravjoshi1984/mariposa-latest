@@ -114,7 +114,7 @@ export class VitalsPage implements OnInit {
       title: "Pulse",
     },
     bloodglucose: {
-      value: "100",
+      value: "100 mg/dl",
       hasValue: true,
       title: "Blood Glucose",
     },
