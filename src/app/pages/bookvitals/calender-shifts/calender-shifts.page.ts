@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { ModalController } from "@ionic/angular";
+import { ModalController, PopoverController } from "@ionic/angular";
 import { AddactivityComponent } from "./addactivity/addactivity.component";
 import * as moment from "moment";
+import { DetailComponent } from "./detail/detail.component";
+import { ProfilelistComponent } from "../profilelist/profilelist.component";
 
 @Component({
   selector: "app-calender-shifts",
@@ -18,7 +20,7 @@ export class CalenderShiftsPage implements OnInit {
   timeLine2 = [];
 
   shiftsDataArray = {
-    17: [
+    24: [
       {
         startDate: "",
         endDate: "",
@@ -34,7 +36,7 @@ export class CalenderShiftsPage implements OnInit {
         title: "Mary-17",
       },
     ],
-    18: [
+    25: [
       {
         startDate: "",
         endDate: "",
@@ -50,7 +52,7 @@ export class CalenderShiftsPage implements OnInit {
         title: "Mary*18",
       },
     ],
-    19: [
+    26: [
       {
         startDate: "",
         endDate: "",
@@ -66,7 +68,7 @@ export class CalenderShiftsPage implements OnInit {
         title: "Mary*19",
       },
     ],
-    20: [
+    27: [
       {
         startDate: "",
         endDate: "",
@@ -82,7 +84,7 @@ export class CalenderShiftsPage implements OnInit {
         title: "Mary*20",
       },
     ],
-    21: [
+    28: [
       {
         startDate: "",
         endDate: "",
@@ -98,7 +100,7 @@ export class CalenderShiftsPage implements OnInit {
         title: "Mary*21",
       },
     ],
-    22: [
+    29: [
       {
         startDate: "",
         endDate: "",
@@ -114,7 +116,7 @@ export class CalenderShiftsPage implements OnInit {
         title: "Mary*22",
       },
     ],
-    23: [
+    30: [
       {
         startDate: "",
         endDate: "",
@@ -132,7 +134,7 @@ export class CalenderShiftsPage implements OnInit {
     ],
   };
   activityDataArray = {
-    17: [
+    24: [
       {
         startDate: "",
         endDate: "",
@@ -166,7 +168,7 @@ export class CalenderShiftsPage implements OnInit {
         desc: "Every wednesday (10 Ltrs)",
       },
     ],
-    18: [
+    25: [
       {
         startDate: "",
         endDate: "",
@@ -200,7 +202,7 @@ export class CalenderShiftsPage implements OnInit {
         desc: "Every wednesday (10 Ltrs)",
       },
     ],
-    19: [
+    26: [
       {
         startDate: "",
         endDate: "",
@@ -234,7 +236,7 @@ export class CalenderShiftsPage implements OnInit {
         desc: "Every wednesday (10 Ltrs)",
       },
     ],
-    20: [
+    27: [
       {
         startDate: "",
         endDate: "",
@@ -268,7 +270,7 @@ export class CalenderShiftsPage implements OnInit {
         desc: "Every wednesday (10 Ltrs)",
       },
     ],
-    21: [
+    28: [
       {
         startDate: "",
         endDate: "",
@@ -302,8 +304,7 @@ export class CalenderShiftsPage implements OnInit {
         desc: "Every wednesday (10 Ltrs)",
       },
     ],
-    22: [
-     
+    29: [
       {
         startDate: "",
         endDate: "",
@@ -336,9 +337,8 @@ export class CalenderShiftsPage implements OnInit {
         title: "Shopping: Milk Tin",
         desc: "Every wednesday (10 Ltrs)",
       },
-   
     ],
-    23: [
+    30: [
       {
         startDate: "",
         endDate: "",
@@ -380,7 +380,10 @@ export class CalenderShiftsPage implements OnInit {
   selectedDay = "Mon";
   endTimeTemp: any;
   endTimeTemp2: any;
-  constructor(private modalController: ModalController) {}
+  constructor(
+    private modalController: ModalController,
+    private popoverCtrl: PopoverController
+  ) {}
 
   ngOnInit() {}
   initCalenderShift() {
@@ -481,7 +484,7 @@ export class CalenderShiftsPage implements OnInit {
       }
     }
   }
-  // segmentChanged() {}
+
   async presentModal() {
     const modal = await this.modalController.create({
       component: AddactivityComponent,
@@ -489,16 +492,14 @@ export class CalenderShiftsPage implements OnInit {
     });
     return await modal.present();
   }
-  // changeSeg(ev: any) {
-  //   console.log("CalenderShiftsPage -> changeSeg -> ev", ev);
-  //   if (ev.detail.value == "activities") {
-  //     this.timeLineData = this.timeLineActivity;
-  //     this.initCalender();
-  //   } else {
-  //     this.timeLineData = this.timeLineShifts;
-  //     this.initCalender();
-  //   }
-  // }
+  async opendetailComponent(item) {
+    const modal = await this.modalController.create({
+      component: DetailComponent,
+      cssClass: "detailcomp-class",
+      componentProps: { data: item },
+    });
+    return await modal.present();
+  }
   ChangeData(ev: any) {
     this.endTimeTemp = null;
     this.endTimeTemp2 = null;
@@ -513,5 +514,19 @@ export class CalenderShiftsPage implements OnInit {
     this.timeLineShifts = Object.assign([], this.shiftsDataArray[ev]);
 
     this.initCalenderShift();
+  }
+  async presentPopover(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: ProfilelistComponent,
+      cssClass: "popoverstylepl",
+      event: ev,
+      translucent: true,
+      mode: "ios",
+    });
+    popover.onDidDismiss().then((x) => {
+      // if (x.data === "delete") {
+      // }
+    });
+    return await popover.present();
   }
 }

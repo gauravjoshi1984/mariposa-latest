@@ -9,13 +9,13 @@
       </ion-segment-button>
     </ion-segment>
     <ion-buttons mode="md" slot="end">
-      <ion-button [routerLink]="'/bookvitals/notifications'">
+      <ion-button [routerLink]="'/notifications'">
         <ion-icon
           mode="md"
           src="assets/MariposaIcons/notification.svg"
         ></ion-icon>
       </ion-button>
-      <ion-button>
+      <ion-button (click)="presentPopover($event)">
         <ion-icon
           class="propic"
           mode="md"
@@ -32,8 +32,8 @@
 
 <ion-content>
   <ion-grid fixed class="ion-no-padding">
-    <ion-row style="padding-bottom: 12px;">
-      <ion-col size="6" style="padding-top: 13px;">
+    <ion-row style="padding-bottom: 12px">
+      <ion-col size="6" style="padding-top: 13px">
         <ion-label class="selectlabel">Select Caregiver:</ion-label>
       </ion-col>
       <ion-col size="6">
@@ -100,6 +100,7 @@
             class="timelinecard"
             [style.height.px]="item['height']"
             *ngIf="item.title;else emptyspace"
+            (click)="opendetailComponent(item)"
           >
             <h1>{{item.title}}</h1>
             <h4>

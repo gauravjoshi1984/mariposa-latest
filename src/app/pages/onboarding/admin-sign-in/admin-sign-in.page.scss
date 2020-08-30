@@ -1,18 +1,18 @@
 ion-img {
-    align-self: center;
-    // max-width: 37%;
-    height: auto;
-    padding: 0px 100px;
-    //padding-top:59px ;
-    padding-top: 0px;
-    img {
-        width: 120px;
-        height: 100px;
-    }
+  align-self: center;
+  // max-width: 37%;
+  height: auto;
+  padding: 0px 100px;
+  //padding-top:59px ;
+  padding-top: 0px;
+  img {
+    width: 120px;
+    height: 100px;
+  }
 }
 
 #segment {
-    top: -20px;
+  top: -20px;
 }
 
 //ion-text {
@@ -20,66 +20,69 @@ ion-img {
 //}
 
 ion-icon {
-    color: red;
-    zoom: 1;
+  color: red;
+  zoom: 1;
 }
 
 #policytext {
-    font-size: 1px;
+  font-size: 1px;
 }
 
 ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
-    /* make scrollbar transparent */
+  width: 0px;
+  background: transparent;
+  /* make scrollbar transparent */
 }
 
 .spacecol {
-    height: 0px;
+  height: 0px;
 }
 
-ion-footer{
-    position:absolute;
-    bottom: 0;
+ion-footer {
+  position: absolute;
+  bottom: 0;
 }
 
-.nametag{
-    margin-top: 16px;
+.nametag {
+  margin-top: 16px;
 }
 
-div{
-    margin-top: 8px;
+div {
+  margin-top: 8px;
 }
 
-.smalltext{
-    text-decoration:none;
+.smalltext {
+  text-decoration: none;
 }
 
-ion-segment{
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 17px;
-    font-style: normal;
+ion-segment {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17px;
+  font-style: normal;
 }
 
 ion-input.ng-invalid.ng-touched {
-    border: 1px solid red;
-  }
-
-.logo-img{
-    display: block;
-    margin: auto;
-    max-width: 400px;
+  border: 1px solid red;
 }
 
-.ripple{
-    --ripple-color: transparent;
+.logo-img {
+  display: block;
+  margin: auto;
+  max-width: 400px;
+}
+
+.ripple {
+  --ripple-color: transparent;
 }
 
 ion-segment-button {
-  --indicator-color-unchecked : grey;
-  }
+  --indicator-color-unchecked: grey;
+}
 
-  .segmentborder {
-    border-bottom: 2px solid #b8b8b8;
-  }  
+.segmentborder {
+  border-bottom: 2px solid #b8b8b8;
+}
+.first-segemnt {
+  margin-right: 3px;
+}

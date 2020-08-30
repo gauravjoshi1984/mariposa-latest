@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { PopoverController } from "@ionic/angular";
+import { ProfilelistComponent } from "../profilelist/profilelist.component";
 
 @Component({
   selector: "app-book",
@@ -53,7 +55,7 @@ export class BookPage implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(private popoverCtrl: PopoverController) {}
 
   ngOnInit() {}
   toggleData() {
@@ -65,5 +67,19 @@ export class BookPage implements OnInit {
         card.liked = !card.liked;
       }
     });
+  }
+  async presentPopover(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: ProfilelistComponent,
+      cssClass: "popoverstylepl",
+      event: ev,
+      translucent: true,
+      mode: "ios",
+    });
+    popover.onDidDismiss().then((x) => {
+      // if (x.data === "delete") {
+      // }
+    });
+    return await popover.present();
   }
 }

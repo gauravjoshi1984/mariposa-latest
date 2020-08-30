@@ -1,0 +1,40 @@
+ion-item {
+  --width: 270px;
+  --height: 69px;
+  background: #ffffff;
+  .headtext {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+
+    /* Direct Black */
+
+    color: #1a1a1a;
+  }
+  .mailtext {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+
+    /* Dark Grey */
+
+    color: #7e7e7e;
+  }
+}
+ion-list {
+  padding: 8px;
+}
+
+.selecteditem {
+  --background: #e0e0e0 !important;
+}

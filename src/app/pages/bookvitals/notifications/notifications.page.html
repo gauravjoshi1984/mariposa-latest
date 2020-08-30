@@ -8,7 +8,7 @@
           src="assets/MariposaIcons/Settings icon.svg"
         ></ion-icon>
       </ion-button>
-      <ion-button class="hdbuttn">
+      <ion-button class="hdbuttn" (click)="goBack()">
         <ion-icon
           slot="start"
           src="assets/MariposaIcons/Close icon.svg"
@@ -19,7 +19,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list style="padding: 0;">
+  <ion-list style="padding: 0">
     <ion-list-header>Today</ion-list-header>
     <ion-item lines="none" class="unreaditem">
       <ion-avatar slot="start">
@@ -58,7 +58,7 @@
     </ion-item>
   </ion-list>
 
-  <ion-list style="padding: 0;">
+  <ion-list style="padding: 0">
     <ion-list-header class="slctclr">Earlier</ion-list-header>
     <ion-item lines="none" class="slctclr">
       <ion-avatar slot="start">

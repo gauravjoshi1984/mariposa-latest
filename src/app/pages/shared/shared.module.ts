@@ -14,6 +14,7 @@ import { PushtoggleComponent } from "./pushtoggle/pushtoggle.component";
 import { MHeaderCloseComponent } from "./m-header-close/m-header-close.component";
 import { MImageSelectorComponent } from "./m-image-selector/m-image-selector.component";
 import { CalenderdateComponent } from "./calenderdate/calenderdate.component";
+import { ProfilelistComponent } from "../bookvitals/profilelist/profilelist.component";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CalenderdateComponent } from "./calenderdate/calenderdate.component";
     MHeaderCloseComponent,
     MImageSelectorComponent,
     CalenderdateComponent,
+    ProfilelistComponent,
   ],
   imports: [CommonModule, IonicModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -40,6 +42,7 @@ import { CalenderdateComponent } from "./calenderdate/calenderdate.component";
     MHeaderCloseComponent,
     MImageSelectorComponent,
     CalenderdateComponent,
+    ProfilelistComponent,
   ],
 })
 export class SharedModule {}

@@ -4,21 +4,17 @@
     <ion-segment
       value="addvitals"
       mode="ios"
-      style="margin-top: 40px;"
+      style="margin-top: 40px"
       *ngIf="userInfo&&userInfo.type=='senior'"
       [(ngModel)]="segmentVar"
     >
-      <ion-segment-button value="addvitals">
-        Add Vitals
-      </ion-segment-button>
-      <ion-segment-button value="reports">
-        Reports
-      </ion-segment-button>
+      <ion-segment-button value="addvitals"> Add Vitals </ion-segment-button>
+      <ion-segment-button value="reports"> Reports </ion-segment-button>
     </ion-segment>
     <!-- </ng-template> -->
     <div
       class="hdcontent"
-      style="display: flex;"
+      style="display: flex"
       *ngIf="userInfo&&userInfo.type=='admin'"
     >
       <img src="assets/MariposaIcons/micon.svg" alt="" />
@@ -27,13 +23,13 @@
       </ion-title>
     </div>
     <ion-buttons mode="md" slot="end">
-      <ion-button>
+      <ion-button [routerLink]="'/notifications'">
         <ion-icon
           mode="md"
           src="assets/MariposaIcons/notification.svg"
         ></ion-icon>
       </ion-button>
-      <ion-button>
+      <ion-button (click)="presentPopover($event)">
         <ion-icon
           class="propic"
           mode="md"

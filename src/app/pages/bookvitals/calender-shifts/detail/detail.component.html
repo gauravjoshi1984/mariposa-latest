@@ -1,0 +1,50 @@
+<ion-header mode="md">
+  <ion-toolbar class="headtoolbar">
+    <ion-buttons class="backbutton" slot="start">
+      <m-backbutton (click)="goBack()"></m-backbutton>
+    </ion-buttons>
+    <ion-title class="cap" color="mdblack" position="floating" id="titletag"
+      >{{ data.title }} Details</ion-title
+    >
+    <ion-buttons slot="end" class="kebab">
+      <ion-img
+        src="../assets/MariposaIcons/Kebab menu.svg"
+        style="color: black; margin-right: 10px"
+      ></ion-img>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="maindiv">
+    <p class="hdng">Activity details</p>
+    <p class="timng">Today 8 am & 7pm</p>
+    <p class="dscrptn">Repeats Every Sunday, Tuesday, Thursday & Saturday</p>
+  </div>
+
+  <div class="ion-no-padding">
+    <hr />
+  </div>
+
+  <div class="maindiv2">
+    <p class="hdng">Assigned to</p>
+    <p class="name">Mary</p>
+    <p class="work">Caregiver</p>
+  </div>
+
+  <div class="ion-no-padding hr2">
+    <hr />
+  </div>
+
+  <div class="maindiv3">
+    <p class="hdng">Instructions</p>
+    <p class="decpt">
+      bathing should done with warm water, allergic to bleach water
+    </p>
+  </div>
+</ion-content>
+<ion-footer>
+  <div id="button">
+    <ion-button type="submit" class="btnblue" expand="block">EDIT</ion-button>
+  </div>
+</ion-footer>

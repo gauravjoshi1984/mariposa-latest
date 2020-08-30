@@ -14,8 +14,9 @@ import {
   ApexTitleSubtitle,
   ApexLegend,
 } from "ng-apexcharts";
-import { ModalController } from "@ionic/angular";
+import { ModalController, PopoverController } from "@ionic/angular";
 import { AddvitalComponent } from "./addvital/addvital.component";
+import { ProfilelistComponent } from "../profilelist/profilelist.component";
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -127,10 +128,10 @@ export class VitalsPage implements OnInit {
           return value + "°F";
         }
       },
-      show:true,
+      show: true,
       maxWidth: 200,
-      align: 'right',
-      style:{fontSize:'8px',colors:'#000000'},
+      align: "right",
+      style: { fontSize: "8px", colors: "#000000" },
       offsetX: 8,
     },
   };
@@ -138,18 +139,17 @@ export class VitalsPage implements OnInit {
     opposite: true,
 
     labels: {
-      show:true,
+      show: true,
       maxWidth: 200,
-      
-      style:{fontSize:'8px',colors:'#000000'},
+
+      style: { fontSize: "8px", colors: "#000000" },
       formatter: function (value: any) {
         if (value == 96 || value == 100 || value == 104) {
-          return  value + "Bpm";
+          return value + "Bpm";
         }
       },
       align: "right",
       offsetX: 8,
-      
     },
   };
 
@@ -157,14 +157,13 @@ export class VitalsPage implements OnInit {
     opposite: true,
 
     labels: {
-      show:true,
+      show: true,
       maxWidth: 200,
-      align: 'right',
-      style:{fontSize:'8px',colors:'#000000'},
+      align: "right",
+      style: { fontSize: "8px", colors: "#000000" },
       formatter: function (value: any) {
         if (value == 96 || value == 100 || value == 104) {
           return value + "mg/dl";
-          
         }
       },
       // align:"center",
@@ -195,7 +194,10 @@ export class VitalsPage implements OnInit {
       unit: "mHg",
     },
   ];
-  constructor(private modalCtrl: ModalController) {}
+  constructor(
+    private modalCtrl: ModalController,
+    private popoverCtrl: PopoverController
+  ) {}
 
   ngOnInit() {
     this.chartOptions = {
@@ -238,17 +240,16 @@ export class VitalsPage implements OnInit {
         opposite: true,
 
         labels: {
-          show:true,
-      maxWidth: 200,
-      align: 'right',
-      style:{fontSize:'8px',colors:'#000000'},
+          show: true,
+          maxWidth: 200,
+          align: "right",
+          style: { fontSize: "8px", colors: "#000000" },
           formatter: function (value) {
             if (value == 60 || value == 100 || value == 140) {
               return value + "MMHG";
             }
           },
           offsetX: -5,
-          
         },
       },
       legend: {
@@ -372,5 +373,19 @@ export class VitalsPage implements OnInit {
       }
     });
     return await modal.present();
+  }
+  async presentPopover(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: ProfilelistComponent,
+      cssClass: "popoverstylepl",
+      event: ev,
+      translucent: true,
+      mode: "ios",
+    });
+    popover.onDidDismiss().then((x) => {
+      // if (x.data === "delete") {
+      // }
+    });
+    return await popover.present();
   }
 }
