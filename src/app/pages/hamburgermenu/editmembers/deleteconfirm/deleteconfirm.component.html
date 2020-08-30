@@ -1,0 +1,35 @@
+<ion-card>
+  <ion-grid fixed class="ion-no-padding">
+    <ion-row>
+      <ion-col size="10">
+        <h3 class="mdheading">Remove {{ careCircleName }} from Circle</h3>
+      </ion-col>
+      <ion-col class="closebtn" size="2">
+        <ion-icon (click)="closemodal()" name="close-outline"></ion-icon>
+        <!-- <img src="" alt=""> -->
+      </ion-col>
+
+      <ion-col size="12" class="infocol">
+        <p class="confirmqn">
+          Are you sure you want to delete {{ careCircleName }} from circle ?
+        </p>
+        <p class="deleteinfo">
+          All progress made upto this point will be deleted immediately. You
+          can’t undo this action.
+        </p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="btnsrow">
+      <ion-col size="6">
+        <ion-button (click)="closemodal('delete')" fill="clear" class="dltbtn"
+          >YES, I’m Sure</ion-button
+        >
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-button (click)="closemodal()" class="cancelbtn">NO</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>
