@@ -304,12 +304,13 @@ export class CalenderShiftsPage implements OnInit {
         desc: "Every wednesday (10 Ltrs)",
       },
     ],
-    29: [
+    2: [
       {
         startDate: "",
         endDate: "",
         startTime: moment("07:00:00 am", "HH:mm:ss a"),
-        endTime: moment("08:00:00 am", "HH:mm:ss a"),
+        endTime: moment("08:30:00 am", "HH:mm:ss a"),
+
         title: "Wake Up - 22",
         desc: "message or instructions will be shown here",
       },
@@ -473,18 +474,23 @@ export class CalenderShiftsPage implements OnInit {
     ].endTime;
 
     let emptycount = 0;
-    this.timeLineActivity.forEach((element, i) => {
+    this.timeLineActivity.forEach((element: any, i) => {
+      console.log(
+        "CalenderShiftsPage -> initCalenderActivity -> element.startTime",
+        element
+      );
       if (
         this.endTimeTemp2 &&
+        element.startTime &&
         this.endTimeTemp2.format("HH:mm:ss") !=
           element.startTime.format("HH:mm:ss")
       ) {
-        let dur = moment.duration(element.startTime.diff(this.endTimeTemp2));
-        let hrs: any = dur.asHours();
+        let dur = moment.duration(this.endTimeTemp2.diff(element.startTime));
+        let hrs: any = dur.asMinutes();
         console.log("CalenderShiftsPage -> initCalenderActivity -> hrs", hrs);
         let tempData: any = {
           // emptyspace: hrs,
-          emptyheight: hrs * 85,
+          emptyheight: hrs * 1.5,
         };
         if (emptycount == 0) {
           this.timeLineActivity.splice(i, 0, tempData);
@@ -497,13 +503,25 @@ export class CalenderShiftsPage implements OnInit {
       }
       if (element.title) {
         let duration = moment.duration(element.endTime.diff(element.startTime));
-
+        console.log(element.startTime);
         // duration in hours
-        let hours: any = duration.asHours();
-        element["hours"] = hours;
-        element["height"] = hours * 85 - 10;
+        let minutes: any = duration.asMinutes();
+        console.log(
+          "CalenderShiftsPage -> initCalenderActivity -> minutes",
+          minutes
+        );
+        element["hours"] = minutes;
+        element["height"] = minutes * 1.5 - 10;
+        console.log(
+          "CalenderShiftsPage -> initCalenderActivity -> element[height]",
+          element["height"]
+        );
 
         this.endTimeTemp2 = element.endTime;
+        console.log(
+          "CalenderShiftsPage -> initCalenderActivity -> this.endTimeTemp2",
+          this.endTimeTemp2
+        );
       }
     });
     let duration = moment.duration(

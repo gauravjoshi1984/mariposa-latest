@@ -101,6 +101,9 @@ ion-content {
 .timelinecol {
   display: inline-flex;
   margin-bottom: 5px;
+  height: 85px;
+  max-height: 85px;
+  min-height: 85px;
 }
 .hidecard {
   visibility: hidden;
@@ -118,7 +121,7 @@ ion-content {
   //   width: 20%;
   margin: 0;
   padding-bottom: 44px;
-  padding-top: 22px;
+  padding-top: 3px;
 }
 .timePer2 {
   font-style: normal;
