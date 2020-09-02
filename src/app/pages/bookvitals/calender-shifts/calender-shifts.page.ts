@@ -476,55 +476,64 @@ export class CalenderShiftsPage implements OnInit {
     let emptycount = 0;
     this.timeLineActivity.forEach((element: any, i) => {
       let tempData: any = {};
-      console.log(
-        "CalenderShiftsPage -> initCalenderActivity -> element.startTime",
-        element
-      );
-      if (
-        this.endTimeTemp2 &&
-        element.startTime &&
-        this.endTimeTemp2.format("HH:mm:ss a") !=
-          element.startTime.format("HH:mm:ss a")
-      ) {
-        let dur = moment.duration(this.endTimeTemp2.diff(element.startTime));
-        let hrs: any = Math.abs(dur.asMinutes());
-        console.log("CalenderShiftsPage -> initCalenderActivity -> hrs", hrs);
-        tempData = {
-          // emptyspace: hrs,
-          title: "",
-          emptyheight: hrs * 1.5,
-        };
-        if (emptycount == 0) {
-          this.timeLineActivity.splice(i, 0, tempData);
-          emptycount = emptycount + 1;
-        } else {
-          // debugger;
-          emptycount = emptycount + 1;
-          this.timeLineActivity.splice(i + emptycount, 0, tempData);
-        }
-      }
-      if (element.title.length > 0) {
-        let duration = moment.duration(element.endTime.diff(element.startTime));
-        console.log(element.startTime);
-        // duration in hours
-        let minutes: any = duration.asMinutes();
-        console.log(
-          "CalenderShiftsPage -> initCalenderActivity -> minutes",
-          minutes
-        );
-        element["hours"] = minutes;
-        element["height"] = minutes * 1.5 - 10;
-        console.log(
-          "CalenderShiftsPage -> initCalenderActivity -> element[height]",
-          element["height"]
-        );
 
+      let itemp: any = 0;
+      if (this.endTimeTemp2) {
+        itemp = moment
+          .duration(this.endTimeTemp2.diff(element.startTime))
+          .asMinutes();
         console.log(
-          "CalenderShiftsPage -> initCalenderActivity -> this.endTimeTemp2",
-          this.endTimeTemp2
+          "CalenderShiftsPage -> initCalenderActivity -> itemp",
+          Math.abs(itemp)
         );
+        itemp = Math.abs(itemp);
+        // debugger;
       }
+      // if (this.endTimeTemp2 && element.startTime && itemp > 0) {
+      //   console.log(i);
+      //   let dur = moment.duration(this.endTimeTemp2.diff(element.startTime));
+      //   console.log(
+      //     "CalenderShiftsPage -> initCalenderActivity -> element.startTime",
+      //     element.startTime
+      //   );
+      //   console.log(
+      //     "CalenderShiftsPage -> initCalenderActivity -> this.endTimeTemp2",
+      //     this.endTimeTemp2
+      //   );
+      //   console.log("CalenderShiftsPage -> initCalenderActivity -> dur", dur);
+
+      //   let hrs: any = Math.abs(dur.asMinutes());
+      //   console.log("CalenderShiftsPage -> initCalenderActivity -> hrs", hrs);
+      //   tempData = {
+      //     // emptyspace: hrs,
+      //     title: "",
+      //     emptyheight: hrs * 1.5,
+      //   };
+      //   if (emptycount == 0) {
+      //     this.timeLineActivity.splice(i, 0, tempData);
+      //     emptycount = emptycount + 1;
+      //   } else {
+      //     // debugger;
+      //     emptycount = emptycount + 1;
+      //     this.timeLineActivity.splice(i + emptycount, 0, tempData);
+      //   }
+      // }
+      // if (element.title.length > 0) {
+      let duration = moment.duration(element.endTime.diff(element.startTime));
+      console.log(element.startTime);
+      // duration in hours
+      let minutes: any = duration.asMinutes();
+      console.log(
+        "CalenderShiftsPage -> initCalenderActivity -> minutes",
+        minutes
+      );
+      element["hours"] = minutes;
+      element["height"] = minutes * 1.5 - 10;
+      element["empty"] = itemp * 1.5;
+
+      // this.endTimeTemp2 = element.endTime;
       this.endTimeTemp2 = element.endTime;
+      // }
 
       // if (emptycount == 0) {
       //   this.timeLineActivity.splice(i, 0, tempData);
