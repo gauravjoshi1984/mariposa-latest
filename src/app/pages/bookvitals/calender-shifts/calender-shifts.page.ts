@@ -309,7 +309,7 @@ export class CalenderShiftsPage implements OnInit {
         startDate: "",
         endDate: "",
         startTime: moment("07:00:00 am", "HH:mm:ss a"),
-        endTime: moment("08:30:00 am", "HH:mm:ss a"),
+        endTime: moment("07:30:00 am", "HH:mm:ss a"),
 
         title: "Wake Up - 22",
         desc: "message or instructions will be shown here",
@@ -326,7 +326,7 @@ export class CalenderShiftsPage implements OnInit {
         startDate: "",
         endDate: "",
         startTime: moment("09:00:00 am", "HH:mm:ss a"),
-        endTime: moment("10:00:00 am", "HH:mm:ss a"),
+        endTime: moment("09:30:00 am", "HH:mm:ss a"),
         title: "Medication: Ibuprofine MKal",
         desc: "Dosage: 1 with warm water, Daily",
       },
@@ -475,6 +475,7 @@ export class CalenderShiftsPage implements OnInit {
 
     let emptycount = 0;
     this.timeLineActivity.forEach((element: any, i) => {
+      let tempData: any = {};
       console.log(
         "CalenderShiftsPage -> initCalenderActivity -> element.startTime",
         element
@@ -482,14 +483,15 @@ export class CalenderShiftsPage implements OnInit {
       if (
         this.endTimeTemp2 &&
         element.startTime &&
-        this.endTimeTemp2.format("HH:mm:ss") !=
-          element.startTime.format("HH:mm:ss")
+        this.endTimeTemp2.format("HH:mm:ss a") !=
+          element.startTime.format("HH:mm:ss a")
       ) {
         let dur = moment.duration(this.endTimeTemp2.diff(element.startTime));
-        let hrs: any = dur.asMinutes();
+        let hrs: any = Math.abs(dur.asMinutes());
         console.log("CalenderShiftsPage -> initCalenderActivity -> hrs", hrs);
-        let tempData: any = {
+        tempData = {
           // emptyspace: hrs,
+          title: "",
           emptyheight: hrs * 1.5,
         };
         if (emptycount == 0) {
@@ -497,11 +499,11 @@ export class CalenderShiftsPage implements OnInit {
           emptycount = emptycount + 1;
         } else {
           // debugger;
-          this.timeLineActivity.splice(i + emptycount, 0, tempData);
           emptycount = emptycount + 1;
+          this.timeLineActivity.splice(i + emptycount, 0, tempData);
         }
       }
-      if (element.title) {
+      if (element.title.length > 0) {
         let duration = moment.duration(element.endTime.diff(element.startTime));
         console.log(element.startTime);
         // duration in hours
@@ -517,12 +519,21 @@ export class CalenderShiftsPage implements OnInit {
           element["height"]
         );
 
-        this.endTimeTemp2 = element.endTime;
         console.log(
           "CalenderShiftsPage -> initCalenderActivity -> this.endTimeTemp2",
           this.endTimeTemp2
         );
       }
+      this.endTimeTemp2 = element.endTime;
+
+      // if (emptycount == 0) {
+      //   this.timeLineActivity.splice(i, 0, tempData);
+      //   emptycount = emptycount + 1;
+      // } else {
+      //   // debugger;
+      //   this.timeLineActivity.splice(i + emptycount, 0, tempData);
+      //   emptycount = emptycount + 1;
+      // }
     });
     let duration = moment.duration(
       this.highesttimeper2.diff(this.lowesttimeper2)
