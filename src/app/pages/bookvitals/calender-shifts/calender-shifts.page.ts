@@ -20,8 +20,8 @@ export class CalenderShiftsPage implements OnInit {
   highesttimeper2: any;
   timeLine2 = [];
   dataLoaded = false;
-  shiftsDataArray: any = {};
-  activityDataArray: any = {};
+  shiftsDataArray: any = [];
+  activityDataArray: any = [];
   // shiftsDataArray = {
   //   17: [
   //     {
@@ -322,9 +322,9 @@ export class CalenderShiftsPage implements OnInit {
   //     },
   //   ],
   // };
-  timeLineShifts: any = {};
+  timeLineShifts: any = [];
 
-  timeLineActivity: any = {};
+  timeLineActivity: any = [];
 
   selectedDay = 'Mon';
   endTimeTemp: any;
@@ -418,7 +418,8 @@ export class CalenderShiftsPage implements OnInit {
     }
     this.lowesttimeper = this.timeLineShifts.min;
     this.highesttimeper = this.timeLineShifts.max;
-
+console.log(this.timeLineShifts);
+debugger;
     this.timeLineShifts.events.forEach((element:any, i) => {
       let itemp: any = 0;
 
@@ -505,17 +506,20 @@ export class CalenderShiftsPage implements OnInit {
   }
   
   ChangeData(ev: any) {
+   
     this.endTimeTemp = null;
     this.endTimeTemp2 = null;
     this.timeLine2 = [];
     this.timeLine = [];
-    this.timeLineActivity = {};
-    this.timeLineActivity = Object.assign({}, this.activityDataArray[ev]);
-
+    this.timeLineActivity = [];
+    //problem with in this array activityDataArray[0]...it contains empty elements
+   console.log("-----------------------------------",this.activityDataArray[0]);
+    this.timeLineActivity =  this.activityDataArray&&this.activityDataArray.length&&this.activityDataArray.length>0?Object.assign({}, this.activityDataArray[ev]):[];
+   
     this.initCalenderActivity();
     this.timeLine = [];
-    this.timeLineShifts = {};
-    this.timeLineShifts = Object.assign({}, this.shiftsDataArray[ev]);
+    this.timeLineShifts = [];
+    this.timeLineShifts = this.shiftsDataArray&&this.shiftsDataArray.length&&this.shiftsDataArray.length>0?Object.assign({}, this.shiftsDataArray[ev]):[];
 
     this.initCalenderShift();
   }
