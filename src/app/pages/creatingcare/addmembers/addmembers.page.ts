@@ -45,7 +45,7 @@ export class AddmembersPage implements OnInit {
         }
       ]
     };
-    this._apiService.post('careCircleAddUser', apiRequestBody).then((data) => {
+    this._apiService.post('careCircle/addUser', apiRequestBody).then((data) => {
       this.navCtrl.navigateForward(['carecircle/list']);
     });
 

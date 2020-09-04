@@ -1,8 +1,8 @@
 <app-addimage (click)="addCapImage()"></app-addimage>
-<div class="imagelist" *ngIf="imageList.length">
+<div class="imagelist" *ngIf="imageList && imageList.length">
     <div class="image-thumb" *ngFor="let img of imageList; let j=index">
         <ion-icon slot="icon-only" class="closeicon img-delete" name="close-outline" (click)="removeImg(j)"></ion-icon>
-        <ion-thumbnail>
+        <ion-thumbnail (click)="viewPhoto(img)">
             <img [src]="img">
         </ion-thumbnail>
     </div>

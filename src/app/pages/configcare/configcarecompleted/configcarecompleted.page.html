@@ -1,27 +1,28 @@
 <ion-content>
-  <ion-grid style="padding-top:113px ;">
-    <ion-img src="../assets/MariposaIcons/Assessment_Complete.svg"></ion-img>
+    <ion-grid style="padding-top:113px ;">
+        <ion-img src="../assets/MariposaIcons/Assessment_Complete.svg"></ion-img>
 
-    <div style="text-align: center;">
-      <ion-text color="primary"><h5 style="font-weight:bold;font-size:16px;line-height: 19px;">Congratulations</h5></ion-text>
-    </div>
+        <div style="text-align: center;">
+            <ion-text color="primary">
+                <h5 style="font-weight:bold;font-size:16px;line-height: 19px;">Congratulations</h5>
+            </ion-text>
+        </div>
 
-    <div>
-      <ion-text><h6 style="text-align:center;font-size:16px;font-weight: 300;margin-top:0px ;line-height: 19px;">Your have successfully configured care</h6></ion-text>
-    </div>
+        <div>
+            <ion-text>
+                <h6 style="text-align:center;font-size:16px;font-weight: 300;margin-top:0px ;line-height: 19px;">Your have successfully configured care</h6>
+            </ion-text>
+        </div>
 
-    <div style="text-align: center;margin-top: 14px;">
-      <ion-button class="btnwhite1">EDIT CARE</ion-button>
-    </div>
-    <div style="text-align: center;margin-top: 14px;">
-      <ion-button class="btnwhite1">ADD MEMBERS</ion-button>
-    </div>
+        <div style="text-align: center;margin-top: 14px;">
+            <ion-button class="btnwhite1" (click)="back()">EDIT CARE</ion-button>
+        </div>
+        <div style="text-align: center;margin-top: 14px;">
+            <ion-button class="btnwhite1" routerLink="/carecircle/addmembers">ADD MEMBERS</ion-button>
+        </div>
 
-    <div id="button">
-      <ion-button [disabled]="false" class="btnblue" id="signup">GO TO BOOK</ion-button>
-    </div>
-
-
-  </ion-grid>
+        <div id="button">
+            <ion-button [disabled]="false" routerLink="/bookvitals/books" class="btnblue" id="signup">GO TO BOOK</ion-button>
+        </div>
+    </ion-grid>
 </ion-content>
-

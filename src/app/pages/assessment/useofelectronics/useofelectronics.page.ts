@@ -21,9 +21,7 @@ export class UseofelectronicsPage implements OnInit {
   formData: any = {
 
   };
-  constructor(private router: Router,
-              private apiService: ApiService,
-              private location: Location,
+  constructor(
               private navCtrl: NavController,
               private assessmentService: AssessmentServiceService,
               private dataService: DataserviceService) { }
@@ -37,10 +35,9 @@ export class UseofelectronicsPage implements OnInit {
     if (this.stateObject == null){
       this.stateObject = {};
     }
-    this.stateObject.ELECTRONICS = this.formData;
+    this.stateObject.ELECTRONICS = {...this.formData, imageList: this.imageList};
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
-      console.log(response);
-      this.router.navigate(['/assessment/assessmentbar']);
+      this.navCtrl.back();
     });
   }
 
@@ -50,12 +47,13 @@ export class UseofelectronicsPage implements OnInit {
     this.userId = await this.dataService.getUserInfo();
     this.userId = this.userId.userId;
     const key = 'ELECTRONICS';
-
+    this.equipmentList = [];
     this.assessmentService.getAssessmentStateObject().then((data) => {
       // first time load
       this.stateObject = data.assessmentValues.CARE_NEEDS;
       if (data.assessmentValues.CARE_NEEDS != null && data.assessmentValues.CARE_NEEDS[key] != null){
         this.formData = data.assessmentValues.CARE_NEEDS[key];
+        this.imageList = this.formData.imageList ? this.formData.imageList : [];
       }
       else{
         // do nothing

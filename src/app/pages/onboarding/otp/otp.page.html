@@ -1,46 +1,42 @@
-<ion-content [fullscreen]="true">
-  <ion-grid class="content">   
+<ion-content [fullscreen]="true" [formGroup]="otpForm">
+    <ion-grid class="content">
 
-    <div>
-      <ion-text class="headertext cap">hello {{name}},</ion-text>
-    </div>
-    
-    <div class="top1">
-      <ion-text class="headertext cap">please authenticate email</ion-text>
-    </div>
-    
+        <div>
+            <ion-text class="headertext cap">hello {{name}},</ion-text>
+        </div>
 
-    <div class="top">
-    <ion-text class="text"><br>an OTP has being send to <br><b>{{email}}</b></ion-text>
-    </div>
+        <div class="top1">
+            <ion-text class="headertext cap">please authenticate email</ion-text>
+        </div>
+        <div class="top">
+            <ion-text class="text"><br>an OTP has being sent to <br><b>{{email}}</b>. Please wait for 3 minutes before requesting the OTP again.</ion-text>
+        </div>
+        <ion-row class="otprow" text-center>
+            <ion-col>
+                <ion-input formControlName="otp1" type="tel" #otp1 required maxLength="1" (keyup)="otpController($event,otp2,'')">
+                </ion-input>
+                <ion-input formControlName="otp2" type="tel" #otp2 required maxLength="1" (keyup)="otpController($event,otp3,otp1)">
+                </ion-input>
+                <ion-input formControlName="otp3" type="tel" #otp3 required maxLength="1" (keyup)="otpController($event,otp4,otp2)">
+                </ion-input>
+                <ion-input formControlName="otp4" type="tel" #otp4 required maxLength="1" (keyup)="otpController($event,otp5,otp3)">
+                </ion-input>
+                <ion-input formControlName="otp5" type="tel" #otp5 required maxLength="1" (keyup)="otpController($event,otp6,otp4)">
+                </ion-input>
+                <ion-input formControlName="otp6" type="tel" #otp6 required maxLength="1" (keyup)="otpController($event,'',otp5)">
+                </ion-input>
+            </ion-col>
+        </ion-row>
 
-    <ion-row class="otprow" text-center>
-      <ion-col>
-       <ion-input #otp1 required maxLength="1" (keyup)="otpController($event,otp2,'')">
-       </ion-input>
-       <ion-input #otp2 required maxLength="1" (keyup)="otpController($event,otp3,otp1)">
-       </ion-input>
-       <ion-input #otp3 required maxLength="1" (keyup)="otpController($event,otp4,otp2)">
-       </ion-input>
-       <ion-input #otp4  required maxLength="1" (keyup)="otpController($event,otp5,otp3)">
-       </ion-input>
-       <ion-input #otp5  required maxLength="1" (keyup)="otpController($event,otp6,otp4)">
-      </ion-input>
-      <ion-input #otp6  required maxLength="1" (keyup)="otpController($event,'',otp5)">
-      </ion-input>
-      </ion-col>
-    </ion-row>
+        <div class="top3">
+            <ion-text class="confirmotp">Didn't get OTP? </ion-text>
+            <br/>
+            <br/>
+            <ion-text (click)="resendOtp()" class="resendotp">Click here to Resend</ion-text>
+        </div>
+        <div>
+            <ion-button type="submit" class="btnblue" (click)="verifyOtp()" expand="block">SUBMIT</ion-button>
+        </div>
 
-    <div class="top3">
-      <ion-text class="confirmotp">Didn't get OTP?</ion-text>
-      <ion-text class="resendotp"> Resend</ion-text>
-    </div>
-    
-   
-     
-          <div id="button">
-              <ion-button type="submit" class="btnblue" [disabled]="false" expand="block">SIGNUP</ion-button>
-          </div>
-     
-  </ion-grid>
+    </ion-grid>
 </ion-content>

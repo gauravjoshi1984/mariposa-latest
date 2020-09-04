@@ -1,9 +1,9 @@
 <ion-header mode="md">
 
     <ion-toolbar class="headtoolbar">
-        <ion-grid>
+        <ion-grid class="headergrid">
             <ion-row style="align-items: center;margin-bottom: 5px;">
-                <ion-col>
+                <ion-col size="10">
                     <div>
                         <ion-text color="mdblack" position="floating" id="titletag">Add Members</ion-text>
                         <ion-text class="cap" style="font-size:14px;" color="mdgrey"><br>({{careCircleName}}'s Care Circle)</ion-text>
@@ -69,7 +69,7 @@
                 <ion-text position="floating" id="tag">Relation</ion-text>
             </div>
             <div>
-                <ion-select mode="md" class="input" placeholder="Select Relation" formControlName="memberRelation">
+                <ion-select mode="ios" interface="popover" class="input" placeholder="Select Relation" formControlName="memberRelation">
                     <ion-select-option *ngFor="let relation of relationList" [value]="relation" for="memberRelation">{{relation}}</ion-select-option>
                     <!-- <ion-select-option value="blonde">Blonde</ion-select-option>
         <ion-select-option value="black">Black</ion-select-option>

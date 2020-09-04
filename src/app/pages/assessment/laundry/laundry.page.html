@@ -7,7 +7,7 @@
             <ion-text position="floating" id="tag">Frequency</ion-text>
         </div>
         <div>
-            <ion-select mode="md" class="input" placeholder="Select" [(ngModel)]="formData.frequency">
+            <ion-select mode="ios" interface="popover" class="input" placeholder="Select" [(ngModel)]="formData.frequency">
                 <ion-select-option *ngFor="let laundry of laundryList" value="{{laundry}}" selected>{{laundry}}</ion-select-option>
             </ion-select>
         </div>

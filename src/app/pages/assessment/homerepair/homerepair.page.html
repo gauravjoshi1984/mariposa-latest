@@ -1,50 +1,32 @@
 <app-m-header-close title="Home Repair / Maintenance"></app-m-header-close>
 
 <ion-content [formGroup]="homeRepairForm" fullscreen>
-  <ion-grid style="padding: 24px; height: fit-content">
-    <!-- Therapy-->
+    <ion-grid style="padding:24px;height:fit-content">
+        <!-- Therapy-->
 
-    <div style="padding-top: 0px; margin-bottom: 15px">
-      <ion-label style="font-size: 16px; line-height: 19px"
-        >Appliance/Equipment in use</ion-label
-      >
-    </div>
-
-    <!-- CHECKBOX 1 -->
-    <ion-row
-      style="align-items: center; margin-top: 5px"
-      *ngFor="let appliance of appliances"
-    >
-      <ion-col size="1">
-        <div style="padding-left: 3px">
-          <ion-checkbox
-            #appliance
-            color="mwhite"
-            checked="false"
-            [formControlName]="appliance"
-          ></ion-checkbox>
+        <div style="padding-top: 0px; margin-bottom: 15px;">
+            <ion-label style="font-size: 16px; line-height: 19px;">Appliance/Equipment in use</ion-label>
         </div>
-      </ion-col>
-      <ion-col
-        (click)="generateClick(appliance)"
-        size="11"
-        style="padding-top: 0px"
-      >
-        <div>
-          <ion-text
-            style="
+
+        <!-- CHECKBOX 1 -->
+        <ion-row style="align-items: center; margin-top: 5px;" *ngFor="let appliance of appliances">
+            <ion-col size="1">
+                <div style="padding-left: 3px;">
+                    <ion-checkbox #appliance color="mwhite" checked="false" [formControlName]="appliance"></ion-checkbox>
+                </div>
+            </ion-col>
+            <ion-col (click)="generateClick(appliance)" size="11" style="padding-top: 0px;">
+                <div>
+                    <ion-text style="
               font-size: 16px;
               line-height: 19px;
               font-weight: 300;
               margin-left: 12px;
-            "
-            color="mdblack"
-            >{{appliance}}</ion-text
-          >
-        </div>
-      </ion-col>
-    </ion-row>
-    <!-- <ion-row style="align-items: center; margin-top: 5px;">
+            " color="mdblack">{{appliance}}</ion-text>
+                </div>
+            </ion-col>
+        </ion-row>
+        <!-- <ion-row style="align-items: center; margin-top: 5px;">
       <ion-col  size="1">
         <div style="padding-left: 3px;">
           <ion-checkbox #washer color="mwhite" checked="false"></ion-checkbox>
@@ -70,9 +52,9 @@
       </ion-col>
     </ion-row> -->
 
-    <!-- CHECKBOX 2 -->
+        <!-- CHECKBOX 2 -->
 
-    <!-- <ion-row style="align-items: center; margin-top: 5px;">
+        <!-- <ion-row style="align-items: center; margin-top: 5px;">
       <ion-col  size="1">
         <div style="padding-left: 3px;">
           <ion-checkbox #dryer color="mwhite" checked="false"></ion-checkbox>
@@ -98,9 +80,9 @@
       </ion-col>
     </ion-row> -->
 
-    <!-- CHECKBOX 3 -->
+        <!-- CHECKBOX 3 -->
 
-    <!-- <ion-row style="align-items: center; margin-top: 5px;">
+        <!-- <ion-row style="align-items: center; margin-top: 5px;">
       <ion-col  size="1">
         <div style="padding-left: 3px;">
           <ion-checkbox #refigerator color="mwhite" checked="false"></ion-checkbox>
@@ -126,9 +108,9 @@
       </ion-col>
     </ion-row> -->
 
-    <!-- CHECKBOX 4 -->
+        <!-- CHECKBOX 4 -->
 
-    <!-- <ion-row style="align-items: center; margin-top: 5px;">
+        <!-- <ion-row style="align-items: center; margin-top: 5px;">
       <ion-col  size="1">
         <div style="padding-left: 3px;">
           <ion-checkbox #garbage color="mwhite" checked="false"></ion-checkbox>
@@ -141,9 +123,9 @@
       </ion-col>
     </ion-row> -->
 
-    <!-- CHECKBOX 5 -->
+        <!-- CHECKBOX 5 -->
 
-    <!-- <ion-row style="align-items: center; margin-top: 5px;">
+        <!-- <ion-row style="align-items: center; margin-top: 5px;">
       <ion-col  size="1">
         <div style="padding-left: 3px;">
           <ion-checkbox #air color="mwhite" checked="false"></ion-checkbox>
@@ -156,9 +138,9 @@
       </ion-col>
     </ion-row> -->
 
-    <!-- CHECKBOX 6 -->
+        <!-- CHECKBOX 6 -->
 
-    <!-- <ion-row style="align-items: center; margin-top: 5px;">
+        <!-- <ion-row style="align-items: center; margin-top: 5px;">
       <ion-col  size="1">
         <div style="padding-left: 3px;">
           <ion-checkbox #solar color="mwhite" checked="false"></ion-checkbox>
@@ -171,9 +153,9 @@
       </ion-col>
     </ion-row> -->
 
-    <!-- CHECKBOX 7 -->
+        <!-- CHECKBOX 7 -->
 
-    <!-- <ion-row style="align-items: center; margin-top: 5px;">
+        <!-- <ion-row style="align-items: center; margin-top: 5px;">
       <ion-col  size="1">
         <div style="padding-left: 3px;">
           <ion-checkbox #others color="mwhite" checked="false"></ion-checkbox>
@@ -186,35 +168,24 @@
       </ion-col>
     </ion-row> -->
 
-    <!-- INSTRUCTIONS -->
-    <div *ngIf="readyFlag">
-      <div class="nametag" style="margin-top: 15px">
-        <ion-text position="floating" id="tag">Instructions(optional)</ion-text>
-      </div>
-      <div>
-        <ion-textarea
-          style="height: 120px"
-          class="input"
-          placeholder="Write here"
-          formControlName="instructions"
-        ></ion-textarea>
-      </div>
-    </div>
 
-    <!-- ADD IMAGE -->
-    <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
-  </ion-grid>
+        <!-- INSTRUCTIONS -->
+        <div *ngIf="readyFlag">
+            <div class="nametag" style="margin-top: 15px;">
+                <ion-text position="floating" id="tag">Instructions(optional)</ion-text>
+            </div>
+            <div>
+                <ion-textarea style="height: 120px;" class="input" placeholder="Write here" formControlName="instructions"></ion-textarea>
+            </div>
+        </div>
+
+        <!-- ADD IMAGE -->
+        <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
+    </ion-grid>
 </ion-content>
 
 <ion-footer>
-  <div id="button">
-    <ion-button
-      [disabled]="false"
-      class="btnblue"
-      type="submit"
-      (click)="save()"
-      id="signup"
-      >SAVE & PROCEED</ion-button
-    >
-  </div>
+    <div id="button">
+        <ion-button [disabled]="false" class="btnblue" type="submit" (click)="save()" id="signup">SAVE & PROCEED</ion-button>
+    </div>
 </ion-footer>

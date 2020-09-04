@@ -3,14 +3,50 @@
 <ion-content fullscreen [formGroup]="exerciseForm">
     <ion-grid style="padding:24px;height:fit-content">
         <!-- Therapy-->
-
-        <div style="padding-top: 0px; margin-bottom: 15px;">
-            <ion-label style="font-size: 16px; line-height: 19px;">Type of Therapy</ion-label>
+        <ion-row class="exercise-list">
+            <ion-col>
+                <ion-text class="text">Exercise List</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-text class="add" (click)="addExercise()">ADD</ion-text>
+            </ion-col>
+        </ion-row>
+        <div *ngIf="exerciseData; else noExercise;">
+            <div *ngFor="let type of therapyTypeList">
+                <div class="favoriteitemslist" *ngFor="let item of exerciseData[type]; let i = index">
+                    <ion-row class="favoriteitem" (click)="editExercise(item, item.type, i)">
+                        <ion-col size="10">
+                            <ion-row>
+                                <ion-col>
+                                    <ion-text class="itemname cap">{{item.type}}</ion-text>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col>
+                                    <ion-text class="itemtype cap">{{item.instructions}}</ion-text>
+                                </ion-col>
+                            </ion-row>
+                        </ion-col>
+                        <ion-col>
+                            <ion-icon class="arrow" src="../assets/MariposaIcons/arrowgrey.svg"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                    <hr class="solid">
+                </div>
+            </div>
         </div>
+        <ng-template #noExercise>
+            <div style="padding-top: 0px; margin: 15px 0;">
+                <ion-label style="font-size: 16px; line-height: 19px;">No List added!</ion-label>
+            </div>
+        </ng-template>
+        <!-- <div style="padding-top: 0px; margin-bottom: 15px;">
+            <ion-label style="font-size: 16px; line-height: 19px;">Type of Therapy</ion-label>
+        </div> -->
 
         <!-- CHECKBOX 1 -->
 
-        <ion-row style="align-items: center; margin-top: 5px;" *ngFor="let therapyType of therapyTypeList">
+        <!-- <ion-row style="align-items: center; margin-top: 5px;" *ngFor="let therapyType of therapyTypeList">
             <ion-col size="1">
                 <div style="padding-left: 3px;">
                     <ion-checkbox #therapyType color="mwhite" checked="false" [formControlName]="therapyType"></ion-checkbox>
@@ -26,19 +62,19 @@
             " color="mdblack">{{therapyType}}</ion-text>
                 </div>
             </ion-col>
-        </ion-row>
+        </ion-row> -->
 
         <!-- INSTRUCTIONS -->
 
-        <div class="nametag" style="margin-top: 15px;" *ngIf="readyFlag">
+        <!-- <div class="nametag" style="margin-top: 15px;" *ngIf="readyFlag">
             <ion-text position="floating" id="tag">Instructions(optional)</ion-text>
         </div>
         <div>
             <ion-textarea *ngIf="readyFlag" style="height: 120px;" class="input" placeholder="Write here" formControlName="instructions"></ion-textarea>
-        </div>
+        </div> -->
 
         <!-- ADD IMAGE -->
-        <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
+        <!-- <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector> -->
 
     </ion-grid>
 </ion-content>

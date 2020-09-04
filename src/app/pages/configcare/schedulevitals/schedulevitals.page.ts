@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfigCareServiceService } from '../config-care-service.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-schedulevitals',
@@ -6,26 +8,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./schedulevitals.page.scss'],
 })
 export class SchedulevitalsPage implements OnInit {
+  key: any;
+  vitalData = [];
 
-  ccvitalinfo=[
-    {
-      type:"Blood Pressure",
-      frequency:"Daily",
-      frequencyinaday:"Once",
-      time:"7:30 AM",
-    },
-    {
-      type:"Temperature",
-      frequency:"Daily",
-      frequencyinaday:"Twice",
-      time:"7:30 AM",
-    },
-
-  ]
-
-  constructor() { }
+  constructor(
+    private configCareService: ConfigCareServiceService,
+    private navCtrl: NavController
+  ) { }
 
   ngOnInit() {
   }
+  async populateOptions(){
+    const configCareDetails = await this.configCareService.getConfigCareDetails();
+    this.key = 'VITALS';
+    if (this.key in configCareDetails.configCareValues && configCareDetails.configCareValues[this.key] !== null){
+      this.vitalData = configCareDetails.configCareValues[this.key];
+    }
+  }
 
+  async ionViewWillEnter(){
+    this.populateOptions();
+  }
+
+  submit(){
+    this.navCtrl.back();
+  }
+  editItem(item, index){
+    this.configCareService.setConfigEditShared(item, this.key, index);
+    this.navCtrl.navigateForward('/configcare/addvitals');
+  }
 }

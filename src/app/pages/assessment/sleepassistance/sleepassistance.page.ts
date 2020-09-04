@@ -43,7 +43,7 @@ export class SleepassistancePage implements OnInit {
     if (this.stateObject == null){
       this.stateObject = {};
     }
-    // this.formData.imageList = this.imageList;
+    this.formData.imageList = this.imageList;
     const finalData = JSON.parse(JSON.stringify({...this.sleepForm.value, ...this.formData}));
     // if (typeof finalData.bedTime === 'string'){
     //   finalData.bedTime = {hour: new Date(finalData.bedTime).getHours(), minute: new Date(finalData.bedTime).getMinutes()};
@@ -87,6 +87,7 @@ export class SleepassistancePage implements OnInit {
       this.sleepForm.controls.wakeupTime.setValue(this.stateObject[this.key].wakeupTime);
       this.sleepForm.controls.nightAssistance.setValue(this.stateObject[this.key].nightAssistance);
       this.sleepForm.controls.notes.setValue(this.stateObject[this.key].notes);
+      this.imageList = this.stateObject[this.key].imageList ? this.stateObject[this.key].imageList : [];
     }
   }
 }

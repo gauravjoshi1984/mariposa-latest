@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { AssessmentServiceService } from '../assessment-service.service';
 import { DataserviceService } from '../../dataservice.service';
+import { ConditionalExpr } from '@angular/compiler';
 
 @Component({
   selector: 'app-medication',
@@ -15,25 +16,26 @@ export class MedicationPage implements OnInit {
   readyFlag;
   imageList = [];
   allergies = [];
+  allergiesList = [];
   toggleQuestions = [];
   formData: any = {};
   validForm = false;
-  constructor(private navCtrl: NavController,
-              private assessmentService: AssessmentServiceService,
-              private dataService: DataserviceService, ) { }
-
-  
+  sharedKey = 'medication';
+  constructor(
+    private navCtrl: NavController,
+    private assessmentService: AssessmentServiceService,
+    private dataService: DataserviceService) { }
 
   medicationlist = [
     {
-      name:"perafivir",
-      type:"capsule",
+      name: 'perafivir',
+      type: 'capsule',
     },
     {
-      name:"peracitomal",
-      type:"tablet",
+      name: 'peracitomal',
+      type: 'tablet',
     },
-  ]
+  ];
 
   ngOnInit() {
   }
@@ -60,14 +62,35 @@ export class MedicationPage implements OnInit {
     this.toggleQuestions = data.assessmentConfiguration.CARE_NEEDS[key].yn_questions;
     if (this.stateObject != null && this.stateObject[key] != null){
       this.formData = this.stateObject[key];
-      console.log(this.formData);
       this.validForm = true;
     }
+    const newMedication = this.assessmentService.getAssessmentShared(this.sharedKey);
+    if (newMedication){
+      if (!this.formData[newMedication.type]){
+        this.formData[newMedication.type] = [];
+      }
+      this.formData[newMedication.type].push(newMedication.obj);
+      this.assessmentService.setAssessmentShared(null, null, this.sharedKey);
+    }
+    const editMedication = this.assessmentService.getAssessmentEditShared(this.sharedKey);
+    if (editMedication){
+      this.formData[editMedication.type][editMedication.index] = editMedication.obj;
+      this.assessmentService.setAssessmentEditShared(null, null, this.sharedKey);
+    }
+    data.assessmentValues.CARE_NEEDS[key] = this.formData;
+    this.assessmentService.setAssessmentStateObject(data);
   }
   changeToggle(key, ev: any) {
     this.formData[key] = ev;
   }
-
+  async editMedication(item, type, index){
+    await this.assessmentService.setAssessmentEditShared(item, type.toLowerCase(), this.sharedKey, index);
+    this.navCtrl.navigateForward(['/assessment/addMedication']);
+  }
+  async editAllergy(item, type, index){
+    await this.assessmentService.setAssessmentEditShared(item, type.toLowerCase(), this.sharedKey, index);
+    this.navCtrl.navigateForward(['/assessment/addallergy']);
+  }
   generateClick(key: any) {
     this.formData[key] = !this.formData[key];
   }

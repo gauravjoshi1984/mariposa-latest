@@ -41,15 +41,22 @@ export class CreatingcareService {
     this.data.careCircleDetails = careCircleDetails;
     this.storage.set('careCircleDetails', careCircleDetails);
   }
-  getCareCircleDetails(){
-    let careCircleObj = null;
-    if (this.data.careCircleList != null){
-      this.data.careCircleList.forEach(element => {
-        if (element.careCircleId === this.data.careCircleId){
-          careCircleObj = element;
-        }
-      });
-    }
-    return careCircleObj;
+  async getCareCircleDetails(){
+    // let careCircleObj = null;
+    // if (this.data.careCircleList != null){
+    //   this.data.careCircleList.forEach(element => {
+    //     if (element.careCircleId === this.data.careCircleId){
+    //       careCircleObj = element;
+    //     }
+    //   });
+    // }
+    // return careCircleObj;
+    return await this.storage.get('careCircleDetails');
+  }
+  setSelectedMember(member){
+    this.storage.set('selectedMember', member);
+  }
+  async getSelectedMember(){
+    return await this.storage.get('selectedMember');
   }
 }

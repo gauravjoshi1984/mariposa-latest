@@ -1,0 +1,41 @@
+<app-m-header-close title="Add Medication "></app-m-header-close>
+
+<ion-content fullscreen [formGroup]="addmedicationForm">
+    <ion-grid class="content">
+
+        <div class="nametag" id="topfield">
+            <ion-text position="floating" id="tag">Medicine Type</ion-text>
+        </div>
+        <div>
+            <ion-select mode="ios" interface="popover" class="input" formControlName='medicineType' placeholder="Select">
+                <ion-select-option *ngFor="let items of medicinetype">{{items}}</ion-select-option>
+            </ion-select>
+        </div>
+
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Medicine name</ion-text>
+        </div>
+        <div>
+            <ion-input formControlName="name" mode="md" class="input" placeholder="Enter medicine name"></ion-input>
+        </div>
+
+        <!-- INSTRUCTIONS -->
+
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Instructions (optional)</ion-text>
+        </div>
+        <div>
+            <ion-textarea formControlName="medicalinstructions" style="height: 150px;" class="input" placeholder="Write here"></ion-textarea>
+        </div>
+
+        <!-- ADD IMAGE -->
+        <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
+
+    </ion-grid>
+</ion-content>
+
+<ion-footer [formGroup]="addmedicationForm">
+    <div id="button">
+        <ion-button [disabled]="addmedicationForm.invalid" class="btnblue" type="submit" id="signup" (click)="addmedication()">ADD</ion-button>
+    </div>
+</ion-footer>

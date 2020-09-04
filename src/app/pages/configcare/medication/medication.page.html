@@ -1,71 +1,61 @@
-
-
 <ion-header mode="md">
-  <ion-toolbar class="headtoolbar">
-      <ion-buttons class = "backbutton" slot="start">
-          <m-backbutton></m-backbutton>
-      </ion-buttons>
-      <ion-title class="name" color="mdblack" position="floating" id="titletag">Medication</ion-title>
-      <ion-buttons slot="end" class="edit">
-        <ion-text [routerLink]="'/configcare/deletemedicine'">EDIT</ion-text>
-      </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar class="headtoolbar">
+        <ion-buttons class="backbutton" slot="start">
+            <m-backbutton></m-backbutton>
+        </ion-buttons>
+        <ion-title class="name" color="mdblack" position="floating" id="titletag">Medication</ion-title>
+        <ion-buttons slot="end" class="edit">
+            <ion-text [routerLink]="'/configcare/deletemedicine'">DELETE</ion-text>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
-  <p class="listtitle">Medication List</p>
-  
-  <div style="padding: 0px;" *ngFor="let item of ccmedicineinfo">
-  <ion-card   style="width: 105%;right: 8px;margin-top:10px ;">
-    <ion-grid class="ion-no-padding">
-      <ion-row>
-        <ion-col size="7">
-          <p class="text1">{{item.name}}</p>  
-        </ion-col>
-        <ion-col size="5" style="text-align: end;">
-          <p class="text1">{{item.frequency}}</p>     
-        </ion-col>
-      </ion-row>
-      <ion-row style="margin-top:13px ;">
-        <ion-col size="7">         
-          <p class="text2">Dosage: <span>{{item.dosage}}</span></p>
-        </ion-col>
-        <ion-col size="5" style="text-align: end;">   
-          <p class="text2">Time: <span>{{item.time}}</span></p>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-  </div>
-
+    <div *ngIf="medicationList && medicationList.length; else noList">
+        <p class="listtitle">Medication List</p>
+        <div style="padding: 0px;" *ngFor="let item of medicationList; let i = index;">
+            <ion-card style="width: 105%;right: 8px;margin-top:10px ;" (click)="editItem(item, i)">
+                <ion-grid class="ion-no-padding">
+                    <ion-row>
+                        <ion-col size="7">
+                            <p class="text1">{{item.name}}</p>
+                        </ion-col>
+                        <ion-col size="5" style="text-align: end;">
+                            <p class="text1">{{item.timeList.length}} Time(s)</p>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row style="margin-top:13px ;">
+                        <ion-col size="7">
+                            <p class="text2">Dosage: <span>{{item.dosage}}</span></p>
+                        </ion-col>
+                        <ion-col size="5" style="text-align: end;">
+                            <p class="text2">Time: <span>{{item.timeList[0].hours}}:{{item.timeList[0].minutes}}</span></p>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card>
+        </div>
+    </div>
+    <ng-template #noList>
+        <p class="listtitle ion-text-center">No Medication Scheduled!</p>
+    </ng-template>
 </ion-content>
 
 <ion-footer mode="md">
-  <ion-toolbar id="button">
-    <ion-grid class="ion-no-padding">
-      <ion-row>
-        <ion-col size="6">
-          <ion-button
-            
-            expand="block" 
-            class="lbtn"
-            shape="round"
-          >
-            ADD MORE
-          </ion-button></ion-col
-        >
-        <ion-col size="6">
-          <ion-button
-            color="primary"
-            expand="block"
-            class="rbtn"
-            shape="round"
-          >
-            SUBMIT
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-toolbar>
+    <ion-toolbar id="button">
+        <ion-grid class="ion-no-padding">
+            <ion-row>
+                <ion-col size="6">
+                    <ion-button routerLink="/configcare/addmedicine" expand="block" class="lbtn" shape="round">
+                        ADD {{medicationList && medicationList.length ? 'MORE': ''}}
+                    </ion-button>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-button color="primary" (click)="submit()" expand="block" class="rbtn" shape="round">
+                        SUBMIT
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
 </ion-footer>

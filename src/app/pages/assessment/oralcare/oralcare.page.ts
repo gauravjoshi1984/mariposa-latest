@@ -26,7 +26,8 @@ export class OralcarePage implements OnInit {
       this.oralForm = this.formBuilder.group({
         toothpaste: new FormControl('', [Validators.required]),
         toothSensitivity : new FormControl('', [Validators.required]),
-        instructions: new FormControl('')
+        instructions: new FormControl(''),
+        imageList: new FormControl([])
       });
     }
 
@@ -34,11 +35,10 @@ export class OralcarePage implements OnInit {
   }
 
   save(){
-    console.log(this.oralForm);
     if (this.stateObject == null){
       this.stateObject = {};
     }
-    // this.formData.imageList = this.imageList;
+    this.oralForm.controls.imageList.setValue(this.imageList);
     this.stateObject[this.key] = this.oralForm.value;
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
       this.navCtrl.back();
@@ -58,9 +58,9 @@ export class OralcarePage implements OnInit {
     this.toothpasteOptions = data.assessmentConfiguration.CARE_NEEDS[this.key].toothpaste;
     if (this.stateObject != null && this.stateObject[this.key] != null){
       Object.keys(this.stateObject[this.key]).forEach(key => {
-        console.log(key, this.stateObject[this.key][key]);
         this.oralForm.controls[key].setValue(this.stateObject[this.key][key]);
       });
+      this.imageList = this.oralForm.controls.imageList.value;
     }
   }
 }

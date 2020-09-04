@@ -76,26 +76,27 @@
                 <ion-text class="add" (click)="addMeal()">ADD</ion-text>
             </ion-col>
         </ion-row>
-
-        <div class="favoriteitemslist" *ngFor="let item of recipebook; let i = index">
-            <ion-row class="favoriteitem" (click)="editMeal(item, item.mealType, i)">
-                <ion-col size="10">
-                    <ion-row>
-                        <ion-col>
-                            <ion-text class="itemname cap">{{item.name}}</ion-text>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col>
-                            <ion-text class="itemtype cap">{{item.mealType}}</ion-text>
-                        </ion-col>
-                    </ion-row>
-                </ion-col>
-                <ion-col>
-                    <ion-icon class="arrow" src="../assets/MariposaIcons/arrowgrey.svg"></ion-icon>
-                </ion-col>
-            </ion-row>
-            <hr class="solid">
+        <div *ngFor="let type of mealtype">
+            <div class="favoriteitemslist" *ngFor="let item of formData[type]; let i = index">
+                <ion-row class="favoriteitem" (click)="editMeal(item, item.mealType, i)">
+                    <ion-col size="10">
+                        <ion-row>
+                            <ion-col>
+                                <ion-text class="itemname cap">{{item.name}}</ion-text>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <ion-text class="itemtype cap">{{item.mealType}}</ion-text>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                    <ion-col>
+                        <ion-icon class="arrow" src="../assets/MariposaIcons/arrowgrey.svg"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <hr class="solid">
+            </div>
         </div>
 
 

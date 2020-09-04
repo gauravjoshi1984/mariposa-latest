@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { PrivacypolicyPageRoutingModule } from './privacypolicy-routing.module';
 
 import { PrivacypolicyPage } from './privacypolicy.page';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PrivacypolicyPageRoutingModule
+    PrivacypolicyPageRoutingModule,
+    SharedModule,
   ],
   declarations: [PrivacypolicyPage]
 })

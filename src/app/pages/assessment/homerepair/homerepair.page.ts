@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import {
-  ImagePicker,
-  ImagePickerOptions,
-} from '@ionic-native/image-picker/ngx';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { AssessmentServiceService } from '../assessment-service.service';
 import { DataserviceService } from '../../dataservice.service';
@@ -16,9 +12,7 @@ import { DataserviceService } from '../../dataservice.service';
 export class HomerepairPage implements OnInit {
   constructor(private dataService: DataserviceService,
               private navCtrl: NavController,
-              private imagePicker: ImagePicker,
-              private assessmentService: AssessmentServiceService,
-              private formBuilder: FormBuilder) {
+              private assessmentService: AssessmentServiceService) {
                 this.homeRepairForm = new FormGroup({});
               }
   homeRepairForm: FormGroup;
@@ -34,32 +28,12 @@ export class HomerepairPage implements OnInit {
   ngOnInit() {
   }
 
-  addImage() {
-    const options: ImagePickerOptions = {
-      maximumImagesCount: 4,
-    };
-    this.imagePicker.getPictures(options).then(
-      (results) => {
-        console.log(results);
-        for (let i = 0; i < results.length; i++) {
-          this.imageList.push(results[i]);
-        }
-      },
-      (err) => {}
-    );
-  }
-  removeImg(i) {
-    console.log('*', i);
-    this.imageList.splice(i, 1);
-  }
-
   save(){
     if (this.stateObject == null){
       this.stateObject = {};
     }
-    this.stateObject[this.key] = this.homeRepairForm.value;
+    this.stateObject[this.key] = {...this.homeRepairForm.value, imageList: this.imageList};
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
-      console.log(response);
       this.navCtrl.back();
     });
   }
@@ -81,6 +55,7 @@ export class HomerepairPage implements OnInit {
         Object.keys(this.stateObject[this.key]).forEach((element: any) => {
           this.homeRepairForm.addControl(element, new FormControl(this.stateObject[this.key][element]));
         });
+        this.imageList = this.homeRepairForm.controls.imageList ? this.homeRepairForm.controls.imageList.value : [];
       }
       else{
         // data is not present

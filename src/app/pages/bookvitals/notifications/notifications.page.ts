@@ -1,16 +1,21 @@
-import { Component, OnInit } from "@angular/core";
-import { NavController } from "@ionic/angular";
+import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
-  selector: "app-notifications",
-  templateUrl: "./notifications.page.html",
-  styleUrls: ["./notifications.page.scss"],
+  selector: 'app-notifications',
+  templateUrl: './notifications.page.html',
+  styleUrls: ['./notifications.page.scss'],
 })
 export class NotificationsPage implements OnInit {
-  constructor(private navCtrl: NavController) {}
 
-  ngOnInit() {}
-  goBack() {
+  constructor(private navCtrl: NavController) { }
+
+  ngOnInit() {
+  }
+  onClick(){
+
+  }
+  back(){
     this.navCtrl.back();
   }
 }

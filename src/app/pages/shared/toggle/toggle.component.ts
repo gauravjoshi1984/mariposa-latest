@@ -7,7 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ToggleComponent implements OnInit {
   @Input() name;
-  @Input() value;
+  @Input() value = false;
 
   @Output() result = new EventEmitter<boolean>();
   constructor() {

@@ -31,7 +31,8 @@ export class BathingPage implements OnInit {
     if (this.stateObject == null){
       this.stateObject = {};
     }
-    this.stateObject.BATHING = this.bathingForm.value;
+    this.stateObject.BATHING = {...this.bathingForm.value, imageList: this.imageList};
+    console.log(this.stateObject.BATHING);
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
       this.navCtrl.back();
     });
@@ -54,6 +55,7 @@ export class BathingPage implements OnInit {
         // data is present
         Object.keys(data.assessmentValues.CARE_NEEDS[key]).forEach((element: any) => {
           this.bathingForm.addControl(element, new FormControl(data.assessmentValues.CARE_NEEDS[key][element]));
+          this.imageList = this.bathingForm.controls.imageList ? this.bathingForm.controls.imageList.value : [];
         });
       }
       else{

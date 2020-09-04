@@ -4,7 +4,11 @@ import {
   ImagePickerOptions,
 } from '@ionic-native/image-picker/ngx';
 import { Plugins, CameraResultType } from '@capacitor/core';
+import { ApiService } from 'src/app/http.service';
+import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 const { Camera } = Plugins;
+
+const s3Url = 'https://mariposa-images.s3.amazonaws.com';
 
 @Component({
   selector: 'app-m-image-selector',
@@ -13,8 +17,12 @@ const { Camera } = Plugins;
 })
 export class MImageSelectorComponent implements OnInit {
   @Output() imageListChange = new EventEmitter();
+  folderName = 'assessment';
   imageListArray = [];
-  constructor(private imagePicker: ImagePicker) { }
+  constructor(
+    private imagePicker: ImagePicker,
+    private http: ApiService,
+    private photoViewer: PhotoViewer) { }
 
   ngOnInit() {}
   @Input()
@@ -45,13 +53,37 @@ export class MImageSelectorComponent implements OnInit {
         quality: 90,
         resultType: CameraResultType.Base64
       });
-      this.imageList.push('data:image/jpeg;base64,' + image.base64String);
+      const fileName = `Image-${new Date().getTime()}.jpeg`;
+      const file = this.dataUrlToFile('data:image/jpeg;base64,' + image.base64String, fileName);
+      this.http.post(`image?imageName=${fileName}&folderName=${this.folderName}`, file).then((response: any) => {
+        this.imageList.push(response.URL);
+        // this.imageList.push(`${s3Url}/${this.folderName}/${fileName}`);
+      });
     }
     catch (error){
       console.log('Catch statement ------------------------', error);
     }
   }
+  dataUrlToFile(dataUrl, fileName){
+    const arr = dataUrl.split(',');
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const arrayBuffer = new ArrayBuffer(n);
+    const u8arr = new Uint8Array(arrayBuffer);
+    while (n--){
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    const dataView = new DataView(arrayBuffer);
+    return new Blob([dataView.buffer], {type: mime});
+  }
   removeImg(i) {
-    this.imageList.splice(i, 1);
+    const image = this.imageList[i].split('/');
+    this.http.delete(`image?imageName=${image[4]}&folderName=${image[3]}`, {}).then((response) => {
+      this.imageList.splice(i, 1);
+    });
+  }
+  viewPhoto(url){
+    this.photoViewer.show(url);
   }
 }

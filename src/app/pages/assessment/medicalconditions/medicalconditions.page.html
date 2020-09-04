@@ -7,20 +7,37 @@
                 <div style="padding-top:0px;margin-bottom:15px;">
                     <ion-label style="font-size: 16px;line-height: 19px;">{{question.label}}</ion-label>
                 </div>
-                <ion-row style="align-items: center;margin-top:5px;" *ngFor="let option of question.options">
+                <ion-row style="align-items: center;margin-top:5px;" (click)="generateClick(question.key, option)" *ngFor="let option of question.options">
                     <ion-col size="1">
                         <div style="padding-left: 3px;">
                             <ion-checkbox mode="md" #option color="mwhite" [(ngModel)]="medicalForm[question.key][option]">
                             </ion-checkbox>
                         </div>
                     </ion-col>
-                    <ion-col (click)="generateClick(question.key, option)" size="11" style="padding-top: 0px;">
+                    <ion-col size="11" style="padding-top: 0px;">
                         <div>
                             <ion-text style="font-size:16px;line-height:19px;font-weight:300;margin-left:12px" color="mdblack">{{option}}</ion-text>
                         </div>
                     </ion-col>
                 </ion-row>
                 <hr class="solid">
+            </div>
+            <div *ngIf="medicalForm['healthProviders']">
+                <div *ngFor="let item of objectKeys(medicalForm['healthProviders'])">
+                    <div class="nametag">
+                        <ion-text position="floating" id="tag">{{item}} name</ion-text>
+                    </div>
+                    <div>
+                        <ion-input [(ngModel)]="medicalForm['healthProviderContact'][item].name" mode="md" class="input" placeholder="{{item}} name"></ion-input>
+                    </div>
+                    <div class="nametag">
+                        <ion-text position="floating" id="tag">{{item}} Contact</ion-text>
+                    </div>
+                    <div>
+                        <ion-input [(ngModel)]="medicalForm['healthProviderContact'][item].contact" type="tel" mode="md" class="input" placeholder="{{item}} Contact"></ion-input>
+                    </div>
+                    <hr class="solid">
+                </div>
             </div>
             <div *ngFor="let question of toggleQuestions">
                 <ion-row style="align-items: center;">
@@ -72,6 +89,20 @@
                     </ion-col>
                 </ion-row>
             </div>
+
+            <hr class="solid" />
+            <!-- </div> -->
+            <!-- INSTRUCTIONS -->
+            <div class="nametag" style="margin-top: 0px;">
+                <ion-text position="floating" id="tag">Instructions(optional)</ion-text>
+            </div>
+            <div>
+                <ion-textarea style="height: 120px;" class="input" placeholder="Write here"></ion-textarea>
+            </div>
+            <!-- ADD IMAGE -->
+            <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
+
+
         </ng-container>
     </ion-grid>
 </ion-content>

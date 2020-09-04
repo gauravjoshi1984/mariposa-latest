@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'admin-sign-in',
-    //canActivate: [MariposaAuthGuardService],
+    canActivate: [MariposaAuthGuardService],
     loadChildren: () => import('./pages/onboarding/admin-sign-in/admin-sign-in.module').then( m => m.AdminSignInPageModule)
   },
 
@@ -45,7 +45,7 @@ const routes: Routes = [
   },
   {
     path: 'carecircle',
-    //canActivate: [MariposaAuthGuardService],
+    canActivate: [MariposaAuthGuardService],
     children: [
       {
         path: '',
@@ -62,7 +62,7 @@ const routes: Routes = [
       },
       {
         path: 'addmembers', // done
-        loadChildren: () => import('./pages/creatingcare/addmembers/addmembers.module').then( m => m.AddmembersPageModule)
+        loadChildren: () => import('./pages/addmembers/addmembers/addmembers.module').then( m => m.AddmembersPageModule)
       },
       {
         path: 'showcarecircle', // out of scope
@@ -85,11 +85,15 @@ const routes: Routes = [
 
  {
    path: 'assessment',
-   //canActivate: [MariposaAuthGuardService],
+   canActivate: [MariposaAuthGuardService],
     children: [
       {
         path: 'assessmentbar',
         loadChildren: () => import('./pages/assessment/assessmentbar/assessmentbar.module').then( m => m.AssessmentbarPageModule)
+      },
+      {
+        path: 'addexercise',
+        loadChildren: () => import('./pages/assessment/addexercise/addexercise.module').then( m => m.AddexercisePageModule)
       },
       {
         path: '',
@@ -224,8 +228,20 @@ const routes: Routes = [
         loadChildren: () => import('./pages/assessment/addallergy/addallergy.module').then( m => m.AddallergyPageModule)
       },
       {
+        path: 'addMedication',
+        loadChildren: () => import('./pages/assessment/add-medication/add-medication.module').then( m => m.AddMedicationPageModule)
+      },
+      {
         path: 'addoutfit',
         loadChildren: () => import('./pages/assessment/addoutfit/addoutfit.module').then( m => m.AddoutfitPageModule)
+      },
+      {
+        path: 'addmedication',
+        loadChildren: () => import('./pages/assessment/addmedication/addmedication.module').then( m => m.AddmedicationPageModule)
+      },
+      {
+        path: 'editshoppinglist',
+        loadChildren: () => import('./pages/assessment/editshoppinglist/editshoppinglist.module').then( m => m.EditshoppinglistPageModule)
       },
 
     ]
@@ -233,7 +249,7 @@ const routes: Routes = [
 
   {
     path : 'configcare',
-    //canActivate: [MariposaAuthGuardService],
+    canActivate: [MariposaAuthGuardService],
     children : [
       {
         path: 'medication',
@@ -319,10 +335,31 @@ const routes: Routes = [
         path: 'calenderview',
         loadChildren: () => import('./pages/configcare/calenderview/calenderview.module').then( m => m.CalenderviewPageModule)
       },
+      {
+        path: 'schedulegardening',
+        loadChildren: () => import('./pages/configcare/schedulegardening/schedulegardening.module').then( m => m.SchedulegardeningPageModule)
+      },
+      {
+        path: 'schedulehousework',
+        loadChildren: () => import('./pages/configcare/schedulehousework/schedulehousework.module').then( m => m.SchedulehouseworkPageModule)
+      },
+      {
+        path: 'schedulelaundry',
+        loadChildren: () => import('./pages/configcare/schedulelaundry/schedulelaundry.module').then( m => m.SchedulelaundryPageModule)
+      },
+      {
+        path: 'scheduledressing',
+        loadChildren: () => import('./pages/configcare/scheduledressing/scheduledressing.module').then( m => m.ScheduledressingPageModule)
+      },
+      {
+        path: 'schedulewoundcare',
+        loadChildren: () => import('./pages/configcare/schedulewoundcare/schedulewoundcare.module').then( m => m.SchedulewoundcarePageModule)
+      },
     ]
   },
   {
     path: 'bookvitals',
+    //canActivate: [MariposaAuthGuardService],
     children: [
       {
         path: '',
@@ -360,12 +397,19 @@ const routes: Routes = [
         path: 'addappointment',
         loadChildren: () => import('./pages/bookvitals/addappointment/addappointment.module').then( m => m.AddappointmentPageModule)
       },
-      
-      
+      {
+        path: 'notifications',
+        loadChildren: () => import('./pages/bookvitals/notifications/notifications.module').then( m => m.NotificationsPageModule)
+      },
+      {
+        path: 'senioraddvitals',
+        loadChildren: () => import('./pages/bookvitals/senioraddvitals/senioraddvitals.module').then( m => m.SenioraddvitalsPageModule)
+      },
     ],
   },
   {
     path: 'menu',
+    canActivate: [MariposaAuthGuardService],
     children: [
       {
         path: 'medication',
@@ -420,6 +464,7 @@ const routes: Routes = [
   },
   {
     path: 'add',
+    canActivate: [MariposaAuthGuardService],
     children: [
       {
         path: 'invitationsend',
@@ -432,42 +477,13 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'schedulegardening',
-    loadChildren: () => import('./pages/configcare/schedulegardening/schedulegardening.module').then( m => m.SchedulegardeningPageModule)
-  },
-  {
-    path: 'schedulehousework',
-    loadChildren: () => import('./pages/configcare/schedulehousework/schedulehousework.module').then( m => m.SchedulehouseworkPageModule)
-  },
-  {
-    path: 'schedulelaundry',
-    loadChildren: () => import('./pages/configcare/schedulelaundry/schedulelaundry.module').then( m => m.SchedulelaundryPageModule)
-  },
-  {
-    path: 'scheduledressing',
-    loadChildren: () => import('./pages/configcare/scheduledressing/scheduledressing.module').then( m => m.ScheduledressingPageModule)
-  },
-  {
-    path: 'schedulewoundcare',
-    loadChildren: () => import('./pages/configcare/schedulewoundcare/schedulewoundcare.module').then( m => m.SchedulewoundcarePageModule)
-  },
-  {
-    path: 'notifications',
-    loadChildren: () => import('./pages/bookvitals/notifications/notifications.module').then( m => m.NotificationsPageModule)
-  },
-  {
-    path: 'senioraddvitals',
-    loadChildren: () => import('./pages/bookvitals/senioraddvitals/senioraddvitals.module').then( m => m.SenioraddvitalsPageModule)
-  },
-  {
     path: 'comments',
     loadChildren: () => import('./pages/bookvitals/comments/comments.module').then( m => m.CommentsPageModule)
   },
-  
-  
-  
-  
-  
+  {
+    path: 'addactivity',
+    loadChildren: () => import('./pages/bookvitals/addactivity/addactivity.module').then( m => m.AddactivityPageModule)
+  },
 ];
 
 @NgModule({

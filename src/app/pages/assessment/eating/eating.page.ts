@@ -29,7 +29,6 @@ export class EatingPage implements OnInit {
   }
 
   changeToggle(formItem: any , ev: any) {
-    console.log(ev);
     this.formData[formItem] = ev;
   }
 
@@ -38,7 +37,7 @@ export class EatingPage implements OnInit {
     if (this.stateObject == null){
       this.stateObject = {};
     }
-    this.stateObject.EATING = this.formData;
+    this.stateObject.EATING = {...this.formData, imageList: this.imageList};
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
       this.navCtrl.back();
     });
@@ -56,6 +55,7 @@ export class EatingPage implements OnInit {
       this.stateObject = data.assessmentValues.CARE_NEEDS;
       if (data.assessmentValues.CARE_NEEDS != null && data.assessmentValues.CARE_NEEDS[key] != null){
         this.formData = data.assessmentValues.CARE_NEEDS[key];
+        this.imageList = this.formData.imageList ? this.formData.imageList : [];
       }
       else{
         // do nothing

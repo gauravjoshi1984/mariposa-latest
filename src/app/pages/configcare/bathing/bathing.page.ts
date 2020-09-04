@@ -1,6 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonDatetime } from '@ionic/angular';
+import { IonDatetime, NavController } from '@ionic/angular';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ConfigCareServiceService } from '../config-care-service.service';
+import { DataserviceService } from '../../dataservice.service';
+import { CreatingcareService } from '../../creatingcare/creatingcare.service';
 @Component({
   selector: 'app-bathing',
   templateUrl: './bathing.page.html',
@@ -13,74 +16,25 @@ export class BathingPage {
     timeList: new FormControl([]),
     repeatDays: new FormControl([]),
     instructions: new FormControl(''),
-    images: new FormControl([]),
+    assignedTo: new FormControl({}),
+    imageList: new FormControl([]),
   });
-
+  dataLoaded;
+  careCircleDetails;
   timeList = [];
-  customPickerOptions: any;
   timeindex: number;
   instructions = '';
   imageList = [];
-  daysList = [
-    {
-      name: 's',
-      value: 'Sunday',
-    },
-    {
-      name: 'm',
-      value: 'Monday',
-    },
-    {
-      name: 't',
-      value: 'Tuesday',
-    },
-    {
-      name: 'w',
-      value: 'Wednesday',
-    },
-    {
-      name: 't',
-      value: 'Thursday',
-    },
-    {
-      name: 'f',
-      value: 'Friday',
-    },
-    {
-      name: 's',
-      value: 'Saturday',
-    },
-  ];
+  configCareDetails: any;
+  key: any;
+  daysList = [];
   selectedDays = [];
-  constructor() {
-    this.customPickerOptions = {
-      buttons: [
-        {
-          text: 'Submit',
-          handler: (x) => {
-            console.log('Clicked Save!', x);
-            if (this.timeList[this.timeindex]) {
-              const dateVar = new Date();
-              dateVar.setHours(
-                x.ampm.value == 'pm' ? x.hour.value + 12 : x.hour.value
-              );
-              dateVar.setMinutes(x.minute.value);
-              this.timeList[this.timeindex] = dateVar;
-
-              console.log(this.timeList[this.timeindex]);
-            }
-          },
-        },
-        {
-          text: 'Delete',
-          handler: () => {
-            console.log('Clicked Log. Do not Dismiss.');
-            // return false;
-            this.timeList.splice(this.timeindex, 1);
-          },
-        },
-      ],
-    };
+  constructor(
+    private configCareService: ConfigCareServiceService,
+    private dataService: DataserviceService,
+    private navCtrl: NavController,
+    private careCircleService: CreatingcareService
+  ) {
   }
 
   refresh(ev) {
@@ -90,36 +44,17 @@ export class BathingPage {
   }
 
   ngOnInit(): void {
-    this.addDate();
   }
   addDate() {
-    this.timeList.push(new Date());
+    const date = new Date();
+    this.timeList.push({hours: date.getHours() , minutes: date.getMinutes()});
   }
   changeTime(i) {
     this.datepicker.open().then((x) => {
-      console.log(x);
       this.timeindex = i;
     });
   }
-  
-  // submit() {
-  // let imgList = [];
-  // for (let img of this.imageList) {
-  //   this.base64.encodeFile(img).then((x) => {
-  //     imgList.push(x);
-  //   });
-  // }
-  // let data = {
-  //   times: this.timeList,
-  //   repeatdays: this.selectedDays,
-  //   instructions: this.instructions,
-  //   images: imgList,
-  // };
-  // console.log(data);
-  // this.http.post('url',data).subscribe(x=>{
-  // },err=>{
-  // })
-  // }
+
   addremoveDay(item) {
     if (this.selectedDays.includes(item.value)) {
       const index = this.selectedDays.indexOf(item.value);
@@ -132,15 +67,43 @@ export class BathingPage {
   submit() {
     this.bathingForm.patchValue({ timeList: this.timeList });
     this.bathingForm.patchValue({ repeatDays: this.selectedDays });
-    this.bathingForm.patchValue({ images: this.imageList });
-    console.log(this.bathingForm.value);
+    this.bathingForm.patchValue({ imageList: this.imageList });
+    this.configCareService.saveConfigCareDetails(this.key, [this.bathingForm.value]).then(data => {
+      this.navCtrl.back();
+    });
   }
   setData(ev: any, formname) {
-    console.log(ev, '|||||');
     this.bathingForm.patchValue({ [formname]: ev });
   }
-
+  async populateOptions(){
+    this.configCareDetails = await this.configCareService.getConfigCareDetails();
+    this.key = 'BATHING';
+    this.daysList = this.dataService.getDaysList();
+    const configuration = this.configCareDetails.configCareConfiguration[this.key];
+    if (this.key in this.configCareDetails.configCareValues && this.configCareDetails.configCareValues[this.key] !== null){
+      const savedConfig = this.configCareDetails.configCareValues[this.key][0];
+      if (savedConfig != null){
+          this.timeList = savedConfig.timeList;
+          this.selectedDays = savedConfig.repeatDays;
+          this.bathingForm.controls.instructions.setValue(savedConfig.instructions);
+          this.bathingForm.controls.assignedTo.setValue(savedConfig.assignedTo);
+          this.imageList = savedConfig.imageList;
+      }
+    }
+    this.dataLoaded = true;
+  }
+  async ionViewWillEnter(){
+    this.careCircleDetails = await this.careCircleService.getCareCircleDetails();
+    this.careCircleDetails = this.careCircleDetails.members.filter(member => member.userType !== 'CAREGIVER').map(item => {
+      return {type: item.userType, assigned: {userId: item.userId, userName: item.userName }};
+    });
+    this.careCircleDetails = [{type: 'CAREGIVER'}, ...this.careCircleDetails];
+    this.populateOptions();
+  }
+  compareFn(val1, val2): boolean {
+    return val1 && val2 ? val1.type === val2.type : val1 === val2;
+  }
   addtime(ev, key){
-this.timeList = ev;
+    this.timeList = ev;
   }
 }

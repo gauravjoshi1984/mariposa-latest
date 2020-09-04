@@ -1,6 +1,8 @@
 
 
-
+.headergrid{
+  padding: 5px 24px 0px 24px;
+}
 
 ion-img{
 
@@ -388,3 +390,28 @@ ion-col{
   .disabledlabel{
     opacity: 0.4;
   }
+
+ 
+
+
+
+.warningitems {
+    height: 34px;
+
+
+
+    ion-text{
+      color: red;
+      font-size: 14px;
+      line-height: 17px;
+      margin-left: 5px;
+  }
+}
+
+ion-input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+ion-select.ng-invalid.ng-touched {
+  border: 1px solid red;
+}

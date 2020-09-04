@@ -65,7 +65,12 @@ export class PreviewassessmentPage implements OnInit {
       return hours.join(', ');
   }
   getArrayValues(arr, key){
-    return arr.map(val => val[key]).join(', ');
+    if (arr){
+      return arr.map(val => val[key]).join(', ');
+    }
+    else{
+      return '';
+    }
   }
   getDob(day, month, year){
     return `${new Date(day).getDate()}/${new Date(month).getMonth()}/${new Date(year).getFullYear()}`;

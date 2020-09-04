@@ -2,7 +2,7 @@
 
 <ion-content fullscreen>
     <ion-grid style="padding: 24px; height: fit-content; margin-bottom: 80px;">
-       
+
 
         <!-- KNOWN ALLEGRIES -->
 
@@ -11,11 +11,11 @@
                 <ion-text class="text">Known Allergies</ion-text>
             </ion-col>
             <ion-col>
-                <ion-text class="add">ADD</ion-text>
+                <ion-text [routerLink]="'/assessment/addallergy'" class="add">ADD</ion-text>
             </ion-col>
         </ion-row>
-
-        <div class="favoriteitemslist" *ngFor="let item of allergies; let i = index">
+        <hr class="solid">
+        <div class="favoriteitemslist" (click)="editAllergy(item, 'allergy', i)" *ngFor="let item of formData.allergy; let i = index">
             <ion-row class="favoriteitem">
                 <ion-col size="10">
                     <ion-row>
@@ -25,7 +25,7 @@
                     </ion-row>
                     <ion-row>
                         <ion-col>
-                            <ion-text class="itemtype cap">{{item.type}}</ion-text>
+                            <ion-text class="itemtype cap">{{item.medicineType}}</ion-text>
                         </ion-col>
                     </ion-row>
                 </ion-col>
@@ -35,22 +35,22 @@
             </ion-row>
             <hr class="solid">
         </div>
-        <hr class="solid">
 
         <!-- MEDICATION LIST -->
 
-        
 
-         <ion-row class="favoritemeal">
+
+        <ion-row class="favoritemeal">
             <ion-col>
                 <ion-text class="text">Medication list</ion-text>
             </ion-col>
             <ion-col>
-                <ion-text class="add">ADD</ion-text>
+                <ion-text routerLink="/assessment/addMedication" class="add">ADD</ion-text>
             </ion-col>
         </ion-row>
+        <hr class="solid">
 
-        <div class="favoriteitemslist" *ngFor="let item of medicationlist; let i = index">
+        <div class="favoriteitemslist" (click)="editMedication(item, 'medication', i)" *ngFor="let item of formData.medication; let i = index">
             <ion-row class="favoriteitem">
                 <ion-col size="10">
                     <ion-row>
@@ -60,7 +60,7 @@
                     </ion-row>
                     <ion-row>
                         <ion-col>
-                            <ion-text class="itemtype cap">{{item.type}}</ion-text>
+                            <ion-text class="itemtype cap">{{item.medicineType}}</ion-text>
                         </ion-col>
                     </ion-row>
                 </ion-col>
@@ -72,26 +72,13 @@
         </div>
 
 
-
-       
-
-
-        <app-toggle [name]="'Diabetic'" (result)="changeToggle($event)"></app-toggle>
-
+        <app-toggle [name]="'Diabetic'" [value]="formData.Diabetic" (result)="changeToggle('Diabetic',$event)"></app-toggle>
         <hr style="margin-bottom: 7px;" class="solid" />
 
-
-
-
-        <app-toggle [name]="'Need Medication Reminders'" (result)="changeToggle($event)"></app-toggle>
-
+        <app-toggle [name]="'Need Medication Reminders'" [value]="formData.medicationReminders" (result)="changeToggle('medicationReminders', $event)"></app-toggle>
         <hr style="margin-bottom: 7px;" class="solid" />
 
-
-
-
-        <app-toggle [name]="'Medication/Supplements set up in a pill box'" (result)="changeToggle($event)"></app-toggle>
-
+        <app-toggle [name]="'Medication/Supplements set up in a pill box'" [value]="formData.supplements" (result)="changeToggle('supplements', $event)"></app-toggle>
         <hr style="margin-bottom: 7px;" class="solid" />
 
         <!-- WHO MANAGES MEDICATION -->
@@ -100,7 +87,7 @@
             <ion-text position="floating" id="tag">Who manages medications/supplements</ion-text>
         </div>
         <div>
-            <ion-input  mode="md" class="input" placeholder="Enter name / relation"></ion-input>
+            <ion-input [(ngModel)]="formData.managedBy" mode="md" class="input" placeholder="Enter name / relation"></ion-input>
         </div>
 
 
@@ -110,10 +97,9 @@
             <ion-text position="floating" id="tag">Instructions(optional)</ion-text>
         </div>
         <div>
-            <ion-textarea [(ngModel)]="formData.instructions" style="height: 120px;" class="input" placeholder="Write here"></ion-textarea>
+            <ion-textarea [(ngModel)]="formData.instructions" rows="7" style="min-height: 120px;height: auto;" class="input" placeholder="Write here"></ion-textarea>
         </div>
 
-        
     </ion-grid>
 </ion-content>
 

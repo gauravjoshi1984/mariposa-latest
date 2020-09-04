@@ -30,7 +30,6 @@ export class DrivingPage implements OnInit {
   }
 
   changeToggle(formItem: any , ev: any) {
-    console.log(ev);
     this.formData[formItem] = ev;
   }
 
@@ -39,12 +38,10 @@ export class DrivingPage implements OnInit {
     if (this.stateObject == null){
       this.stateObject = {};
     }
-    this.stateObject.DRIVING = this.formData;
+    this.stateObject.DRIVING = {...this.formData, imageList: this.imageList};
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
-      console.log(response);
       this.navCtrl.back();
     });
-    console.log('called Save', this.formData);
   }
 
   async ionViewWillEnter(){
@@ -59,6 +56,7 @@ export class DrivingPage implements OnInit {
       this.stateObject = data.assessmentValues.CARE_NEEDS;
       if (data.assessmentValues.CARE_NEEDS != null && data.assessmentValues.CARE_NEEDS[key] != null){
         this.formData = data.assessmentValues.CARE_NEEDS[key];
+        this.imageList = this.formData.imageList ? this.formData.imageList : [];
       }
       else{
         // do nothing

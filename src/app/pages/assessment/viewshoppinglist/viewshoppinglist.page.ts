@@ -36,5 +36,4 @@ export class ViewshoppinglistPage implements OnInit {
       }
     });
   }
-
 }

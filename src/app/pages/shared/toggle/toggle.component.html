@@ -9,8 +9,8 @@
           font-weight: normal;
           float: right;
           margin-right: 12px;
-        "><span *ngIf="toggleItem.checked">YES</span
-        ><span *ngIf="!toggleItem.checked">NO</span></ion-text>
+        "><span *ngIf="toggleItem && toggleItem.checked">YES</span
+        ><span *ngIf="toggleItem && !toggleItem.checked">NO</span></ion-text>
     </ion-col>
     <ion-col>
         <ion-toggle mode="ios" [(ngModel)]="value" color="primary" style="float: right;" #toggleItem (ionChange)="toggleVal()"></ion-toggle>

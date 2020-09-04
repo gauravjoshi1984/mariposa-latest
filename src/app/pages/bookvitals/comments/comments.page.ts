@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { BookVitalsService } from '../book-vital.service';
+import { NavController } from '@ionic/angular';
+import { DataserviceService } from '../../dataservice.service';
 
 @Component({
   selector: 'app-comments',
@@ -7,40 +10,49 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommentsPage implements OnInit {
 
-  username = "john";
-
-  chatmessages = [
-    {
-      name:"David Doe",
-      message:"Had fun at the LA Garden",
-      imgurl:"assets/chatimages/senior.png",
-    },
-    {
-      name:"John Doe",
-      message:"Good to hear that Dad",
-    },
-  ]
-
-  activitylist = ["Bathing", "Breakfast", "Medication:Ibuprofine", " Lunch", "Snack", "Exercise",
-    "Dinner", "Medication: ABCD Vitamin Syrup"]
-  
-  notes = ["This notes will be coming from care giver if she enters any specific"]  
+  username = '';
+  dataLoaded = false;
+  chatmessages: any = [];
+  imageList  = [];
+  postDate = '';
+  commentText = '';
+  activitylist = '';
+  notes = ['This notes will be coming from care giver if she enters any specific'];
 
   slideOpts = {
-    initialSlide: 1,
+    initialSlide: 0,
     speed: 400,
-    pagination:{
+    pagination: {
       el: '.swiper-pagination',
     type: 'bullets',
-      bulletClass:'custombullet',
-      bulletActiveClass:'customactivebullet'
+      bulletClass: 'custombullet',
+      bulletActiveClass: 'customactivebullet'
     }
-    
-  };
 
-  constructor() { }
+  };
+  selectedPost;
+  constructor(
+    private bookVitalService: BookVitalsService,
+    private navCtrl: NavController,
+    private dataService: DataserviceService
+  ) { }
 
   ngOnInit() {
   }
-
+  async ionViewWillEnter(){
+    this.selectedPost = await this.bookVitalService.getSelectedPost();
+    this.chatmessages = this.selectedPost.comments ? this.selectedPost.comments : [];
+    const userInfo = await this.dataService.getUserInfo();
+    this.username = userInfo.userName;
+    this.postDate = this.selectedPost.createdDate;
+    this.notes = this.selectedPost.values.content;
+  }
+  addComment(){
+    const commentObj = {comment: this.commentText, userId: this.selectedPost.createdBy, userName: this.username, time: new Date()};
+    this.bookVitalService.editComment(this.selectedPost.postId, commentObj, 'ADD').then(response => {
+      this.chatmessages.push(commentObj);
+      window.dispatchEvent(new CustomEvent('updatePosts'));
+      // this.navCtrl.back();
+    });
+  }
 }

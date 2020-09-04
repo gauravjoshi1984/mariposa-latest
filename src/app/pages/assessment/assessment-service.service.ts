@@ -8,8 +8,8 @@ import { ApiService } from 'src/app/http.service';
 export class AssessmentServiceService {
 
   constructor(private storage: Storage, private apiService: ApiService) { }
-  assesmentMeal = null;
-  editMeal = null;
+  newSharedData = {};
+  editSharedData = {};
   async getCareCircleId(){
     const careCircleDetails = await this.storage.get('careCircleDetails');
     return careCircleDetails.careCircleId;
@@ -27,30 +27,30 @@ export class AssessmentServiceService {
     return assessmentState;
   }
   async saveAssessmentState(careCircleId, key, userId, objectToSave){
-    await this.apiService.post('updateAssessment/?careCircleId=' + careCircleId + '&assessmentKey=' + key + '&userId=' + userId, objectToSave).then( async (response) => {
+    await this.apiService.post('assessment/?careCircleId=' + careCircleId + '&assessmentKey=' + key + '&userId=' + userId, objectToSave).then( async (response) => {
       const assessmentObject = await this.getAssessmentStateObject();
       assessmentObject.assessmentValues[key] = objectToSave;
       await this.setAssessmentStateObject(assessmentObject);
     });
   }
-  setAssessmentMeal(meal, mealType){
-    if (meal){
-      this.assesmentMeal = {mealType, meal};
+  setAssessmentShared(obj, type, key){
+    if (obj){
+      this.newSharedData[key] = {type, obj};
     }else{
-      this.assesmentMeal = null;
+      this.newSharedData[key] = null;
     }
   }
-  setAssessmentMealEdit(meal, mealType, index = 0){
-    if (meal){
-      this.editMeal = {index, mealType, meal};
+  setAssessmentEditShared(obj, type, key, index = 0){
+    if (obj){
+      this.editSharedData[key] = {index, type, obj};
     }else{
-      this.editMeal = null;
+      this.editSharedData[key] = null;
     }
   }
-  getAssessmentMeal(){
-    return this.assesmentMeal;
+  getAssessmentShared(key){
+    return this.newSharedData[key];
   }
-  getAssessmentEditMeal(){
-    return this.editMeal;
+  getAssessmentEditShared(key){
+    return this.editSharedData[key];
   }
 }

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { DataserviceService } from '../../dataservice.service';
 import { CreatingcareService } from '../creatingcare.service';
 import { NavController } from '@ionic/angular';
+import { ToastService } from 'src/app/toast.service';
 
 @Component({
   selector: 'app-createcarecircle',
@@ -16,7 +17,8 @@ export class CreatecarecirclePage implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private _dataService: DataserviceService,
               private _creatingCareService: CreatingcareService,
-              private navCtrl: NavController) {
+              private navCtrl: NavController,
+              private toastService: ToastService) {
   }
 
   createCircle() {
@@ -27,7 +29,7 @@ export class CreatecarecirclePage implements OnInit {
       // logic to create a circle goes here
     }
     else{
-      return;
+      this.toastService.presentToast('Please enter valid care circle name!');
     }
   }
 

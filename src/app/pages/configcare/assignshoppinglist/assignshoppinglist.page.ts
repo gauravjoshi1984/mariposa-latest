@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonDatetime } from "@ionic/angular";
+import { NavController } from '@ionic/angular';
+import { ConfigCareServiceService } from '../config-care-service.service';
+import { DataserviceService } from '../../dataservice.service';
 
 @Component({
   selector: 'app-assignshoppinglist',
@@ -7,79 +9,53 @@ import { IonDatetime } from "@ionic/angular";
   styleUrls: ['./assignshoppinglist.page.scss'],
 })
 export class AssignshoppinglistPage implements OnInit {
-
-  
-
-  
-
-  shoppinglist=[
-   {
-     name:"Tissue Roll",
-     brand:"Quality Brand",
-     isChecked:false,
-   },
-   {
-    name:"Tooth Paste",
-    brand:"Pepsodent",
-    isChecked:false,
+  configCareDetails: any;
+  key: any;
+  shoppingData = [];
+  shoppinglist = [
+  {
+    name: 'Tissue Roll',
+    brand: 'Quality Brand',
+    isChecked: false,
   },
- ]
-  
- @ViewChild("datepicker") datepicker: IonDatetime;
- timeList = [];
- timeindex: number;
+  {
+    name: 'Tooth Paste',
+    brand: 'Pepsodent',
+    isChecked: false,
+  }
+ ];
 
- customPickerOptions: any;
- constructor() {
-   this.customPickerOptions = {
-     buttons: [
-       {
-         text: "Submit",
-         handler: (x) => {
-           console.log("Clicked Save!", x);
-           if (this.timeList[this.timeindex]) {
-             let dateVar = new Date();
-             dateVar.setHours(
-               x.ampm.value == "pm" ? x.hour.value + 12 : x.hour.value
-             );
-             dateVar.setMinutes(x.minute.value);
-             this.timeList[this.timeindex] = dateVar;
+  timeList = [];
 
-             console.log(this.timeList[this.timeindex]);
-           }
-         },
-       },
-       {
-         text: "Delete",
-         handler: () => {
-           console.log("Clicked Log. Do not Dismiss.");
-           // return false;
-           this.timeList.splice(this.timeindex, 1);
-         },
-       },
-     ],
-   };
- }
+  customPickerOptions: any;
+  constructor(
+    private configCareService: ConfigCareServiceService,
+    private dataService: DataserviceService,
+    private navCtrl: NavController
+  ) {}
 
- ngOnInit() {
-   this.addDate();
- }
- addDate() {
-   this.timeList.push(new Date());
- }
- getTimeHR(hr) {
-   return ("0" + hr).slice(-2);
- }
- getMinFormat(min) {
-   return (min < 10 ? "0" : "") + min;
- }
- changeTime(i) {
-   this.datepicker.open().then((x) => {
-     console.log(x);
-     this.timeindex = i;
-   });
- }
- deleteTime(i) {
-   this.timeList.splice(i, 1);
- }
+  ngOnInit() {
+    //  this.addDate();
+  }
+  async populateOptions(){
+    this.configCareDetails = await this.configCareService.getConfigCareDetails();
+    this.key = 'EXERCISE';
+    const configuration = this.configCareDetails.configCareConfiguration[this.key];
+    configuration.type.forEach(element => {
+      this.shoppingData.push({name : element, value : element});
+    });
+    const savedConfig = this.configCareDetails.configCareValues[this.key];
+    if (savedConfig != null){
+        this.timeList = savedConfig.timeList;
+    }
+  }
+  addDate() {
+    this.timeList.push(new Date());
+  }
+  addtime(ev, key){
+    this.timeList = ev;
+  }
+  save(){
+    console.log(this.timeList);
+  }
 }

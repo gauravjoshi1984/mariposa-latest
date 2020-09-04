@@ -1,119 +1,105 @@
 <ion-header mode="md">
 
-  <ion-toolbar class="headtoolbar">
-      <ion-grid>
-          <ion-row style="align-items: center;margin-bottom: 5px;">
-              <ion-col size = "10">
-                  <div>
-                      <ion-text color="mdblack" position="floating" id="titletag">Updating on today's schedule</ion-text>
-                      <ion-text class="cap" style="font-size:14px;" color="mdgrey"><br>{{date}}th {{month}}'{{year}}</ion-text>
-                  </div>
-              </ion-col>
-              <ion-col>
-                  <ion-icon style="zoom:1.2;color: black;float:right;" name="close-outline"></ion-icon>
-              </ion-col> 
-          </ion-row>
-      </ion-grid>
-  </ion-toolbar>
+    <ion-toolbar class="headtoolbar">
+        <ion-grid class="headergrid">
+            <ion-row style="align-items: center;margin-bottom: 5px;">
+                <ion-col size="10">
+                    <div>
+                        <ion-text color="mdblack" position="floating" id="titletag">Updating on today's schedule</ion-text>
+                        <ion-text class="cap" style="font-size:14px;" color="mdgrey"><br>{{date}}th {{month}}'{{year}}</ion-text>
+                    </div>
+                </ion-col>
+                <ion-col (click)="back()">
+                    <ion-icon style="zoom:1.2;color: black;float:right;" name="close-outline"></ion-icon>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid class = "content">
+    <ion-grid class="content">
 
-    <div [hidden]="false">
-      <ion-text class="tag cap">Completed Activities</ion-text>
+        <div [hidden]="false">
+            <ion-text class="tag cap">Completed Activities</ion-text>
 
-      <ion-row style="align-items: center; margin-top: 20px;" *ngFor="let items of activityList">
-        <ion-col  size="1">
-          <div style="padding-left: 3px;">
-            <ion-checkbox #activitytype color="mwhite" checked="false"></ion-checkbox>
-          </div>
-        </ion-col>
-        <ion-col
-          (click)="generateClick(activitytype)"
-          size="11"
-          style="padding-top: 0px;"
-        >
-          <div>
-            <ion-text
-              style="
+            <ion-row style="align-items: center; margin-top: 20px;" *ngFor="let items of activityList">
+                <ion-col size="1">
+                    <div style="padding-left: 3px;">
+                        <ion-checkbox #activitytype color="mwhite" checked="false"></ion-checkbox>
+                    </div>
+                </ion-col>
+                <ion-col (click)="generateClick(activitytype)" size="11" style="padding-top: 0px;">
+                    <div>
+                        <ion-text style="
                 font-size: 16px;
                 line-height: 19px;
                 font-weight: 300;
                 margin-left: 12px;
-              "
-              color="mdblack"
-              >{{items}}</ion-text
-            >
-          </div>
-        </ion-col>
-      </ion-row>
-      <hr class="solid">
-    </div>
+              " color="mdblack">{{items}}</ion-text>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <hr class="solid">
+        </div>
 
-    <div [hidden]="false">
+        <div [hidden]="false">
 
-      <ion-text class="tag cap">Shopping List</ion-text>
+            <ion-text class="tag cap">Shopping List</ion-text>
 
-      <ion-row style="align-items: center; margin-top: 20px;" *ngFor="let items of shoppingList">
-        <ion-col  size="1">
-          <div style="padding-left: 3px;">
-            <ion-checkbox #shoppingtype color="mwhite" checked="false"></ion-checkbox>
-          </div>
-        </ion-col>
-        <ion-col
-          (click)="generateClick(shoppingtype)"
-          size="11"
-          style="padding-top: 0px;"
-        >
-          <div>
-            <ion-text
-              style="
+            <ion-row style="align-items: center; margin-top: 20px;" *ngFor="let items of shoppingList">
+                <ion-col size="1">
+                    <div style="padding-left: 3px;">
+                        <ion-checkbox #shoppingtype color="mwhite" checked="false"></ion-checkbox>
+                    </div>
+                </ion-col>
+                <ion-col (click)="generateClick(shoppingtype)" size="11" style="padding-top: 0px;">
+                    <div>
+                        <ion-text style="
                 font-size: 16px;
                 line-height: 19px;
                 font-weight: 300;
                 margin-left: 12px;
-              "
-              color="mdblack"
-              >{{items.name}}, {{items.quantity}}</ion-text
-            >
-          </div>
-        </ion-col>
-      </ion-row>
-      <hr class="solid">
-    </div>
+              " color="mdblack">{{items.name}}, {{items.quantity}}</ion-text>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <hr class="solid">
+        </div>
 
-  <!-- INSTRUCTIONS -->
+        <!-- INSTRUCTIONS -->
 
-     <div class="nametag" style="margin-top: 0px;">
-      <ion-text position="floating" id="tag">Notes</ion-text>
-  </div>
-  <div>
-      <ion-textarea  style="height: 120px;" class="input" placeholder="Write here"></ion-textarea>
-  </div>
+        <div class="nametag" style="margin-top: 0px;">
+            <ion-text position="floating" id="tag">Notes</ion-text>
+        </div>
+        <div>
+            <ion-textarea style="height: 120px;" class="input" placeholder="Write here"></ion-textarea>
+        </div>
 
 
-  <!-- ADD IMAGE -->
-  <app-addimage (click)="addImage()"></app-addimage>
-  <ion-text>
-      <div class="imagelist" *ngFor="let img of imageList; let j=index">
-          <ion-grid fixed class="ion-no-padding">
-              <ion-row>
-                  <ion-col style="padding-top: 11px;" size="8"><span>{{img.substring(img.lastIndexOf("/") + 1) | slice:0:12}}</span></ion-col>
-                  <ion-col size="4">
-                      <ion-button fill="clear" shape="round" class="dltbtn" (click)="removeImg(j)">
-                          <ion-icon slot="icon-only" src="assets/trash.svg"></ion-icon>
-                          Delete
-                      </ion-button>
-                  </ion-col>
-              </ion-row>
-          </ion-grid>
-      </div>
-  </ion-text>
+        <!-- ADD IMAGE -->
+        <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
 
 
-    <div id="button">
-      <ion-button [disabled]="true" class="btnblue" type="submit" id="signup">SUBMIT</ion-button>
-  </div>
-  </ion-grid>
+       
+    </ion-grid>
 </ion-content>
+
+<ion-footer mode="md">
+    <ion-toolbar id="button">
+        <ion-grid class="ion-no-padding">
+            <ion-row>
+                <ion-col size="6">
+                    <ion-button expand="block"  class="lbtn" shape="round">
+                        SAVE
+                    </ion-button>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-button color="primary" expand="block" class="rbtn" shape="round">
+                        SUBMIT
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer>

@@ -17,7 +17,7 @@ import { DatePipe } from '@angular/common';
 export class MSelectdateComponent implements OnInit {
   @ViewChild('datepicker') datepicker: IonDatetime;
   @Output() result = new EventEmitter<[]>();
-  @Input() times = [];
+  @Input() times;
   timeList: any = [];
   timeindex: number;
 
@@ -28,16 +28,13 @@ export class MSelectdateComponent implements OnInit {
         {
           text: 'Submit',
           handler: (x) => {
-            console.log('Clicked Save!', x);
             if (this.timeList[this.timeindex]) {
               const dateVar = new Date();
               dateVar.setHours(
-                x.ampm.value == 'pm' ? x.hour.value + 12 : x.hour.value
+                x.ampm.value === 'pm' ? (x.hour.value !== 12 ? x.hour.value + 12 : 12) : (x.hour.value === 12 ? 0 : x.hour.value)
               );
               dateVar.setMinutes(x.minute.value);
               this.timeList[this.timeindex] = {hours: dateVar.getHours(), minutes: dateVar.getMinutes()};
-
-              console.log(this.timeList[this.timeindex]);
               this.result.emit(this.timeList);
             }
           },
@@ -59,7 +56,6 @@ export class MSelectdateComponent implements OnInit {
   addDate(time: any) {
     if (time.hasOwnProperty('hours')){
       this.timeList.push({hours: time.hours, minutes: time.minutes});
-
     }
     else{
       const date = new Date();
@@ -69,6 +65,7 @@ export class MSelectdateComponent implements OnInit {
   }
   getTimeHR(hr) {
     hr = hr % 12;
+    hr = hr === 0 ? 12 : hr;
     return ('0' + hr).slice(-2);
   }
   getMinFormat(min) {
@@ -76,7 +73,6 @@ export class MSelectdateComponent implements OnInit {
   }
   changeTime(i) {
     this.datepicker.open().then((x) => {
-      console.log(x);
       this.timeindex = i;
     });
   }

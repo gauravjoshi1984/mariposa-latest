@@ -7,12 +7,12 @@
             <ion-text position="floating" id="tag">Preferred tooth Paste</ion-text>
         </div>
         <div style="margin-bottom:24px;">
-            <ion-select formControlName="toothpaste" mode="md" class="input" placeholder="Select">
+            <ion-select formControlName="toothpaste" mode="ios" interface="popover" class="input" placeholder="Select">
                 <ion-select-option [value]="option" *ngFor="let option of toothpasteOptions">{{option}}</ion-select-option>
             </ion-select>
         </div>
 
-        <app-toggle [name]="'Senior has Tooth Sensitivity'" (result)="changeToggle($event)"></app-toggle>
+        <app-toggle [name]="'Senior has Tooth Sensitivity'" [value]="oralForm.controls.toothSensitivity.value" (result)="changeToggle($event)"></app-toggle>
         <hr class="solid" />
 
         <!-- INSTRUCTIONS -->

@@ -1,42 +1,44 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
+import { ConfigCareServiceService } from '../../configcare/config-care-service.service';
 
 @Component({
-  selector: "app-medication",
-  templateUrl: "./medication.page.html",
-  styleUrls: ["./medication.page.scss"],
+  selector: 'app-medication',
+  templateUrl: './medication.page.html',
+  styleUrls: ['./medication.page.scss'],
 })
 export class MedicationPage implements OnInit {
-  type: string = "all";
+  type = 'all';
+  medicationDetails;
+  constructor(private configCareService: ConfigCareServiceService, ) {}
 
-  constructor() {}
-
-  medtable = [
-    {
-      name: "Ibuprofile MKal",
-      dosage: "2",
-      timing: ["9:00 am", "10:00 pm"],
-      notes: "Medicine should be taken with warm water",
-    },
-  ];
-
-  medalltable = [
-    {
-      name: "Ibuprofile MKal",
-      dosage: "2",
-      timing: ["9:00 am", "10:00 pm"],
-      notes: "Medicine should be taken with warm water",
-    },
-    {
-      name: "Aspirin",
-      dosage: "2",
-      timing: ["8:00 am", "12:00 pm"],
-      notes: "Medicine should be taken before meals",
-    },
-  ];
+  medTable: any = [];
 
   ngOnInit() {}
 
   segmentChanged(ev: any) {
-    console.log("Segment changed", ev);
+  }
+  async ionViewWillEnter(){
+    this.medicationDetails = (await this.configCareService.getConfigCareDetails()).configCareValues?.MEDICATION;
+    console.log(this.medicationDetails);
+    if (this.medicationDetails?.length){
+      this.medTable = this.medicationDetails.map(item => (
+        {
+          name: item.name,
+          dosage: item.dosage,
+          timing : item.timeList.map(val => `${val.hours === 0 ? 12 : (val.hours > 12 ? val.hours % 12 : val.hours)}:${val.minutes.toString().padStart(2, '0')} ${val.hours >= 12 ? 'PM' : 'AM'}`),
+          repeatDays: item.repeatDays,
+          notes: item.instructions
+        }
+      ));
+    }
+  }
+  filterItems(){
+    const day = new Date().getDay();
+    if (this.type === 'all'){
+      return this.medTable;
+    }
+    else{
+      return this.medTable.filter(item => item.repeatDays.indexOf(day) !== -1);
+    }
   }
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Location} from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataserviceService } from '../../dataservice.service';
 import { AssessmentServiceService } from '../assessment-service.service';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-addshoppinglist',
   templateUrl: './addshoppinglist.page.html',
@@ -16,7 +16,7 @@ export class AddshoppinglistPage implements OnInit {
   careCircleId;
   userId;
   stateObject;
-  constructor(private _location: Location,
+  constructor(private navCtrl: NavController,
               private dataService: DataserviceService,
               private assessmentService: AssessmentServiceService,
               private router: Router) {
@@ -31,7 +31,7 @@ export class AddshoppinglistPage implements OnInit {
     return this.shoppingForm.controls;
   }
   back(){
-    this._location.back();
+    this.navCtrl.back();
   }
   async ionViewWillEnter(){
     this.key = 'SHOPPING';
@@ -51,7 +51,8 @@ export class AddshoppinglistPage implements OnInit {
     }
     this.stateObject[this.key].push(this.shoppingForm.value);
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
-      this.router.navigate(['/assessment/viewshoppinglist']);
+      // this.router.navigate(['/assessment/viewshoppinglist']);
+      this.navCtrl.back();
     });
   }
   checkValidity(control){

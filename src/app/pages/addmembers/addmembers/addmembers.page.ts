@@ -4,64 +4,42 @@ import { DataserviceService } from '../../dataservice.service';
 import { CreatingcareService } from '../../creatingcare/creatingcare.service';
 import { ApiService } from 'src/app/http.service';
 import { NavController } from '@ionic/angular';
-
+import { Plugins } from '@capacitor/core';
+const { Keyboard } = Plugins;
 @Component({
   selector: 'app-addmembers',
   templateUrl: './addmembers.page.html',
   styleUrls: ['./addmembers.page.scss'],
 })
 export class AddmembersPage implements OnInit {
-
-  shifttimeform:FormGroup;
   relationList;
   memberForm: FormGroup;
+  shiftDetails = [];
+  spouseAsCaregiver = false;
+  enterVitals = false;
+  isKeyboardOpen: boolean;
 
-  status1:boolean=false;
-  status2=false;
-  
-  
   selectedType = 'CAREGIVER';
   careCircleName;
-  selectedDays = ["Monday","Wednesday"];
-  daysList = [
-    {
-      name: 's',
-      value: 'Sunday',
-    },
-    {
-      name: 'm',
-      value: 'Monday',
-    },
-    {
-      name: 't',
-      value: 'Tuesday',
-    },
-    {
-      name: 'w',
-      value: 'Wednesday',
-    },
-    {
-      name: 't',
-      value: 'Thursday',
-    },
-    {
-      name: 'f',
-      value: 'Friday',
-    },
-    {
-      name: 's',
-      value: 'Saturday',
-    },
-  ];
+  selectedDays = [];
+  daysList = [];
 
-  constructor(private formBuilder: FormBuilder,
-              private _dataService: DataserviceService,
-              private _creatingCareService: CreatingcareService,
-              private _apiService: ApiService,
-              private navCtrl: NavController,
-              private fbuilder:FormBuilder
-              ) {
-                this.shifttimeform=this.fbuilder.group({timeshift:this.fbuilder.array([])})
+  constructor(
+    private formBuilder: FormBuilder,
+    private _dataService: DataserviceService,
+    private _creatingCareService: CreatingcareService,
+    private _apiService: ApiService,
+    private navCtrl: NavController,
+    private fbuilder: FormBuilder,
+    private dataService: DataserviceService) {
+      this.shiftDetails.push({
+        startTime: '12:00',
+        endTime: '12:00',
+        startDate: '2020-10-20',
+        endDate: '2020-10-20',
+        repeat: [],
+      });
+      this.daysList = _dataService.getDaysList();
       this.relationList = ['Father', 'Mother', 'Sibling'];
       const mobileNumberPattern = '^[0-9]+$';
       this.memberForm = this.formBuilder.group({
@@ -71,10 +49,34 @@ export class AddmembersPage implements OnInit {
         memberEmail: new FormControl('', [Validators.email, Validators.required]),
         memberMobileNumber: new FormControl('', Validators.pattern(mobileNumberPattern) )
       });
+      this.dataService.getDeviceInfo().then(deviceDetails => {
+        if (deviceDetails.platform !== 'web'){
+          Keyboard.addListener('keyboardWillShow', () => {
+            this.isKeyboardOpen = true;
+          }),
+          Keyboard.addListener('keyboardWillHide', () => {
+            this.isKeyboardOpen = false;
+          }),
+          this.isKeyboardOpen = false;
+        }
+      });
   }
 
   async saveMember(){
     const userData = await this._dataService.getUserInfo();
+    const shifts = [];
+    if (this.selectedType === 'CAREGIVER'){
+      this.shiftDetails.forEach(shift => {
+        let time = shift.startTime.split(':');
+        shift.startDate = shift.startDate.split('T')[0];
+        shift.endDate = shift.endDate.split('T')[0];
+        const temp: any = {...shift};
+        temp.startTime = {hours: +time[0], minutes: +time[1]};
+        time = shift.endTime.split(':');
+        temp.endTime = {hours: +time[0], minutes: +time[1]};
+        shifts.push(temp);
+      });
+    }
     const apiRequestBody = {
       careCircleId : await this._creatingCareService.getCareCircleID(),
       careCircleName : await this._creatingCareService.getCareCircleName(),
@@ -84,14 +86,16 @@ export class AddmembersPage implements OnInit {
           userName : this.memberForm.controls.memberName.value,
           email : this.memberForm.controls.memberEmail.value,
           mobile: this.memberForm.controls.memberMobileNumber.value,
-          userType: this.selectedType
+          userType: this.spouseAsCaregiver ? 'SPOUSE_CAREGIVER' : this.selectedType,
+          relation: this.memberForm.controls.memberRelation.value,
+          configuration: {permissions: {ENTER_VITALS: this.enterVitals}, shifts}
         }
-      ]
+      ],
     };
-    this._apiService.post('careCircleAddUser', apiRequestBody).then((data) => {
+    console.log(apiRequestBody);
+    this._apiService.post('careCircle/addUser', apiRequestBody).then((data) => {
       this.navCtrl.navigateForward(['carecircle/list']);
     });
-
   }
 
   back(){
@@ -99,15 +103,14 @@ export class AddmembersPage implements OnInit {
   }
 
   ngOnInit() {
-    this.addtimeshift()
 
   }
-  addremoveDay(item) {
-    if (this.selectedDays.includes(item.value)) {
-      const index = this.selectedDays.indexOf(item.value);
-      this.selectedDays.splice(index, 1);
+  addremoveDay(item, repeatDays) {
+    if (repeatDays.includes(item.value)) {
+      const index = repeatDays.indexOf(item.value);
+      repeatDays.splice(index, 1);
     } else {
-      this.selectedDays.push(item.value);
+      repeatDays.push(item.value);
     }
   }
 
@@ -130,44 +133,38 @@ export class AddmembersPage implements OnInit {
   }
 
 
-  addCheckbox(event:any){
-    console.log(this.status1)
-    if(event.detail.checked==true){
-     this.status2=true;
-     this.status1=true;
-      
+  addCheckbox(event: any){
+    if (event.detail.checked == true){
+     this.enterVitals = true;
+     this.spouseAsCaregiver = true;
+
     }
     else{
-      this.status2=false;
-      this.status1=false;
+      this.enterVitals = false;
+      this.spouseAsCaregiver = false;
     }
-    
+
   }
 
   addtimeshift(){
-    const add=this.shifttimeform.get('timeshift')as FormArray;
-    add.push(this.fbuilder.group({
-      startTime:"",
-      endTime:"",
-      startDate:"2020-May-19",
-      endDate:"2020-May-19",
-      repeat:[],
-      
-    }))
-
-    console.log(this.shifttimeform)
-
+    this.shiftDetails.push({
+      startTime: '12:00',
+      endTime: '12:00',
+      startDate: '2020-10-20',
+      endDate: '2020-10-20',
+      repeat: [],
+    });
   }
 
   changestartdate(i){
 // this.shifttimeform.controls.timeshift.at(i).patchValue([i]).
-console.log("controler",this.shifttimeform)
+    // console.log('controler', this.shifttimeform);
   }
 
   onclick(i){
 // console.log(JSON.parse(i))
 // let x=new Date(i).toDateString();
-console.log(i)
+    console.log(i);
   }
 
 

@@ -8,21 +8,27 @@
                 <ion-text class="text">Favorite Outfit</ion-text>
             </ion-col>
             <ion-col>
-                <ion-text class="add" >ADD</ion-text>
+                <ion-text class="add" [routerLink]="'/assessment/addoutfit'">ADD</ion-text>
             </ion-col>
         </ion-row>
-
-        <div class="favoriteitemslist" *ngFor="let item of outfit; let i = index">
-            <ion-row class="favoriteitem">
-                <ion-col size="10">  
-                            <ion-text class="itemname cap">{{item.name}}</ion-text>
-                </ion-col>
-                <ion-col>
-                    <ion-icon class="arrow" src="../assets/MariposaIcons/arrowgrey.svg"></ion-icon>
-                </ion-col>
-            </ion-row>
-            <hr class="solid">
+        <div *ngIf="formData; else noOutfits;">
+            <div class="favoriteitemslist" (click)="editOutfit(item, i)" *ngFor="let item of formData; let i = index">
+                <ion-row class="favoriteitem">
+                    <ion-col size="10">
+                        <ion-text class="itemname cap">{{item.name}}</ion-text>
+                    </ion-col>
+                    <ion-col>
+                        <ion-icon class="arrow" src="../assets/MariposaIcons/arrowgrey.svg"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <hr class="solid">
+            </div>
         </div>
+        <ng-template #noOutfits>
+            <div class="ion-text-center">
+                <ion-text class="text">No Outfits added!</ion-text>
+            </div>
+        </ng-template>
 
     </ion-grid>
 </ion-content>

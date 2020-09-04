@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/http.service';
 import { NavController } from '@ionic/angular';
+import { DataserviceService } from '../../dataservice.service';
+import { ToastService } from 'src/app/toast.service';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -12,7 +14,7 @@ export class ForgotpasswordPage implements OnInit {
 
   forgotPasswordForm: FormGroup;
   resetResult = false;
-  constructor(formBuilder: FormBuilder, private http: ApiService, private navCtrl: NavController) {
+  constructor(formBuilder: FormBuilder, private http: ApiService, private navCtrl: NavController, private dataService: DataserviceService) {
     this.forgotPasswordForm = formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
     });
@@ -37,9 +39,9 @@ export class ForgotpasswordPage implements OnInit {
   }
   forgotPassword(){
     if (this.forgotPasswordForm.valid){
-      this.http.post('/forgotPassword', this.forgotPasswordForm.value).then((response) => {
+      this.http.post('user/forgotPassword', this.forgotPasswordForm.value).then((response) => {
         this.navCtrl.navigateForward(['forgotpasswordcompleted']);
-        console.log(response);
+        this.dataService.setSignupData(this.forgotPasswordForm.value);
       }, err => {
         console.log(err);
       });

@@ -15,12 +15,13 @@ export class MedicalconditionsPage implements OnInit {
   careCircleId;
   userId;
   key: string;
-  medicalForm: any = {otherFactors: {}};
+  medicalForm: any = {otherFactors: {}, healthProviderContact: {}};
   otherFactors: any = {};
   toggleQuestions: any = [];
   radioQuestions: any = [];
   checkboxQuestions: any = [];
   formReady = false;
+  imageList = [];
 
   constructor(
     private navCtrl: NavController,
@@ -30,7 +31,9 @@ export class MedicalconditionsPage implements OnInit {
 
   ngOnInit() {
   }
-
+  objectKeys(obj){
+    return Object.keys(obj).filter(key => obj[key]);
+  }
   save(){
     this.stateObject = this.medicalForm;
     this.assessmentService.saveAssessmentState(this.careCircleId, this.key, this.userId, this.stateObject).then((response) => {
@@ -41,6 +44,9 @@ export class MedicalconditionsPage implements OnInit {
 
   generateClick(key, option) {
     this.medicalForm[key][option] = !this.medicalForm[key][option];
+    if (key === 'healthProviders' && this.medicalForm[key][option]){
+      this.medicalForm.healthProviderContact[option] = {};
+    }
   }
 
   async ionViewWillEnter(){
@@ -56,6 +62,12 @@ export class MedicalconditionsPage implements OnInit {
     this.stateObject = data.assessmentValues[this.key];
     if (this.stateObject != null){
       this.medicalForm = this.stateObject;
+      if (!this.medicalForm.healthProviderContact){
+        this.medicalForm.healthProviderContact = {};
+        Object.keys(this.medicalForm.healthProviders).forEach(item => {
+          this.medicalForm.healthProviderContact[item] = {};
+        });
+      }
     }else{
       this.checkboxQuestions.forEach(question => {
         this.medicalForm[question.key] = {};

@@ -89,7 +89,7 @@
             <ion-text position="floating" id="tag">Lives with</ion-text>
         </div>
         <div>
-            <ion-select formControlName="livesWith" mode="md" class="input" placeholder="Select one">
+            <ion-select formControlName="livesWith" mode="ios" interface="popover" class="input" placeholder="Select one">
                 <ion-select-option [value]="item" *ngFor="let item of livesWith">{{item}}</ion-select-option>
             </ion-select>
         </div>
@@ -127,7 +127,9 @@
             <ion-text position="floating" id="tag">Country</ion-text>
         </div>
         <div>
-            <ion-select formControlName="country" mode="md" class="input" placeholder="Select Country"></ion-select>
+            <ion-select formControlName="country" mode="ios" interface="popover" class="input" placeholder="Select Country">
+                <ion-select-option [value]="item.name" *ngFor="let item of countries">{{item.name}}</ion-select-option>
+            </ion-select>
         </div>
 
         <!-- SELCET CITY -->
@@ -136,7 +138,8 @@
             <ion-text position="floating" id="tag">City</ion-text>
         </div>
         <div>
-            <ion-select formControlName="city" mode="md" class="input" placeholder="Select City"></ion-select>
+            <!-- <ion-select formControlName="city" mode="ios" interface="popover" class="input" placeholder="Select City"></ion-select> -->
+            <ion-input formControlName="city" mode="md" class="input" placeholder="Enter city"></ion-input>
         </div>
 
         <!-- EMERGENCY PERSON NAME -->

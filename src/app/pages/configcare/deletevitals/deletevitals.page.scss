@@ -3,53 +3,52 @@ ion-content {
     --padding-end: 24px;
     --padding-start: 24px;
     --padding-top: 24px;
-  }
-  .listtitle {
+}
+
+.listtitle {
     margin: 0;
     padding-bottom: 12px;
-  }
-  ion-card {
+}
+
+ion-card {
     background: #ffffff;
     /* Medium Grey */
-  
     border: 0.4px solid #b8b8b8;
     box-sizing: border-box;
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.08), 0px 0px 1px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
     padding: 16px;
     margin: 0;
-  }
-  .text1 {
+}
+
+.text1 {
+    text-transform: capitalize;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
     /* identical to box height */
-  
     /* Direct Black */
-  
     color: #1a1a1a;
     margin: 0;
-  }
-  .text2 {
+}
+
+.text2 {
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
     line-height: 17px;
     /* identical to box height */
-  
     /* Dark Grey */
-  
     color: #7e7e7e;
     margin: 0;
     span {
-      color: #1a1a1a !important;
+        color: #1a1a1a !important;
     }
-  }
-  
-  .deletecheckbox{
-  
-  background: #ffffff;
+}
+
+.deletecheckbox {
+    background: #ffffff;
     border-width: 1px !important;
     border-style: solid !important;
     border-radius: 4px;
@@ -60,4 +59,4 @@ ion-content {
     --background-checked: #ffffff;
     --border-color: #ffffff;
     --border-color-checked: #ffffff;
-  }  
+}

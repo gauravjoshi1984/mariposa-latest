@@ -12,6 +12,19 @@ import { DataserviceService } from '../../dataservice.service';
 export class AddmealPage implements OnInit {
   addMealForm: FormGroup;
   editFlag = false;
+  key = 'meal';
+  category = 'COOKING';
+  stateObject;
+  careCircleId;
+  userId;
+  formData = {
+    assistance: {},
+    specialDiet: false,
+    breakfast: [],
+    lunch: [],
+    dinner: [],
+    snack: []
+  };
   constructor(private navCtrl: NavController,
               private formBuilder: FormBuilder,
               private assessmentService: AssessmentServiceService,
@@ -27,26 +40,43 @@ export class AddmealPage implements OnInit {
   ngOnInit() {
   }
 
-  ionViewWillEnter(){
-    const selectedMeal = this.assessmentService.getAssessmentEditMeal();
+  async ionViewWillEnter(){
+    this.careCircleId = await this.assessmentService.getCareCircleId();
+    this.userId = await this.dataService.getUserInfo();
+    this.userId = this.userId.userId;
+    const selectedMeal = this.assessmentService.getAssessmentEditShared(this.key);
     if (selectedMeal){
       this.editFlag = true;
-      const {mealType, name, recepie} = selectedMeal.meal;
-      this.imageList = selectedMeal.meal.imageList ? selectedMeal.meal.imageList : [];
+      const {mealType, name, recepie} = selectedMeal.obj;
+      this.imageList = selectedMeal.obj.imageList ? selectedMeal.obj.imageList : [];
       this.addMealForm.setValue({mealType, name, recepie});
-      this.assessmentService.setAssessmentMealEdit(null, null, null);
+    }
+    const data = await this.assessmentService.getAssessmentStateObject();
+    if (data.assessmentValues.CARE_NEEDS){
+      this.stateObject = data.assessmentValues.CARE_NEEDS;
+      if (this.stateObject != null && this.stateObject[this.category] != null && 'assistance' in this.stateObject[this.category]){
+        this.formData = this.stateObject[this.category];
+      }
     }
   }
   async addmeal(){
     const mealType = this.addMealForm.controls.mealType.value.toLowerCase();
-    // const data = {...this.addMealForm.value, imageList: this.imageList};
-    const data = {...this.addMealForm.value};
+    const data = {...this.addMealForm.value, imageList: this.imageList};
+    // const data = {...this.addMealForm.value};
     if (this.editFlag){
-      await this.assessmentService.setAssessmentMealEdit(data, mealType);
+      const selectedMeal = this.assessmentService.getAssessmentEditShared(this.key);
+      await this.assessmentService.setAssessmentEditShared(data, mealType, this.key, selectedMeal.index);
     }
     else{
-      await this.assessmentService.setAssessmentMeal(data, mealType);
+      if (!(mealType in this.formData)){
+        this.formData[mealType] = [];
+      }
+      this.formData[mealType].push(data);
+      this.stateObject[this.category] = this.formData;
+      this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
+        this.navCtrl.back();
+      });
+      // await this.assessmentService.setAssessmentShared(data, mealType, this.key);
     }
-    this.navCtrl.back();
   }
 }

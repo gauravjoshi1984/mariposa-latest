@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CreatingcareService } from '../../creatingcare/creatingcare.service';
 
 @Component({
   selector: 'app-adminprofile',
@@ -6,26 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./adminprofile.page.scss'],
 })
 export class AdminprofilePage implements OnInit {
+  member;
 
-  admintable = [
-    {
-      title:"Name",
-      info:"John Doe",
-    },
-    
-    {
-      title:"Email",
-      info:"john.doe@gmail.com",
-    },
-    {
-      title:"Mobile",
-      info:"212 1234 543",
-    },
-  ]
-
-  constructor() { }
+  constructor(private _creatingCareService: CreatingcareService) { }
 
   ngOnInit() {
+  }
+  async ionViewWillEnter(){
+    this.member = await this._creatingCareService.getSelectedMember();
   }
 
 }

@@ -1,0 +1,71 @@
+<ion-header mode="md">
+    <ion-toolbar class="headtoolbar">
+
+        <ion-row style="align-items: center;">
+            <ion-col size="2">
+                <ion-toolbar>
+                    <ion-buttons slot="start">
+                        <m-backbutton></m-backbutton>
+                    </ion-buttons>
+                </ion-toolbar>
+            </ion-col>
+            <ion-col>
+                <div>
+                    <ion-text color="mdblack" position="floating" id="titletag">Edit Shopping List Items</ion-text>
+
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content scrollable fullscreen>
+    <ng-container *ngIf="shoppingitems.length; else noList">
+        <ion-grid style="padding-top: 24px;padding-left: 16px;padding-right: 16px;padding-bottom: 13px;height: auto;margin-bottom: 73px;">
+            <ion-row>
+                <ion-col>
+                    <ion-text style="font-size: 14px;line-height: 17px;color: #1A1A1A;">Product Name</ion-text>
+                </ion-col>
+                <ion-col>
+                    <ion-text style="float:right;font-size: 14px;line-height: 17px;color: #1A1A1A;">Specification</ion-text>
+                </ion-col>
+            </ion-row>
+
+            <hr class="solid">
+            <div *ngFor="let item of shoppingitems; let i = index">
+                <ion-row style="align-items: center;">
+                    <ion-col size="1.3">
+                        <ion-checkbox style="float:left" mode="md" (ionChange)="toggleSelection($event, i)" color="mwhite"></ion-checkbox>
+                    </ion-col>
+                    <ion-col class="setpadding">
+                        <ion-text class="cap" style="font-size: 14px;line-height: 17px;color: #1A1A1A;font-weight: 500;">{{item.name}}</ion-text>
+                    </ion-col>
+                    <ion-col class="setpadding">
+                        <ion-text class="cap" style="float:right;font-size: 14px;line-height: 17px;color: #7E7E7E;">{{item.brand}}</ion-text>
+                    </ion-col>
+                </ion-row>
+                <hr class="solid" style="margin-top: 16px;margin-bottom:16px;">
+            </div>
+        </ion-grid>
+    </ng-container>
+    <ng-template #noList>
+        <p style="padding:10px;font-size: 17px;line-height: 17px;color: #1A1A1A; text-align: center;">No shopping list!</p>
+    </ng-template>
+</ion-content>
+
+<ion-footer>
+    <ion-grid style="padding-left: 24px;padding-right: 24px;padding-top: 16px;padding-bottom: 16px;">
+        <!-- BUTTON -->
+        <div id="button">
+            <ion-row style="align-items: center;">
+                <ion-col size="6">
+                    <ion-button class="btn50white" (click)="back()">CANCEL</ion-button>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-button class="btn50blue" [disabled]="false" (click)="deleteItems()" type="submit">DELETE ITEMS</ion-button>
+                </ion-col>
+            </ion-row>
+        </div>
+    </ion-grid>
+</ion-footer>

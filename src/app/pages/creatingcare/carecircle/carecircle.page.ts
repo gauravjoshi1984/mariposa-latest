@@ -27,8 +27,8 @@ export class CarecirclePage implements OnInit {
   }
   async populateMemberList() {
     const careCircleId = await this._creatingCareService.getCareCircleID();
-    const userId = await this._dataService.getUserInfo();
-    this.assessmentData = await this.apiService.get('assessment', {careCircleId, userId });
+    const userInfo = await this._dataService.getUserInfo();
+    this.assessmentData = await this.apiService.get('assessment', {careCircleId, userId: userInfo.userId });
     if (this.assessmentData.assessmentValues.CARE_NEED_PREFS !== null){
       this.assessmentBtnText = 'CONTINUE ASSESSMENT';
     }

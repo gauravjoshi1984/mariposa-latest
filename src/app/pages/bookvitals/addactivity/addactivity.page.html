@@ -1,0 +1,40 @@
+<app-m-header-close title="Add Activity">
+</app-m-header-close>
+
+<ion-content [fullscreen] = "true">
+  <ion-grid class="contentgrid">
+
+    <p class="listtitle">Select Activity</p>
+    <ion-select mode="ios" interface="popover" class="input" placeholder="Select">
+    </ion-select>
+
+    <p class="listtitle" style = "margin-top: 29px;" >Select Date</p>
+    <ion-button fill="outline" class="datebtn" expand="block">
+      <ion-datetime displayFormat="DD-MMM-YYYY" value="25-Aug-2020"></ion-datetime>
+      <ion-icon slot="end" src="assets/MariposaIcons/Calendar icon.svg"></ion-icon>
+    </ion-button>
+
+    <ion-grid fixed class="configurecaregrid">
+      <m-selectdate [times]="timeList" (result)="addtime($event,'timeList')"></m-selectdate>
+    </ion-grid>
+
+    <p class="listtitle" style="margin-top: 24px;">Assign to</p>
+    <ion-select mode="ios" interface="popover" class="input" placeholder="Select">
+    </ion-select>
+
+    <p class="label-text">Notes</p>
+    <ion-textarea rows="5" placeholder="Add notes about appointment" ></ion-textarea>
+   
+    <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
+
+
+  </ion-grid> 
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+      <ion-button color="primary" expand="block" fill="solid" class="submitbtn" shape="round">
+          ADD
+      </ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -4,21 +4,23 @@
     font-size: 16px;
     line-height: 19px;
     margin: 0;
-  
     color: #7e7e7e;
-  }
-  ion-slide {
+}
+
+ion-slide {
     padding-bottom: 26px;
-  }
-  
-  .activitydiv {
-    padding: 0 0 0 24px;
+}
+
+.activitydiv {
+    padding: 20px 0 0 24px;
     margin: 0 !important;
-  }
-  .activitydescriptiondiv {
+}
+
+.activitydescriptiondiv {
     padding: 0px 24px 0px 24px;
-  }
-  .activitydescription {
+}
+
+.activitydescription {
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
@@ -26,13 +28,13 @@
     color: #1a1a1a;
     margin: 0;
     padding-top: 8px;
-  }
-  
-  .activitynotediv {
+}
+
+.activitynotediv {
     padding: 0px 24px 0px 24px;
-  }
-  
-  .activitynote {
+}
+
+.activitynote {
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -41,168 +43,155 @@
     margin: 0;
     padding-top: 8px;
     padding-bottom: 8px;
-  }
-  .hdingdiv {
+}
+
+.hdingdiv {
     padding: 0px 24px 0px 24px;
     p {
-      font-style: normal;
-      font-weight: 300;
-      font-size: 16px;
-      line-height: 19px;
-      color: #7e7e7e;
-      margin: 0;
-      padding-top: 9px;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 19px;
+        color: #7e7e7e;
+        margin: 0;
+        padding-top: 9px;
     }
-  }
-  
-  .reportdiv {
+}
+
+.reportdiv {
     padding: 9px 24px 8px 24px;
     p {
-      margin: 0;
-      padding: 3px;
-      font-style: normal;
-      font-weight: 300;
-      font-size: 16px;
-      line-height: 28px;
-      text-transform: capitalize;
-      color: #1a1a1a;
-      padding: 0;
-      .spn1 {
-        padding-left: 41px;
-      }
-      .spn2 {
-        padding-left: 58px;
-      }
-      .spn3 {
-        padding-left: 72px;
-      }
-      .spn4 {
-        padding-left: 68px;
-      }
+        margin: 0;
+        padding: 3px;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 28px;
+        text-transform: capitalize;
+        color: #1a1a1a;
+        padding: 0;
+        .spn1 {
+            padding-left: 41px;
+        }
+        .spn2 {
+            padding-left: 58px;
+        }
+        .spn3 {
+            padding-left: 72px;
+        }
+        .spn4 {
+            padding-left: 68px;
+        }
     }
-  }
-  
-  .medicindetdiv {
+}
+
+.medicindetdiv {
     padding: 8px 24px 0px 24px;
-  
     p {
-      font-style: normal;
-      font-weight: normal;
-      font-size: 16px;
-      line-height: 19px;
-      color: #1a1a1a;
-      margin: 0;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        color: #1a1a1a;
+        margin: 0;
     }
-  }
-  hr {
+}
+
+hr {
     height: 1px;
     border-width: 0;
     box-sizing: content-box;
     /* background: aquamarine; */
     background: #e0e0e0;
     margin: 8px 24px;
-  }
-  ion-title {
+}
+
+ion-title {
     padding-left: 24px;
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
     line-height: 19px;
-  
     color: #1a1a1a;
-  }
+}
 
-  .commentheader{
-
+.commentheader {
     font-style: normal;
     font-size: 14px;
     line-height: 17px;
     font-weight: 500;
     color: #7E7E7E
-  }
+}
 
-  .commentdiv{
-      margin-bottom: 19px;
-  }
+.commentdiv {
+    margin-bottom: 19px;
+}
 
-  .commentgrid{
-      padding: 9px 24px 24px 24px;
-
-      ion-row{
+.commentgrid {
+    padding: 9px 24px 24px 24px;
+    ion-row {
         padding: 0px;
-        margin:0px;
+        margin: 0px;
         align-items: center;
-       
     }
-
-    ion-col{
-      padding: 0px;
-      margin:0px;
+    ion-col {
+        padding: 0px;
+        margin: 0px;
     }
-
-    ion-img{
+    ion-img {
         height: 32px;
-        width:32px;
+        width: 32px;
         float: left;
     }
-
-    .username{
+    .username {
         font-style: normal;
-        font-size:14px;
-        line-height:17px;
+        font-size: 14px;
+        line-height: 17px;
         color: #000000;
         font-weight: 500;
     }
-
-    .time{
+    .time {
         font-size: 14px;
         line-height: 17px;
         color: #b8b8b8;
         font-weight: normal;
         font-style: normal;
     }
-
-    .chatmsg{
+    .chatmsg {
         font-weight: 300;
         font-size: 16px;
         line-height: 19px;
         font-style: normal;
-        color:#000000;
+        color: #000000;
     }
-
-    .solid{
-        margin:0px;
+    .solid {
+        margin: 0px;
         margin-top: 24px;
         margin-bottom: 16px;
     }
-  }
+}
 
-  .postcomment{
-
+.postcomment {
     height: 73px;
     background-color: white;
-
-      ion-row{
-          padding: 0px;
-          margin:0px;
-          align-items: center;
-      }
-
-      ion-col{
+    ion-row {
         padding: 0px;
-        margin:0px;
-      }
-
-      .post{
-          font-style: normal;
-          font-size: 14px;
-          line-height: 17px;
-          font-weight: 600;
-          text-transform: uppercase;
-          color:#b8b8b8
-      }
-
-     .chatinputgrid{
-         padding:16px 24px 26px 16px;
-     }
-  }
+        margin: 0px;
+        align-items: center;
+    }
+    ion-col {
+        padding: 0px;
+        margin: 0px;
+    }
+    .post {
+        font-style: normal;
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #b8b8b8
+    }
+    .chatinputgrid {
+        padding: 16px 24px 26px 16px;
+    }
+}

@@ -7,6 +7,7 @@ import { DataserviceService } from '../../dataservice.service';
 import { NavController } from '@ionic/angular';
 import { Animation, AnimationController, IonSearchbar } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
+import { ToastService } from 'src/app/toast.service';
 
 const { Keyboard } = Plugins;
 @Component({
@@ -37,9 +38,11 @@ export class AdminSignInPage implements OnInit {
   loginForm: FormGroup;
   registrationForm: FormGroup;
   isKeyboardOpen: boolean;
+  deviceDetails = {};
   constructor(private formBuilder: FormBuilder, private animationCtrl: AnimationController, private http: ApiService,
               private dataService: DataserviceService,
-              private navCtrl: NavController, private detector: ChangeDetectorRef) {
+              private navCtrl: NavController, private detector: ChangeDetectorRef,
+              private toastService: ToastService) {
     this.loginForm = formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])
@@ -54,16 +57,21 @@ export class AdminSignInPage implements OnInit {
     {
       validator: MustMatch('password', 'confirmPassword')
     });
-    Keyboard.addListener('keyboardWillShow', () => {
-      this.isKeyboardOpen = true;
-      detector.detectChanges();
-  }),
-  Keyboard.addListener('keyboardWillHide', () => {
-      this.isKeyboardOpen = false;
-      detector.detectChanges();
-  }),
-  this.isKeyboardOpen = false;
-   }
+    this.dataService.getDeviceInfo().then(deviceDetails => {
+      this.deviceDetails = deviceDetails;
+      if (deviceDetails.platform !== 'web'){
+        Keyboard.addListener('keyboardWillShow', () => {
+          this.isKeyboardOpen = true;
+          detector.detectChanges();
+        }),
+        Keyboard.addListener('keyboardWillHide', () => {
+          this.isKeyboardOpen = false;
+          detector.detectChanges();
+        }),
+        this.isKeyboardOpen = false;
+      }
+    });
+  }
   get loginFormControl() {
     return this.loginForm.controls;
   }
@@ -80,12 +88,17 @@ export class AdminSignInPage implements OnInit {
   loginUser(){
     if (this.loginForm.valid){
       this.loginForm.controls.email.setValue(this.loginForm.value.email.toLowerCase());
-      this.http.post('login', this.loginForm.value).then((response: any) => {
+      this.http.post('user/login', {...this.loginForm.value, deviceDetails: this.deviceDetails}).then(async (response: any) => {
         this.dataService.setUserInfo(response);
+        this.dataService.getInitialData();
         // this.navCtrl.navigateForward(['carecircle']);
-        this.navCtrl.navigateForward(['carecircle/showcarecircle']);
+        const lastVisited = await this.dataService.getlastVisitedPage();
+        this.navCtrl.navigateForward([lastVisited ? lastVisited : 'carecircle/showcarecircle']);
       }, (error) => {
-        console.log(error);
+        if (error?.msg.indexOf('not verified') === 8){
+          this.dataService.setSignupData(this.loginForm.value);
+          this.navCtrl.navigateForward(['otp']);
+        }
       });
     }
     else{
@@ -95,15 +108,16 @@ export class AdminSignInPage implements OnInit {
   registerUser(){
     if (this.registrationForm.valid){
       this.registrationForm.controls.email.setValue(this.registrationForm.value.email.toLowerCase());
-      this.http.post('user', this.registrationForm.value).then((response) => {
+      this.http.post('user', {...this.registrationForm.value, deviceDetails: this.deviceDetails}).then((response) => {
+        this.dataService.setSignupData(response);
         this.registrationForm.reset();
-        this.type = 'signin';
+        this.navCtrl.navigateForward(['otp']);
+        // this.type = 'signin';
       }, (error) => {
-        console.log(error);
       });
     }
     else{
-      return;
+      this.toastService.presentToast('Please enter all the required fields!');
     }
   }
   checkValidity(control, passwordMatch= false){
@@ -125,13 +139,11 @@ export class AdminSignInPage implements OnInit {
     }
   }
 
-  //  ionViewWillEnter() {
-  //  setTimeout(() => this.searchbar.setFocus(), 300);
-  // }
+   ionViewWillEnter() {
+    this.type = 'signin';
+  }
 
   segmentChanged(ev: any) {
-    console.log('Segment changed', ev);
-    console.log(this.helpMenuOpen);
     this.helpMenuOpen = this.helpMenuOpen === 'out' ? 'in' : 'out';
 
     if (ev.detail.value === 'signin') {

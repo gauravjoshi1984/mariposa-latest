@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfigCareServiceService } from '../config-care-service.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-schedule-exercise',
@@ -7,25 +9,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScheduleExercisePage implements OnInit {
 
-  constructor() { }
+  exerciseData: any = null;
+  key: any;
 
-  ccexerciseinfo=[
-    {
-      type:"Physical Therapy",
-      frequency:"Daily",
-      frequencyinaday:"Once",
-      time:"8:30 AM",
-    },
-    {
-      type:"Yoga",
-      frequency:"Daily",
-      frequencyinaday:"Once",
-      time:"6:30 AM",
-    },
-
-  ]
+  constructor(
+    private configCareService: ConfigCareServiceService,
+    private navCtrl: NavController
+  ) { }
 
   ngOnInit() {
+  }
+
+  async populateOptions(){
+    const configCareDetails = await this.configCareService.getConfigCareDetails();
+    this.key = 'EXERCISE';
+    const configuration = configCareDetails.configCareConfiguration[this.key];
+    if (this.key in configCareDetails.configCareValues && configCareDetails.configCareValues[this.key] !== null){
+      this.exerciseData = configCareDetails.configCareValues[this.key];
+    }
+  }
+
+  async ionViewWillEnter(){
+    this.populateOptions();
+  }
+
+  submit(){
+    this.navCtrl.back();
+  }
+  editItem(item, index){
+    this.configCareService.setConfigEditShared(item, this.key, index);
+    this.navCtrl.navigateForward('/configcare/addexercise');
   }
 
 }

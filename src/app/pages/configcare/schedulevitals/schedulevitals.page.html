@@ -1,70 +1,55 @@
 <ion-header mode="md">
-  <ion-toolbar class="headtoolbar">
-      <ion-buttons class = "backbutton" slot="start">
-          <m-backbutton></m-backbutton>
-      </ion-buttons>
-      <ion-title class="name" color="mdblack" position="floating" id="titletag">Schedule Vitals</ion-title>
-      <ion-buttons slot="end" class="edit">
-        <ion-text [routerLink]="'/configcare/deletevitals'">EDIT</ion-text>
-      </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar class="headtoolbar">
+        <ion-buttons class="backbutton" slot="start">
+            <m-backbutton></m-backbutton>
+        </ion-buttons>
+        <ion-title class="name" color="mdblack" position="floating" id="titletag">Schedule Vitals</ion-title>
+        <ion-buttons slot="end" class="edit">
+            <ion-text [routerLink]="'/configcare/deletevitals'">DELETE</ion-text>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
-
-
-  <div style="padding: 0px;" *ngFor="let item of ccvitalinfo">
-  <ion-card style="width: 105%;right: 8px;margin-top:10px;">
-    <ion-grid class="ion-no-padding">
-      <ion-row>
-        <ion-col size="7">
-          <p class="text1">{{item.type}}</p>  
-        </ion-col>
-        <ion-col size="5" style="text-align: end;">
-          <p class="text1">{{item.frequency}}</p>     
-        </ion-col>
-      </ion-row>
-      <ion-row style="margin-top:13px ;">
-        <ion-col size="8">         
-          <p class="text2">{{item.frequencyinaday}}</p>
-        </ion-col>
-        <ion-col size="4" style="text-align: end;">   
-          <p class="text2">Time: <span>{{item.time}}</span></p>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-</div>
-
-
+    <div style="padding: 0px;" *ngFor="let item of vitalData; let i=index">
+        <ion-card style="width: 105%;right: 8px;margin-top:10px;" (click)="editItem(item, i)">
+            <ion-grid class="ion-no-padding">
+                <ion-row>
+                    <ion-col size="7">
+                        <p class="text1">{{item.type}}</p>
+                    </ion-col>
+                    <ion-col size="5" style="text-align: end;">
+                        <p class="text1">Daily</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row style="margin-top:13px ;">
+                    <ion-col size="8">
+                        <p class="text2">{{item.timeList.length}} Time(s)</p>
+                    </ion-col>
+                    <ion-col size="4" style="text-align: end;">
+                        <p class="text2">Time: <span>{{item.timeList[0].hours}}:{{item.timeList[0].minutes}}</span></p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+    </div>
 </ion-content>
 
 <ion-footer mode="md">
-  <ion-toolbar id="button">
-    <ion-grid class="ion-no-padding">
-      <ion-row>
-        <ion-col size="6">
-          <ion-button
-            
-            expand="block" 
-            class="lbtn"
-            shape="round"
-          >
-            ADD MORE
-          </ion-button></ion-col
-        >
-        <ion-col size="6">
-          <ion-button
-            color="primary"
-            expand="block"
-            class="rbtn"
-            shape="round"
-          >
-            SUBMIT
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-toolbar>
+    <ion-toolbar id="button">
+        <ion-grid class="ion-no-padding">
+            <ion-row>
+                <ion-col size="6">
+                    <ion-button routerLink="/configcare/addvitals" expand="block" class="lbtn" shape="round">
+                        ADD {{vitalData && vitalData.length ? 'MORE' : ''}}
+                    </ion-button>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-button color="primary" (click)="submit()" expand="block" class="rbtn" shape="round">
+                        SUBMIT
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
 </ion-footer>

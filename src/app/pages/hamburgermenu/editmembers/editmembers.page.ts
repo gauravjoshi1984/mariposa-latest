@@ -1,34 +1,38 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { DeleteconfirmComponent } from "./deleteconfirm/deleteconfirm.component";
 import { ModalController } from "@ionic/angular";
 
 @Component({
-  selector: "app-editmembers",
-  templateUrl: "./editmembers.page.html",
-  styleUrls: ["./editmembers.page.scss"],
+  selector: 'app-editmembers',
+  templateUrl: './editmembers.page.html',
+  styleUrls: ['./editmembers.page.scss'],
 })
 export class EditmembersPage implements OnInit {
-  senior = "David";
+
+  senior = 'David';
   isAdmin = false;
 
   memberdetails = [
     {
-      membername: "David",
-      memberrelation: "Father",
-      memberrank: "SENIOR",
-      details: "70 Years Old, Male, lives with",
+      membername : 'David',
+      memberrelation : 'Father',
+      memberrank : 'SENIOR',
+      details : '70 Years Old, Male, lives with',
     },
     {
-      membername: "Mary Arthur",
-      memberrelation: "Caregiver",
-      memberrank: "ADMIN",
-      details: "40 Years Old, Female, lives in LA...",
-    },
-  ];
+      membername : 'David',
+      memberrelation : 'Father',
+      memberrank : 'ADMIN',
+      details : '70 Years Old, Male, lives with',
+    }
+];
 
-  constructor(private modalController: ModalController) {}
+
+  constructor(private navCtrl: NavController,private modalController: ModalController) { }
 
   ngOnInit() {}
+
   async presentModal() {
     const modal = await this.modalController.create({
       component: DeleteconfirmComponent,
@@ -43,4 +47,8 @@ export class EditmembersPage implements OnInit {
     });
     return await modal.present();
   }
+  back(){
+    this.navCtrl.back();
+  }
+
 }

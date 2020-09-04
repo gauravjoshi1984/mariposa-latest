@@ -1,69 +1,45 @@
 <ion-header mode="md">
-  <ion-toolbar class="headtoolbar">
-      <ion-buttons class = "backbutton" slot="start">
-          <m-backbutton></m-backbutton>
-      </ion-buttons>
-      <ion-title class="name" color="mdblack" position="floating" id="titletag">Schedule Bathing</ion-title>
-  </ion-toolbar>
+    <ion-toolbar class="headtoolbar">
+        <ion-buttons class="backbutton" slot="start">
+            <m-backbutton></m-backbutton>
+        </ion-buttons>
+        <ion-title class="name" color="mdblack" position="floating" id="titletag">Schedule Bathing</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="bathingForm">
-    <ion-item style="display: none;">
-      <ion-label>Date</ion-label>
-      <ion-datetime
-        [pickerOptions]="customPickerOptions"
-        #datepicker
-        displayFormat="h:mm A"
-      ></ion-datetime>
-    </ion-item>
-    <ion-grid fixed style="height: auto;" class="configurecaregrid">
-      <m-selectdate (result)="addtime($event,'timeList')"></m-selectdate>
+    <form [formGroup]="bathingForm" *ngIf="dataLoaded">
+        <ion-grid fixed style="height: auto;" class="configurecaregrid">
+            <m-selectdate [times]="timeList" (result)="addtime($event,'timeList')"></m-selectdate>
+        </ion-grid>
 
-      
-    </ion-grid>
+        <p class="label-text">Repeat</p>
+        <div class="chipdiv">
+            <ion-chip color="primary" mode="ios" outline="true" [class.selectedchip]="selectedDays.includes(day.value)" *ngFor="let day of daysList" (click)="addremoveDay(day)">
+                <ion-label>{{day.name}}</ion-label>
+            </ion-chip>
 
-    <p class="label-text">Repeat</p>
-    <div class="chipdiv">
-      <ion-chip
-        color="primary"
-        mode="ios"
-        outline="true"
-        [class.selectedchip]="selectedDays.includes(day.value)"
-        *ngFor="let day of daysList"
-        (click)="addremoveDay(day)"
-      >
-        <ion-label>{{day.name}}</ion-label>
-      </ion-chip>
-     
-    </div>
-    <hr />
-    <p class="label-text">Instructions (optional)</p>
-    <ion-textarea
-      rows="5"
-      placeholder="Write if any bathing information"
-      [(ngModel)]="instructions"
-      formControlName="instructions"
-    ></ion-textarea>
-    
-     <!-- ADD IMAGE -->
-     <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
+        </div>
+        <hr />
 
-    
-  </form>
+        <ion-select formControlName="assignedTo" mode="ios" [compareWith]="compareFn" interface="popover" class="input" placeholder="Assigned To">
+            <ion-select-option [value]="item" *ngFor="let item of careCircleDetails">{{item.assigned ? item.assigned.userName : 'Caregiver'}}</ion-select-option>
+        </ion-select>
+
+        <p class="label-text">Instructions (optional)</p>
+        <ion-textarea rows="5" placeholder="Write if any bathing information" formControlName="instructions"></ion-textarea>
+
+        <!-- ADD IMAGE -->
+        <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
+
+
+    </form>
 </ion-content>
 
 <ion-footer>
-  
-  <div id="button">
-    <ion-button
-      [disabled]="false"
-      class="btnblue"
-      type="submit"
-      id="signup"
-      (click)="submit()"
-      >SUBMIT</ion-button
-    >
-  </div>
+
+    <div id="button">
+        <ion-button [disabled]="false" class="btnblue" type="submit" id="signup" (click)="submit()">SUBMIT</ion-button>
+    </div>
 </ion-footer>

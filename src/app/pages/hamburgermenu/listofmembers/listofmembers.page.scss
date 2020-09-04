@@ -1,81 +1,83 @@
-.details{
+.details {
     padding-top: 16px;
     padding-left: 24px;
     padding-right: 24px;
-
-    ion-row{
+    ion-row {
         align-items: center;
         margin: 0px;
-        padding:0px;
+        padding: 0px;
     }
-    ion-col{
+    ion-col {
         margin: 0px;
-        padding:0px;
+        padding: 0px;
     }
 }
 
-.image{
+.image {
     height: 60px;
     width: 60px;
+    border-radius: 60px;
+    img {
+        border-radius: 100%;
+    }
 }
 
-ion-text{
-
-    color:black;
+ion-text {
+    color: black;
     font-size: 16px;
     line-height: 20px;
     font-weight: normal;
     font-style: normal;
 }
 
-.membersdetails{
+.membersdetails {
     font-weight: 300;
     font-size: 16px;
     line-height: 19px;
     color: #7E7E7E;
 }
 
-ion-chip{
-    height:20px;
-    width:80px;
+ion-chip {
+    height: 20px;
+    // width:80px;
     border-radius: 8px;
     border-width: 0.4px;
+    text-align: center;
     color: #B8B8B8;
-
-    ion-label{
+    ion-label {
         font-size: 12px;
         line-height: 14px;
         text-align: center;
         font-weight: bold;
-        margin-left: 6px;
+        // margin-left: 6px;
     }
 }
 
-.viewprofile{
+.viewprofile {
     font-weight: 600;
     font-size: 14px;
     line-height: 17px;
     text-align: center;
     text-transform: uppercase;
-    color:#4137FF
+    color: #4137FF
 }
 
-.logos{
+.logos {
     height: 55px;
     width: 55px;
     float: right;
 }
 
-#profilerow{
+#profilerow {
     margin-top: 5px;
 }
 
-.solid{
+.solid {
     margin-top: 16px;
     margin-bottom: 16px;
 }
 
-.container{
+.container {
     padding: 0px;
     margin: 0px;
 }

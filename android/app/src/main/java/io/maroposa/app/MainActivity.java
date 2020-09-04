@@ -1,4 +1,4 @@
-package io.maroposa.app;
+package io.mariposa.app;
 
 import android.os.Bundle;
 

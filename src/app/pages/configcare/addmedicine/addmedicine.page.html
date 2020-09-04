@@ -1,57 +1,64 @@
-
-<app-m-header-close title="Add Medicine"></app-m-header-close>
+<app-m-header-close title="Add Medicine">
+</app-m-header-close>
 
 <ion-content>
-    <form [formGroup]="medicineForm">
+    <form [formGroup]="medicineForm" *ngIf="dataLoaded">
         <p class="listtitle">Medicine Type</p>
-        <ion-select mode="md" class="input" placeholder="Select" formControlName="medicineType" (result)="setData($event,'medicineType')">
-          <ion-select-option *ngFor="let Option of selectData" value="{{Option.value}}" selected>{{Option.name}}</ion-select-option>
+        <ion-select mode="ios" interface="popover" [compareWith]="compareFnValue" class="input" placeholder="Select" (ionChange)="mediceneTypeChanged()" formControlName="type" (result)="setData($event,'type')">
+            <ion-select-option *ngFor="let Option of medicineType" [value]="Option.value">{{Option.name}}</ion-select-option>
         </ion-select>
+
         <p class="listtitle listtitle2">Medicine Name</p>
-        <ion-input mode="md" class="input" value="Ibuprofine MKal 100mg" formControlName="medicineName"></ion-input>
+        <ion-select mode="ios" interface="popover" class="input" [compareWith]="compareFnValue" placeholder="Select" (ionChange)="navigateToPage()" formControlName="name" (result)="setData($event,'name')">
+            <ion-select-option value="navigate">Add More</ion-select-option>
+            <ion-select-option *ngFor="let item of mediceneData" [value]="item.name">{{item.name}}</ion-select-option>
+        </ion-select>
         <ion-grid fixed class="configurecaregrid">
-           
-            <m-selectdate [times] = "initialTimeList" (result)="addtime($event,'timeList')"></m-selectdate>
-            
+            <m-selectdate [times]="initialTimeList" (result)="addtime($event,'timeList')"></m-selectdate>
         </ion-grid>
-        
+
 
         <p class="label-text">Repeat</p>
         <div class="chipdiv">
             <ion-chip color="primary" mode="ios" outline="true" [class.selectedchip]="selectedDays.includes(day.value)" *ngFor="let day of daysList" (click)="addremoveDay(day)">
                 <ion-label>{{day.name}}</ion-label>
             </ion-chip>
-            
         </div>
         <p class="listtitle listtitle3">Dosage</p>
-        <ion-select mode="md" class="input" placeholder="Select" formControlName="dosage" (result)="setData($event,'dosage')">
+        <ion-input mode="md" class="input" formControlName="dosage"></ion-input>
+        <!-- <ion-select mode="md" class="input" placeholder="Select" formControlName="dosage" (result)="setData($event,'dosage')">
           <ion-select-option *ngFor="let Option of selectData2" value="{{Option.value}}" selected>{{Option.name}}</ion-select-option>
-        </ion-select>
+        </ion-select> -->
         <p class="listtitle listtitle4">Medication Duration</p>
         <ion-grid class="configurecaregrid">
             <ion-row>
                 <ion-col size="6">
                     <p class="datelabel">Start Date</p>
-                    <ion-button fill="outline" class="datebtn">
-                        <ion-datetime displayFormat="DD-MMM-YYYY" formControlName="startDate"></ion-datetime>
+                    <ion-button (click)="openDatePicker($event,startDate)" fill="outline" class="datebtn">
+                        <ion-datetime #startDate displayFormat="DD-MMM-YYYY" [min]="minDate" formControlName="startDate"></ion-datetime>
                         <ion-icon slot="end" src="assets/MariposaIcons/Calendar icon.svg"></ion-icon>
                     </ion-button>
                 </ion-col>
                 <ion-col size="6">
                     <p class="datelabel">End Date</p>
-                    <ion-button fill="outline" class="datebtn">
-                        <ion-datetime displayFormat="DD-MMM-YYYY" formControlName="endDate"></ion-datetime>
+                    <ion-button (click)="openDatePicker($event,endDate)" fill="outline" class="datebtn">
+                        <ion-datetime #endDate displayFormat="DD-MMM-YYYY" [min]="minDate" formControlName="endDate"></ion-datetime>
                         <ion-icon slot="end" src="assets/MariposaIcons/Calendar icon.svg"></ion-icon>
                     </ion-button>
                 </ion-col>
             </ion-row>
         </ion-grid>
 
+        <p class="label-text">Assigned To</p>
+        <ion-select formControlName="assignedTo" mode="ios" [compareWith]="compareFn" interface="popover" class="input" placeholder="Assigned To">
+            <ion-select-option [value]="item" *ngFor="let item of careCircleDetails">{{item.assigned ? item.assigned.userName : 'Caregiver'}}</ion-select-option>
+        </ion-select>
+
         <p class="label-text">Instructions (optional)</p>
         <ion-textarea rows="5" placeholder="Write if any bathing information" formControlName="instructions"></ion-textarea>
-        
-         <!-- ADD IMAGE -->
-         <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
+
+        <!-- ADD IMAGE -->
+        <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
 
 
     </form>

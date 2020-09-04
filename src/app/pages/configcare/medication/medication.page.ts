@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfigCareServiceService } from '../config-care-service.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-medication',
@@ -6,27 +8,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./medication.page.scss'],
 })
 export class MedicationPage implements OnInit {
+  medicationList = [];
+  key: any;
 
-  ccmedicineinfo=[
-
-    {
-      name:"Ibuprofine Mkal 100mg",
-      frequency:"Daily",
-      dosage:"#1",
-      time:"10.00 PM",
-    },
-    {
-      name:"Ibuprofine Mkal 100mg",
-      frequency:"Daily",
-      dosage:"#1",
-      time:"10.00 PM",
-    },
-
-  ]
-
-  constructor() { }
+  constructor(
+    private configCareService: ConfigCareServiceService,
+    private navCtrl: NavController
+  ) { }
 
   ngOnInit() {
   }
+  async populateOptions(){
+    const configCareDetails = await this.configCareService.getConfigCareDetails();
+    this.key = 'MEDICATION';
+    if (this.key in configCareDetails.configCareValues && configCareDetails.configCareValues[this.key] !== null){
+      this.medicationList = configCareDetails.configCareValues[this.key];
+    }
+  }
 
+  async ionViewWillEnter(){
+    this.populateOptions();
+  }
+
+  submit(){
+    this.navCtrl.back();
+  }
+  editItem(item, index){
+    this.configCareService.setConfigEditShared(item, this.key, index);
+    this.navCtrl.navigateForward('/configcare/addmedicine');
+  }
 }

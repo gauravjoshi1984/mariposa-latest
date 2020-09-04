@@ -1,73 +1,63 @@
 <ion-header mode="md">
-  <ion-toolbar class="headtoolbar">
-      <ion-buttons class = "backbutton" slot="start">
-          <m-backbutton></m-backbutton>
-      </ion-buttons>
-      <ion-title class="name" color="mdblack" position="floating" id="titletag">Exercise / Physical Therapy</ion-title>
-  </ion-toolbar>
+    <ion-toolbar class="headtoolbar">
+        <ion-buttons class="backbutton" slot="start">
+            <m-backbutton></m-backbutton>
+        </ion-buttons>
+        <ion-title class="name" color="mdblack" position="floating" id="titletag">Exercise / Physical Therapy</ion-title>
+    </ion-toolbar>
 </ion-header>
 <ion-content>
 
-<div style="padding: 0px;" *ngFor="let item of ccexerciseinfo">
-  <ion-row style="align-items:center ;">
-    <ion-col size="1">
-      <ion-checkbox mode="md" class="deletecheckbox"></ion-checkbox>
-    </ion-col>
-    <ion-col>
+    <div style="padding: 0px;" *ngFor="let item of exerciseData;  let i = index;">
+        <ion-row style="align-items:center ;">
+            <ion-col size="1">
+                <ion-checkbox mode="md" (ionChange)="toggleSelection($event, i)" class="deletecheckbox"></ion-checkbox>
+            </ion-col>
+            <ion-col>
 
-      <ion-card style="left: 8px;">
-        <ion-grid class="ion-no-padding">
-          <ion-row>
-            <ion-col size="7">
-              <p class="text1">{{item.type}}</p>  
-            </ion-col>
-            <ion-col size="5" style="text-align: end;">
-              <p class="text1">{{item.frequency}}</p>     
-            </ion-col>
-          </ion-row>
-          <ion-row style="margin-top:13px ;">
-            <ion-col size="7">         
-              <p class="text2">{{item.frequencyinaday}}</p>
-            </ion-col>
-            <ion-col size="5" style="text-align: end;">   
-              <p class="text2">Time: <span>{{item.time}}</span></p>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-      
-    </ion-col>
-  </ion-row>
-  </div>
+                <ion-card style="left: 8px;">
+                    <ion-grid class="ion-no-padding">
+                        <ion-row>
+                            <ion-col size="7">
+                                <p class="text1">{{item.type}}</p>
+                            </ion-col>
+                            <ion-col size="5" style="text-align: end;">
+                                <p class="text1">{{item.timeList.length}} Time(s)</p>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row style="margin-top:13px ;">
+                            <ion-col size="7">
+                                <p class="text2">{{item.instructions}}</p>
+                            </ion-col>
+                            <ion-col size="5" style="text-align: end;">
+                                <p class="text2">Time: <span>{{item.timeList[0].hours}}:{{item.timeList[0].minutes}}</span></p>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card>
 
-  
+            </ion-col>
+        </ion-row>
+    </div>
+
+
 </ion-content>
 
 <ion-footer mode="md">
-  <ion-toolbar id="button">
-    <ion-grid class="ion-no-padding">
-      <ion-row>
-        <ion-col size="6">
-          <ion-button
-            
-            expand="block" 
-            class="lbtn"
-            shape="round"
-          >
-            CANCEL
-          </ion-button></ion-col
-        >
-        <ion-col size="6">
-          <ion-button
-            color="primary"
-            expand="block"
-            class="rbtn"
-            shape="round"
-          >
-            DELETE ITEMS
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-toolbar>
+    <ion-toolbar id="button">
+        <ion-grid class="ion-no-padding">
+            <ion-row>
+                <ion-col size="6">
+                    <ion-button expand="block" (click)="back()" class="lbtn" shape="round">
+                        CANCEL
+                    </ion-button>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-button color="primary" (click)="deleteItems()" expand="block" class="rbtn" shape="round">
+                        DELETE ITEMS
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
 </ion-footer>

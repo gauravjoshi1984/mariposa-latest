@@ -42,7 +42,7 @@
       <ion-text position="floating" id="tag">Assign to</ion-text>
     </div> 
     <div>
-      <ion-select mode="md" class="input" placeholder="Select Relation" formControlName="caregivername">
+      <ion-select mode="ios" interface="popover" class="input" placeholder="Select Relation" formControlName="caregivername">
           <ion-select-option *ngFor="let relation of caregiverList" [value]="relation" for="relation">{{relation}}</ion-select-option>
       </ion-select>
   </div>

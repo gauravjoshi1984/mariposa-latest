@@ -18,7 +18,7 @@ export class ShowcarecirclePage implements OnInit {
   }
   async populateCareCircle(){
     const userData = await this._dataService.getUserInfo();
-    this._apiService.get('getCareCircles', {userId: userData.userId}).then((data: any) => {
+    this._apiService.get('careCircle', {userId: userData.userId}).then((data: any) => {
       this.careCircleList = data;
       this._creatingCareService.setAvailableCareCircleDetails(data);
     });

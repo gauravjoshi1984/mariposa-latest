@@ -1,11 +1,12 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, } from '@angular/core';
 import { FormBuilder,  FormControl, Validators } from '@angular/forms';
 import { DataserviceService } from '../../dataservice.service';
 import { CreatingcareService } from '../creatingcare.service';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/http.service';
 import { Location } from '@angular/common';
-
+import { Plugins } from '@capacitor/core';
+const { Keyboard } = Plugins;
 @Component({
   selector: 'app-carecircleaddsenior',
   templateUrl: './carecircleaddsenior.page.html',
@@ -15,13 +16,16 @@ export class CarecircleaddseniorPage implements OnInit {
   addEditSeniorForm;
   relationList;
   careCircleName;
+  deviceDetails;
+  isKeyboardOpen;
   constructor(private formBuilder: FormBuilder,
               private _dataService: DataserviceService,
               private _creatingCareService: CreatingcareService,
               private _router: Router,
               private _apiService: ApiService,
-              private _location: Location) {
-      this.relationList = ['Father', 'Mother', 'Sibling'];
+              private _location: Location,
+              private detector: ChangeDetectorRef, ) {
+      this.relationList = ['Father', 'Mother', 'Sibling', 'Self'];
       const mobileNumberPattern = '^[0-9]+$';
       this.addEditSeniorForm = this.formBuilder.group({
         name: new FormControl('', Validators.required),
@@ -30,6 +34,20 @@ export class CarecircleaddseniorPage implements OnInit {
         mobileNumber: new FormControl('', Validators.pattern(mobileNumberPattern) ),
         vitals : new FormControl(),
         appointments : new FormControl()
+      });
+      this._dataService.getDeviceInfo().then(deviceDetails => {
+        this.deviceDetails = deviceDetails;
+        if (deviceDetails.platform !== 'web'){
+          Keyboard.addListener('keyboardWillShow', () => {
+            this.isKeyboardOpen = true;
+            detector.detectChanges();
+          }),
+          Keyboard.addListener('keyboardWillHide', () => {
+            this.isKeyboardOpen = false;
+            detector.detectChanges();
+          }),
+          this.isKeyboardOpen = false;
+        }
       });
   }
 
@@ -52,7 +70,7 @@ export class CarecircleaddseniorPage implements OnInit {
         }
       ]
     };
-    this._apiService.post('createCareCircle', apiRequestBody).then((data: any) => {
+    this._apiService.post('careCircle', apiRequestBody).then((data: any) => {
       this._creatingCareService.setCareCircleId(data.careCircleId);
       this._dataService.setLastVisitedPage('carecircle/showcarecircle');
       this._router.navigate(['carecircle/list']);

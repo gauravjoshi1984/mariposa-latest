@@ -4,11 +4,6 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/http.service';
 import { AssessmentServiceService } from '../assessment-service.service';
 import { DataserviceService } from '../../dataservice.service';
-import { Location } from '@angular/common';
-import {
-  ImagePicker,
-  ImagePickerOptions,
-} from '@ionic-native/image-picker/ngx';
 
 @Component({
   selector: 'app-dressing',
@@ -18,34 +13,19 @@ import {
 export class DressingPage implements OnInit {
   constructor(private router: Router,
               private apiService: ApiService,
-              private location: Location,
               private assessmentService: AssessmentServiceService,
-              private imagePicker: ImagePicker,
               private dataService: DataserviceService,
               private navCtrl: NavController) { }
 
 
-  formData: any = {
-    dressingPreferences : [{value: ''}],
-    instructions: ''
-  };
+  formData: any = [];
   careCircleId;
   userId;
   stateObject;
   readyFlag;
+  sharedKey = 'outfit';
 
   imageList = [];
-
-  outfit = [
-    {
-      name:"Polka pants",
-      instructions:"",
-    },
-    {
-      name:"Jeans",
-      instructions:"",
-    },
-  ]
 
   addMore(arrayName){
     this.formData[arrayName].push({value: ''});
@@ -60,7 +40,6 @@ export class DressingPage implements OnInit {
     }
     this.stateObject.DRESSING = this.formData;
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
-      console.log(response);
       this.navCtrl.back();
     });
   }
@@ -76,12 +55,21 @@ export class DressingPage implements OnInit {
       if (data.assessmentValues.CARE_NEEDS != null && data.assessmentValues.CARE_NEEDS[key] != null){
         this.formData = data.assessmentValues.CARE_NEEDS[key];
       }
-      else{
-        // data is not present
-        // do nothing
+      const newOutfit = this.assessmentService.getAssessmentShared(this.sharedKey);
+      if (newOutfit){
+        this.formData.push(newOutfit.obj);
+        this.assessmentService.setAssessmentShared(null, null, this.sharedKey);
+      }
+      const outfitEdit = this.assessmentService.getAssessmentEditShared(this.sharedKey);
+      if (outfitEdit){
+        this.formData[outfitEdit.index] = outfitEdit.obj;
+        this.assessmentService.setAssessmentEditShared(null, null, this.sharedKey);
       }
       this.readyFlag = true;
     });
   }
-
+  async editOutfit(outfit, index){
+    await this.assessmentService.setAssessmentEditShared(outfit, null, this.sharedKey, index);
+    this.navCtrl.navigateForward(['/assessment/addoutfit']);
+  }
 }

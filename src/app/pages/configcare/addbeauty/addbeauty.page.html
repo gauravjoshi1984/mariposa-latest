@@ -4,7 +4,7 @@
 <ion-content [fullscreen]="true">
   <form [formGroup]="beautyForm">
   <p class="listtitle">Grooming Type</p>
-  <ion-select mode="md" class="input" placeholder="Select" formControlName="groomingType" (result)="setData($event,'groomingType')">
+  <ion-select mode="ios" interface="popover" class="input" placeholder="Select" formControlName="groomingType" (result)="setData($event,'groomingType')">
     <ion-select-option *ngFor="let Option of groomingData" value="{{Option.value}}" selected>{{Option.name}}</ion-select-option>
   </ion-select>
   

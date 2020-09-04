@@ -25,6 +25,7 @@ export class MealsPage implements OnInit {
   readyFlag;
   imageList = [];
   validForm = false;
+  sharedKey = 'meal';
   shoppingAssistance = [];
    selectData = [
     {
@@ -44,17 +45,6 @@ export class MealsPage implements OnInit {
     dinner: [],
     snack: []
   };
-
-  recipebook = [
-    {
-      name: 'garlic bread',
-      mealType: 'breakfast',
-    },
-    {
-      name: 'french toast',
-      mealType: 'breakfast',
-    }
-];
 
   addMore(arrayName){
       this.formData[arrayName].push({name: ''});
@@ -80,7 +70,6 @@ export class MealsPage implements OnInit {
     }
     this.stateObject.COOKING = this.formData;
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
-      console.log(response);
       this.navCtrl.back();
     });
   }
@@ -90,35 +79,37 @@ export class MealsPage implements OnInit {
       this.careCircleId = await this.assessmentService.getCareCircleId();
       this.userId = await this.dataService.getUserInfo();
       this.userId = this.userId.userId;
-      this.recipebook = [];
       const key = 'COOKING';
       const data = await this.assessmentService.getAssessmentStateObject();
       this.stateObject = data.assessmentValues.CARE_NEEDS;
-      if (this.stateObject != null && this.stateObject[key] != null){
+      if (this.stateObject != null && this.stateObject[key] != null && 'assistance' in this.stateObject[key]){
         this.formData = this.stateObject[key];
         this.validForm = true;
       }
-      const newMeal = this.assessmentService.getAssessmentMeal();
+      const newMeal = this.assessmentService.getAssessmentShared(this.sharedKey);
       if (newMeal){
-        this.formData[newMeal.mealType].push(newMeal.meal);
-        this.assessmentService.setAssessmentMeal(null, null);
+        this.formData[newMeal.type].push(newMeal.obj);
+        this.assessmentService.setAssessmentShared(null, null, this.sharedKey);
       }
-      const mealEdit = this.assessmentService.getAssessmentEditMeal();
+      const mealEdit = this.assessmentService.getAssessmentEditShared(this.sharedKey);
       if (mealEdit){
-        this.formData[mealEdit.mealType][mealEdit.index] = mealEdit.meal;
-        this.assessmentService.setAssessmentMealEdit(null, null);
+        this.formData[mealEdit.type][mealEdit.index] = mealEdit.obj;
+        this.assessmentService.setAssessmentEditShared(null, null, this.sharedKey);
       }
-      this.mealtype.forEach(type => {
-        this.recipebook.push(...this.formData[type]);
-      });
+      // this.mealtype.forEach(type => {
+      //   this.recipebook.push(...this.formData[type]);
+      // });
       this.shoppingAssistance = data.assessmentConfiguration.CARE_NEEDS[key].assistance;
       this.readyFlag = true;
   }
-  addMeal(){
+  async addMeal(){
+    const data = await this.assessmentService.getAssessmentStateObject();
+    data.assessmentValues.CARE_NEEDS.COOKING = this.formData;
+    this.assessmentService.setAssessmentStateObject(data);
     this.navCtrl.navigateForward(['/assessment/addmeal']);
   }
   async editMeal(meal, mealType, index){
-    await this.assessmentService.setAssessmentMealEdit(meal, mealType.toLowerCase(), index);
+    await this.assessmentService.setAssessmentEditShared(meal, mealType.toLowerCase(), this.sharedKey, index);
     this.navCtrl.navigateForward(['/assessment/addmeal']);
   }
 }

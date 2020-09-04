@@ -5,6 +5,7 @@ import { IonDatetime } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { AssessmentServiceService } from '../assessment-service.service';
 import { DataserviceService } from '../../dataservice.service';
+import { ApiService } from 'src/app/http.service';
 
 @Component({
   selector: 'app-personalinfo',
@@ -17,11 +18,13 @@ export class PersonalinfoPage implements OnInit {
   userId;
   key: string;
   livesWith = [];
+  countries = [];
   constructor(
     private navCtrl: NavController,
     formBuilder: FormBuilder,
     private assessmentService: AssessmentServiceService,
-    private dataService: DataserviceService, ) {
+    private dataService: DataserviceService,
+    private http: ApiService) {
     this.personalInfoForm = formBuilder.group({
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
@@ -45,6 +48,9 @@ export class PersonalinfoPage implements OnInit {
   ngOnInit() {}
 
   async ionViewWillEnter(){
+    this.http.getCountries().then((response: any) => {
+      this.countries = response;
+    });
     this.careCircleId = await this.assessmentService.getCareCircleId();
     this.userId = await this.dataService.getUserInfo();
     this.userId = this.userId.userId;
@@ -54,17 +60,14 @@ export class PersonalinfoPage implements OnInit {
     this.stateObject = data.assessmentValues[this.key];
     if (this.stateObject != null){
       Object.keys(this.stateObject).forEach(key => {
-        console.log(key, this.stateObject[key]);
         this.personalInfoForm.controls[key].setValue(this.stateObject[key]);
       });
     }
   }
 
   save(){
-    console.log(this.personalInfoForm.value);
     this.stateObject = this.personalInfoForm.value;
     this.assessmentService.saveAssessmentState(this.careCircleId, this.key, this.userId, this.stateObject).then((response) => {
-      console.log(response);
       this.navCtrl.back();
     });
     // this.navCtrl.back();

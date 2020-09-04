@@ -1,61 +1,61 @@
 <app-m-header-close title="Schedule Wound Care"></app-m-header-close>
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="woundcareForm">
-  
-  
-  <ion-grid fixed class="configurecaregrid">
-    
-    <m-selectdate (result)="addtime($event,'timeList')"></m-selectdate>
-    
-  </ion-grid>
+    <form [formGroup]="woundcareForm">
 
-  
-  
 
-  <p class="label-text">Repeat</p>
-  <div class="chipdiv">
-    <ion-chip
-      color="primary"
-      mode="ios"
-      outline="true"
-      [class.selectedchip]="selectedDays.includes(day.value)"
-      *ngFor="let day of daysList"
-      (click)="addremoveDay(day)"
-    >
-      <ion-label>{{day.name}}</ion-label>
-    </ion-chip>
-    
-  </div>
+        <ion-grid fixed class="configurecaregrid">
+            <m-selectdate [times]="timeList" (result)="addtime($event,'timeList')"></m-selectdate>
+        </ion-grid>
 
-  <p class="listtitle listtitle2">Wound place on body</p>
+        <p class="label-text">Repeat</p>
+        <div class="chipdiv">
+            <ion-chip color="primary" mode="ios" outline="true" [class.selectedchip]="selectedDays.includes(day.value)" *ngFor="let day of daysList" (click)="addremoveDay(day)">
+                <ion-label>{{day.name}}</ion-label>
+            </ion-chip>
+
+        </div>
+
+        <p class="listtitle listtitle2">Wound place on body</p>
         <ion-input mode="md" class="input" value="" formControlName="woundplace"></ion-input>
-  
-  
-  <p class="instruction">Instructions (optional)</p>
-  <ion-textarea
-    rows="5"
-    placeholder="Write here"
-    formControlName="instructions"
-  ></ion-textarea>
-  
-  <!-- ADD IMAGE -->
-  <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
-    
-  </form>
+
+        <p class="listtitle listtitle4">Woundcare Duration</p>
+        <ion-grid class="configurecaregrid">
+            <ion-row>
+                <ion-col size="6">
+                    <p class="datelabel">Start Date</p>
+                    <ion-button fill="outline" class="datebtn">
+                        <ion-datetime displayFormat="DD-MMM-YYYY" formControlName="startDate"></ion-datetime>
+                        <ion-icon slot="end" src="assets/MariposaIcons/Calendar icon.svg"></ion-icon>
+                    </ion-button>
+                </ion-col>
+                <ion-col size="6">
+                    <p class="datelabel">End Date</p>
+                    <ion-button fill="outline" class="datebtn">
+                        <ion-datetime displayFormat="DD-MMM-YYYY" formControlName="endDate"></ion-datetime>
+                        <ion-icon slot="end" src="assets/MariposaIcons/Calendar icon.svg"></ion-icon>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <p class="listtitle listtitle2">Assign To</p>
+        <ion-select formControlName="assignedTo" mode="ios" [compareWith]="compareFn" interface="popover" class="input" placeholder="Assigned To">
+            <ion-select-option [value]="item" *ngFor="let item of careCircleDetails">{{item.assigned ? item.assigned.userName : 'Caregiver'}}</ion-select-option>
+        </ion-select>
+        <p class="instruction">Instructions (optional)</p>
+        <ion-textarea rows="5" placeholder="Write here" formControlName="instructions"></ion-textarea>
+
+        <!-- ADD IMAGE -->
+        <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
+
+    </form>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-    <ion-button
-      color="primary"
-      expand="block"
-      fill="solid"
-      class="submitbtn"
-      shape="round"
-      (click) = "submit()"
-    >
-      ADD
-    </ion-button>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-button color="primary" expand="block" fill="solid" class="submitbtn" shape="round" (click)="submit()">
+            ADD
+        </ion-button>
+    </ion-toolbar>
 </ion-footer>

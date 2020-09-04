@@ -1,62 +1,61 @@
 <app-m-header-close title="Exercise / Physical Therapy"></app-m-header-close>
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="exerciseForm">
-  <p class="listtitle">Select Type</p>
-  
-  <ion-select mode="md" class="input" placeholder="Select" formControlName="selectType" (result)="setData($event,'selectType')">
-    <ion-select-option *ngFor="let Option of exerciseData" value="{{Option.value}}" selected>{{Option.name}}</ion-select-option>
-  </ion-select>
-  
-  <ion-grid fixed class="configurecaregrid">
-    
-    <m-selectdate (result)="addtime($event,'timeList')"></m-selectdate>
-    
-  </ion-grid>
+    <form [formGroup]="exerciseForm" *ngIf="dataLoaded">
+        <p class="listtitle">Select Type</p>
 
-  
-  
+        <ion-select mode="ios" interface="popover" class="input" placeholder="Select" formControlName="type" (result)="setData($event,'type')">
+            <ion-select-option *ngFor="let Option of exerciseData" [value]="Option.value" selected>{{Option.name}}</ion-select-option>
+        </ion-select>
 
-  <p class="label-text">Repeat</p>
-  <div class="chipdiv">
-    <ion-chip
-      color="primary"
-      mode="ios"
-      outline="true"
-      [class.selectedchip]="selectedDays.includes(day.value)"
-      *ngFor="let day of daysList"
-      (click)="addremoveDay(day)"
-    >
-      <ion-label>{{day.name}}</ion-label>
-    </ion-chip>
-    
-  </div>
-  
- 
-  <p class="instruction">Instructions (optional)</p>
-  <ion-textarea
-    rows="5"
-    placeholder="Write here"
-    formControlName="instructions"
-  ></ion-textarea>
-  
-   <!-- ADD IMAGE -->
-   <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
+        <ion-grid fixed class="configurecaregrid">
+            <m-selectdate [times]="initialTimeList" (result)="addtime($event,'timeList')"></m-selectdate>
+        </ion-grid>
 
-    
-  </form>
+        <p class="label-text">Repeat</p>
+        <div class="chipdiv">
+            <ion-chip color="primary" mode="ios" outline="true" [class.selectedchip]="selectedDays.includes(day.value)" *ngFor="let day of daysList" (click)="addremoveDay(day)">
+                <ion-label>{{day.name}}</ion-label>
+            </ion-chip>
+
+        </div>
+        <p class="listtitle listtitle4">Exercise Duration</p>
+        <ion-grid class="configurecaregrid">
+            <ion-row>
+                <ion-col size="6">
+                    <p class="datelabel">Start Date</p>
+                    <ion-button (click)="openDatePicker($event, startDate)" fill="outline" class="datebtn">
+                        <ion-datetime #startDate displayFormat="DD-MMM-YYYY" formControlName="startDate"></ion-datetime>
+                        <ion-icon slot="end" src="assets/MariposaIcons/Calendar icon.svg"></ion-icon>
+                    </ion-button>
+                </ion-col>
+                <ion-col size="6">
+                    <p class="datelabel">End Date</p>
+                    <ion-button (click)="openDatePicker($event,endDate)" fill="outline" class="datebtn">
+                        <ion-datetime #endDate displayFormat="DD-MMM-YYYY" formControlName="endDate"></ion-datetime>
+                        <ion-icon slot="end" src="assets/MariposaIcons/Calendar icon.svg"></ion-icon>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-select formControlName="assignedTo" mode="ios" [compareWith]="compareFn" interface="popover" class="input" placeholder="Assigned To">
+            <ion-select-option [value]="item" *ngFor="let item of careCircleDetails">{{item.assigned ? item.assigned.userName : 'Caregiver'}}</ion-select-option>
+        </ion-select>
+
+        <p class="instruction">Instructions (optional)</p>
+        <ion-textarea rows="5" placeholder="Write here" formControlName="instructions"></ion-textarea>
+
+        <!-- ADD IMAGE -->
+        <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
+
+
+    </form>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-    <ion-button
-      color="primary"
-      expand="block"
-      fill="solid"
-      class="submitbtn"
-      shape="round"
-    >
-      Submit
-    </ion-button>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-button color="primary" expand="block" fill="solid" class="submitbtn" shape="round" (click)="submit()">
+            Submit
+        </ion-button>
+    </ion-toolbar>
 </ion-footer>

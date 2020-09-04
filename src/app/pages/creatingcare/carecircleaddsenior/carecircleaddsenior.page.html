@@ -1,9 +1,9 @@
 <ion-header mode="md">
 
     <ion-toolbar class="headtoolbar">
-        <ion-grid>
+        <ion-grid class="headergrid">
             <ion-row style="align-items: center;margin-bottom: 5px;">
-                <ion-col>
+                <ion-col size="10">
                     <div>
                         <ion-text color="mdblack" position="floating" id="titletag">Add Senior</ion-text>
                         <ion-text class="cap" style="font-size:14px;" color="mdgrey"><br>{{careCircleName}}'s Care Circle</ion-text>
@@ -75,7 +75,7 @@
                 <ion-text position="floating" id="tag">Relation</ion-text>
             </div>
             <div>
-                <ion-select mode="md" class="input" placeholder="Select Relation" formControlName="relation">
+                <ion-select mode="ios" interface="popover" class="input" placeholder="Select Relation" formControlName="relation">
                     <ion-select-option *ngFor="let relation of relationList" [value]="relation" for="relation">{{relation}}</ion-select-option>
                     <!-- <ion-select-option value="blonde">Blonde</ion-select-option>
           <ion-select-option value="black">Black</ion-select-option>
@@ -108,10 +108,13 @@
                     <ion-text class=“warning”>Incorrect Number.</ion-text>
                 </ion-item>
             </div>
-
-            <div id="button">
-                <ion-button [disabled]="addEditSeniorForm.invalid || addEditSeniorForm.pristine" class="btnblue" type="submit" id="signup">ADD</ion-button>
-            </div>
         </form>
     </ion-grid>
 </ion-content>
+<ion-footer *ngIf="!isKeyboardOpen">
+    <form flex [formGroup]="addEditSeniorForm" (ngSubmit)="saveSenior()" layout="column">
+        <div id="button">
+            <ion-button [disabled]="addEditSeniorForm.invalid || addEditSeniorForm.pristine" class="btnblue" (click)="saveSenior()" type="submit" id="signup">ADD</ion-button>
+        </div>
+    </form>
+</ion-footer>

@@ -4,9 +4,9 @@
     <ion-grid style="padding:24px;height:fit-content">
         <div [formGroup]="toiletingForm">
             <!-- <div *ngFor="let item of electronicList"> -->
-            <app-toggle [value]="toiletingForm.controls.Toilet.value" name="Toilet"></app-toggle>
+            <app-toggle [value]="toiletingForm.controls.Toilet.value" name="Toilet" (click)="changeToggle('Toilet', $event)"></app-toggle>
             <hr class="solid" />
-            <app-toggle [value]="toiletingForm.controls.Commode.value" name="Commode"></app-toggle>
+            <app-toggle [value]="toiletingForm.controls.Commode.value" name="Commode" (click)="changeToggle('Commode', $event)"></app-toggle>
             <hr class="solid" />
             <!-- </div> -->
             <!-- INSTRUCTIONS -->

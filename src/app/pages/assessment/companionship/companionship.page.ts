@@ -37,9 +37,9 @@ export class CompanionshipPage implements OnInit {
     if (this.stateObject == null){
       this.stateObject = {};
     }
+    this.companionshipForm.controls.imageList ? this.companionshipForm.controls.imageList.setValue(this.imageList) : this.companionshipForm.addControl('imageList', new FormControl(this.imageList));
     this.stateObject.COMPANIONSHIP = this.companionshipForm.value;
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
-      console.log(response);
       this.navCtrl.back();
     });
   }
@@ -52,8 +52,6 @@ export class CompanionshipPage implements OnInit {
     this.companionshipForm = new FormGroup({});
 
     this.assessmentService.getAssessmentStateObject().then((data) => {
-      console.log(data);
-
       // first time load
       this.stateObject = data.assessmentValues.CARE_NEEDS;
       if (data.assessmentValues.CARE_NEEDS != null && data.assessmentValues.CARE_NEEDS[key] != null){
@@ -65,10 +63,12 @@ export class CompanionshipPage implements OnInit {
       else{
         // data is not present
         this.companionshipForm.addControl('instructions', new FormControl());
+        this.companionshipForm.addControl('imageList', new FormControl());
         data.assessmentConfiguration.CARE_NEEDS[key].fav_activities.forEach(element => {
           this.companionshipForm.addControl(element, new FormControl());
         });
       }
+      this.imageList = this.companionshipForm.controls.imageList.value;
       this.favItemList = data.assessmentConfiguration.CARE_NEEDS[key].fav_activities;
     });
   }

@@ -50,7 +50,7 @@ export class AssessmentbarPage implements OnInit {
     const careNeedPrefs = this.assessmentData.assessmentConfiguration.CARE_NEED_PREFS.options;
     const careNeedPrefsValues = this.assessmentData.assessmentValues.CARE_NEED_PREFS;
     const careNeedValues = this.assessmentData.assessmentValues.CARE_NEEDS;
-
+    console.log(this.assessmentData);
     let openFlag = false;
 
     this.stepperData = [];
@@ -70,7 +70,7 @@ export class AssessmentbarPage implements OnInit {
       }
     });
     careNeedPrefs.forEach(careNeed => {
-      if (careNeedPrefsValues !== null && careNeed.key in careNeedPrefsValues && careNeedPrefsValues[careNeed.key] !== null && (careNeedPrefsValues[careNeed.key] !== '' && careNeedPrefsValues[careNeed.key] !== 'none')){
+      if (careNeed.assessment && careNeedPrefsValues !== null && careNeed.key in careNeedPrefsValues && careNeedPrefsValues[careNeed.key] !== null && (careNeedPrefsValues[careNeed.key] !== '' && careNeedPrefsValues[careNeed.key] !== 'none')){
         const temp = {name: careNeed.label, open: false, status: 'pending', pathUrl: careNeed.pathUrl};
         if (!openFlag){
           if (careNeedValues !== null && (careNeed.key in careNeedValues) && careNeedValues[careNeed.key] !== null){
@@ -219,7 +219,7 @@ export class AssessmentbarPage implements OnInit {
     this.navCtrl.navigateBack('/assessment');
   }
   deleteAssessment(){
-    this.apiService.post('deleteAssessment/?careCircleId=' + this.careCircleId, {}).then((response: any) => {
+    this.apiService.delete('assessment/?careCircleId=' + this.careCircleId, {}).then((response: any) => {
       if (response){
         this.assessmentService.setAssessmentStateObject(null);
         this.navCtrl.navigateBack(['/carecircle/showcarecircle']);

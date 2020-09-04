@@ -1,0 +1,58 @@
+.exercise-list {
+    align-items: center;
+    padding: 0px;
+    margin: 0px;
+    ion-col {
+        padding: 0px;
+        margin: 0px;
+    }
+    .text {
+        font-size: 14px;
+        line-height: 17px;
+        color: #1A1A1A;
+        float: left;
+    }
+    .add {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        color: #4137FF;
+        text-transform: uppercase;
+        float: right;
+    }
+}
+
+.favoriteitemslist {
+    margin-top: 16px;
+    ion-row {
+        align-items: center;
+        padding: 0px;
+        margin: 0px;
+    }
+    ion-col {
+        padding: 0px;
+        margin: 0px;
+    }
+    ion-icon {
+        zoom: 1;
+        height: 24px;
+        width: 24px;
+        float: right;
+    }
+    .itemname {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: #1A1A1A;
+    }
+    .itemtype {
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 17px;
+        color: #7E7E7E;
+    }
+    .solid {
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+}

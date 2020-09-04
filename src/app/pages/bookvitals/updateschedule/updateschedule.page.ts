@@ -3,6 +3,7 @@ import {
   ImagePicker,
   ImagePickerOptions,
 } from '@ionic-native/image-picker/ngx';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-updateschedule',
@@ -11,30 +12,30 @@ import {
 })
 export class UpdateschedulePage implements OnInit {
 
-  constructor(private imagePicker: ImagePicker,) { }
+  constructor(private navCtrl: NavController) { }
 
 
-  date = "19";
-  month = "January"
-  year = "20"
+  date = '19';
+  month = 'January'
+  year = '20'
 
   imageList = [];
-  activityList = ["Bathing","Exercise"]
+  activityList = ['Bathing','Exercise'];
   shoppingList = [
     {
-      name:"Tissue",
-      quantity:"2 no's",
+      name:'Tissue',
+      quantity:'2 no\'s',
     },
     {
-      name:"Tooth Paste",
-      quantity:"1 no's",
+      name:'Tooth Paste',
+      quantity:'1 no\'s',
     },
     {
-      name:"Milk Tin",
-      quantity:"10 Ltrs",
+      name:'Milk Tin',
+      quantity:'10 Ltrs',
     },
-      
-    ]
+
+    ];
 
   ngOnInit() {
   }
@@ -48,24 +49,7 @@ export class UpdateschedulePage implements OnInit {
     }
     console.log(ev.checked);
   }
-
-  addImage() {
-    const options: ImagePickerOptions = {
-      maximumImagesCount: 4,
-    };
-    this.imagePicker.getPictures(options).then(
-      (results) => {
-        console.log(results);
-        for (let i = 0; i < results.length; i++) {
-          this.imageList.push(results[i]);
-        }
-      },
-      (err) => {}
-    );
+  back(){
+    this.navCtrl.back();
   }
-  removeImg(i) {
-    console.log('*', i);
-    this.imageList.splice(i, 1);
-  }
-
 }

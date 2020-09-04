@@ -41,27 +41,28 @@ export class ToiletingPage implements OnInit {
         Object.keys(data.assessmentValues.CARE_NEEDS[this.key]).forEach((element: any) => {
           this.toiletingForm.addControl(element, new FormControl(this.stateObject[this.key][element]));
         });
+        this.imageList = this.toiletingForm.controls.imageList ? this.toiletingForm.controls.imageList.value : [];
       }
       else{
         // data is not present
         this.toiletingForm.addControl('instructions', new FormControl());
         this.toiletingForm.addControl('Toilet', new FormControl(false));
         this.toiletingForm.addControl('Commode', new FormControl(false));
+        this.toiletingForm.addControl('imageList', new FormControl(false));
       }
       this.formCreated = true ;
     });
   }
-  changeToggle(ev: any) {
-    console.log(ev);
+  changeToggle(key, ev: any) {
+    this.toiletingForm.controls[key].setValue(!this.toiletingForm.controls[key].value);
   }
 
   save(){
     if (this.stateObject == null){
       this.stateObject = {};
     }
-    this.stateObject[this.key] = this.toiletingForm.value;
+    this.stateObject[this.key] = {...this.toiletingForm.value, imageList: this.imageList};
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
-      console.log(response);
       this.navCtrl.back();
     });
   }

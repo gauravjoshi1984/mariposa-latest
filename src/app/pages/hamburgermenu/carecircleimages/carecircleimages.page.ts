@@ -18,7 +18,7 @@ export class CarecircleimagesPage implements OnInit {
 
     async populateCareCircle(){
       const userData = await this._dataService.getUserInfo();
-      this._apiService.get('getCareCircles', {userId: userData.userId}).then((data: any) => {
+      this._apiService.get('careCircle', {userId: userData.userId}).then((data: any) => {
         this.careCircleList = data;
         this._creatingCareService.setAvailableCareCircleDetails(data);
       });
@@ -27,7 +27,7 @@ export class CarecircleimagesPage implements OnInit {
     careCircleDetails(careCircleId, careCircleName) {
       this._creatingCareService.setCareCircleId(careCircleId);
       this._creatingCareService.setCareCircleName(careCircleName);
-      this.navCtrl.navigateForward(['carecircle/list']);
+      this.navCtrl.navigateForward(['/menu/listofmembers']);
     }
 
     back(){
@@ -45,6 +45,9 @@ export class CarecircleimagesPage implements OnInit {
     }
     getMemberNames(members){
       return members.map((member) => member.userName).join(', ');
+    }
+    getMemberImage(members){
+      return members.filter(member => member.userType === 'SENIOR')[0].profilePic;
     }
 
 }

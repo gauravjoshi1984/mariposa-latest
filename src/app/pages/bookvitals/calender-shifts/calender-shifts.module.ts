@@ -18,6 +18,7 @@ import { DetailComponent } from "./detail/detail.component";
     IonicModule,
     CalenderShiftsPageRoutingModule,
     SharedModule,
+
   ],
   declarations: [CalenderShiftsPage, AddactivityComponent, DetailComponent],
 })

@@ -29,19 +29,16 @@ export class ManagingfinancesPage implements OnInit {
   }
 
   changeToggle(formItem: any , ev: any) {
-    console.log(ev);
     this.formData[formItem] = ev;
   }
   save(){
     if (this.stateObject == null){
       this.stateObject = {};
     }
-    this.stateObject.FINANCES = this.formData;
+    this.stateObject.FINANCES = {...this.formData, imageList: this.imageList};
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
-      console.log(response);
       this.navCtrl.back();
     });
-    console.log('called Save', this.formData);
   }
 
   async ionViewWillEnter(){
@@ -56,6 +53,7 @@ export class ManagingfinancesPage implements OnInit {
       this.stateObject = data.assessmentValues.CARE_NEEDS;
       if (data.assessmentValues.CARE_NEEDS != null && data.assessmentValues.CARE_NEEDS[key] != null){
         this.formData = data.assessmentValues.CARE_NEEDS[key];
+        this.imageList = this.formData.imageList ? this.formData.imageList : [];
       }
       else{
         // do nothing

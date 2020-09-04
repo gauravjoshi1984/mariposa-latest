@@ -1,121 +1,59 @@
 <ion-header mode="md">
-  <ion-toolbar class="headtoolbar">
-    <ion-grid>
-      <ion-row style="align-items: center; margin-top: 32px">
-        <ion-col size="10">
-          <ion-text color="mdblack" position="floating" id="titletag"
-            >Edit {{senior}}'s Care Circle</ion-text
-          >
-        </ion-col>
-        <ion-col>
-          <ion-icon
-            style="zoom: 1.2; color: black; float: right"
-            name="close-outline"
-          ></ion-icon>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-toolbar>
+    <ion-toolbar class="headtoolbar">
+        <ion-grid>
+            <ion-row style="align-items: center;">
+                <ion-col size="10">
+                    <ion-text color="mdblack" position="floating" id="titletag">Edit {{senior}}'s Care Circle</ion-text>
+                </ion-col>
+                <ion-col>
+                    <ion-icon (click)="back()" style="zoom: 1.2; color: black; float: right;" name="close-outline"></ion-icon>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid class="contentgrid">
-    <div>
-      <ion-text
-        style="line-height: 19px; font-size: 16px; font-weight: 300"
-        color="mdblack"
-        position="floating"
-        id="tag"
-        >Name of the Care circle</ion-text
-      >
-      <ion-text
-        style="line-height: 19px; font-size: 16px; font-weight: 300"
-        color="mdgrey"
-        position="floating"
-        ><br />(Senior name is Suggested)</ion-text
-      >
-    </div>
-    <ion-item lines="none">
-      <ion-input
-        mode="md"
-        class="input"
-        value="David’s Care Circle"
-      ></ion-input>
-    </ion-item>
+    <ion-grid class="contentgrid">
+        <div>
+            <ion-text style="line-height: 19px;font-size: 16px;font-weight: 300;" color="mdblack" position="floating" id="tag">Name of the Care circle</ion-text>
+            <ion-text style="line-height: 19px;font-size: 16px;font-weight: 300;" color="mdgrey" position="floating"><br>(Senior name is Suggested)</ion-text>
+        </div>
+        <ion-item lines="none">
+            <ion-input mode="md" class="input"></ion-input>
+        </ion-item>
 
-    <div class="container" *ngFor="let items of memberdetails">
-      <ion-row>
-        <ion-col size="2.8">
-          <ion-img
-            class="image"
-            src="../assets/MariposaIcons/carecircle/adultimage60.png"
-          ></ion-img>
-        </ion-col>
-        <ion-col>
-          <ion-row>
-            <ion-col>
-              <ion-text
-                ><b>{{items.membername}},</b> {{items.memberrelation}}</ion-text
-              >
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-text maxlength="10" class="membersdetails"
-                >{{items.details}}...</ion-text
-              >
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col *ngIf="!isAdmin" size="1" (click)="presentModal()">
-          <ion-img
-            class="removeicon"
-            src="../assets/MariposaIcons/carecircle/remove.svg"
-          ></ion-img>
-        </ion-col>
-      </ion-row>
+        <div class="container" *ngFor="let items of memberdetails">
+            <ion-row>
+                <ion-col size="2.8">
+                    <ion-img class="image" src="../assets/MariposaIcons/carecircle/adultimage60.png"></ion-img>
+                </ion-col>
+                <ion-col>
+                    <ion-row>
+                        <ion-col>
+                            <ion-text><b>{{items.membername}},</b> {{items.memberrelation}}</ion-text>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <ion-text maxlength="10" class="membersdetails">{{items.details}}...</ion-text>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+                <ion-col *ngIf="!isAdmin" size="1" (click)="presentModal()">
+                    <ion-img class="removeicon" src="../assets/MariposaIcons/carecircle/remove.svg"></ion-img>
+                </ion-col>
+            </ion-row>
 
-      <hr class="solid" />
-    </div>
-    <div class="container">
-      <ion-row>
-        <ion-col size="2.8">
-          <ion-img
-            class="image"
-            src="../assets/MariposaIcons/carecircle/adultimage60.png"
-          ></ion-img>
-        </ion-col>
-        <ion-col>
-          <ion-row>
-            <ion-col>
-              <ion-text><b>My Profile,</b> John Doe</ion-text>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-text maxlength="10" class="membersdetails"
-                >32 years old, Male, lives in Colora...</ion-text
-              >
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <!-- <ion-col *ngIf="!isAdmin" size="1">
-          <ion-img
-            class="removeicon"
-            src="../assets/MariposaIcons/carecircle/remove.svg"
-          ></ion-img>
-        </ion-col> -->
-      </ion-row>
+            <hr class="solid">
+        </div>
 
-      <hr class="solid" />
-    </div>
-  </ion-grid>
 
-  <ion-grid>
-    <div id="button">
-      <ion-button type="submit" class="btnwhite" expand="block"
-        >ADD MEMBERS
-      </ion-button>
-    </div>
-  </ion-grid>
+    </ion-grid>
+
+    <ion-grid>
+        <div id="button">
+            <ion-button type="submit" class="btnwhite" expand="block">ADD MEMBERS </ion-button>
+        </div>
+    </ion-grid>
 </ion-content>

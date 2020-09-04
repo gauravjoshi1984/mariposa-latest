@@ -31,7 +31,7 @@ export class MobilityPage implements OnInit {
     if (this.stateObject == null){
       this.stateObject = {};
     }
-    // this.formData.imageList = this.imageList;
+    this.formData.imageList = this.imageList;
     this.stateObject.MOBILITY = this.formData;
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
       this.navCtrl.back();
@@ -49,7 +49,7 @@ export class MobilityPage implements OnInit {
     this.other = data.assessmentConfiguration.CARE_NEEDS[key].other;
     if (this.stateObject != null && this.stateObject[key] != null){
       this.formData = this.stateObject[key];
-      console.log(this.formData);
+      this.imageList = this.formData.imageList ? this.formData.imageList : [];
       this.validForm = true;
     }
   }
