@@ -413,36 +413,38 @@ export class CalenderShiftsPage implements OnInit {
     }
   }
   initCalenderActivity() {
-    if (!(Object.keys(this.timeLineActivity).length)){
+    if (!(Object.keys(this.timeLineShifts).length)){
       return;
     }
-    this.lowesttimeper2 = this.timeLineActivity.min;
-    this.highesttimeper2 = this.timeLineActivity.max;
-    let index = 0;
-    this.timeLineActivity.events.forEach((element, i) => {
-      if (this.endTimeTemp2 && element.startTime && this.endTimeTemp2.format('HH:mm:ss') !== element.startTime.format('HH:mm:ss')
-      ) {
-        const dur = moment.duration(element.startTime.diff(this.endTimeTemp2));
-        const hrs: any = dur.asHours();
-        const tempData: any = {
-          // emptyspace: hrs,
-          emptyheight: hrs * 80,
-        };
-        this.timeLineActivity.events.splice(index, 0, tempData);
-        index++;
-      }
-      if (element.key) {
-        const duration = moment.duration(element.endTime.diff(element.startTime));
+    this.lowesttimeper = this.timeLineShifts.min;
+    this.highesttimeper = this.timeLineShifts.max;
 
-        // duration in hours
-        const hours: any = duration.asHours();
-        element.hours = hours;
-        element.height = hours * 80 - 8;
-        element.height = element.height < 68 ? 'auto' : element.height + 'px';
-        this.endTimeTemp2 = element.endTime;
-        index++;
+    this.timeLineShifts.events.forEach((element:any, i) => {
+      let itemp: any = 0;
+
+      if (this.endTimeTemp2) {
+        itemp = moment
+          .duration(this.endTimeTemp2.diff(element.startTime))
+          .asMinutes();
+        console.log(
+          "CalenderShiftsPage -> initCalenderActivity -> itemp",
+          Math.abs(itemp)
+        );
+        itemp = Math.abs(itemp);
+        
       }
+
+      let duration = moment.duration(element.endTime.diff(element.startTime));
+      console.log(element.startTime);
+      
+      let minutes: any = duration.asMinutes();
+
+      element["hours"] = minutes;
+      element["height"] = minutes * 1.5 - 10;
+      element["empty"] = itemp * 1.5;
+      this.endTimeTemp2 = element.endTime;
     });
+    
     const duration = moment.duration(
       this.highesttimeper2.diff(this.lowesttimeper2)
     );
