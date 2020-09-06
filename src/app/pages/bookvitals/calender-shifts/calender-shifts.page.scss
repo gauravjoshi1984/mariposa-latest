@@ -4,36 +4,36 @@ ion-title {
     font-weight: bold;
     font-size: 16px;
     line-height: 19px;
-  
     color: #1a1a1a;
-  }
-  ion-icon {
+}
+
+ion-icon {
     font-size: 24px !important;
     zoom: 1;
-  }
-  ion-chip {
+}
+
+ion-chip {
     margin: 0;
     //   padding: 0;
-  }
-  .unselectchip {
+}
+
+.unselectchip {
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 17px;
     /* identical to box height */
-  
     text-align: center;
     text-transform: uppercase;
     display: inline-block;
-  
     /* Dark Grey */
-  
     color: #7e7e7e;
     background: white;
     width: 14.2857142857%;
     height: 17px;
-  }
-  .selectedchip {
+}
+
+.selectedchip {
     font-style: normal;
     display: inline-block;
     font-weight: 600;
@@ -41,23 +41,23 @@ ion-title {
     line-height: 17px;
     text-align: center;
     text-transform: uppercase;
-  
     /* White */
-  
     color: #ffffff;
     background: #4137ff;
     border-radius: 8px;
     width: 14.2857142857%;
     height: 32px;
     padding-top: 7px;
-  }
-  .chipcol {
+}
+
+.chipcol {
     //   padding-top: 8px;
     padding-bottom: 8px;
     padding-left: 24px;
     padding-right: 24px;
-  }
-  .circlestyle {
+}
+
+.circlestyle {
     width: 44px;
     height: 44px;
     border-radius: 50%;
@@ -66,72 +66,69 @@ ion-title {
     text-transform: uppercase;
     display: inline-block;
     .daylabel {
-      font-style: normal;
-      font-weight: normal;
-      font-size: 12px;
-      line-height: 14px;
-      /* or 117% */
-  
-      text-align: center;
-  
-      /* White */
-  
-      // color: #ffffff;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 14px;
+        /* or 117% */
+        text-align: center;
+        /* White */
+        // color: #ffffff;
     }
     .datelabel {
-      font-style: normal;
-      font-weight: normal;
-      font-size: 12px;
-      line-height: 14px;
-      /* or 117% */
-  
-      text-align: center;
-  
-      /* White */
-  
-      // color: #ffffff;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 14px;
+        /* or 117% */
+        text-align: center;
+        /* White */
+        // color: #ffffff;
     }
-  }
-  ion-content {
+}
+
+ion-content {
     --padding-start: 24px !important;
     --padding-end: 24px !important;
     --padding-top: 16px;
     --background: #f8f8f8;
-  }
-  .timelinecol {
-    display: inline-flex;
+}
+
+.timelinecol {
+    // display: inline-flex;
+    text-align: center;
+    // border-top: 1px solid grey;
     margin-bottom: 5px;
     height: 85px;
     max-height: 85px;
     min-height: 85px;
-  }
-  .hidecard {
+}
+
+.hidecard {
     visibility: hidden;
-  }
-  .timePer {
+}
+
+.timePer {
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
-    line-height: 14px;
+    // line-height: 14px;
     /* identical to box height, or 100% */
-  
     /* Dark Grey */
-  
     color: #7e7e7e;
     //   width: 20%;
     margin: 0;
     padding-bottom: 44px;
     padding-top: 3px;
-  }
-  .timePer2 {
+}
+
+.timePer2 {
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
     line-height: 14px;
     /* identical to box height, or 100% */
-  
     /* Dark Grey */
-  
     color: #7e7e7e;
     //   width: 20%;
     margin: 0;
@@ -139,22 +136,23 @@ ion-title {
     padding-top: 22px;
     padding-right: 16px;
     width: 60px;
-  }
-  .selectedCard {
+}
+
+.selectedCard {
     background: #4137ff !important;
     /* Medium Grey */
-  
     border: 0.4px solid #b8b8b8 !important;
     box-sizing: border-box;
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.08), 0px 0px 1px rgba(0, 0, 0, 0.25) !important;
     .cardtitle {
-      color: #ffffff !important;
+        color: #ffffff !important;
     }
     .carddesc {
-      color: #ffffff !important;
+        color: #ffffff !important;
     }
-  }
-  .detailCard {
+}
+
+.detailCard {
     background: #ffffff;
     padding: 14px 0 12px 14px;
     border: 0.4px solid #b8b8b8;
@@ -164,90 +162,85 @@ ion-title {
     width: 278px;
     height: 64px;
     .cardtitle {
-      font-style: normal;
-      font-weight: normal;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-  
-      /* Direct Black */
-  
-      color: #1a1a1a;
-      margin: 0;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        /* identical to box height */
+        /* Direct Black */
+        color: #1a1a1a;
+        margin: 0;
     }
     .carddesc {
-      font-style: normal;
-      font-weight: normal;
-      padding-top: 5px;
-      font-size: 12px;
-      line-height: 14px;
-      margin: 0;
-  
-      /* Dark Grey */
-  
-      color: #7e7e7e;
+        font-style: normal;
+        font-weight: normal;
+        padding-top: 5px;
+        font-size: 12px;
+        line-height: 14px;
+        margin: 0;
+        /* Dark Grey */
+        color: #7e7e7e;
     }
-  }
-  .timelinecard {
+}
+
+.timelinecard {
     background: #ffffff;
     /* Mariposa Vivid Blue */
-  
     border: 0.4px solid #4137ff;
     box-sizing: border-box;
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.25), 0px 1px 8px rgba(0, 0, 0, 0.08);
     border-radius: 8px;
+    position: absolute;
     width: 278px;
     // height: 440px;
-    padding: 14px 22px;
+    padding: 10px 20px;
     margin: 0;
-    margin-bottom: 8px;
     h1 {
-      font-style: normal;
-      font-weight: normal;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-  
-      /* Direct Black */
-  
-      color: #1a1a1a;
-      margin: 0;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        /* identical to box height */
+        /* Direct Black */
+        color: #1a1a1a;
+        margin: 0;
     }
     h4 {
-      font-style: normal;
-      font-weight: normal;
-      font-size: 12px;
-      line-height: 14px;
-  
-      /* Direct Black */
-  
-      color: #1a1a1a;
-      margin: 0;
-      padding-top: 5px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 14px;
+        /* Direct Black */
+        color: #1a1a1a;
+        margin: 0;
+        padding-top: 5px;
     }
-  }
-  .emptyspace {
+}
+
+.emptyspace {
     height: 0px;
-  }
-  .selectlabel {
+}
+
+.selectlabel {
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
     /* identical to box height */
-  
     /* Direct Black */
-  
     color: #1a1a1a;
-  }
-  ion-icon {
+}
+
+ion-icon {
     zoom: 1;
     font-size: 24px;
-  }
-  .propic {
+}
+
+.propic {
     font-size: 32px;
-  }
-  ion-segment {
+}
+
+ion-segment {
     height: 32px;
     min-height: 32px;
     width: 188px;
@@ -255,13 +248,13 @@ ion-title {
     margin-left: 24px;
     border-left: 0.6px solid #4137ff;
     border-right: 0.6px solid #4137ff;
-  
     /* box-shadow: 0 0 0 2px #4137ff; */
     border-radius: 8px;
     padding: 0;
     background: #4137ff;
-  }
-  ion-segment-button {
+}
+
+ion-segment-button {
     margin: 0;
     font-style: normal;
     font-weight: 500;
@@ -282,47 +275,53 @@ ion-title {
     border-top: 0.1px solid #4137ff;
     border-bottom: 0.1px solid #4137ff;
     // border-right: 0.1px solid #4137ff;
-  }
-  .secondtoolbar {
+}
+
+.secondtoolbar {
     height: 96px;
     box-shadow: 0px 2px 8px rgba(65, 55, 255, 0.08);
     ion-item {
-      --height: 24px;
-      margin-top: 8px;
-      padding: 0;
-      ion-select {
-        margin: 0;
-        padding: 0;
         --height: 24px;
-      }
+        margin-top: 8px;
+        padding: 0;
+        ion-select {
+            margin: 0;
+            padding: 0;
+            --height: 24px;
+        }
     }
-  }
-  ion-select::part(icon) {
+}
+
+ion-select::part(icon) {
     color: #000000;
     opacity: 1;
     width: 8px;
     height: 8px;
     padding-right: 18px;
     margin-left: 8px;
-  }
-  .inactivecircle {
+}
+
+.inactivecircle {
     color: #b8b8b8;
-  }
-  .selectedcircle {
+}
+
+.selectedcircle {
     color: #ffffff;
     background: #4137ff;
-  }
-  .activecircle {
+}
+
+.activecircle {
     color: #000000;
-  }
-  .custSelect {
+}
+
+.custSelect {
     border: 1px solid #b8b8b8;
     box-sizing: border-box;
     border-radius: 8px;
     background: white;
-  }
-  ion-fab-button {
+}
+
+ion-fab-button {
     width: 40px;
     height: 40px;
-  }
-  
+}

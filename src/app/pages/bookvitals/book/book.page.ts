@@ -14,7 +14,7 @@ import { ProfilelistComponent } from '../profilelist/profilelist.component';
 export class BookPage implements OnInit {
   showData = false;
   Cards: any = [];
-
+  scheduleAdded = false;
   constructor(
     private dataService: DataserviceService,
     private bookVitalService: BookVitalsService,
@@ -34,13 +34,21 @@ export class BookPage implements OnInit {
     });
   }
   async loadPosts(){
+    const currentDate = moment().format('YYYY-MM-DD');
     const posts: any = await this.bookVitalService.getPost();
     const { userId } = await this.dataService.getUserInfo();
-    this.Cards = posts.map(post => (
-      {...post, date: moment(post.createdDate).format('D'), month: moment(post.createdDate).format('MMM'), title: post.values.content, notes: post.values.content, liked: post.likes?.indexOf(userId) >= 0 }
-    ));
+    this.Cards = posts.map(post => {
+      if (post.postType === 'SCHEDULE' && post.postDate === currentDate){
+        this.scheduleAdded = true;
+      }
+      return {...post, date: moment(post.createdDate).format('D'), month: moment(post.createdDate).format('MMM'),
+      title: post.values.content,
+      notes: post.values.notes ? post.values.notes : post.values.content,
+      liked: post.likes?.indexOf(userId) >= 0 };
+    });
   }
-  async likepost(item) {
+  async likepost(event, item) {
+    event.stopPropagation();
     item.liked = !item.liked;
     let type = '';
     if (item.liked){
@@ -52,7 +60,8 @@ export class BookPage implements OnInit {
     const response = await this.bookVitalService.editLike(item.postId, type);
     this.loadPosts();
   }
-  commentPost(post){
+  commentPost(event, post){
+    event.stopPropagation();
     this.bookVitalService.setSelectedPost(post);
     this.navCtrl.navigateForward('/comments');
   }
@@ -69,5 +78,27 @@ export class BookPage implements OnInit {
       // }
     });
     return await popover.present();
+  }
+  viewPost(post){
+    this.bookVitalService.setSelectedPost(post);
+    if (post.postType === 'SCHEDULE' && post.values.status === 'IN_PROGRESS'){
+      this.navCtrl.navigateForward('/bookvitals/updateschedule');
+    }
+    else{
+      this.navCtrl.navigateForward('/bookvitals/bookdetailedview');
+    }
+  }
+  getProgressIcon(post){
+    if (post.postType === 'SCHEDULE'){
+      if (post.values.status === 'IN_PROGRESS'){
+        return 'progress_pending.svg';
+      }
+      else{
+        return 'progress_done.svg';
+      }
+    }
+    else{
+      return 'progress_done.svg';
+    }
   }
 }

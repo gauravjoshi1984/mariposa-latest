@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -13,13 +13,15 @@ import {
   ApexStroke,
   ApexTitleSubtitle,
   ApexLegend,
-} from "ng-apexcharts";
-import { ModalController, PopoverController } from "@ionic/angular";
-import { AddvitalComponent } from "./addvital/addvital.component";
-import { ProfilelistComponent } from "../profilelist/profilelist.component";
-import { DataserviceService } from "../../dataservice.service";
-import { CreatingcareService } from "../../creatingcare/creatingcare.service";
-import { ConfigCareServiceService } from "../../configcare/config-care-service.service";
+} from 'ng-apexcharts';
+import { ModalController , PopoverController, NavController } from '@ionic/angular';
+import { AddvitalComponent } from './addvital/addvital.component';
+import { ProfilelistComponent } from '../profilelist/profilelist.component';
+import { DataserviceService } from '../../dataservice.service';
+import { CreatingcareService } from '../../creatingcare/creatingcare.service';
+import { ConfigCareServiceService } from '../../configcare/config-care-service.service';
+import { BookVitalsService } from '../book-vital.service';
+import * as moment from 'moment';
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -30,18 +32,6 @@ export type ChartOptions = {
 
   fill: ApexFill;
   grid: ApexGrid;
-};
-export type ChartOptions2 = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  xaxis: ApexXAxis;
-  dataLabels: ApexDataLabels;
-  grid: ApexGrid;
-  yaxis: ApexYAxis;
-  fill: ApexFill;
-
-  stroke: ApexStroke;
-  title: ApexTitleSubtitle;
 };
 export type ChartOptions3 = {
   series: ApexAxisChartSeries;
@@ -57,70 +47,102 @@ export type ChartOptions3 = {
   fill: ApexFill;
 };
 @Component({
-  selector: "app-vitals",
-  templateUrl: "./vitals.page.html",
-  styleUrls: ["./vitals.page.scss"],
+  selector: 'app-vitals',
+  templateUrl: './vitals.page.html',
+  styleUrls: ['./vitals.page.scss'],
 })
 export class VitalsPage implements OnInit {
+  constructor(
+    private modalCtrl: ModalController,
+    private popoverCtrl: PopoverController,
+    private dataService: DataserviceService,
+    private _creatingCareService: CreatingcareService,
+    private configCareService: ConfigCareServiceService,
+    private bookVitalService: BookVitalsService,
+    private navCtrl: NavController) {}
   // @ViewChild("chart") chart: ChartComponent;
-  @ViewChild("chart") chart: ChartComponent;
+  @ViewChild('chart') chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-  public chartOptions2: Partial<ChartOptions2>;
-  public chartOptions3: Partial<ChartOptions2>;
-  public chartOptions4: Partial<ChartOptions2>;
   public chartOptions5: Partial<ChartOptions3>;
   strokepulse: ApexStroke = {
-    curve: "straight",
-    colors: ["#FF002B"],
+    curve: 'straight',
+    colors: ['#FF002B'],
     width: 2,
   };
+  dates = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
   fillpulse: ApexFill = {
-    colors: ["#FF002B"],
+    colors: ['#FF002B'],
   };
   strokebg: ApexStroke = {
-    curve: "straight",
-    colors: ["#FFBC00"],
+    curve: 'straight',
+    colors: ['#FFBC00'],
     width: 2,
   };
   fillbg: ApexFill = {
-    colors: ["#FFBC00"],
+    colors: ['#FFBC00'],
   };
   showData = true;
   configCareDetails;
   series = {
-    monthDataSeries1: {
-      prices: [97.85, 98.0, 99.9, 98.5, 98.0, 97.5, 97.0],
-      dates: ["S", "M", "T", "W", "T", "F", "S"],
-    },
-    monthDataSeries2: {
-      prices: [8423.7, 8423.5, 8514.3, 8481.85],
-      dates: ["13 Nov 2017", "14 Nov 2017", "15 Nov 2017", "16 Nov 2017"],
-    },
-    monthDataSeries3: {
-      prices: [7114.25, 7126.6, 7116.95, 7203.7],
-      dates: ["02 Jun 2017", "05 Jun 2017", "06 Jun 2017", "07 Jun 2017"],
-    },
+    bloodpressure: [
+      {
+        name: 'Blood Pressure',
+        data: [
+          {
+            x: 'S',
+            y: [70, 120],
+          },
+          {
+            x: 'M',
+            y: [80, 130],
+          },
+          {
+            x: 'T',
+            y: [65, 115],
+          },
+          {
+            x: 'W',
+            y: [80, 120],
+          },
+          {
+            x: 'T',
+            y: [85, 135],
+          },
+          {
+            x: 'F',
+            y: [80, 130],
+          },
+          {
+            x: 'S',
+            y: [70, 120],
+          },
+        ],
+      },
+    ],
+    temperature: [{name: 'Temperature', data: [97.85, 98.0, 99.9, 98.5, 98.0, 97.5, 97.0]}],
+    pulse: [{name: 'Pulse', data: [97.85, 98.0, 99.9, 98.5, 98.0, 97.5, 97.0]}],
+    bloodglucose: [{name: 'Blood Glucose', data: [97.85, 98.0, 99.9, 98.5, 98.0, 97.5, 97.0]}],
   };
   chartCardData = {
     bloodpressure: {
-      value: "11/60",
-      hasValue: true,
-      title: "Blood Pressure",
+      value: '110/60',
+      hasValue: false,
+      title: 'Blood Pressure',
     },
-    temparature: {
-      value: "98.7",
-      hasValue: true,
-      title: "Temperature",
+    temperature: {
+      value: '98.7',
+      hasValue: false,
+      title: 'Temperature',
     },
     pulse: {
-      value: "120",
-      hasValue: true,
-      title: "Pulse",
+      value: '120',
+      hasValue: false,
+      title: 'Pulse',
     },
     bloodglucose: {
-      value: "100 mg/dl",
-      hasValue: true,
-      title: "Blood Glucose",
+      value: '100',
+      hasValue: false,
+      title: 'Blood Glucose',
     },
   };
   yaxisTemp: ApexYAxis = {
@@ -129,13 +151,13 @@ export class VitalsPage implements OnInit {
     labels: {
       formatter(value: any) {
         if (value == 96 || value == 100 || value == 104) {
-          return value + "°F";
+          return value + '°F';
         }
       },
       show: true,
       maxWidth: 200,
-      align: "right",
-      style: { fontSize: "8px", colors: "#000000" },
+      align: 'right',
+      style: {fontSize: '8px', colors: '#000000'},
       offsetX: 8,
     },
   };
@@ -146,14 +168,15 @@ export class VitalsPage implements OnInit {
       show: true,
       maxWidth: 200,
 
-      style: { fontSize: "8px", colors: "#000000" },
+      style: {fontSize: '8px', colors: '#000000'},
       formatter(value: any) {
         if (value == 96 || value == 100 || value == 104) {
-          return value + "Bpm";
+          return  value + 'Bpm';
         }
       },
-      align: "right",
+      align: 'right',
       offsetX: 8,
+
     },
   };
 
@@ -163,11 +186,12 @@ export class VitalsPage implements OnInit {
     labels: {
       show: true,
       maxWidth: 200,
-      align: "right",
-      style: { fontSize: "8px", colors: "#000000" },
+      align: 'right',
+      style: {fontSize: '8px', colors: '#000000'},
       formatter(value: any) {
         if (value == 96 || value == 100 || value == 104) {
-          return value + "mg/dl";
+          return value + 'mg/dl';
+
         }
       },
       // align:"center",
@@ -175,98 +199,45 @@ export class VitalsPage implements OnInit {
     },
   };
   userInfo: any = {};
-  segmentVar = "addvitals";
-  vitalCards = [
-    {
-      name: "Blood Pressure",
-      value: "120/70",
-      unit: "mHg",
-    },
-    {
-      name: "Pulse",
-      value: "",
-      unit: "mHg",
-    },
-    {
-      name: "Respitory Rate",
-      value: "",
-      unit: "mHg",
-    },
-    {
-      name: "Temperature",
-      value: "",
-      unit: "mHg",
-    },
-  ];
-  constructor(
-    private modalCtrl: ModalController,
-    private popoverCtrl: PopoverController,
-    private dataService: DataserviceService,
-    private _creatingCareService: CreatingcareService,
-    private configCareService: ConfigCareServiceService
-  ) {}
+  segmentVar = 'addvitals';
+  vitalUnits = {
+    temperature: 'F',
+    bloodpressure: 'Mm Hg',
+    pulse: 'Bpm',
+    bloodglucose : 'mg/dl'
+  };
 
+  vitalCards: any = [];
+  vitals: any = [];
+  vitalValues = {};
+  reportDetail: any = {};
   ngOnInit() {
     this.chartOptions = {
-      series: [
-        {
-          name: "blue",
-          data: [
-            {
-              x: "S",
-              y: [70, 120],
-            },
-            {
-              x: "M",
-              y: [80, 130],
-            },
-            {
-              x: "T",
-              y: [65, 115],
-            },
-            {
-              x: "W",
-              y: [80, 120],
-            },
-            {
-              x: "T",
-              y: [85, 135],
-            },
-            {
-              x: "F",
-              y: [80, 130],
-            },
-            {
-              x: "S",
-              y: [70, 120],
-            },
-          ],
-        },
-      ],
       yaxis: {
         opposite: true,
 
         labels: {
           show: true,
-          maxWidth: 200,
-          align: "right",
-          style: { fontSize: "8px", colors: "#000000" },
+      maxWidth: 200,
+      align: 'right',
+      style: {fontSize: '8px', colors: '#000000'},
           formatter(value) {
             if (value == 60 || value == 100 || value == 140) {
-              return value + "MMHG";
+              return value + 'MMHG';
             }
           },
           offsetX: -5,
+
         },
       },
       legend: {
-        horizontalAlign: "right",
+        horizontalAlign: 'right',
       },
 
       chart: {
-        type: "rangeBar",
+        type: 'rangeBar',
         height: 110,
-        width: "100%",
+        width: '100%',
         toolbar: {
           show: false,
         },
@@ -274,14 +245,14 @@ export class VitalsPage implements OnInit {
       plotOptions: {
         bar: {
           horizontal: false,
-          columnWidth: "18",
+          columnWidth: '18',
         },
       },
       dataLabels: {
         enabled: false,
       },
       fill: {
-        colors: ["#2AE4F0"],
+        colors: ['#2AE4F0'],
       },
       grid: {
         xaxis: {
@@ -297,16 +268,10 @@ export class VitalsPage implements OnInit {
     };
 
     this.chartOptions5 = {
-      series: [
-        {
-          name: "STOCK ABC",
-          data: this.series.monthDataSeries1.prices,
-        },
-      ],
       chart: {
-        type: "area",
+        type: 'area',
         height: 110,
-        width: "100%",
+        width: '100%',
         zoom: {
           enabled: false,
         },
@@ -318,22 +283,22 @@ export class VitalsPage implements OnInit {
         enabled: false,
       },
       stroke: {
-        curve: "straight",
-        colors: ["#E229F2"],
+        curve: 'straight',
+        colors: ['#E229F2'],
         width: 2,
       },
 
       title: {
-        text: "Fundamental Analysis of Stocks",
-        align: "left",
+        text: 'Fundamental Analysis of Stocks',
+        align: 'left',
       },
       subtitle: {
-        text: "Price Movements",
-        align: "left",
+        text: 'Price Movements',
+        align: 'left',
       },
-      labels: this.series.monthDataSeries1.dates,
+      labels: this.dates,
       xaxis: {
-        type: "category",
+        type: 'category',
       },
       yaxis: {
         opposite: true,
@@ -341,70 +306,151 @@ export class VitalsPage implements OnInit {
         labels: {
           formatter(value: any, opt) {
             if (value == 96 || value == 100 || value == 104) {
-              return " " + value + "°F";
+              return ' ' + value + '°F';
             }
           },
-          align: "right",
+          align: 'right',
         },
       },
 
       legend: {
-        horizontalAlign: "right",
+        horizontalAlign: 'right',
       },
       fill: {
-        colors: ["#E229F2"],
+        colors: ['#E229F2'],
       },
     };
   }
-  async ionViewWillEnter() {
-    // this.userInfo = await this.getUserinfo();
-    // this.configCareDetails = await this.configCareService.getConfigCareDetails();
-    console.log(this.configCareDetails);
+  async ionViewWillEnter(){
+    this.userInfo = await this.getUserinfo();
+    this.configCareDetails = await this.configCareService.getConfigCareDetails();
+    this.vitalCards = this.bookVitalService.getVitalsSchedule(this.configCareDetails);
+    const vitalValues = await this.bookVitalService.getVitals();
+    this.vitals = vitalValues;
+    this.getReportData();
+    Object.keys(vitalValues).forEach(key => {
+      this.vitalValues[key] = JSON.parse(vitalValues[key][0].values)[0];
+    });
   }
+  async getReportData(){
+    const reportVitals = await this.bookVitalService.getVitals(true);
+    Object.keys(reportVitals).forEach(key => {
+      this.reportDetail[key] = {series: [], entries: [], valueStr: ''};
+      this.chartCardData[key].hasValue = true;
+      if (key !== 'bloodpressure'){
+        this.series[key][0].data = new Array(7).fill(0);
+      }
+      else{
+        this.series[key][0].data = this.series[key][0].data.map(val => ({x: val.x, y: [0, 0]}));
+      }
+      reportVitals[key].forEach(item => {
+        const values = JSON.parse(item.values);
+        let avgValue;
+        if (key === 'bloodpressure'){
+          avgValue = values[0].valueStr;
+        }
+        else{
+          avgValue = values.reduce((total, value, index, arr) => {
+            total += +value.valueStr;
+            if (index === arr.length - 1){
+              return total / arr.length;
+            }else {
+              return total;
+            }
+          }, 0);
+        }
+        this.reportDetail[key].entries.push({day: moment(item.vitalDate, 'YYYY-MM-DD'), values, valueStr: avgValue});
+        this.chartCardData[key].value = avgValue;
+        const day = moment(item.vitalDate, 'YYYY-MM-DD').day();
+        if (key === 'bloodpressure'){
+          this.series[key][0].data[day].y = [values[0].value.systolic, values[0].value.diastolic];
+        }
+        else{
+          this.series[key][0].data[day] = +avgValue;
+        }
+        this.reportDetail[key].valueStr = avgValue;
+      });
+      this.reportDetail[key].series = this.series[key];
+    });
+  }
+  // getScheduledVitals(){
+  //   this.vitalCards = this.bookVitalService.getVitalsSchedule(this.configCareDetails);
+  //   // const configCareVitalOptions = this.configCareDetails.configCareConfiguration.VITALS.type;
+  //   // const configCareVitals = this.configCareDetails.configCareValues.VITALS;
+  //   // const scheduledVitals = {};
+  //   // const currentDay = new Date().getDay();
+  //   // configCareVitals.forEach(schedule => {
+  //   //   const vitalConfig = configCareVitalOptions.find(option => option.value === schedule.type);
+  //   //   if (schedule.repeatDays.indexOf(currentDay) >= 0) {
+  //   //     scheduledVitals[schedule.type] = {...schedule, label: vitalConfig.name};
+  //   //   }
+  //   // });
+  //   // Object.keys(scheduledVitals).forEach(key => {
+  //   //   this.vitalCards.push(scheduledVitals[key]);
+  //   // });
+  // }
   toggleData() {
     this.showData = !this.showData;
   }
   async getUserinfo() {
     const userData = await this.dataService.getUserInfo();
-    const members = (await this._creatingCareService.getCareCircleDetails())
-      .members;
-    // const user = members.find(member => member.userId === userData.userId);
-    const user = {
-      userType: "SENIOR",
-    };
+    const members = (await this._creatingCareService.getCareCircleDetails()).members;
+    const user = members.find(member => member.userId === userData.userId);
+    // const user = {
+    //   userType: 'SENIOR',
+    // };
     return user;
   }
   async gotoModel(item: any) {
     const modal = await this.modalCtrl.create({
       component: AddvitalComponent,
       componentProps: {
-        title: item.name,
+        item
       },
     });
     modal.onDidDismiss().then((data: any) => {
-      console.log("VitalsPage -> gotoModel -> data", data.data);
-      if (data.data && data.data.Diastolic && data.data.Systolic) {
-        item.value = data.data.Diastolic + "/" + data.data.Systolic;
+      if (data.data?.value){
+        if (!(item.type in this.vitalValues)){
+          this.vitalValues[item.type] = {};
+        }
+        this.vitalValues[item.type] = data.data;
+        if (data.data && data.data.value.diastolic && data.data.value.systolic) {
+          this.vitalValues[item.type].valueStr = data.data.value.diastolic + '/' + data.data.value.systolic;
+        }
+        else{
+          this.vitalValues[item.type].valueStr = data.data.value.value;
+        }
+        this.bookVitalService.setVitalValues(this.vitalValues);
+        this.bookVitalService.addVitals(item.type, this.vitalValues[item.type]);
+        this.getReportData();
       }
     });
     return await modal.present();
   }
-  setData(ev: any) {
-    this.segmentVar = ev;
+  getTimeString(timeObj){
+    const timeStr = timeObj.hours + ':' + timeObj.minutes.toString().padStart(2, '0');
+    return timeStr;
   }
 
   async presentPopover(ev: any) {
     const popover = await this.popoverCtrl.create({
       component: ProfilelistComponent,
-      cssClass: "popoverstylepl",
+      cssClass: 'popoverstylepl',
       event: ev,
       translucent: true,
-      mode: "ios",
+      mode: 'ios',
     });
     popover.onDidDismiss().then((x) => {
       // if (x.data === "delete") {
       // }
     });
     return await popover.present();
+  }
+  goToReportDetail(type){
+    this.bookVitalService.setReportDetail(type, this.reportDetail[type]);
+    this.navCtrl.navigateForward(`/bookvitals/reportdetailedview`);
+  }
+  setData(ev: any) {
+    this.segmentVar = ev;
   }
 }

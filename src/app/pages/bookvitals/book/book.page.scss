@@ -113,6 +113,9 @@ ion-toolbar {
     border-radius: 8px;
     box-shadow: none;
     width: 303px;
+    &.IN_PROGRESS {
+        border-color: orangered;
+    }
 }
 
 .imgtagline {

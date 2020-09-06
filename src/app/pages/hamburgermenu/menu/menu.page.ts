@@ -3,6 +3,7 @@ import { DataserviceService } from '../../dataservice.service';
 import { Router } from '@angular/router';
 import { ModalController , PopoverController } from '@ionic/angular';
 import { ProfilelistComponent } from '../../bookvitals/profilelist/profilelist.component';
+import { UserAuthService } from '../../onboarding/user-auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -15,6 +16,7 @@ export class MenuPage implements OnInit {
 
   constructor(
     private dataService: DataserviceService,
+    private authService: UserAuthService,
     private router: Router,
     private modalCtrl: ModalController, private popoverCtrl: PopoverController
   ) { }
@@ -23,7 +25,7 @@ export class MenuPage implements OnInit {
   }
   logout(){
     this.dataService.setUserInfo(null);
-    this.dataService.setAuthTokens(null);
+    this.authService.setAuthTokens(null);
     this.router.navigateByUrl('/admin-sign-in');
   }
 

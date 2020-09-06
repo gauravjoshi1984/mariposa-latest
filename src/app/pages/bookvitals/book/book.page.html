@@ -1,5 +1,5 @@
 <ion-header>
-  <!-- <ion-toolbar class="headtoolbar">
+    <!-- <ion-toolbar class="headtoolbar">
         <div class="hdcontent" style="display: flex;">
             <img src="assets/MariposaIcons/micon.svg" alt="" />
             <ion-title mode="md" class="title-text vitaltext" (click)="toggleData()">
@@ -15,118 +15,88 @@
             </ion-button>
         </ion-buttons>
     </ion-toolbar> -->
-  <app-tab-header [page]="'Book'"></app-tab-header>
+    <app-tab-header [page]="'Book'"></app-tab-header>
 </ion-header>
 
 <ion-content>
-  <ion-grid class="buttons">
-    <ion-row style="align-items: center; padding: 0px; margin: 0px">
-      <ion-col style="padding: 0px; margin: 0px" size="7">
-        <ion-button
-          [routerLink]="'/bookvitals/updateschedule'"
-          class="activity"
-          expand="block"
-        >
-          <ion-icon
-            style="margin-right: 4px"
-            src="assets/activity.svg"
-          ></ion-icon>
-          TODAYS ACTIVITY
-        </ion-button>
-      </ion-col>
-      <ion-col style="padding: 0px; margin: 0px" size="5">
-        <ion-button
-          [routerLink]="'/bookvitals/addpost'"
-          expand="block"
-          class="post"
-        >
-          <ion-icon src="assets/post.svg"></ion-icon> ADD POST
-        </ion-button>
-      </ion-col>
-      <ion-col class="placesec" size="12" *ngIf="!showData">
-        <img src="assets/Empty_Book.svg" />
-        <div style="padding-top: 16px">
-          Once a Caregiver starts updating schedule,
-        </div>
-        <div>you will start seeing your feed</div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid class="content">
-    <ng-container *ngIf="showData">
-      <div class="step completed" *ngFor="let card of Cards">
-        <div class="v-stepper">
-          <div class="timelinedate">{{card.date}}<br />{{card.month}}</div>
-          <div class="line"></div>
-        </div>
+    <ion-grid class="buttons">
+        <ion-row style="align-items:center;padding:0px;margin:0px">
+            <ion-col style="padding:0px;margin:0px" size="7">
+                <ion-button [disabled]="scheduleAdded" [routerLink]="'/bookvitals/updateschedule'" class="activity" expand="block">
+                    <ion-icon style="margin-right: 4px;" src="assets/activity.svg"></ion-icon> TODAYS ACTIVITY
+                </ion-button>
+            </ion-col>
+            <ion-col style="padding:0px;margin:0px" size="5">
+                <ion-button [routerLink]="'/bookvitals/addpost'" expand="block" class="post">
+                    <ion-icon src="assets/post.svg"></ion-icon> ADD POST
+                </ion-button>
 
-        <div class="content">
-          <ion-card class="ion-no-padding cardCust">
-            <ion-grid class="ion-no-padding">
-              <ion-row *ngIf="card.values.imageList">
-                <ion-col size="12" class="img-container">
-                  <img
-                    style="width: 100%"
-                    [src]="card.values.imageList[0]"
-                    alt=""
-                  />
-                  <p class="imgtagline">{{card.imagetag}}</p>
-                  <hr style="margin: 0 8px" />
-                </ion-col>
-              </ion-row>
-              <ion-row class="rowpadding">
-                <ion-col size="9">
-                  <p class="subtitle">{{card.title}}</p>
-                  <p class="titletext">{{card.subTitle}}</p>
-                </ion-col>
-                <ion-col size="3">
-                  <!-- <ion-icon slot="start" src="assets/progress_done.svg"></ion-icon> -->
-                  <img
-                    style="float: right"
-                    src="assets/progress_done.svg"
-                    alt=""
-                  />
-                </ion-col>
-                <ion-col size="12">
-                  <hr />
-                  <p class="notestext">Notes: {{card.notes}}</p>
-                </ion-col>
-                <ion-col size="12">
-                  <!-- <ion-buttons slot="start"> -->
-                  <ion-button
-                    fill="clear"
-                    class="simplebtn"
-                    (click)="likepost(card)"
-                  >
-                    <ion-icon
-                      *ngIf="card.liked"
-                      slot="start"
-                      src="assets/Heart_filled.svg"
-                    ></ion-icon>
-                    <ion-icon
-                      *ngIf="!card.liked"
-                      slot="start"
-                      src="assets/Heart_outline23.svg"
-                    ></ion-icon>
-                    Like
-                  </ion-button>
-                  <ion-button
-                    (click)="commentPost(card)"
-                    fill="clear"
-                    class="simplebtn"
-                  >
-                    <ion-icon slot="start" src="assets/Comment.svg"></ion-icon>
-                    Comment({{card.comments?.length}})
-                  </ion-button>
-                  <!-- </ion-buttons> -->
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-card>
-        </div>
-      </div>
-    </ng-container>
-  </ion-grid>
+            </ion-col>
+            <ion-col class="placesec" size="12" *ngIf="!showData">
+                <img src="assets/Empty_Book.svg" />
+                <div style="padding-top: 16px;">
+                    Once a Caregiver starts updating schedule,
+                </div>
+                <div>
+                    you will start seeing your feed
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid class="content">
+        <ng-container *ngIf="showData">
+            <div class="step completed" *ngFor="let card of Cards">
+                <div class="v-stepper">
+                    <div class="timelinedate">{{card.date}}<br />{{card.month}}</div>
+                    <div class="line"></div>
+                </div>
+
+                <div class="content">
+                    <ion-card class="ion-no-padding cardCust {{card.values.status}}" (click)="viewPost(card)">
+                        <ion-grid class="ion-no-padding">
+                            <ion-row *ngIf="card.values.imageList.length">
+                                <ion-col size="12" class="img-container">
+                                    <img style="width:100%" [src]="card.values.imageList[0]" alt="" />
+                                    <p class="imgtagline">{{card.imagetag}}</p>
+                                    <hr style="margin: 0 8px;" />
+                                </ion-col>
+                            </ion-row>
+                            <ion-row class="rowpadding">
+                                <ion-col size="9">
+                                    <p class="subtitle">{{card.subTitle}}</p>
+                                    <p class="titletext">
+                                        {{card.title}}
+                                    </p>
+                                </ion-col>
+                                <ion-col size="3">
+                                    <img style="float: right;" src="assets/{{getProgressIcon(card)}}" alt="" />
+                                </ion-col>
+                                <ion-col size="12">
+                                    <hr />
+                                    <p class="notestext">
+                                        Notes: {{card.notes}}
+                                    </p>
+                                </ion-col>
+                                <ion-col size="12">
+                                    <!-- <ion-buttons slot="start"> -->
+                                    <ion-button fill="clear" class="simplebtn" (click)="likepost($event, card)">
+                                        <ion-icon *ngIf="card.liked" slot="start" src="assets/Heart_filled.svg"></ion-icon>
+                                        <ion-icon *ngIf="!card.liked" slot="start" src="assets/Heart_outline23.svg"></ion-icon>
+                                        Like
+                                    </ion-button>
+                                    <ion-button (click)="commentPost($event, card)" fill="clear" class="simplebtn">
+                                        <ion-icon slot="start" src="assets/Comment.svg"></ion-icon>
+                                        Comment({{card.comments?.length}})
+                                    </ion-button>
+                                    <!-- </ion-buttons> -->
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card>
+                </div>
+            </div>
+        </ng-container>
+    </ion-grid>
 </ion-content>
 <!-- <ion-content>
  

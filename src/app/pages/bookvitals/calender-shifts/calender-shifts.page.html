@@ -1,130 +1,93 @@
-<ion-header [translucent]="true">
-  <!-- <ion-toolbar class="toolbarshadow">
-      <ion-segment [(ngModel)]="segValue" mode="ios">
-        <ion-segment-button value="activities">
-          <ion-label>Activities</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="shifts">
-          <ion-label>Shifts</ion-label>
-        </ion-segment-button>
-      </ion-segment>
-      <ion-buttons mode="md" slot="end">
-        <ion-button [routerLink]="'/notifications'">
-          <ion-icon
-            mode="md"
-            src="assets/MariposaIcons/notification.svg"
-          ></ion-icon>
-        </ion-button>
-        <ion-button (click)="presentPopover($event)">
-          <ion-icon
-            class="propic"
-            mode="md"
-            src="assets/MariposaIcons/profile_img.svg"
-          ></ion-icon>
-        </ion-button>
-      </ion-buttons>
+<ion-header>
+    <!-- <ion-toolbar class="toolbarshadow">
+        <ion-segment [(ngModel)]="segValue" mode="ios">
+            <ion-segment-button value="activities">
+                <ion-label>Activities</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="shifts">
+                <ion-label>Shifts</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+        <ion-buttons mode="md" slot="end">
+            <ion-button [routerLink]="'/notifications'">
+                <ion-icon mode="md" src="assets/MariposaIcons/notification.svg"></ion-icon>
+            </ion-button>
+            <ion-button (click)="presentPopover($event)">
+                <ion-icon class="propic" mode="md" src="assets/MariposaIcons/profile_img.svg"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar> -->
-  <app-tab-header
+    <app-tab-header
     [page]="'calender'"
     (getData)="setData($event)"
   ></app-tab-header>
-
-  <app-calenderdate
-    (dayselected)="ChangeData($event)"
-    [showMonth]="true"
-  ></app-calenderdate>
+    <app-calenderdate *ngIf="dataLoaded" (dayselected)="ChangeData($event)" [showMonth]="true"></app-calenderdate>
 </ion-header>
 
 <ion-content>
-  <ion-grid fixed class="ion-no-padding">
-    <ion-row style="padding-bottom: 12px">
-      <ion-col size="6" style="padding-top: 13px">
-        <ion-label class="selectlabel">Select Caregiver:</ion-label>
-      </ion-col>
-      <ion-col size="6">
-        <ion-select
-          value="peperoni"
-          multiple="true"
-          placeholder="Select Pizza"
-          class="custSelect"
-        >
-          <ion-select-option value="peperoni">All</ion-select-option>
-          <ion-select-option value="hawaii">Hawaii</ion-select-option>
-        </ion-select>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid fixed class="ion-no-padding" *ngIf="segValue=='shifts'">
-    <ion-row>
-      <ion-col size="2">
-        <ion-row>
-          <ion-col size="12" class="timelinecol" *ngFor="let item of timeLine">
-            <h2 class="timePer">{{item}}</h2>
-          </ion-col>
+    <ion-grid fixed class="ion-no-padding" *ngIf="dataLoaded">
+        <ion-row style="padding-bottom: 12px">
+            <ion-col size="6" style="padding-top: 13px">
+                <ion-label class="selectlabel">Select Caregiver:</ion-label>
+            </ion-col>
+            <ion-col size="6">
+                <ion-select mode="ios" [(ngModel)]="selectedCaregiver" value="peperoni" multiple="true" placeholder="Select Caregiver" class="custSelect">
+                    <ion-select-option [value]="item.userId" *ngFor="let item of careCircleDetails">{{item.userName}}</ion-select-option>
+                </ion-select>
+            </ion-col>
         </ion-row>
-      </ion-col>
-      <ion-col size="10">
-        <ng-container *ngFor="let item of timeLineShifts">
-          <ion-card
-            class="timelinecard"
-            [style.height.px]="item['height']"
-            *ngIf="item.title;else emptyspace"
-          >
-            <h1>{{item.title}}</h1>
-            <h4>
-              {{item.startTime | date:'hh:mm aa'}} - {{item.endTime| date:'hh:mm
-              aa' }}
-            </h4>
-          </ion-card>
-          <ng-template #emptyspace>
-            <div
-              class="emptyspace"
-              [style.height.px]="item['emptyheight']"
-            ></div>
-          </ng-template>
-        </ng-container>
-        <!-- <ion-card class="timelinecard">
+    </ion-grid>
+    <ion-grid fixed class="ion-no-padding" *ngIf="segValue=='shifts'">
+        <ion-row>
+            <ion-col size="2">
+                <ion-row>
+                    <ion-col size="12" class="timelinecol" *ngFor="let item of timeLine">
+                        <h2 class="timePer">{{item}}</h2>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col size="10">
+                <ng-container *ngFor="let item of timeLineShifts.events">
+                    <ng-container *ngIf="checkCareGiver(item)">
+                        <ion-card class="timelinecard" [style.top.px]="item['top']" [style.height]="item['height']">
+                            <h1>{{item.key}}</h1>
+                            <h4>
+                                {{item.startTime | date:'hh:mm aa'}} - {{item.endTime| date:'hh:mmaa' }}
+                            </h4>
+                        </ion-card>
+                    </ng-container>
+                </ng-container>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid fixed class="ion-no-padding" *ngIf="segValue=='activities'">
+        <ion-row>
+            <ion-col size="2">
+                <ion-row>
+                    <ion-col size="12" class="timelinecol" *ngFor="let item of timeLine2">
+                        <h2 class="timePer">{{item}}</h2>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col size="10">
+                <ng-container *ngFor="let item of timeLineActivity.events">
+                    <ion-card class="timelinecard" [style.top.px]="item['top']" [style.height]="item['height']" (click)="opendetailComponent(item)">
+                        <h1>{{item.key}}</h1>
+                        <h4>
+                            {{item.startTime | date:'hh:mm aa'}} - {{item.endTime| date:'hh:mm aa' }}
+                        </h4>
+                    </ion-card>
+                </ng-container>
+                <!-- <ion-card class="timelinecard">
             <h1>Johnson</h1>
             <h4>2:00 pm - 8:30 pm</h4>
           </ion-card> -->
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid fixed class="ion-no-padding" *ngIf="segValue=='activities'">
-    <ion-row>
-      <ion-col size="2">
-        <ion-row>
-          <ion-col size="12" class="timelinecol" *ngFor="let item of timeLine2">
-            <h2 class="timePer">{{item}}</h2>
-          </ion-col>
+            </ion-col>
         </ion-row>
-      </ion-col>
-      <ion-col size="10">
-        <ng-container *ngFor="let item of timeLineActivity">
-          <div class="empty" [style.height.px]="item['empty']"></div>
-
-          <ion-card
-            class="timelinecard"
-            [style.height.px]="item['height']"
-            (click)="opendetailComponent(item)"
-          >
-            <h1>{{item.title}}</h1>
-            <h4>
-              {{item.startTime | date:'hh:mm aa'}} - {{item.endTime| date:'hh:mm
-              aa' }}
-            </h4>
-          </ion-card>
-        </ng-container>
-        <!-- <ion-card class="timelinecard">
-            <h1>Johnson</h1>
-            <h4>2:00 pm - 8:30 pm</h4>
-          </ion-card> -->
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="presentModal()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+    </ion-grid>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="presentModal()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>

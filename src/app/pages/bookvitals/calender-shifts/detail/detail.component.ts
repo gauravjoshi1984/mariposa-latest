@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { ModalController } from "@ionic/angular";
+import { Component, OnInit, Input } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
-  selector: "app-detail",
-  templateUrl: "./detail.component.html",
-  styleUrls: ["./detail.component.scss"],
+  selector: 'app-detail',
+  templateUrl: './detail.component.html',
+  styleUrls: ['./detail.component.scss'],
 })
 export class DetailComponent implements OnInit {
   @Input() data: any;
@@ -12,9 +12,9 @@ export class DetailComponent implements OnInit {
   constructor(private modalCtrl: ModalController) {}
 
   ngOnInit() {
-    console.log(this.data.title);
+    console.log(this.data);
   }
-  goBack() {
+  goBack(event) {
     this.modalCtrl.dismiss();
   }
 }

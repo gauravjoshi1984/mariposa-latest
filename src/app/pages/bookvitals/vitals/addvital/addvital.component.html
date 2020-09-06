@@ -5,7 +5,7 @@
                 <ion-icon class="bckbtn" slot="icon-only" src="assets/back.svg"></ion-icon>
             </ion-button>
         </ion-buttons>
-        <ion-title class="name cap" color="mdblack" position="floating" id="titletag">Add {{ title }}</ion-title>
+        <ion-title class="name cap" color="mdblack" position="floating" id="titletag">Add {{ item.label }}</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -15,37 +15,40 @@
             <ion-col size="6">
                 <p class="datelabel">Date</p>
                 <ion-button fill="outline" class="datebtn left">
-                    <ion-datetime displayFormat="DD-MMM-YYYY" value="16-May-2020"></ion-datetime>
+                    <ion-datetime disabled displayFormat="DD-MMM-YYYY" [value]="currentDate" [max]="currentDate" [min]="currentDate"></ion-datetime>
                     <ion-icon slot="end" src="assets/MariposaIcons/Calendar icon.svg"></ion-icon>
                 </ion-button>
             </ion-col>
             <ion-col size="6">
                 <p class="datelabel">Time</p>
-                <ion-button fill="outline" class="datebtn right">
-                    <ion-datetime displayFormat="HH:mm A" value="23:00"></ion-datetime>
+                <ion-button (click)="timeSelect.open($event)" fill="outline" class="datebtn right">
+                    {{selectedTime ? getTime(selectedTime) : 'Select Time'}}
+                    <!-- <ion-datetime displayFormat="HH:mm A" value="23:00"></ion-datetime> -->
                     <ion-icon class="timeicon" src="assets/MariposaIcons/Timeicon.svg"></ion-icon>
                 </ion-button>
+                <ion-select hidden="true" #timeSelect [(ngModel)]="selectedTime" mode="ios" interface="popover">
+                    <ion-select-option [value]="time" *ngFor="let time of item.timeList">{{getTime(time)}}</ion-select-option>
+                </ion-select>
             </ion-col>
         </ion-row>
-
-        <div class="nametag" *ngIf="title!='Blood Pressure'">
+        <div class="nametag" *ngIf="item.label!='Blood Pressure'">
             <ion-text position="floating" id="tag">Value</ion-text>
         </div>
-        <div *ngIf="title!='Blood Pressure'">
-            <ion-input mode="md" class="input" placeholder="Enter value" [(ngModel)]="Systolic"></ion-input>
+        <div *ngIf="item.label!='Blood Pressure'">
+            <ion-input mode="md" class="input" placeholder="Enter value" [(ngModel)]="value.value"></ion-input>
         </div>
-        <div class="nametag" *ngIf="title=='Blood Pressure'">
+        <div class="nametag" *ngIf="item.label=='Blood Pressure'">
             <ion-text position="floating" id="tag">Systolic</ion-text>
         </div>
-        <div *ngIf="title=='Blood Pressure'">
-            <ion-input mode="md" class="input" placeholder="Enter value" [(ngModel)]="Systolic"></ion-input>
+        <div *ngIf="item.label=='Blood Pressure'">
+            <ion-input mode="md" class="input" placeholder="Enter value" [(ngModel)]="value.systolic"></ion-input>
         </div>
 
-        <div class="nametag" *ngIf="title=='Blood Pressure'">
+        <div class="nametag" *ngIf="item.label=='Blood Pressure'">
             <ion-text position="floating" id="tag">Diastolic</ion-text>
         </div>
-        <div *ngIf="title=='Blood Pressure'">
-            <ion-input mode="md" class="input" placeholder="Enter value" [(ngModel)]="Diastolic"></ion-input>
+        <div *ngIf="item.label=='Blood Pressure'">
+            <ion-input mode="md" class="input" placeholder="Enter value" [(ngModel)]="value.diastolic"></ion-input>
         </div>
 
         <!-- INSTRUCTIONS -->
@@ -54,7 +57,7 @@
             <ion-text position="floating" id="tag">Notes</ion-text>
         </div>
         <div>
-            <ion-textarea style="height: 120px;" class="input" placeholder="Enter Notes"></ion-textarea>
+            <ion-textarea style="height: 120px;" class="input" [(ngModel)]="value.notes" placeholder="Enter Notes"></ion-textarea>
         </div>
     </ion-grid>
 </ion-content>
