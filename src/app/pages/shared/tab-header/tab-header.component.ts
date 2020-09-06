@@ -12,8 +12,8 @@ import { ProfilelistComponent } from "../../bookvitals/profilelist/profilelist.c
 })
 export class TabHeaderComponent implements OnInit {
   @Input() page: string;
-  @Output() inputModelChange = new EventEmitter<string>();
-
+  @Output() getData = new EventEmitter<any>();
+  @Output() getDataVital = new EventEmitter<any>();
   segValue = "activities";
   userInfo: any = {};
   configCareDetails;
@@ -41,11 +41,12 @@ export class TabHeaderComponent implements OnInit {
     this.configCareDetails = await this.configCareService.getConfigCareDetails();
     console.log(this.configCareDetails);
   }
-  changevital() {
-    this.inputModelChange.emit(this.segmentVar);
+  changevital(ev: any) {
+    this.getDataVital.emit(ev.detail.value);
   }
-  changecal() {
-    this.inputModelChange.emit(this.segValue);
+  changecal(ev: any) {
+    console.log(ev);
+    this.getData.emit(ev.detail.value);
   }
   async getUserinfo() {
     const userData = await this.dataService.getUserInfo();

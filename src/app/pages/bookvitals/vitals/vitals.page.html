@@ -9,7 +9,10 @@
                 Reports
             </ion-segment-button>
         </ion-segment> -->
-  <app-tab-header [page]="'vital'" [(ngModel)]="segmentVar"></app-tab-header>
+  <app-tab-header
+    [page]="'vital'"
+    (getDataVital)="setData($event)"
+  ></app-tab-header>
 
   <!-- </ng-template> -->
   <!-- <div

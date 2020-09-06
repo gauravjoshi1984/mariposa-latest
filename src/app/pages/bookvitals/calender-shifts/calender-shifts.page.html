@@ -24,7 +24,10 @@
         </ion-button>
       </ion-buttons>
     </ion-toolbar> -->
-  <app-tab-header [page]="'calender'" [(ngModel)]="segValue"></app-tab-header>
+  <app-tab-header
+    [page]="'calender'"
+    (getData)="setData($event)"
+  ></app-tab-header>
 
   <app-calenderdate
     (dayselected)="ChangeData($event)"

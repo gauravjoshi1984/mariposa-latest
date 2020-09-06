@@ -389,6 +389,9 @@ export class VitalsPage implements OnInit {
     });
     return await modal.present();
   }
+  setData(ev: any) {
+    this.segmentVar = ev;
+  }
 
   async presentPopover(ev: any) {
     const popover = await this.popoverCtrl.create({

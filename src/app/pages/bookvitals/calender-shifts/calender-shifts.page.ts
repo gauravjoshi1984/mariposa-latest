@@ -1,18 +1,22 @@
 import { Component, OnInit } from "@angular/core";
-import { ModalController , PopoverController , NavController} from "@ionic/angular";
+import {
+  ModalController,
+  PopoverController,
+  NavController,
+} from "@ionic/angular";
 import { AddactivityComponent } from "./addactivity/addactivity.component";
 import * as moment from "moment";
 import { DetailComponent } from "./detail/detail.component";
 import { ProfilelistComponent } from "../profilelist/profilelist.component";
-import { ConfigCareServiceService } from '../../configcare/config-care-service.service';
+import { ConfigCareServiceService } from "../../configcare/config-care-service.service";
 
 @Component({
-  selector: 'app-calender-shifts',
-  templateUrl: './calender-shifts.page.html',
-  styleUrls: ['./calender-shifts.page.scss'],
+  selector: "app-calender-shifts",
+  templateUrl: "./calender-shifts.page.html",
+  styleUrls: ["./calender-shifts.page.scss"],
 })
 export class CalenderShiftsPage implements OnInit {
-  segValue = 'activities';
+  segValue = "activities";
   lowesttimeper: any;
   highesttimeper: any;
   timeLine = [];
@@ -326,39 +330,49 @@ export class CalenderShiftsPage implements OnInit {
 
   timeLineActivity: any = [];
 
-  selectedDay = 'Mon';
+  selectedDay = "Mon";
   endTimeTemp: any;
   endTimeTemp2: any;
-  constructor( private modalController: ModalController,
+  constructor(
+    private modalController: ModalController,
     private popoverCtrl: PopoverController,
     private configCareService: ConfigCareServiceService,
-    private navCtrl: NavController) {}
+    private navCtrl: NavController
+  ) {}
 
-  async ionViewWillEnter(){
+  async ionViewWillEnter() {
     const schedule: any = await this.configCareService.getCalendatSchedule();
-    schedule.forEach(item => {
+    schedule.forEach((item) => {
       this.initializeTimelineData(this.shiftsDataArray, item);
       this.initializeTimelineData(this.activityDataArray, item);
     });
-    Object.keys(this.shiftsDataArray).forEach(key => {
-      this.shiftsDataArray[key].events.sort((a, b) => (a.startTime > b.startTime) ? 1 : ((b.startTime > a.startTime) ? -1 : 0));
+    Object.keys(this.shiftsDataArray).forEach((key) => {
+      this.shiftsDataArray[key].events.sort((a, b) =>
+        a.startTime > b.startTime ? 1 : b.startTime > a.startTime ? -1 : 0
+      );
     });
-    Object.keys(this.activityDataArray).forEach(key => {
-      this.activityDataArray[key].events.sort((a, b) => (a.startTime > b.startTime) ? 1 : ((b.startTime > a.startTime) ? -1 : 0));
+    Object.keys(this.activityDataArray).forEach((key) => {
+      this.activityDataArray[key].events.sort((a, b) =>
+        a.startTime > b.startTime ? 1 : b.startTime > a.startTime ? -1 : 0
+      );
     });
     this.dataLoaded = true;
   }
-  initializeTimelineData(object, item){
+  initializeTimelineData(object, item) {
     const start = new Date(item.startTime);
     const end = new Date(item.endTime);
     const day = start.getDate();
-    if (!(day in object)){
-      object[day] = {min: moment(item.startTime), max: moment(item.endTime), events: []};
+    if (!(day in object)) {
+      object[day] = {
+        min: moment(item.startTime),
+        max: moment(item.endTime),
+        events: [],
+      };
     }
-    if (object[day].min.unix() > (start.getTime() / 1000)){
+    if (object[day].min.unix() > start.getTime() / 1000) {
       object[day].min = moment(item.startTime);
     }
-    if (object[day].max.unix() < (end.getTime() / 1000)){
+    if (object[day].max.unix() < end.getTime() / 1000) {
       object[day].max = moment(item.endTime);
     }
     item.startTime = moment(item.startTime);
@@ -367,14 +381,19 @@ export class CalenderShiftsPage implements OnInit {
   }
   ngOnInit() {}
   initCalenderShift() {
-    if (!(Object.keys(this.timeLineShifts).length)){
+    if (!Object.keys(this.timeLineShifts).length) {
       return;
     }
     this.lowesttimeper = this.timeLineShifts.min;
     this.highesttimeper = this.timeLineShifts.max;
 
     this.timeLineShifts.events.forEach((element, i) => {
-      if (this.endTimeTemp && element.startTime && this.endTimeTemp.format('HH:mm:ss') !== element.startTime.format('HH:mm:ss')) {
+      if (
+        this.endTimeTemp &&
+        element.startTime &&
+        this.endTimeTemp.format("HH:mm:ss") !==
+          element.startTime.format("HH:mm:ss")
+      ) {
         const dur = moment.duration(element.startTime.diff(this.endTimeTemp));
         const hrs: any = dur.asHours();
         const tempData: any = {
@@ -384,13 +403,15 @@ export class CalenderShiftsPage implements OnInit {
         this.timeLineShifts.events.splice(i, 0, tempData);
       }
       if (element.key) {
-        const duration = moment.duration(element.endTime.diff(element.startTime));
+        const duration = moment.duration(
+          element.endTime.diff(element.startTime)
+        );
 
         // duration in hours
         const hours: any = duration.asHours();
         element.hours = hours;
         element.height = hours * 84.6 - 8;
-        element.height = element.height < 68 ? 'auto' : element.height + 'px';
+        element.height = element.height < 68 ? "auto" : element.height + "px";
         this.endTimeTemp = element.endTime;
       }
     });
@@ -403,24 +424,23 @@ export class CalenderShiftsPage implements OnInit {
 
     for (let index = 0; index < hours; index++) {
       if (index == 0) {
-        this.timeLine.push(this.lowesttimeper.format('hh A'));
+        this.timeLine.push(this.lowesttimeper.format("hh A"));
       } else {
         const temp = this.lowesttimeper;
         this.timeLine.push(
-          this.lowesttimeper.clone().add(index, 'hours').format('hh A')
+          this.lowesttimeper.clone().add(index, "hours").format("hh A")
         );
       }
     }
   }
   initCalenderActivity() {
-    if (!(Object.keys(this.timeLineShifts).length)){
+    if (!Object.keys(this.timeLineShifts).length) {
       return;
     }
     this.lowesttimeper = this.timeLineShifts.min;
     this.highesttimeper = this.timeLineShifts.max;
-console.log(this.timeLineShifts);
-debugger;
-    this.timeLineShifts.events.forEach((element:any, i) => {
+    console.log(this.timeLineShifts);
+    this.timeLineShifts.events.forEach((element: any, i) => {
       let itemp: any = 0;
 
       if (this.endTimeTemp2) {
@@ -432,12 +452,11 @@ debugger;
           Math.abs(itemp)
         );
         itemp = Math.abs(itemp);
-        
       }
 
       let duration = moment.duration(element.endTime.diff(element.startTime));
       console.log(element.startTime);
-      
+
       let minutes: any = duration.asMinutes();
 
       element["hours"] = minutes;
@@ -445,7 +464,7 @@ debugger;
       element["empty"] = itemp * 1.5;
       this.endTimeTemp2 = element.endTime;
     });
-    
+
     const duration = moment.duration(
       this.highesttimeper2.diff(this.lowesttimeper2)
     );
@@ -455,11 +474,11 @@ debugger;
 
     for (let index = 0; index < hours; index++) {
       if (index == 0) {
-        this.timeLine2.push(this.lowesttimeper2.format('hh A'));
+        this.timeLine2.push(this.lowesttimeper2.format("hh A"));
       } else {
         const temp = this.lowesttimeper;
         this.timeLine2.push(
-          this.lowesttimeper2.clone().add(index, 'hours').format('hh A')
+          this.lowesttimeper2.clone().add(index, "hours").format("hh A")
         );
       }
     }
@@ -468,7 +487,7 @@ debugger;
   async presentModal() {
     const modal = await this.modalController.create({
       component: AddactivityComponent,
-      cssClass: 'addactivity-class',
+      cssClass: "addactivity-class",
     });
     return await modal.present();
   }
@@ -504,22 +523,37 @@ debugger;
     });
     return await popover.present();
   }
-  
+  setData(ev: any) {
+    console.log(ev);
+    this.segValue = ev;
+  }
   ChangeData(ev: any) {
-   
     this.endTimeTemp = null;
     this.endTimeTemp2 = null;
     this.timeLine2 = [];
     this.timeLine = [];
     this.timeLineActivity = [];
     //problem with in this array activityDataArray[0]...it contains empty elements
-   console.log("-----------------------------------",this.activityDataArray[0]);
-    this.timeLineActivity =  this.activityDataArray&&this.activityDataArray.length&&this.activityDataArray.length>0?Object.assign({}, this.activityDataArray[ev]):[];
-   
+    console.log(
+      "-----------------------------------",
+      this.activityDataArray[0]
+    );
+    this.timeLineActivity =
+      this.activityDataArray &&
+      this.activityDataArray.length &&
+      this.activityDataArray.length > 0
+        ? Object.assign({}, this.activityDataArray[ev])
+        : [];
+
     this.initCalenderActivity();
     this.timeLine = [];
     this.timeLineShifts = [];
-    this.timeLineShifts = this.shiftsDataArray&&this.shiftsDataArray.length&&this.shiftsDataArray.length>0?Object.assign({}, this.shiftsDataArray[ev]):[];
+    this.timeLineShifts =
+      this.shiftsDataArray &&
+      this.shiftsDataArray.length &&
+      this.shiftsDataArray.length > 0
+        ? Object.assign({}, this.shiftsDataArray[ev])
+        : [];
 
     this.initCalenderShift();
   }
