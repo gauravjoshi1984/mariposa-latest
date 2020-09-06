@@ -1,0 +1,68 @@
+<ion-toolbar>
+  <div
+    class="hdcontent"
+    style="display: flex"
+    *ngIf="page == 'Book' || page == 'Menu'"
+  >
+    <img src="assets/MariposaIcons/micon.svg" alt="" />
+    <ion-title mode="md" class="title-text vitaltext" (click)="toggleData()">
+      {{ page }}
+    </ion-title>
+  </div>
+  <ion-segment
+    [(ngModel)]="segValue"
+    mode="ios"
+    *ngIf="page == 'calender'"
+    (ionChange)="changecal()"
+  >
+    <ion-segment-button value="activities">
+      <ion-label>Activities</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="shifts">
+      <ion-label>Shifts</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <!-- <ng-template #ionsegment> -->
+  <ion-segment
+    value="addvitals"
+    mode="ios"
+    (ionChange)="changevital()"
+    *ngIf="
+      page == 'vital' &&
+      (userInfo.userType == 'SENIOR' || userInfo.userType == 'CAREGIVER')
+    "
+    [(ngModel)]="segmentVar"
+  >
+    <ion-segment-button value="addvitals"> Add Vitals </ion-segment-button>
+    <ion-segment-button value="reports"> Reports </ion-segment-button>
+  </ion-segment>
+  <!-- </ng-template> -->
+  <div
+    class="hdcontent"
+    style="display: flex"
+    *ngIf="
+      userInfo &&
+      (userInfo.userType == 'ADMIN' || userInfo.userType == 'FAMILY')
+    "
+  >
+    <img src="assets/MariposaIcons/micon.svg" alt="" />
+    <ion-title mode="md" class="title-text vitaltext" (click)="toggleData()">
+      Vital Reports
+    </ion-title>
+  </div>
+  <ion-buttons mode="md" slot="end">
+    <ion-button [routerLink]="'/bookvitals/notifications'">
+      <ion-icon
+        mode="md"
+        src="assets/MariposaIcons/notification.svg"
+      ></ion-icon>
+    </ion-button>
+    <ion-button (click)="presentPopover($event)">
+      <ion-icon
+        class="propic"
+        mode="md"
+        src="assets/MariposaIcons/profile_img.svg"
+      ></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
