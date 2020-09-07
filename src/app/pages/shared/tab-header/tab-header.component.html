@@ -41,12 +41,12 @@
     class="hdcontent"
     style="display: flex"
     *ngIf="
-      userInfo &&
+    page == 'vital' &&
       (userInfo.userType == 'ADMIN' || userInfo.userType == 'FAMILY')
     "
   >
     <img src="assets/MariposaIcons/micon.svg" alt="" />
-    <ion-title mode="md" class="title-text vitaltext" (click)="toggleData()">
+    <ion-title mode="md" class="title-text vitaltext" >
       Vital Reports
     </ion-title>
   </div>

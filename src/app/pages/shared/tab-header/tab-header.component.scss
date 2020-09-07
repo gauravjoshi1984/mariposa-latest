@@ -2,6 +2,27 @@ ion-toolbar{
   margin-top: 20px;
 }
 
+.vitaltext {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+   color: #010465;
+  margin: 0 0 0 8px;
+}
+
+
+.titletext {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  /* Direct Black */
+  margin: 0;
+  width: 196px;
+  color: #1a1a1a;
+}
+
 ion-icon {
   zoom: 1;
   font-size: 24px;

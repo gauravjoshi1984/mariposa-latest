@@ -451,6 +451,7 @@ export class VitalsPage implements OnInit {
     this.navCtrl.navigateForward(`/bookvitals/reportdetailedview`);
   }
   setData(ev: any) {
+    console.log("---------------------------",ev)
     this.segmentVar = ev;
   }
 }
