@@ -43,7 +43,6 @@ export class ForgotpasswordPage implements OnInit {
         this.navCtrl.navigateForward(['forgotpasswordcompleted']);
         this.dataService.setSignupData(this.forgotPasswordForm.value);
       }, err => {
-        console.log(err);
       });
     }
   }

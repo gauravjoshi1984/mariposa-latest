@@ -35,8 +35,7 @@ export class ConfigurecarebarPage implements OnInit {
     const careNeedPrefs = this.assessmentData.assessmentConfiguration.CARE_NEED_PREFS.options;
     const careNeedPrefsValues = this.assessmentData.assessmentValues.CARE_NEED_PREFS;
     const careNeedValues = this.assessmentData.assessmentValues.CARE_NEEDS;
-    const configCareDetails = await this.configCareService.getConfigCareDetails();
-    console.log(configCareDetails);
+    const configCareDetails = await this.configCareService.getConfigCareDetails(true, true);
     const configCareValues = configCareDetails.configCareValues;
     let openFlag = false;
     this.stepperData = [];

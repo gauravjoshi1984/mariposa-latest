@@ -22,53 +22,55 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    dataService: DataserviceService
+    private dataService: DataserviceService
   ) {
     this.initializeApp();
-    Device.getInfo().then(data => {
-      if (data.platform !== 'web'){
-        PushNotifications.requestPermission().then( result => {
-          if (result.granted) {
-            // Register with Apple / Google to receive push via APNS/FCM
-            console.log('result granted');
-            PushNotifications.register();
-          } else {
-            // Show some error
-            console.log('result not granted');
-          }
-        });
-        PushNotifications.addListener('registration',
-            (token: PushNotificationToken) => {
-              data.uuid = token.value;
-              dataService.setDeviceInfo(data);
-          }
-        );
-        PushNotifications.addListener('pushNotificationReceived',
-          (notification: PushNotification) => {
-            alert('Push received: ' + JSON.stringify(notification));
-          }
-        );
-      }
-    });
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      const notifs = LocalNotifications.schedule({
-        notifications: [
-          {
-            title: 'Mariposa',
-            body: 'Welcome to Mariposa!',
-            id: 1,
-            schedule: { at: new Date(Date.now() + 1000 * 5) },
-            smallIcon: '/assets/MariposaIcons/mariposa-icon.png',
-            actionTypeId: '',
-          }
-        ]
-      });
+      // const notifs = LocalNotifications.schedule({
+      //   notifications: [
+      //     {
+      //       title: 'Mariposa',
+      //       body: 'Welcome to Mariposa!',
+      //       id: 1,
+      //       schedule: { at: new Date(Date.now() + 1000 * 5) },
+      //       smallIcon: '/assets/MariposaIcons/mariposa-icon.png',
+      //       actionTypeId: '',
+      //     }
+      //   ]
+      // });
       this.statusBar.overlaysWebView(false);
       this.statusBar.backgroundColorByHexString('#000000');
       this.splashScreen.hide();
+      Device.getInfo().then(data => {
+        this.dataService.setDeviceInfo(data);
+        if (data?.platform !== 'web'){
+          PushNotifications.requestPermission().then( result => {
+            if (result.granted) {
+              // Register with Apple / Google to receive push via APNS/FCM
+              PushNotifications.register();
+            } else {
+              // Show some error
+              console.log('result not granted');
+            }
+          });
+          PushNotifications.addListener('registration',
+              (token: PushNotificationToken) => {
+                data.uuid = token.value;
+                this.dataService.setDeviceInfo(data);
+            }
+          );
+          PushNotifications.addListener('pushNotificationReceived',
+            (notification: PushNotification) => {
+              alert('Push received: ' + JSON.stringify(notification));
+            }
+          );
+        }
+        else{
+        }
+      });
     });
   }
 }

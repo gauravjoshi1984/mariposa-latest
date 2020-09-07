@@ -17,6 +17,7 @@ export class PersonalinfoPage implements OnInit {
   careCircleId;
   userId;
   key: string;
+  formLoaded;
   livesWith = [];
   countries = [];
   constructor(
@@ -63,6 +64,7 @@ export class PersonalinfoPage implements OnInit {
         this.personalInfoForm.controls[key].setValue(this.stateObject[key]);
       });
     }
+    this.formLoaded = true;
   }
 
   save(){
@@ -74,5 +76,8 @@ export class PersonalinfoPage implements OnInit {
   }
   selectGender(value){
     this.personalInfoForm.controls.gender.setValue(value);
+  }
+  compareFn(val1, val2): boolean {
+    return val1 && val2 && val1 === val2;
   }
 }

@@ -1,5 +1,5 @@
 <ion-header>
-  <!-- <ion-toolbar class="headtoolbar">
+    <!-- <ion-toolbar class="headtoolbar">
     <ion-row>
       <ion-col size="2">
         <ion-toolbar>
@@ -19,69 +19,60 @@
       </ion-col>
     </ion-row>
   </ion-toolbar> -->
-  <ion-toolbar
-    ><ion-buttons slot="start">
-      <ion-button [routerLink]="'/../'" routerDirection="backward">
-        <ion-icon slot="icon-only" src="assets/back.svg"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>17th January 2020</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="back()">
+                <ion-icon slot="icon-only" src="assets/back.svg"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title *ngIf="loaded">{{selectedPost.createdDate | date: "dd-MMM-yyyy"}}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-slides pager="true" [options]="slideOpts" class="bookslider">
-    <ion-slide>
-      <img src="assets/tabs/Mask Group.svg" alt="" />
-      <!-- <h1>Slide 1</h1> -->
-    </ion-slide>
-    <ion-slide>
-      <img src="assets/tabs/Mask Group.svg" alt="" />
-    </ion-slide>
-    <ion-slide>
-      <img src="assets/tabs/Mask Group.svg" alt="" />
-    </ion-slide>
-    <ion-slide>
-      <img src="assets/tabs/Mask Group.svg" alt="" />
-    </ion-slide>
-    <ion-slide>
-      <img src="assets/tabs/Mask Group.svg" alt="" />
-    </ion-slide>
-  </ion-slides>
-  <div class="activitydiv">
-    <p class="activitytxt">Yesterday’s Activities</p>
-  </div>
-  <div class="activitydescriptiondiv">
-    <p class="activitydescription">
-      Bathing, Breakfast, Medication: Ibuprofine, Lunch, Snack, Exercise,
-      Dinner, Medication: ABCD Vitamin Syrup
-    </p>
-  </div>
-  <div class="activitynotediv">
-    <p class="activitynote">
-      Notes: This notes will be coming from care giver if she enters any
-      specific
-    </p>
-  </div>
+    <div *ngIf="loaded">
+        <ion-slides pager="true" [options]="slideOpts" class="bookslider">
+            <ion-slide *ngFor="let image of selectedPost.values.imageList">
+                <img [src]="image" alt="" />
+                <!-- <h1>Slide 1</h1> -->
+            </ion-slide>
+        </ion-slides>
+        <div class="activitydiv">
+            <p class="activitytxt">Activities on {{selectedPost.createdDate | date: "dd-MMM-yyyy"}}</p>
+        </div>
+        <div class="activitydescriptiondiv">
+            <p class="activitydescription">
+                {{selectedPost.title}}
+            </p>
+        </div>
+        <div class="activitynotediv">
+            <p class="activitynote">
+                Notes: {{selectedPost.notes}}
+            </p>
+        </div>
 
-  <div class="ion-no-padding">
-    <hr />
-  </div>
+        <div class="ion-no-padding">
+            <hr />
+        </div>
 
-  <div class="hdingdiv">
-    <p class="">Vitals</p>
-  </div>
-  <div class="reportdiv">
-    <p>Blood Pressure <span class="spn1">:</span> 120/80</p>
-    <p>Temperature <span class="spn2">:</span> 98.6 F</p>
-    <p>Pulse Rate <span class="spn3">:</span> 77bpm</p>
-    <p>Respiration <span class="spn4">:</span> 16 /m</p>
-  </div>
-  <hr />
-  <div class="hdingdiv" style="padding-top: 8px;">
-    <p style="margin-top: 0;">Medication</p>
-  </div>
-  <div class="medicindetdiv">
-    <p class="medicindet">Ibuprofine MKal, ABCD Vitamin Syrup</p>
-  </div>
+        <div class="hdingdiv">
+            <p class="">Vitals</p>
+        </div>
+        <div class="reportdiv" *ngIf="objectKeys(selectedPost.values.vital).length">
+            <p *ngFor="let item of objectKeys(selectedPost.values.vital)">{{item}} <span class="spn1">:</span> {{concatValues(selectedPost.values.vital[item])}}</p>
+            <!-- <p>Temperature <span class="spn2">:</span> 98.6 F</p>
+            <p>Pulse Rate <span class="spn3">:</span> 77bpm</p>
+            <p>Respiration <span class="spn4">:</span> 16 /m</p> -->
+        </div>
+        <hr />
+        <div class="hdingdiv" style="padding-top: 8px;">
+            <p style="margin-top: 0;">Medication</p>
+        </div>
+        <div class="medicindetdiv">
+            <p class="medicindet" *ngIf="objectKeys(selectedPost.values.medication).length; else noMedication">{{objectKeys(selectedPost.values.medication).join(', ')}}</p>
+            <ng-template #noMedication>
+                <p> - </p>
+            </ng-template>
+        </div>
+    </div>
 </ion-content>

@@ -355,7 +355,7 @@
                 <ion-text class="tags" style="line-height:24px;">Allergic to these medications</ion-text>
             </ion-col>
             <ion-col>
-                <ion-text class="details"> : {{getPropertyValues(assessmentData.assessmentValues.CARE_NEEDS.MEDICATION)}}</ion-text>
+                <ion-text class="details"> : {{getArrayValues(assessmentData.assessmentValues.CARE_NEEDS.MEDICATION.allergy, 'name')}}</ion-text>
             </ion-col>
         </ion-row>
 

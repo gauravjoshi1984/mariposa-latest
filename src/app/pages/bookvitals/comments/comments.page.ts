@@ -12,6 +12,7 @@ export class CommentsPage implements OnInit {
 
   username = '';
   dataLoaded = false;
+  content = '';
   chatmessages: any = [];
   imageList  = [];
   postDate = '';
@@ -41,11 +42,17 @@ export class CommentsPage implements OnInit {
   }
   async ionViewWillEnter(){
     this.selectedPost = await this.bookVitalService.getSelectedPost();
+    if (!this.selectedPost){
+      this.navCtrl.back();
+    }
+    this.bookVitalService.setSelectedPost(null);
     this.chatmessages = this.selectedPost.comments ? this.selectedPost.comments : [];
     const userInfo = await this.dataService.getUserInfo();
     this.username = userInfo.userName;
     this.postDate = this.selectedPost.createdDate;
-    this.notes = this.selectedPost.values.content;
+    this.content =  this.selectedPost.values.content;
+    this.notes = this.selectedPost.notes ? this.selectedPost.notes : this.selectedPost.values.content;
+    this.imageList = this.selectedPost.values.imageList;
   }
   addComment(){
     const commentObj = {comment: this.commentText, userId: this.selectedPost.createdBy, userName: this.username, time: new Date()};

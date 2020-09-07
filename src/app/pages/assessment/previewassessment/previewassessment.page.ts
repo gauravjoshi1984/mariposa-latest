@@ -69,7 +69,7 @@ export class PreviewassessmentPage implements OnInit {
       return arr.map(val => val[key]).join(', ');
     }
     else{
-      return '';
+      return 'None';
     }
   }
   getDob(day, month, year){

@@ -1,118 +1,125 @@
-
-ion-title{
-  font-style: normal;
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 19px;
- 
-  color: #1A1A1A; 
+ion-title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1A1A1A;
 }
+
 .shareicon {
-  font-size: 28px;
-  padding: 0 0 0 25px;
+    font-size: 28px;
+    padding: 0 0 0 25px;
 }
+
 .weekselect {
-  ion-item {
-    ion-label {
-      font-style: normal;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 17px;
-      /* identical to box height */
-
-      display: flex;
-      align-items: center;
-
-      color: #000000;
+    ion-item {
+        ion-label {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            /* identical to box height */
+            display: flex;
+            align-items: center;
+            color: #000000;
+        }
+        padding: 0 0 0 7px;
     }
-    padding: 0 0 0 7px;
-  }
-  p {
-    margin: 0;
-    padding: 0 0 0 24px;
+    p {
+        margin: 0;
+        padding: 0 0 0 24px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 17px;
+        /* identical to box height */
+        display: flex;
+        align-items: center;
+        /* Dark Grey */
+        color: #7e7e7e;
+    }
+}
+
+.reportcard {
+    background: #ffffff;
+    /* Medium Grey */
+    padding: 16px;
+    border: 0.4px solid #b8b8b8;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.08), 0px 0px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    margin: 0 24px;
+}
+
+.bpchart {
+    width: 326px;
+    height: 158px;
+    background-color: red;
+    margin: 0 0 0 24px;
+}
+
+.dtldreport {
+    padding: 45px 24px 0px 24px;
+    .dtldreportdate {
+        min-width: 140px;
+        display: inline-block;
+        /* height: 26px; */
+        padding: 6px 5px;
+        background: #EAFCFD;
+        border-radius: 4px;
+        p {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            /* identical to box height */
+            display: flex;
+            align-items: center;
+            text-align: center;
+            /* Direct Black */
+            color: #1a1a1a;
+            margin: 0;
+        }
+    }
+}
+
+.dtldtime {
+    text-align: right;
+}
+
+.dtldnote {
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
     line-height: 17px;
-    /* identical to box height */
-
     display: flex;
     align-items: center;
-
     /* Dark Grey */
-
     color: #7e7e7e;
-  }
+    margin: 0;
 }
 
-.reportcard {
-  background: #ffffff;
-  /* Medium Grey */
-  padding: 16px;
-
-  border: 0.4px solid #b8b8b8;
-  box-sizing: border-box;
-  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.08), 0px 0px 1px rgba(0, 0, 0, 0.25);
-  border-radius: 8px;
-  margin: 0 24px;
-}
-
-.bpchart {
-  width: 326px;
-  height: 158px;
-  background-color: red;
-  margin: 0 0 0 24px;
-}
-.dtldreport {
-  padding: 45px 24px 0px 24px;
-  .dtldreportdate {
-    width: 140px;
-    height: 26px;
-    background: #EAFCFD;
-    
-    border-radius: 4px;
-    p {
-      font-style: normal;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 17px;
-      /* identical to box height */
-
-      display: flex;
-      align-items: center;
-      text-align: center;
-
-      /* Direct Black */
-
-      color: #1a1a1a;
-      margin: 0;
-    }
-  }
-}
-.dtldtime {
-  padding: 0 0 0 50px;
-}
-.dtldnote {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  display: flex;
-  align-items: center;
-
-  /* Dark Grey */
-
-  color: #7e7e7e;
-  margin: 0;
-}
 hr {
-  height: 1px;
-  border-width: 0;
-  box-sizing: content-box;
-  /* background: aquamarine; */
-  background: #e0e0e0;
-  margin: 8px 24px;
+    height: 1px;
+    border-width: 0;
+    box-sizing: content-box;
+    /* background: aquamarine; */
+    background: #e0e0e0;
+    // margin: 8px 24px;
 }
+
 .dtldreport2 {
-  padding: 0px 24px 0 24px;
+    padding: 0px 24px 0 24px;
+}
+
+.timesec {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    float: right;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    color: #000000;
 }

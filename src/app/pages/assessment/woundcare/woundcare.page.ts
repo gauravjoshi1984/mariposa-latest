@@ -49,7 +49,6 @@ export class WoundcarePage implements OnInit {
     }
     this.stateObject[this.key] = this.woundForm.value;
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
-      console.log(response);
       this.navCtrl.back();
     });
   }

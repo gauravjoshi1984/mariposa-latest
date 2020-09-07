@@ -18,6 +18,7 @@ export class MSelectdateComponent implements OnInit {
   @ViewChild('datepicker') datepicker: IonDatetime;
   @Output() result = new EventEmitter<[]>();
   @Input() times;
+  @Input() single?;
   timeList: any = [];
   timeindex: number;
 

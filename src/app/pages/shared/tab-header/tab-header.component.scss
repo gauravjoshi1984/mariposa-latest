@@ -1,6 +1,7 @@
 ion-icon {
   zoom: 1;
   font-size: 24px;
+ 
 }
 
 .propic {
@@ -46,4 +47,12 @@ ion-segment-button {
   border-top: 0.1px solid #4137ff;
   border-bottom: 0.1px solid #4137ff;
   // border-right: 0.1px solid #4137ff;
+}
+
+ion-toolbar{
+  height: 56px;
+}
+
+ion-buttons{
+  margin-top:5px;
 }

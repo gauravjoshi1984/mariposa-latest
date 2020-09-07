@@ -65,7 +65,6 @@ export class ScheduledressingPage implements OnInit {
     this.dressingForm.patchValue({ timeList: this.timeList });
     this.dressingForm.patchValue({ repeatDays: this.selectedDays });
     this.dressingForm.patchValue({ imageList: this.imageList });
-    console.log(this.dressingForm.value);
     this.configCareService.saveConfigCareDetails(this.key, [this.dressingForm.value]).then(data => {
       this.navCtrl.back();
     });
@@ -82,7 +81,6 @@ export class ScheduledressingPage implements OnInit {
     this.outfitData = assessmentData.assessmentValues.CARE_NEEDS[this.key];
     if (this.key in this.configCareDetails.configCareValues && this.configCareDetails.configCareValues[this.key] !== null){
       const savedConfig = this.configCareDetails.configCareValues[this.key][0];
-      console.log(savedConfig);
       if (savedConfig != null){
           this.timeList = savedConfig.timeList;
           this.selectedDays = savedConfig.repeatDays;

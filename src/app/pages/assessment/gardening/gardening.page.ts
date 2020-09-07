@@ -32,10 +32,8 @@ export class GardeningPage implements OnInit {
     }
     this.stateObject.GARDENING = this.formData;
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
-      console.log(response);
       this.navCtrl.back();
     });
-    console.log('called Save', this.formData);
   }
 
   async ionViewWillEnter(){

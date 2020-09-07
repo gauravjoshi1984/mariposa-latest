@@ -5,7 +5,7 @@ import { ConfigCareServiceService } from '../config-care-service.service';
 import { DataserviceService } from '../../dataservice.service';
 import { CreatingcareService } from '../../creatingcare/creatingcare.service';
 import { AssessmentServiceService } from '../../assessment/assessment-service.service';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-addmedicine',
   templateUrl: './addmedicine.page.html',
@@ -17,7 +17,7 @@ export class AddmedicinePage implements OnInit {
   careCircleDetails;
   medicineType = [];
   stateData = {};
-  minDate = new Date().toISOString().split('T')[0];
+  minDate = moment().format('YYYY-MM-DD');
   medicineForm = new FormGroup({
     type: new FormControl(''),
     name: new FormControl(),
@@ -25,8 +25,8 @@ export class AddmedicinePage implements OnInit {
     repeatDays: new FormControl([]),
     assignedTo: new FormControl({}),
     dosage: new FormControl(''),
-    startDate: new FormControl(new Date().toISOString().split('T')[0]),
-    endDate: new FormControl(new Date().toISOString().split('T')[0]),
+    startDate: new FormControl(moment().format('YYYY-MM-DD')),
+    endDate: new FormControl(moment().format('YYYY-MM-DD')),
     instructions: new FormControl(''),
     imageList: new FormControl([]),
   });

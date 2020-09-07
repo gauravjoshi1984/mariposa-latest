@@ -57,20 +57,6 @@ export class AdminSignInPage implements OnInit {
     {
       validator: MustMatch('password', 'confirmPassword')
     });
-    this.dataService.getDeviceInfo().then(deviceDetails => {
-      this.deviceDetails = deviceDetails;
-      if (deviceDetails.platform !== 'web'){
-        Keyboard.addListener('keyboardWillShow', () => {
-          this.isKeyboardOpen = true;
-          detector.detectChanges();
-        }),
-        Keyboard.addListener('keyboardWillHide', () => {
-          this.isKeyboardOpen = false;
-          detector.detectChanges();
-        }),
-        this.isKeyboardOpen = false;
-      }
-    });
   }
   get loginFormControl() {
     return this.loginForm.controls;
@@ -85,14 +71,16 @@ export class AdminSignInPage implements OnInit {
     this.type = 'signin';
     this.helpMenuOpen = 'in';
   }
-  loginUser(){
+  async loginUser(){
     if (this.loginForm.valid){
+      this.deviceDetails = await this.dataService.getDeviceInfo();
       this.loginForm.controls.email.setValue(this.loginForm.value.email.toLowerCase());
       this.http.post('user/login', {...this.loginForm.value, deviceDetails: this.deviceDetails}).then(async (response: any) => {
         this.dataService.setUserInfo(response);
         this.dataService.getInitialData();
         // this.navCtrl.navigateForward(['carecircle']);
         const lastVisited = await this.dataService.getlastVisitedPage();
+        this.dataService.getInitialData();
         this.navCtrl.navigateForward([lastVisited ? lastVisited : 'carecircle/showcarecircle']);
       }, (error) => {
         if (error?.msg.indexOf('not verified') === 8){
@@ -141,6 +129,20 @@ export class AdminSignInPage implements OnInit {
 
    ionViewWillEnter() {
     this.type = 'signin';
+    this.dataService.getDeviceInfo().then(deviceDetails => {
+      this.deviceDetails = deviceDetails;
+      if (deviceDetails && deviceDetails.platform !== 'web'){
+        Keyboard.addListener('keyboardWillShow', () => {
+          this.isKeyboardOpen = true;
+          this.detector.detectChanges();
+        }),
+        Keyboard.addListener('keyboardWillHide', () => {
+          this.isKeyboardOpen = false;
+          this.detector.detectChanges();
+        }),
+        this.isKeyboardOpen = false;
+      }
+    });
   }
 
   segmentChanged(ev: any) {

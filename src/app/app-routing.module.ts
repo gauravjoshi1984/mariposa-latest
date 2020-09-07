@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { MariposaAuthGuardService } from './mariposa-auth-guard.service';
+import { MariposaLoginGuard } from './mariposa-login.guard';
 
 const routes: Routes = [
 
@@ -17,30 +18,37 @@ const routes: Routes = [
 
   {
     path: 'forgotpassword',
+    canActivate: [MariposaLoginGuard],
     loadChildren: () => import('./pages/onboarding/forgotpassword/forgotpassword.module').then( m => m.ForgotpasswordPageModule)
   },
   {
     path: 'resetpassword',
+    canActivate: [MariposaLoginGuard],
     loadChildren: () => import('./pages/onboarding/resetpassword/resetpassword.module').then( m => m.ResetpasswordPageModule)
   },
   {
     path: 'resetpasswordemail',
+    canActivate: [MariposaLoginGuard],
     loadChildren: () => import('./pages/onboarding/resetcheckmail/resetcheckmail.module').then( m => m.ResetcheckmailPageModule)
   },
   {
     path: 'forgotpasswordcompleted',
+    canActivate: [MariposaLoginGuard],
     loadChildren: () => import('./pages/onboarding/forgotpasswordcompleted/forgotpasswordcompleted.module').then( m => m.ResetpasswordcompletedPageModule)
   },
   {
     path: 'resetcheckmail',
+    canActivate: [MariposaLoginGuard],
     loadChildren: () => import('./pages/onboarding/resetcheckmail/resetcheckmail.module').then( m => m.ResetcheckmailPageModule)
   },
   {
     path: 'otp',
+    canActivate: [MariposaLoginGuard],
     loadChildren: () => import('./pages/onboarding/otp/otp.module').then( m => m.OtpPageModule)
   },
   {
     path: 'invitation',
+    canActivate: [MariposaLoginGuard],
     loadChildren: () => import('./pages/onboarding/invitation/invitation.module').then( m => m.InvitationPageModule)
   },
   {
@@ -359,7 +367,7 @@ const routes: Routes = [
   },
   {
     path: 'bookvitals',
-    //canActivate: [MariposaAuthGuardService],
+    canActivate: [MariposaAuthGuardService],
     children: [
       {
         path: '',
@@ -370,7 +378,7 @@ const routes: Routes = [
         loadChildren: () => import('./pages/bookvitals/bookdetailedview/bookdetailedview.module').then( m => m.BookdetailedviewPageModule)
       },
       {
-        path: 'bloodpressuredetailedview',
+        path: 'reportdetailedview',
         loadChildren: () => import('./pages/bookvitals/bloodpressuredetailedview/bloodpressuredetailedview.module').then( m => m.BloodpressuredetailedviewPageModule)
       },
       {

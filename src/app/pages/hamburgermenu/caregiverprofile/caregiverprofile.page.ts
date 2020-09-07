@@ -3,7 +3,7 @@ import { CreatingcareService } from '../../creatingcare/creatingcare.service';
 import { DataserviceService } from '../../dataservice.service';
 import { ApiService } from 'src/app/http.service';
 import { NavController } from '@ionic/angular';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-caregiverprofile',
   templateUrl: './caregiverprofile.page.html',
@@ -35,7 +35,7 @@ export class CaregiverprofilePage implements OnInit {
   ];
 
   daysList = [];
-
+  min = moment().format('YYYY-MM-DD');
 
 
   constructor(
@@ -48,6 +48,7 @@ export class CaregiverprofilePage implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   addremoveDay(item, repeatDays) {
@@ -64,7 +65,6 @@ export class CaregiverprofilePage implements OnInit {
       shift.startTime = `${(shift.startTime.hours % 12).toString().padStart(2, '0')}:${shift.startTime.minutes.toString().padStart(2, '0')}`;
       shift.endTime = `${(shift.endTime.hours % 12).toString().padStart(2, '0')}:${shift.endTime.minutes.toString().padStart(2, '0')}`;
     });
-    console.log(this.member);
 
   }
   // getTimeFromObj(obj){
@@ -75,8 +75,8 @@ export class CaregiverprofilePage implements OnInit {
     this.member.configuration.shifts.push({
       startTime: '12:00',
       endTime: '12:00',
-      startDate: new Date().toISOString().split('T')[0],
-      endDate: new Date().toISOString().split('T')[0],
+      startDate: moment().format('YYYY-MM-DD'),
+      endDate: moment().format('YYYY-MM-DD'),
       repeat: [],
     });
   }
@@ -93,8 +93,7 @@ export class CaregiverprofilePage implements OnInit {
       time = shift.endTime.split(':');
       shift.endTime = {hours: +time[0], minutes: +time[1]};
     });
-    this._apiService.post('careCircle/updateShifts/?careCircleId=' + careCircleId + '&userId=' + memberData.userId + '&updatedBy=' + userInfo.userId + '', memberData.configuration.shifts).then((data) => {
-      console.log(data);
+    this._apiService.put('careCircle/updateShifts/?careCircleId=' + careCircleId + '&userId=' + memberData.userId + '&updatedBy=' + userInfo.userId + '', memberData.configuration.shifts).then((data) => {
       this.navCtrl.back();
     });
   }

@@ -1,16 +1,16 @@
-<app-m-header-close title="Shopping List"></app-m-header-close>
+<app-m-header-close title="Schedule Shopping"></app-m-header-close>
 <ion-content>
     <ion-grid class="selecttimegrid">
         <!-- SELECT TIME -->
-        <m-selectdate [times]="timeList" (result)="addtime($event,'timeList')"></m-selectdate>
+        <m-selectdate [times]="timeList" single="true" (result)="addtime($event,'timeList')"></m-selectdate>
         <!-- SELECT TIME END -->
 
         <div style="padding: 0px;" class="nametag">
             <ion-text position="floating" id="tag">Assign to</ion-text>
         </div>
         <div style="padding-top: 5px;">
-            <ion-select mode="md" class="input" placeholder="Select one">
-                <ion-select-option value="caregiver">Care Giver</ion-select-option>
+            <ion-select [(ngModel)]="formData.assignedTo" mode="ios" [compareWith]="compareFn" interface="popover" class="input" placeholder="Assigned To">
+                <ion-select-option [value]="item" *ngFor="let item of careCircleDetails">{{item.assigned ? item.assigned.userName : 'Caregiver'}}</ion-select-option>
             </ion-select>
         </div>
     </ion-grid>
@@ -48,12 +48,13 @@
                 <ion-row style="margin-top:6px;align-items: center;">
                     <ion-col size="2"></ion-col>
                     <ion-col size="5">
-                        <ion-input class="input"></ion-input>
+                        <ion-input [(ngModel)]="item.quantity" type="number" class="input"></ion-input>
                     </ion-col>
                     <ion-col size="5">
-                        <ion-select style="width:90%;float:right;" class="input">
-                            <ion-select-option value="no's">No's</ion-select-option>
-                            <ion-select-option value="kg">KG</ion-select-option>
+                        <ion-select mode="ios" [(ngModel)]="item.unit" interface="popover" style="width:90%;float:right;" class="input">
+                            <ion-select-option value="no's">no's</ion-select-option>
+                            <ion-select-option value="kg">kg</ion-select-option>
+                            <ion-select-option value="kg">lt</ion-select-option>
                         </ion-select>
                     </ion-col>
                 </ion-row>
@@ -69,7 +70,7 @@
         <ion-grid class="ion-no-padding">
             <ion-row>
                 <ion-col size="6">
-                    <ion-button expand="block" class="lbtn" shape="round">
+                    <ion-button routerLink="/assessment/addshoppinglist" expand="block" class="lbtn" shape="round">
                         ADD MORE
                     </ion-button>
                 </ion-col>

@@ -63,7 +63,6 @@ export class SchedulewoundcarePage implements OnInit {
     this.woundcareForm.patchValue({ timeList: this.timeList });
     this.woundcareForm.patchValue({ repeatDays: this.selectedDays });
     this.woundcareForm.patchValue({ imageList: this.imageList });
-    console.log(this.woundcareForm.value);
     this.woundcareForm.controls.startDate.patchValue(this.woundcareForm.controls.startDate.value.split('T')[0]);
     this.woundcareForm.controls.endDate.patchValue(this.woundcareForm.controls.endDate.value.split('T')[0]);
     this.configCareService.saveConfigCareDetails(this.key, [this.woundcareForm.value]).then(data => {

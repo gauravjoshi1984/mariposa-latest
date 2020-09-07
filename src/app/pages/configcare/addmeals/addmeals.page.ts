@@ -145,6 +145,7 @@ export class AddmealsPage implements OnInit {
         this.selectedDays = savedConfig.repeatDays;
         this.mealForm.controls.instructions.setValue(savedConfig.instructions);
         this.mealForm.controls.type.setValue(savedConfig.type);
+        this.mealForm.controls.favRecepie.setValue(savedConfig.favRecepie);
         this.mealForm.controls.assignedTo.setValue(savedConfig.assignedTo);
         this.imageList = savedConfig.imageList;
         this.editFlag = true;

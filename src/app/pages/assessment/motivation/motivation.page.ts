@@ -28,7 +28,6 @@ export class MotivationPage implements OnInit {
   save(){
     this.stateObject = this.motivationForm;
     this.assessmentService.saveAssessmentState(this.careCircleId, this.key, this.userId, this.stateObject).then((response) => {
-      console.log(response);
       this.navCtrl.back();
     });
   }

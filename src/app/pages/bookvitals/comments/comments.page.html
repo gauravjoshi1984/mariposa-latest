@@ -3,7 +3,7 @@
 
 <ion-content>
     <ion-slides *ngIf="imageList.length" pager="true" [options]="slideOpts" class="bookslider">
-        <ion-slide *ngFor="let image of imageList">
+        <ion-slide style="max-height: 200px;" *ngFor="let image of imageList">
             <img [src]="image" alt="" />
         </ion-slide>
     </ion-slides>
@@ -12,7 +12,7 @@
     </div>
     <div class="activitydescriptiondiv">
         <p class="activitydescription">
-            {{notes}}
+            {{content}}
         </p>
     </div>
     <div class="activitynotediv">

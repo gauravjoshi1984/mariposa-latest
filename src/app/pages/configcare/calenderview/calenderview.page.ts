@@ -64,46 +64,42 @@ export class CalenderviewPage implements OnInit {
     }
   }
   initCalenderShift() {
-    this.lowesttimeper = this.timeLineShifts.min;
-    this.highesttimeper = this.timeLineShifts.max;
-    let index = 0;
+    this.lowesttimeper = this.timeLineShifts.min.clone();
+    this.lowesttimeper.set({minute: 0, second: 0});
+    this.highesttimeper = this.timeLineShifts.max.clone();
+    this.highesttimeper.set({minute: 59, second: 59});
+    // let index = 0;
     this.timeLineShifts.events.forEach((element, i) => {
-      if (this.endTimeTemp && element.startTime && this.endTimeTemp.format('HH:mm:ss') !== element.startTime.format('HH:mm:ss')) {
-        const dur = moment.duration(element.startTime.diff(this.endTimeTemp));
-        const hrs: any = dur.asHours();
-        const tempData: any = {
-          // emptyspace: hrs,
-          emptyheight: hrs * 84.6,
-        };
-        this.timeLineShifts.events.splice(index, 0, tempData);
-        index++;
-      }
-      if (element.key) {
-        const duration = moment.duration(element.endTime.diff(element.startTime));
-        // duration in hours
-        const hours: any = duration.asHours();
-        element.hours = hours;
-        element.height = hours * 84.6 - 8;
+      // if (this.endTimeTemp && element.startTime && this.endTimeTemp.format('HH:mm:ss') !== element.startTime.format('HH:mm:ss')) {
+        const positionDuration = moment.duration(element.startTime.diff(this.lowesttimeper));
+        const positionHours: any = Math.abs(positionDuration.asHours());
+        // const tempData: any = {
+        //   // emptyspace: hrs,
+        //   emptyheight: hrs * 84.6,
+        // };
+        // this.timeLineShifts.events.splice(index, 0, tempData);
+        // index++;
+      // }
+      // if (element.key) {
+        const heightDuration = moment.duration(element.endTime.diff(element.startTime));
+        const heightHours: any = Math.abs(heightDuration.asHours());
+        element.hours = heightHours;
+        element.top = positionHours * 84.6;
+        element.height = heightHours * 84.6 - 8;
         element.height = element.height < 68 ? 'auto' : element.height + 'px';
-        this.endTimeTemp = element.endTime;
-        index++;
-      }
+        // this.endTimeTemp = element.endTime;
+        // index++;
+      // }
     });
-    const duration = moment.duration(
-      this.highesttimeper.diff(this.lowesttimeper)
-    );
 
-    // duration in hours
-    const hours: any = duration.asHours();
-
+    const duration = moment.duration(this.highesttimeper.diff(this.lowesttimeper));
+    const hours: any = duration.asHours() + 1;
     for (let index = 0; index < hours; index++) {
       if (index === 0) {
         this.timeLine.push(this.lowesttimeper.format('hh A'));
       } else {
-        const temp = this.lowesttimeper;
-        this.timeLine.push(
-          this.lowesttimeper.clone().add(index, 'hours').format('hh A')
-        );
+        // const temp = this.lowesttimeper;
+        this.timeLine.push(this.lowesttimeper.clone().add(index, 'hours').format('hh A'));
       }
     }
   }

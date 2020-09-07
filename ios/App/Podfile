@@ -15,7 +15,8 @@ def capacitor_pods
   # Do not delete
 end
 
-target 'App' do
+target 'mariposa.care' do
   capacitor_pods
+  pod 'Firebase/Messaging'
   # Add your Pods here
 end

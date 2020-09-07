@@ -21,7 +21,7 @@
         </ion-text>
     </ion-col>
 </ion-row>
-<ion-button class="addbutton" fill="outline" shape="round" (click)="addDate({})">
+<ion-button *ngIf="!single" class="addbutton" fill="outline" shape="round" (click)="addDate({})">
     <ion-icon class="plusbutton" slot="start" name="add-circle"></ion-icon>ADD
 </ion-button>
 <ion-datetime style="display: none;" [pickerOptions]="customPickerOptions" #datepicker displayFormat="h:mm A" minuteValues="0,15,30,45"></ion-datetime>

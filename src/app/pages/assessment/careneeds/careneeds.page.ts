@@ -64,7 +64,6 @@ export class CareneedsPage implements OnInit {
         });
     }
     checkOptions(){
-        console.log(this.careneedinfo);
     }
     back(){
         this.navCtrl.navigateBack(['/carecircle/list']);

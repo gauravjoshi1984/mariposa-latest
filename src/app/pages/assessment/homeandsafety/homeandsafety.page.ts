@@ -31,13 +31,10 @@ export class HomeandsafetyPage implements OnInit {
     } else {
       ev.checked = true;
     }
-    console.log(ev.checked);
   }
 
   generateClick2(ev: any, value) {
     ev.value = value;
-
-    console.log(ev);
  }
 
 }

@@ -1,6 +1,6 @@
 <ion-header mode="md">
-  <ion-toolbar class="headtoolbar">
-    <!-- <ion-row>
+    <ion-toolbar class="headtoolbar">
+        <!-- <ion-row>
       <ion-col size="2">
         <ion-toolbar>
           <ion-buttons slot="start">
@@ -27,196 +27,83 @@
         </div>
       </ion-col>
     </ion-row> -->
-   <ion-buttons slot="start">
-    <ion-button [routerLink]="'../'" routerDirection="backward">
-      <ion-icon slot="icon-only" src="assets/back.svg"></ion-icon>
-    </ion-button>
-   </ion-buttons>
-   <ion-title>Blood Pressure</ion-title>
-   <ion-buttons slot="end">
-    <ion-button >
-      <ion-icon
-      class="shareicon"
-      src="assets/MariposaIcons/Share icon.svg"
-      slot="end"
-    ></ion-icon>
-    </ion-button>
-   </ion-buttons>
+        <ion-buttons slot="start">
+            <ion-button (click)="back()">
+                <ion-icon slot="icon-only" src="assets/back.svg"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>{{chartCardData[reportData.key]?.title}}</ion-title>
+        <!-- <ion-buttons slot="end">
+            <ion-button>
+                <ion-icon slot="icon-only" class="shareicon" src="assets/MariposaIcons/Share icon.svg"></ion-icon>
+            </ion-button>
+        </ion-buttons> -->
 
-  </ion-toolbar>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="weekselect">
-    <ion-item lines="none">
-      <ion-label>17 May - 23 May 2020</ion-label>
-      <ion-select>
-        <!-- <ion-select-option value="f">Female</ion-select-option>
-        <ion-select-option value="m">Male</ion-select-option> -->
-      </ion-select>
-    </ion-item>
-    <p>This week</p>
-  </div>
-
-  <ion-card class="reportcard">
-    <ion-grid class="ion-no-padding">
-      <ion-row>
-        <ion-col size="6">
-          <span class="cardhead">Blood Pressure</span>
-        </ion-col>
-        <ion-col size="6"><span class="timesec">110/60</span></ion-col>
-        <ion-col size="12">
-          <!-- <p class="nodatatxt">No data</p> -->
-          <apx-chart
-            [series]="chartOptions.series"
-            [chart]="chartOptions.chart"
-            [dataLabels]="chartOptions.dataLabels"
-            [plotOptions]="chartOptions.plotOptions"
-            [yaxis]="chartOptions.yaxis"
-            [fill]="chartOptions.fill"
-            [grid]="chartOptions.grid"
-          ></apx-chart>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-  <div class="dtldreport">
-    <div class="dtldreportdate">
-      <p>Friday, 22 May 2020</p>
+    <div class="weekselect">
+        <ion-item lines="none">
+            <ion-label>{{dateStr}}</ion-label>
+        </ion-item>
+        <br/>
+        <p>This week</p>
+        <br/>
     </div>
-    <ion-row>
-      <ion-col size="8">
-        <p>116/70 mm Hg</p>
-      </ion-col>
-      <ion-col size="4">
-        <p class="dtldtime">9:30 am</p>
-      </ion-col>
-      <p class="dtldnote">
-        Notes details here. Notes about the entry taken at the time of
-        measurement can be seen here
-      </p>
-    </ion-row>
-  </div>
-  <div class="ion-no-padding">
-    <hr />
-  </div>
-  <div class="dtldreport2">
-    <ion-row>
-      <ion-col size="8">
-        <p>120/75 mm Hg</p>
-      </ion-col>
-      <ion-col size="4">
-        <p class="dtldtime">6:35 am</p>
-      </ion-col>
-      <p class="dtldnote">
-        Notes details here. Notes about the entry taken at the time of
-        measurement can be seen here
-      </p>
-    </ion-row>
-  </div>
 
-  <div class="dtldreport">
-    <div class="dtldreportdate">
-      <p>Friday, 22 May 2020</p>
-    </div>
-    <ion-row>
-      <ion-col size="8">
-        <p>116/70 mm Hg</p>
-      </ion-col>
-      <ion-col size="4">
-        <p class="dtldtime">9:30 am</p>
-      </ion-col>
-      <p class="dtldnote">
-        Notes details here. Notes about the entry taken at the time of
-        measurement can be seen here
-      </p>
-    </ion-row>
-  </div>
-  <div class="ion-no-padding">
-    <hr />
-  </div>
-  <div class="dtldreport2">
-    <ion-row>
-      <ion-col size="8">
-        <p>120/75 mm Hg</p>
-      </ion-col>
-      <ion-col size="4">
-        <p class="dtldtime">6:35 am</p>
-      </ion-col>
-      <p class="dtldnote">
-        Notes details here. Notes about the entry taken at the time of
-        measurement can be seen here
-      </p>
-    </ion-row>
-  </div>
-
-  <div class="dtldreport">
-    <div class="dtldreportdate">
-      <p>Friday, 22 May 2020</p>
-    </div>
-    <ion-row>
-      <ion-col size="8">
-        <p>116/70 mm Hg</p>
-      </ion-col>
-      <ion-col size="4">
-        <p class="dtldtime">9:30 am</p>
-      </ion-col>
-      <p class="dtldnote">
-        Notes details here. Notes about the entry taken at the time of
-        measurement can be seen here
-      </p>
-    </ion-row>
-  </div>
-  <div class="ion-no-padding">
-    <hr />
-  </div>
-  <div class="dtldreport2">
-    <ion-row>
-      <ion-col size="8">
-        <p>120/75 mm Hg</p>
-      </ion-col>
-      <ion-col size="4">
-        <p class="dtldtime">6:35 am</p>
-      </ion-col>
-      <p class="dtldnote">
-        Notes details here. Notes about the entry taken at the time of
-        measurement can be seen here
-      </p>
-    </ion-row>
-  </div>
-
-  <div class="dtldreport">
-    <div class="dtldreportdate">
-      <p>Friday, 22 May 2020</p>
-    </div>
-    <ion-row>
-      <ion-col size="8">
-        <p>116/70 mm Hg</p>
-      </ion-col>
-      <ion-col size="4">
-        <p class="dtldtime">9:30 am</p>
-      </ion-col>
-      <p class="dtldnote">
-        Notes details here. Notes about the entry taken at the time of
-        measurement can be seen here
-      </p>
-    </ion-row>
-  </div>
-  <div class="ion-no-padding">
-    <hr />
-  </div>
-  <div class="dtldreport2">
-    <ion-row>
-      <ion-col size="8">
-        <p>120/75 mm Hg</p>
-      </ion-col>
-      <ion-col size="4">
-        <p class="dtldtime">6:35 am</p>
-      </ion-col>
-      <p class="dtldnote">
-        Notes details here. Notes about the entry taken at the time of
-        measurement can be seen here
-      </p>
-    </ion-row>
-  </div>
+    <ion-card class="reportcard">
+        <ion-grid class="ion-no-padding" *ngIf="reportData.value">
+            <ion-row>
+                <ion-col size="6">
+                    <span class="cardhead">{{chartCardData[reportData.key]?.title}}</span>
+                </ion-col>
+                <ion-col size="6"><span class="timesec">{{reportData.value?.valueStr}}</span></ion-col>
+                <ion-col size="12">
+                    <!-- <p class="nodatatxt">No data</p> -->
+                    <ng-container *ngIf="reportData.key === 'bloodpressure'; else lineGraph">
+                        <apx-chart [series]="reportData.value.series" [chart]="chartOptions.chart" [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions" [yaxis]="chartOptions.yaxis" [fill]="chartOptions.fill" [grid]="chartOptions.grid"></apx-chart>
+                    </ng-container>
+                    <ng-template #lineGraph>
+                        <apx-chart [series]="reportData.value.series" [chart]="chartOptions5.chart" [xaxis]="chartOptions5.xaxis" [stroke]="stroke[reportData.key]" [dataLabels]="chartOptions5.dataLabels" [yaxis]="yaxis[reportData.key]" [labels]="chartOptions5.labels" [legend]="chartOptions5.legend"
+                            [fill]="fill[reportData.key]"></apx-chart>
+                    </ng-template>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+    <ng-container *ngIf="reportData?.value?.entries?.length">
+        <div class="dtldreport" *ngFor="let entry of reportData.value.entries">
+            <div class="dtldreportdate">
+                <p>{{getDayString(entry.day)}}</p>
+            </div>
+            <div *ngFor="let item of entry.values">
+                <ion-row>
+                    <ion-col size="8">
+                        <p>{{item.valueStr}} {{vitalUnits[reportData.key]}}</p>
+                    </ion-col>
+                    <ion-col size="4">
+                        <p class="dtldtime">{{getTimeString(item.selectedTime)}}</p>
+                    </ion-col>
+                    <p class="dtldnote">
+                        {{item.value.notes}}
+                    </p>
+                </ion-row>
+                <hr />
+            </div>
+            <!-- <div>
+              <ion-row>
+                  <ion-col size="8">
+                      <p>120/75 mm Hg</p>
+                  </ion-col>
+                  <ion-col size="4">
+                      <p class="dtldtime">6:35 am</p>
+                  </ion-col>
+                  <p class="dtldnote">
+                      Notes details here. Notes about the entry taken at the time of measurement can be seen here
+                  </p>
+              </ion-row>
+          </div> -->
+        </div>
+    </ng-container>
 </ion-content>

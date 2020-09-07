@@ -30,10 +30,8 @@ export class GroomingPage implements OnInit {
     }
     this.stateObject.GROOMING = this.formData;
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
-      console.log(response);
       this.navCtrl.back();
     });
-    console.log('called Save', this.formData);
   }
 
   async ionViewWillEnter(){

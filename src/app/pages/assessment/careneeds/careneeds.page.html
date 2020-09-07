@@ -1,48 +1,50 @@
 <app-m-header-close title="Care Needs"></app-m-header-close>
 
-<ion-content fullscreen *ngIf="formReady" [formGroup]="careNeedsForm">
-    <ion-grid class="careneedheadergrid">
-        <ion-row>
-            <ion-col style="padding:0px;">
-                <ion-text class="selecttext" color="mdgrey">Please select the care needs required along with the level of assistance required.</ion-text>
-            </ion-col>
-        </ion-row>
-        <ion-row style="padding-top:24px;">
-            <ion-col size="4" style="left: 70px;" class="careneeds-lable">
-                <ion-text style="float: right;">Some</ion-text>
-            </ion-col>
-            <ion-col size="4" style="left: 50px;" class="careneeds-lable">
-                <ion-text style="float: right;">Complete</ion-text>
-            </ion-col>
-            <ion-col size="4" class="careneeds-lable">
-                <ion-text style="float: right;">None</ion-text>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
-    <ion-grid class="careneedcontent scrollablecontent">
-        <ion-card *ngFor="let item of careneedinfo" class="careneeds-card">
-            <ion-grid style="padding:0px">
-                <ion-radio-group mode="md" [formControlName]="item.value" [name]="item.value">
-                    <ion-row class="contentrow">
-                        <ion-col size="5">
-                            <ion-text>
-                                <h5 class="itemname">{{item.name}}</h5>
-                            </ion-text>
-                        </ion-col>
-                        <ion-col class="radioCol">
-                            <ion-radio value="some"></ion-radio>
-                        </ion-col>
-                        <ion-col class="radioCol">
-                            <ion-radio value="complete"></ion-radio>
-                        </ion-col>
-                        <ion-col class="radioCol">
-                            <ion-radio value="none"></ion-radio>
-                        </ion-col>
-                    </ion-row>
-                </ion-radio-group>
-            </ion-grid>
-        </ion-card>
-    </ion-grid>
+<ion-content fullscreen>
+    <div *ngIf="formReady" [formGroup]="careNeedsForm">
+        <ion-grid class="careneedheadergrid">
+            <ion-row>
+                <ion-col style="padding:0px;">
+                    <ion-text class="selecttext" color="mdgrey">Please select the care needs required along with the level of assistance required.</ion-text>
+                </ion-col>
+            </ion-row>
+            <ion-row style="padding-top:24px;">
+                <ion-col size="4" style="left: 70px;" class="careneeds-lable">
+                    <ion-text style="float: right;">Some</ion-text>
+                </ion-col>
+                <ion-col size="4" style="left: 50px;" class="careneeds-lable">
+                    <ion-text style="float: right;">Complete</ion-text>
+                </ion-col>
+                <ion-col size="4" class="careneeds-lable">
+                    <ion-text style="float: right;">None</ion-text>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-grid class="careneedcontent scrollablecontent">
+            <ion-card *ngFor="let item of careneedinfo" class="careneeds-card">
+                <ion-grid style="padding:0px">
+                    <ion-radio-group mode="md" [formControlName]="item.value" [name]="item.value">
+                        <ion-row class="contentrow">
+                            <ion-col size="5">
+                                <ion-text>
+                                    <h5 class="itemname">{{item.name}}</h5>
+                                </ion-text>
+                            </ion-col>
+                            <ion-col class="radioCol">
+                                <ion-radio value="some"></ion-radio>
+                            </ion-col>
+                            <ion-col class="radioCol">
+                                <ion-radio value="complete"></ion-radio>
+                            </ion-col>
+                            <ion-col class="radioCol">
+                                <ion-radio value="none"></ion-radio>
+                            </ion-col>
+                        </ion-row>
+                    </ion-radio-group>
+                </ion-grid>
+            </ion-card>
+        </ion-grid>
+    </div>
 </ion-content>
 <ion-footer>
     <ion-grid>

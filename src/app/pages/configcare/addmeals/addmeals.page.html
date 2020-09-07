@@ -2,7 +2,7 @@
 </app-m-header-close>
 
 <ion-content [fullscreen]="true">
-    <form [formGroup]="mealForm">
+    <form [formGroup]="mealForm" *ngIf="dataLoaded">
         <p class="listtitle">Meal Type</p>
         <ion-select mode="ios" interface="popover" class="input" placeholder="Select" formControlName="type" (ionChange)="mealTypeChanged()">
             <ion-select-option *ngFor="let Option of mealData" value="{{Option.value}}" selected>{{Option.name}}</ion-select-option>
@@ -22,7 +22,7 @@
         <p class="listtitle" style="margin-top: 16px;">Favorite Recepie</p>
         <ion-select mode="ios" interface="popover" class="input" placeholder="Select" (ionChange)="navigateToPage()" formControlName="favRecepie">
             <ion-select-option value="navigate">Add More</ion-select-option>
-            <ion-select-option *ngFor="let Option of recepieData" [value]="Option.value" selected>{{Option.name}}</ion-select-option>
+            <ion-select-option *ngFor="let Option of recepieData" value="{{Option.value}}" selected>{{Option.name}}</ion-select-option>
         </ion-select>
 
 

@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage';
 import { ApiService } from 'src/app/http.service';
 import { DataserviceService } from '../dataservice.service';
 import { Md5 } from 'ts-md5/dist/md5';
+import * as moment from 'moment';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,23 +11,23 @@ export class ConfigCareServiceService {
   data: any = {};
   editSharedData = {};
   constructor(private storage: Storage,
-              private apiService: ApiService,
-              private dataService: DataserviceService) {
+              private apiService: ApiService) {
 
   }
   getStartEnd() {
-    const now = new Date();
-    const day = now.getDay();
-    const diff = now.getDate() - day + (day === 0 ? -6 : 1);
-    const start = new Date(now.setDate(diff)).toISOString().split('T')[0];
-    const end = new Date(now.setDate(now.getDate() + 6)).toISOString().split('T')[0];
+    const start = moment().startOf('week').format('YYYY-MM-DD');
+    const end = moment().endOf('week').format('YYYY-MM-DD');
     return {start, end};
   }
-  async getConfigCareDetails(){
+  getTodayStartEnd(){
+    const now = moment().format('YYYY-MM-DD');
+    return {start: now, end: now};
+  }
+  async getConfigCareDetails(reload = false, loader= false){
     const configCareDetails = await this.storage.get('configCareDetails');
-    if (!configCareDetails){
+    if (!configCareDetails || reload){
       const careCircleId = await this.storage.get('careCircleId');
-      const data = await this.apiService.get('configCare', {careCircleId});
+      const data = await this.apiService.get('configCare', {careCircleId}, loader);
       this.storage.set('configCareDetails', data);
       return data;
     }
@@ -58,9 +59,15 @@ export class ConfigCareServiceService {
   getConfigEditShared(key){
     return this.editSharedData[key];
   }
-  async getCalendatSchedule(){
+  async getCalendatSchedule(today= false){
     const careCircleId = await this.storage.get('careCircleId');
-    const dates = this.getStartEnd();
+    let dates;
+    if (today){
+      dates = this.getTodayStartEnd();
+    }
+    else{
+      dates = this.getStartEnd();
+    }
     const response = await this.apiService.get('bookvitals/schedule', {careCircleId, start: dates.start, end: dates.end});
     return response;
   }

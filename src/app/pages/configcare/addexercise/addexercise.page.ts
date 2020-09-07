@@ -5,7 +5,7 @@ import { DataserviceService } from '../../dataservice.service';
 import { NavController } from '@ionic/angular';
 import { CreatingcareService } from '../../creatingcare/creatingcare.service';
 import { AssessmentServiceService } from '../../assessment/assessment-service.service';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-addexercise',
   templateUrl: './addexercise.page.html',
@@ -19,8 +19,8 @@ export class AddexercisePage implements OnInit {
     repeatDays: new FormControl([]),
     assignedTo: new FormControl({}),
     instructions: new FormControl(''),
-    startDate: new FormControl(new Date().toISOString().split('T')[0]),
-    endDate: new FormControl(new Date().toISOString().split('T')[0]),
+    startDate: new FormControl(moment().format('YYYY-MM-DD')),
+    endDate: new FormControl(moment().format('YYYY-MM-DD')),
     imageList: new FormControl([]),
   });
   careCircleDetails;

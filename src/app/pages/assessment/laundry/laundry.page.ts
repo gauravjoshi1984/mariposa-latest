@@ -30,10 +30,8 @@ export class LaundryPage implements OnInit {
     }
     this.stateObject.LAUNDRY = this.formData;
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
-      console.log(response);
       this.navCtrl.back();
     });
-    console.log('called Save', this.formData);
   }
 
   async ionViewWillEnter(){
@@ -44,8 +42,6 @@ export class LaundryPage implements OnInit {
     const key = 'LAUNDRY';
 
     this.assessmentService.getAssessmentStateObject().then((data) => {
-      console.log('came here 33', data);
-
       // first time load
       this.stateObject = data.assessmentValues.CARE_NEEDS;
       if (data.assessmentValues.CARE_NEEDS != null && data.assessmentValues.CARE_NEEDS[key] != null){

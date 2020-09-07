@@ -63,7 +63,6 @@ export class OtpPage implements OnInit {
   }
   resendOtp(){
     this.http.post('user/resendSignUp', {email: this.email}).then((response) => {
-      console.log(response);
       this.toastService.presentToast('OTP Email Sent!', 'success');
     });
   }

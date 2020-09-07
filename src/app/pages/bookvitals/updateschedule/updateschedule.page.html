@@ -6,7 +6,7 @@
                 <ion-col size="10">
                     <div>
                         <ion-text color="mdblack" position="floating" id="titletag">Updating on today's schedule</ion-text>
-                        <ion-text class="cap" style="font-size:14px;" color="mdgrey"><br>{{date}}th {{month}}'{{year}}</ion-text>
+                        <ion-text class="cap" style="font-size:14px;" color="mdgrey"><br>{{date}}</ion-text>
                     </div>
                 </ion-col>
                 <ion-col (click)="back()">
@@ -18,52 +18,96 @@
 </ion-header>
 
 <ion-content>
-    <ion-grid class="content">
+    <ion-grid class="content" *ngIf="dataLoaded">
 
         <div [hidden]="false">
             <ion-text class="tag cap">Completed Activities</ion-text>
 
-            <ion-row style="align-items: center; margin-top: 20px;" *ngFor="let items of activityList">
+            <ion-row style="align-items: center; margin-top: 20px;" *ngFor="let item of activityList">
                 <ion-col size="1">
                     <div style="padding-left: 3px;">
-                        <ion-checkbox #activitytype color="mwhite" checked="false"></ion-checkbox>
+                        <ion-checkbox [(ngModel)]="formData.activity[item]" color="mwhite" checked="false"></ion-checkbox>
                     </div>
                 </ion-col>
-                <ion-col (click)="generateClick(activitytype)" size="11" style="padding-top: 0px;">
+                <ion-col (click)="generateClick('activity',item)" size="11" style="padding-top: 0px;">
                     <div>
-                        <ion-text style="
-                font-size: 16px;
-                line-height: 19px;
-                font-weight: 300;
-                margin-left: 12px;
-              " color="mdblack">{{items}}</ion-text>
+                        <ion-text style="font-size: 16px;line-height: 19px;font-weight: 300;margin-left: 12px;" color="mdblack ion-text-capitalize">{{item}}</ion-text>
                     </div>
                 </ion-col>
             </ion-row>
+            <hr class="solid">
+        </div>
+        <div>
+            <ion-text class="tag cap">Check Vitals
+                <ion-text class="cap" style="font-size:14px;" color="mdgrey">(Please use vitals tab to add vitals)</ion-text>
+            </ion-text>
+            <div *ngIf="vitalList.length; else noVitals;">
+                <ion-row style="align-items: center; margin-top: 20px;" *ngFor="let item of vitalList">
+                    <ion-col size="1">
+                        <div style="padding-left: 3px;">
+                            <ion-checkbox disabled [checked]="vitalValues[item.type]?.length" color="mwhite" checked="false"></ion-checkbox>
+                        </div>
+                    </ion-col>
+                    <ion-col size="11" style="padding-top: 0px;">
+                        <div>
+                            <ion-text style="font-size: 16px;line-height: 19px;font-weight: 300;margin-left: 12px;" color="mdblack ion-text-capitalize">{{item.label}}</ion-text>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </div>
+            <ng-template #noVitals>
+                <p>
+                    <ion-text class="cap" style="font-size:14px;" color="mdgrey">No Vitals for today</ion-text>
+                </p>
+            </ng-template>
+            <hr class="solid">
+        </div>
+        <div [hidden]="false">
+            <ion-text class="tag cap">Medication</ion-text>
+            <div *ngIf="medicationList.length; else noMedication;">
+                <ion-row style="align-items: center; margin-top: 20px;" *ngFor="let item of medicationList">
+                    <ion-col size="1">
+                        <div style="padding-left: 3px;">
+                            <ion-checkbox [(ngModel)]="formData.medication[item.name]" color="mwhite"></ion-checkbox>
+                        </div>
+                    </ion-col>
+                    <ion-col (click)="generateClick('medication',item.name)" size="11" style="padding-top: 0px;">
+                        <div>
+                            <ion-text style="font-size: 16px;line-height: 19px;font-weight: 300;margin-left: 12px;" color="mdblack ion-text-capitalize">{{item.name}}</ion-text>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </div>
+            <ng-template #noMedication>
+                <p>
+                    <ion-text class="cap" style="font-size:14px;" color="mdgrey">No Medication for today</ion-text>
+                </p>
+            </ng-template>
             <hr class="solid">
         </div>
 
         <div [hidden]="false">
 
             <ion-text class="tag cap">Shopping List</ion-text>
-
-            <ion-row style="align-items: center; margin-top: 20px;" *ngFor="let items of shoppingList">
-                <ion-col size="1">
-                    <div style="padding-left: 3px;">
-                        <ion-checkbox #shoppingtype color="mwhite" checked="false"></ion-checkbox>
-                    </div>
-                </ion-col>
-                <ion-col (click)="generateClick(shoppingtype)" size="11" style="padding-top: 0px;">
-                    <div>
-                        <ion-text style="
-                font-size: 16px;
-                line-height: 19px;
-                font-weight: 300;
-                margin-left: 12px;
-              " color="mdblack">{{items.name}}, {{items.quantity}}</ion-text>
-                    </div>
-                </ion-col>
-            </ion-row>
+            <div *ngIf="shoppingList.length; else noShopping;">
+                <ion-row style="align-items: center; margin-top: 20px;" *ngFor="let item of shoppingList">
+                    <ion-col size="1">
+                        <div style="padding-left: 3px;">
+                            <ion-checkbox [(ngModel)]="formData.shopping[item.name]" #shoppingtype color="mwhite"></ion-checkbox>
+                        </div>
+                    </ion-col>
+                    <ion-col (click)="generateClick('shopping',item.name)" size="11" style="padding-top: 0px;">
+                        <div>
+                            <ion-text style="font-size: 16px;line-height: 19px;font-weight: 300;margin-left: 12px;" color="mdblack">{{item.name}}, {{item.quantity}} {{item.unit}}</ion-text>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </div>
+            <ng-template #noShopping>
+                <p>
+                    <ion-text class="cap" style="font-size:14px;" color="mdgrey">No Shopping list for today</ion-text>
+                </p>
+            </ng-template>
             <hr class="solid">
         </div>
 
@@ -73,15 +117,11 @@
             <ion-text position="floating" id="tag">Notes</ion-text>
         </div>
         <div>
-            <ion-textarea style="height: 120px;" class="input" placeholder="Write here"></ion-textarea>
+            <ion-textarea [(ngModel)]="formData.notes" style="height: 150px;" rows="7" class="input" placeholder="Write here"></ion-textarea>
         </div>
 
-
         <!-- ADD IMAGE -->
-        <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
-
-
-       
+        <app-m-image-selector [(imageList)]="formData.imageList"></app-m-image-selector>
     </ion-grid>
 </ion-content>
 
@@ -90,12 +130,12 @@
         <ion-grid class="ion-no-padding">
             <ion-row>
                 <ion-col size="6">
-                    <ion-button expand="block"  class="lbtn" shape="round">
+                    <ion-button expand="block" (click)="save()" class="lbtn" shape="round">
                         SAVE
                     </ion-button>
                 </ion-col>
                 <ion-col size="6">
-                    <ion-button color="primary" expand="block" class="rbtn" shape="round">
+                    <ion-button color="primary" (click)="save(true)" expand="block" class="rbtn" shape="round">
                         SUBMIT
                     </ion-button>
                 </ion-col>

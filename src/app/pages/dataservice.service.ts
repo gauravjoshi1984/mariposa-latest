@@ -1,12 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { ApiService } from '../http.service';
+import { CreatingcareService } from './creatingcare/creatingcare.service';
+import { AssessmentServiceService } from './assessment/assessment-service.service';
+import { ConfigCareServiceService } from './configcare/config-care-service.service';
 @Injectable({
   providedIn: 'root'
 })
 export class DataserviceService {
   private data: any = {};
   private signupData: any;
-  constructor(private storage: Storage) {
+  constructor(
+    private storage: Storage,
+    private apiService: ApiService,
+    private creatingCareService: CreatingcareService,
+    private assessmentService: AssessmentServiceService,
+    private configCareService: ConfigCareServiceService) {
     this.storage.get('user').then((userData) => {
       this.data.userData = userData;
     });
@@ -79,13 +88,17 @@ export class DataserviceService {
     }
     return this.signupData;
   }
-  setAuthTokens(data){
-    this.storage.set('authTokens', data);
-  }
-  async getAuthTokens(){
-    return await this.storage.get('authTokens');
-  }
-  getInitialData(){
-
+  async getInitialData(){
+    const userData = await this.getUserInfo();
+    const careCircleData: any = await this.apiService.get('careCircle', {userId: userData.userId}, false);
+    if (careCircleData.length){
+      this.creatingCareService.setAvailableCareCircleDetails(careCircleData);
+      this.creatingCareService.setCareCircleDetails(careCircleData[0]);
+      this.creatingCareService.setCareCircleId(careCircleData[0].careCircleId);
+      this.creatingCareService.setCareCircleName(careCircleData[0].careCircleName);
+      const assessmentData = await this.apiService.get('assessment', {careCircleId: careCircleData[0].careCircleId, userId: userData.userId }, false);
+      this.assessmentService.setAssessmentStateObject(assessmentData);
+      this.configCareService.getConfigCareDetails(true, false);
+      }
   }
 }

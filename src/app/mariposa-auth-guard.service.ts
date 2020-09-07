@@ -36,7 +36,8 @@ export class MariposaAuthGuardService implements CanActivate {
         }
       }
       else if (state.url !== '/admin-sign-in'){
-        this.router.navigate(['admin-sign-in']);
+        console.log(state.url);
+        this.router.navigate(['/admin-sign-in']);
         return false;
       }
       else{

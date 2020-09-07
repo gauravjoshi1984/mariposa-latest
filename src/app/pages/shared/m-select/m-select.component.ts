@@ -14,7 +14,6 @@ export class MSelectComponent implements OnInit {
   constructor(private modalCtrl: ModalController) {}
 
   ngOnInit() {
-    console.log(this.selectOptions);
   }
   async presentModal() {
     const modal = await this.modalCtrl.create({
@@ -24,7 +23,6 @@ export class MSelectComponent implements OnInit {
       componentProps: { data: this.selectOptions },
     });
     modal.onDidDismiss().then((x: any) => {
-      console.log(x.data.value);
       this.result.emit(x.data.value);
     });
     return await modal.present();
@@ -41,7 +39,6 @@ export class selectModelComponent {
   @Input() data: any;
   constructor(private modalCtrl: ModalController) {}
   valueChange(ev: any) {
-    console.log(ev);
     this.modalCtrl.dismiss({ value: ev.detail.value });
   }
 }

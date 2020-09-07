@@ -1,7 +1,7 @@
 <app-m-header-close title="Personal Information"></app-m-header-close>
 
 <ion-content fullscreen scrollable [formGroup]="personalInfoForm">
-    <ion-grid style="padding-top: 35px;padding-left: 24px;padding-right: 24px;padding-bottom: 13px;height: auto;margin-bottom: 73px;
+    <ion-grid *ngIf="formLoaded" style="padding-top: 35px;padding-left: 24px;padding-right: 24px;padding-bottom: 13px;height: auto;margin-bottom: 73px;
     ">
         <!-- FIRST NAME TAG -->
         <div class="nametag" style="padding: 0px; margin: 0px;">
@@ -127,7 +127,7 @@
             <ion-text position="floating" id="tag">Country</ion-text>
         </div>
         <div>
-            <ion-select formControlName="country" mode="ios" interface="popover" class="input" placeholder="Select Country">
+            <ion-select [compareWith]="compareFn" formControlName="country" mode="ios" interface="popover" class="input" placeholder="Select Country">
                 <ion-select-option [value]="item.name" *ngFor="let item of countries">{{item.name}}</ion-select-option>
             </ion-select>
         </div>

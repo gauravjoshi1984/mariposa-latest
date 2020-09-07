@@ -59,7 +59,7 @@
             </ion-col>
             <ion-col size="10">
                 <ng-container *ngFor="let item of timeLineShifts.events">
-                    <ion-card class="timelinecard" [style.height]="item['height']" *ngIf="item.key;else emptyspace">
+                    <ion-card class="timelinecard" [style.top.px]="item['top']" [style.height]="item['height']" *ngIf="item.key;else emptyspace">
                         <h1>{{item.key}}</h1>
                         <h4>
                             {{item.startTime | date:'hh:mm aa'}} - {{item.endTime| date:'hh:mm aa' }}

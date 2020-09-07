@@ -1,5 +1,5 @@
 <ion-header>
-    <!-- <ion-toolbar>
+    <ion-toolbar>
        
         <ion-segment value="addvitals" mode="ios" style="margin-top: 40px;" *ngIf="userInfo && (userInfo.userType=='SENIOR' || userInfo.userType=='CAREGIVER')" [(ngModel)]="segmentVar">
             <ion-segment-button value="addvitals">
@@ -24,11 +24,11 @@
                 <ion-icon class="propic" mode="md" src="assets/MariposaIcons/profile_img.svg"></ion-icon>
             </ion-button>
         </ion-buttons>
-    </ion-toolbar> -->
-    <app-tab-header
+    </ion-toolbar>
+    <!-- <app-tab-header
     [page]="'vital'"
     (getDataVital)="setData($event)"
-  ></app-tab-header>
+  ></app-tab-header> -->
 </ion-header>
 
 <ion-content class="pagebckd" *ngIf="(userInfo.userType=='ADMIN' || userInfo.userType=='FAMILY') || segmentVar=='reports'">

@@ -8,6 +8,7 @@ import { EditmembersPageRoutingModule } from './editmembers-routing.module';
 
 import { EditmembersPage } from './editmembers.page';
 import { SharedModule } from '../../shared/shared.module';
+import { DeleteconfirmComponent } from './deleteconfirm/deleteconfirm.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { SharedModule } from '../../shared/shared.module';
     EditmembersPageRoutingModule,
     SharedModule,
   ],
-  declarations: [EditmembersPage]
+  declarations: [EditmembersPage, DeleteconfirmComponent]
 })
 export class EditmembersPageModule {}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -13,50 +13,50 @@ export class AddothertasksPage implements OnInit {
     taskName: new FormControl(),
     timeList: new FormControl([]),
     repeatDays: new FormControl([]),
-    startDate: new FormControl("2020-05-12T13:47:20.789"),
-    endDate: new FormControl("2020-05-12T13:47:20.789"),
-    instructions: new FormControl(""),
+    startDate: new FormControl('2020-05-12T13:47:20.789'),
+    endDate: new FormControl('2020-05-12T13:47:20.789'),
+    instructions: new FormControl(''),
     images: new FormControl([]),
   });
 
   timeList = [];
   customPickerOptions: any;
   timeindex: number;
-  instructions = "";
+  instructions = '';
   imageList = [];
   daysList = [
     {
-      name: "s",
-      value: "Sunday",
+      name: 's',
+      value: 'Sunday',
     },
     {
-      name: "m",
-      value: "Monday",
+      name: 'm',
+      value: 'Monday',
     },
     {
-      name: "t",
-      value: "Tuesday",
+      name: 't',
+      value: 'Tuesday',
     },
     {
-      name: "w",
-      value: "Wednesday",
+      name: 'w',
+      value: 'Wednesday',
     },
     {
-      name: "t",
-      value: "Thursday",
+      name: 't',
+      value: 'Thursday',
     },
     {
-      name: "f",
-      value: "Friday",
+      name: 'f',
+      value: 'Friday',
     },
     {
-      name: "s",
-      value: "Saturday",
+      name: 's',
+      value: 'Saturday',
     },
   ];
   selectedDays = [];
   constructor() {
-    
+
   }
 
   refresh(ev) {
@@ -71,11 +71,11 @@ export class AddothertasksPage implements OnInit {
   addDate() {
     this.timeList.push(new Date());
   }
-  
-  
+
+
   addremoveDay(item) {
     if (this.selectedDays.includes(item.value)) {
-      let index = this.selectedDays.indexOf(item.value);
+      const index = this.selectedDays.indexOf(item.value);
       this.selectedDays.splice(index, 1);
     } else {
       this.selectedDays.push(item.value);
@@ -83,14 +83,12 @@ export class AddothertasksPage implements OnInit {
   }
 
   setData(ev: any, formname) {
-    console.log(ev, "|||||");
     this.taskForm.patchValue({ [formname]: ev });
   }
   submit() {
     this.taskForm.patchValue({ timeList: this.timeList });
     this.taskForm.patchValue({ repeatDays: this.selectedDays });
     this.taskForm.patchValue({ images: this.imageList });
-    console.log(this.taskForm.value);
   }
 
   addtime(ev, key){

@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ConfigCareServiceService } from '../config-care-service.service';
-import { DataserviceService } from '../../dataservice.service';
-
+import { CreatingcareService } from '../../creatingcare/creatingcare.service';
+import { AssessmentServiceService } from '../../assessment/assessment-service.service';
+import { BookVitalsService } from '../../bookvitals/book-vital.service';
+import * as moment from 'moment';
 @Component({
   selector: 'app-assignshoppinglist',
   templateUrl: './assignshoppinglist.page.html',
@@ -11,27 +13,18 @@ import { DataserviceService } from '../../dataservice.service';
 export class AssignshoppinglistPage implements OnInit {
   configCareDetails: any;
   key: any;
-  shoppingData = [];
-  shoppinglist = [
-  {
-    name: 'Tissue Roll',
-    brand: 'Quality Brand',
-    isChecked: false,
-  },
-  {
-    name: 'Tooth Paste',
-    brand: 'Pepsodent',
-    isChecked: false,
-  }
- ];
-
+  formData: any = {};
+  shoppinglist: any = [];
+  careCircleDetails;
   timeList = [];
 
   customPickerOptions: any;
   constructor(
     private configCareService: ConfigCareServiceService,
-    private dataService: DataserviceService,
-    private navCtrl: NavController
+    private bookVitalService: BookVitalsService,
+    private navCtrl: NavController,
+    private careCircleService: CreatingcareService,
+    private assessmentService: AssessmentServiceService
   ) {}
 
   ngOnInit() {
@@ -39,23 +32,31 @@ export class AssignshoppinglistPage implements OnInit {
   }
   async populateOptions(){
     this.configCareDetails = await this.configCareService.getConfigCareDetails();
-    this.key = 'EXERCISE';
-    const configuration = this.configCareDetails.configCareConfiguration[this.key];
-    configuration.type.forEach(element => {
-      this.shoppingData.push({name : element, value : element});
+    const assessmentState = await this.assessmentService.getAssessmentStateObject();
+    this.key = 'SHOPPING';
+    this.shoppinglist = assessmentState.assessmentValues.CARE_NEEDS[this.key].map(item => ({...item, isChecked: false}));
+  }
+  async ionViewWillEnter(){
+    this.careCircleDetails = await this.careCircleService.getCareCircleDetails();
+    this.careCircleDetails = this.careCircleDetails.members.map(item => {
+      return {type: item.userType, assigned: {userId: item.userId, userName: item.userName }};
     });
-    const savedConfig = this.configCareDetails.configCareValues[this.key];
-    if (savedConfig != null){
-        this.timeList = savedConfig.timeList;
-    }
+    // this.careCircleDetails = [{type: 'CAREGIVER'}, ...this.careCircleDetails];
+    this.populateOptions();
   }
-  addDate() {
-    this.timeList.push(new Date());
-  }
-  addtime(ev, key){
+  addtime(ev, key) {
     this.timeList = ev;
   }
   save(){
-    console.log(this.timeList);
+    const dataObj = {date: moment().format('YYYY-MM-DD'), hours: this.timeList[0].hours, minutes: this.timeList[0].minutes, list: []};
+    dataObj.list = this.shoppinglist.filter(item => item.isChecked);
+    this.bookVitalService.addActivity(this.key, dataObj).then((response: any) => {
+      if (response){
+        this.navCtrl.back();
+      }
+    });
+  }
+  compareFn(val1, val2): boolean {
+    return val1 && val2 ? val1.type === val2.type : val1 === val2;
   }
 }

@@ -18,7 +18,7 @@ export class EditbathingPage implements OnInit {
     timeList: new FormControl([]),
     repeatDays: new FormControl([]),
     instructions: new FormControl(''),
-    caregivername:new FormControl(''),
+    caregivername: new FormControl(''),
     images: new FormControl([]),
   });
 
@@ -28,7 +28,7 @@ export class EditbathingPage implements OnInit {
   instructions = '';
   caregivername = '';
   imageList = [];
-  caregiverList =["Mary","Anna"]
+  caregiverList = ['Mary', 'Anna'];
   daysList = [
     {
       name: 's',
@@ -61,29 +61,25 @@ export class EditbathingPage implements OnInit {
   ];
   selectedDays = [];
 
-  constructor(private imagePicker: ImagePicker) { 
+  constructor(private imagePicker: ImagePicker) {
     this.customPickerOptions = {
       buttons: [
         {
           text: 'Submit',
           handler: (x) => {
-            console.log('Clicked Save!', x);
             if (this.timeList[this.timeindex]) {
               const dateVar = new Date();
               dateVar.setHours(
-                x.ampm.value == 'pm' ? x.hour.value + 12 : x.hour.value
+                x.ampm.value === 'pm' ? (x.hour.value !== 12 ? x.hour.value + 12 : 12) : (x.hour.value === 12 ? 0 : x.hour.value)
               );
               dateVar.setMinutes(x.minute.value);
-              this.timeList[this.timeindex] = dateVar;
-
-              console.log(this.timeList[this.timeindex]);
+              this.timeList[this.timeindex] = {hours: dateVar.getHours(), minutes: dateVar.getMinutes()};
             }
           },
         },
         {
           text: 'Delete',
           handler: () => {
-            console.log('Clicked Log. Do not Dismiss.');
             // return false;
             this.timeList.splice(this.timeindex, 1);
           },
@@ -106,7 +102,6 @@ export class EditbathingPage implements OnInit {
   }
   changeTime(i) {
     this.datepicker.open().then((x) => {
-      console.log(x);
       this.timeindex = i;
     });
   }
@@ -116,7 +111,6 @@ export class EditbathingPage implements OnInit {
     };
     this.imagePicker.getPictures(options).then(
       (results) => {
-        console.log(results);
         for (let i = 0; i < results.length; i++) {
           this.imageList.push(results[i]);
         }
@@ -125,7 +119,6 @@ export class EditbathingPage implements OnInit {
     );
   }
   removeImg(i) {
-    console.log('*', i);
     this.imageList.splice(i, 1);
   }
 
@@ -142,10 +135,8 @@ export class EditbathingPage implements OnInit {
     this.editbathingForm.patchValue({ timeList: this.timeList });
     this.editbathingForm.patchValue({ repeatDays: this.selectedDays });
     this.editbathingForm.patchValue({ images: this.imageList });
-    console.log(this.editbathingForm.value);
   }
   setData(ev: any, formname) {
-    console.log(ev, '|||||');
     this.editbathingForm.patchValue({ [formname]: ev });
   }
 

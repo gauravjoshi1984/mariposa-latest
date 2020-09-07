@@ -34,7 +34,7 @@
             </ion-row>
             <ion-row [hidden]="member['userType'] === 'ADMIN'">
                 <ion-col style="padding-bottom: 0px;">
-                    <ion-button class="pending">
+                    <ion-button *ngIf="member['careCircleStatus'] === 'Pending'" class="pending">
                         <ion-icon slot="icon-only" src="assets/MariposaIcons/Error.svg"></ion-icon>
                         Invitation Pending
                     </ion-button>

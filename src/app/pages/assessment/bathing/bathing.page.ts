@@ -32,7 +32,6 @@ export class BathingPage implements OnInit {
       this.stateObject = {};
     }
     this.stateObject.BATHING = {...this.bathingForm.value, imageList: this.imageList};
-    console.log(this.stateObject.BATHING);
     this.assessmentService.saveAssessmentState(this.careCircleId, 'CARE_NEEDS', this.userId, this.stateObject).then((response) => {
       this.navCtrl.back();
     });

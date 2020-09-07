@@ -38,7 +38,6 @@ export class CarecirclePage implements OnInit {
         this._creatingCareService.setCareCircleDetails(data);
       }
       else{
-        console.log(data);
       }
     });
   }
@@ -64,7 +63,6 @@ export class CarecirclePage implements OnInit {
       mode: 'ios',
     });
     popover.onDidDismiss().then((result) => {
-      console.log(result);
     });
     return await popover.present();
   }

@@ -329,29 +329,29 @@ hr.solid {
 }
 
 ion-checkbox {
-  
-  //--border-color-checked: blue;
-  //  --border-radius: 4px;
-  //  --border-color: black;
-  //  --border-width: 1px;
-  //  height: 16px;
-  //  width: 16px;
-  //  --checkmark-color: blue;
-   // --border-style: solid;
-  --border-color-checked: #4b62fc !important;
-  --border-style: solid;
-  --height: 24px;
-  --checkmark-color: blue;
-  --width: 24px;
-  --border-width: 1px;
-  --border-radius: 4px;
-  --border-color: #000000;
+    //--border-color-checked: blue;
+    //  --border-radius: 4px;
+    //  --border-color: black;
+    //  --border-width: 1px;
+    //  height: 16px;
+    //  width: 16px;
+    //  --checkmark-color: blue;
+    // --border-style: solid;
+    --border-color-checked: #4b62fc !important;
+    --border-style: solid;
+    --height: 24px;
+    --checkmark-color: blue;
+    --width: 24px;
+    --border-width: 1px;
+    --border-radius: 4px;
+    --border-color: #000000;
 }
 
-ion-checkbox::part(container){
+ion-checkbox::part(container) {
     padding: 1px;
 }
-ion-checkbox::part(mark){
+
+ion-checkbox::part(mark) {
     stroke-width: 5px;
 }
 
@@ -560,33 +560,37 @@ ion-footer {
 
 .addactivity-class {
     .modal-wrapper {
-      position: absolute;
-      //width: 766px !important;
-      height: 590px ;
-      //top: calc(100% - (500px));
-      //left: calc(100% - (766px)) !important;
-      bottom:0%;
+        position: absolute;
+        //width: 766px !important;
+        height: 290px;
+        //top: calc(100% - (500px));
+        //left: calc(100% - (766px)) !important;
+        bottom: 0%;
     }
-  
     .popover-content {
-      background: #ffffff00;
-      border: 1px solid #b8b8b8;
-      box-sizing: border-box;
-      /* Header_text */
-      box-shadow: 0px 2px 8px rgba(65, 55, 255, 0.08);
-      border-radius: 8px;
+        background: #ffffff00;
+        border: 1px solid #b8b8b8;
+        box-sizing: border-box;
+        /* Header_text */
+        box-shadow: 0px 2px 8px rgba(65, 55, 255, 0.08);
+        border-radius: 8px;
     }
-  }
+}
 
-  .popoverstylepl {
+.popoverstylepl {
     --backdrop-opacity: 0.7;
     --background: #1a1a1a;
     .popover-content {
-      width: 286px;
-      left: calc(85px - var(--ion-safe-area-right, 0px)) !important;
-      padding-top: 0px;
+        width: 286px;
+        left: calc(85px - var(--ion-safe-area-right, 0px)) !important;
+        padding-top: 0px;
     }
-  }
-  app-profilelist {
+}
+
+.popover-content {
+    --width: auto !important;
+}
+
+app-profilelist {
     width: 286px;
-  }
+}

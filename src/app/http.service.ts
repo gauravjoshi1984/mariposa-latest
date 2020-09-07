@@ -1,10 +1,9 @@
-import { Storage } from '@ionic/storage';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
-import { DataserviceService } from './pages/dataservice.service';
 import { Router } from '@angular/router';
+import { UserAuthService } from './pages/onboarding/user-auth.service';
 
 // const urlPrefix = 'http://localhost:8080/';
 const urlPrefix = 'https://lywob7s34m.execute-api.us-east-1.amazonaws.com/dev1/';
@@ -16,8 +15,8 @@ export class ApiService{
     token: string;
     loading;
     constructor(private http: HttpClient, private loadingController: LoadingController, private toastController: ToastController,
-                private dataService: DataserviceService,
-                private router: Router){
+                private navCtrl: NavController,
+                private authService: UserAuthService){
     }
     private async presentLoading() {
         return await this.loadingController.create({
@@ -26,7 +25,7 @@ export class ApiService{
         });
     }
     private async getHeaders(){
-        const authTokens = await this.dataService.getAuthTokens();
+        const authTokens = await this.authService.getAuthTokens();
         let headers = new HttpHeaders();
         if (authTokens){
             // headers = headers.append('Content-Type', 'application/json');
@@ -38,7 +37,7 @@ export class ApiService{
     private setHeaders(data){
         if (data && data.keys().indexOf('mariposa-auth-status') >= 0 && data.get('mariposa-auth-status') === 'Updated'){
             const headers = {accessToken: data.get('newaccesstoken'), refreshToken: data.get('newrefreshtoken')};
-            this.dataService.setAuthTokens(headers);
+            this.authService.setAuthTokens(headers);
         }
     }
     private async presentToast(message) {
@@ -58,14 +57,14 @@ export class ApiService{
             // console.log(error.headers.keys());
             // if (error.status === 401 && (error.headers.get('mariposa-auth-status') === 'Denied' || error.headers.get('mariposa-auth-status') === 'Re-Login')){
             if (error.status === 401 || error.status === 403){
-                this.dataService.setUserInfo(null);
+                this.authService.setUserInfo(null);
                 if (error.error){
                     this.presentToast(error.error.msg);
                     return error.error;
                 }
                 else{
                     this.presentToast('Please login again!!');
-                    this.router.navigateByUrl('/admin-sign-in', { skipLocationChange: true, replaceUrl: true });
+                    this.navCtrl.navigateRoot('/admin-sign-in');
                 }
             }
             else if (error.error){
@@ -77,18 +76,25 @@ export class ApiService{
             }
         }
     }
-    get(route, params){
+    get(route, params, loader= true){
         return new Promise(async (resolve, reject) => {
             const headers = await this.getHeaders();
             const URL = urlPrefix + route;
-            const loading = await this.presentLoading();
-            loading.present();
+            let loading;
+            if (loader){
+                loading = await this.presentLoading();
+                loading.present();
+            }
             this.http.get(URL, {params, observe: 'response', headers}).subscribe((response: any) => {
                 this.setHeaders(response.headers);
-                loading.dismiss();
+                if (loader){
+                    loading.dismiss();
+                }
                 resolve(response.body);
             }, error => {
-                loading.dismiss();
+                if (loader){
+                    loading.dismiss();
+                }
                 this.httpErrorHandler(error);
             });
         });

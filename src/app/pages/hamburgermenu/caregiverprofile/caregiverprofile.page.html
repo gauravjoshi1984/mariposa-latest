@@ -3,7 +3,7 @@
         <ion-buttons class="backbutton" slot="start">
             <m-backbutton></m-backbutton>
         </ion-buttons>
-        <ion-title class="name cap" color="mdblack" position="floating" id="titletag">{{caregiver}}'s Profile</ion-title>
+        <ion-title *ngIf="member" class="name cap" color="mdblack" position="floating" id="titletag">{{member.userName}}'s Profile</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -80,14 +80,14 @@
                         <ion-col size="6">
                             <p class="datelabel">Start Time</p>
                             <ion-button fill="outline" class="datebtn">
-                                <ion-datetime displayFormat="hh:mm A" [(ngModel)]="item.startTime"></ion-datetime>
+                                <ion-datetime displayFormat="hh:mm A" [(ngModel)]="item.startTime" minuteValues="0,15,30,45"></ion-datetime>
                                 <ion-icon class="timeicon" src="assets/MariposaIcons/Timeicon.svg"></ion-icon>
                             </ion-button>
                         </ion-col>
                         <ion-col size="6">
                             <p class="datelabel">End Time</p>
                             <ion-button fill="outline" class="datebtn right">
-                                <ion-datetime displayFormat="hh:mm A" [(ngModel)]="item.endTime"></ion-datetime>
+                                <ion-datetime displayFormat="hh:mm A" [(ngModel)]="item.endTime" minuteValues="0,15,30,45"></ion-datetime>
                                 <ion-icon class="timeicon" src="assets/MariposaIcons/Timeicon.svg"></ion-icon>
                             </ion-button>
                         </ion-col>
@@ -97,14 +97,14 @@
                         <ion-col size="6">
                             <p class="datelabel">Start Date</p>
                             <ion-button fill="outline" class="datebtn">
-                                <ion-datetime [(ngModel)]="item.startDate" displayFormat="DD-MMM-YYYY"></ion-datetime>
+                                <ion-datetime [(ngModel)]="item.startDate" displayFormat="DD-MMM-YYYY" [min]="min"></ion-datetime>
                                 <ion-icon slot="end" src="assets/MariposaIcons/Calendar icon.svg"></ion-icon>
                             </ion-button>
                         </ion-col>
                         <ion-col size="6">
                             <p class="datelabel">End Date</p>
                             <ion-button fill="outline" class="datebtn right">
-                                <ion-datetime [(ngModel)]="item.endDate" displayFormat="DD-MMM-YYYY"></ion-datetime>
+                                <ion-datetime [(ngModel)]="item.endDate" displayFormat="DD-MMM-YYYY" [min]="min"></ion-datetime>
                                 <ion-icon slot="end" src="assets/MariposaIcons/Calendar icon.svg"></ion-icon>
                             </ion-button>
                         </ion-col>

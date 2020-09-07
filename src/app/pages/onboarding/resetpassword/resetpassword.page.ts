@@ -81,7 +81,6 @@ export class ResetpasswordPage implements OnInit {
   }
   resendOtp(){
     this.http.post('user/resendPassword', {email: this.email}).then((response) => {
-      console.log(response);
       this.toastService.presentToast('OTP Email sent!', 'success');
     });
   }

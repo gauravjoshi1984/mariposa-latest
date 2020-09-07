@@ -37,7 +37,6 @@ export class MedicalconditionsPage implements OnInit {
   save(){
     this.stateObject = this.medicalForm;
     this.assessmentService.saveAssessmentState(this.careCircleId, this.key, this.userId, this.stateObject).then((response) => {
-      console.log(response);
       this.navCtrl.back();
     });
   }

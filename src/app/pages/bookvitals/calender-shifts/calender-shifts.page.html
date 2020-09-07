@@ -1,5 +1,5 @@
 <ion-header>
-    <!-- <ion-toolbar class="toolbarshadow">
+    <ion-toolbar class="toolbarshadow">
         <ion-segment [(ngModel)]="segValue" mode="ios">
             <ion-segment-button value="activities">
                 <ion-label>Activities</ion-label>
@@ -16,11 +16,11 @@
                 <ion-icon class="propic" mode="md" src="assets/MariposaIcons/profile_img.svg"></ion-icon>
             </ion-button>
         </ion-buttons>
-    </ion-toolbar> -->
-    <app-tab-header
+    </ion-toolbar>
+    <!-- <app-tab-header
     [page]="'calender'"
     (getData)="setData($event)"
-  ></app-tab-header>
+  ></app-tab-header> -->
     <app-calenderdate *ngIf="dataLoaded" (dayselected)="ChangeData($event)" [showMonth]="true"></app-calenderdate>
 </ion-header>
 

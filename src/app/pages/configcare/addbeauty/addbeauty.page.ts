@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-addbeauty',
@@ -9,65 +9,65 @@ import { FormGroup, FormControl } from "@angular/forms";
 export class AddbeautyPage implements OnInit {
 
   beautyForm = new FormGroup({
-    groomingType: new FormControl(""),
+    groomingType: new FormControl(''),
     timeList: new FormControl([]),
     repeatDays: new FormControl([]),
-    instructions: new FormControl(""),
+    instructions: new FormControl(''),
     images: new FormControl([]),
   });
 
   timeList = [];
   customPickerOptions: any;
   timeindex: number;
-  instructions = "";
+  instructions = '';
   imageList = [];
   groomingData = [
     {
-      name:"Hair cut",
-      value:"haircut"
+      name:'Hair cut',
+      value:'haircut'
     },
     {
-      name:"Shave",
-      value:"shave"
+      name:'Shave',
+      value:'shave'
     },
     {
-      name:"Massage",
-      value:"massage",
+      name:'Massage',
+      value:'massage',
     },
-  ]
+  ];
   daysList = [
     {
-      name: "s",
-      value: "Sunday",
+      name: 's',
+      value: 'Sunday',
     },
     {
-      name: "m",
-      value: "Monday",
+      name: 'm',
+      value: 'Monday',
     },
     {
-      name: "t",
-      value: "Tuesday",
+      name: 't',
+      value: 'Tuesday',
     },
     {
-      name: "w",
-      value: "Wednesday",
+      name: 'w',
+      value: 'Wednesday',
     },
     {
-      name: "t",
-      value: "Thursday",
+      name: 't',
+      value: 'Thursday',
     },
     {
-      name: "f",
-      value: "Friday",
+      name: 'f',
+      value: 'Friday',
     },
     {
-      name: "s",
-      value: "Saturday",
+      name: 's',
+      value: 'Saturday',
     },
   ];
   selectedDays = [];
   constructor() {
-    
+
   }
 
   refresh(ev) {
@@ -82,25 +82,23 @@ export class AddbeautyPage implements OnInit {
   addDate() {
     this.timeList.push(new Date());
   }
-  
-  
+
+
   addremoveDay(item) {
     if (this.selectedDays.includes(item.value)) {
-      let index = this.selectedDays.indexOf(item.value);
+      const index = this.selectedDays.indexOf(item.value);
       this.selectedDays.splice(index, 1);
     } else {
       this.selectedDays.push(item.value);
     }
   }
   setData(ev: any, formname) {
-    console.log(ev, "|||||");
     this.beautyForm.patchValue({ [formname]: ev });
   }
   submit() {
     this.beautyForm.patchValue({ timeList: this.timeList });
     this.beautyForm.patchValue({ repeatDays: this.selectedDays });
     this.beautyForm.patchValue({ images: this.imageList });
-    console.log(this.beautyForm.value);
   }
 
   addtime(ev, key){

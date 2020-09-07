@@ -39,7 +39,6 @@ export class TabsPage implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.iontab);
   }
   changeTab(i) {
     this.TabsData.forEach((element) => {

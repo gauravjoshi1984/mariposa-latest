@@ -19,7 +19,6 @@ export class MedicationPage implements OnInit {
   }
   async ionViewWillEnter(){
     this.medicationDetails = (await this.configCareService.getConfigCareDetails()).configCareValues?.MEDICATION;
-    console.log(this.medicationDetails);
     if (this.medicationDetails?.length){
       this.medTable = this.medicationDetails.map(item => (
         {

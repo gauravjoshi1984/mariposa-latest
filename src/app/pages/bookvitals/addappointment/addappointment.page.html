@@ -1,72 +1,69 @@
 <ion-header mode="md">
-  <ion-toolbar class="headtoolbar">
-      <ion-buttons class="backbutton" slot="start">
-          <m-backbutton></m-backbutton>
-      </ion-buttons>
-      <ion-title class="name cap" color="mdblack" position="floating" id="titletag">Add Appointment</ion-title>
-  </ion-toolbar>
+    <ion-toolbar class="headtoolbar">
+        <ion-buttons class="backbutton" slot="start">
+            <m-backbutton></m-backbutton>
+        </ion-buttons>
+        <ion-title class="name cap" color="mdblack" position="floating" id="titletag">Add Appointment</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 
-  <ion-content class= "pagebckd" fullscreen>
-    <ion-grid class="content">
+<ion-content class="pagebckd" fullscreen>
+    <ion-grid class="content" [formGroup]="appointmentForm">
 
-      <div class="nametag">
-        <ion-text position="floating" id="tag">Appointment type</ion-text>
-    </div>
-    <div>
-        <ion-select  mode="ios" interface="popover" class="input" placeholder="Select"></ion-select>
-    </div>
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Appointment type</ion-text>
+        </div>
+        <div>
+            <ion-input formControlName="type" mode="md" class="input" placeholder="Appointment type"></ion-input>
+        </div>
 
-      <ion-row class="timerow">
-        <ion-col >
-          <p class="datelabel">Select Date</p>
-          <ion-button fill="outline" expand="block" class="datebtn left">
-              <ion-datetime slot="start" expand="block" displayFormat="DD-MMM-YYYY" value="16-May-2020" ></ion-datetime>
-              <ion-icon slot="end" src="assets/MariposaIcons/Calendar icon.svg"></ion-icon>
-          </ion-button>
-      </ion-col>
-  </ion-row>
+        <ion-row class="timerow">
+            <ion-col>
+                <p class="datelabel">Select Date</p>
+                <ion-button fill="outline" expand="block" class="datebtn left">
+                    <ion-datetime formControlName="date" slot="start" expand="block" displayFormat="DD-MMM-YYYY" [value]="currentDate" [min]="min"></ion-datetime>
+                    <ion-icon slot="end" src="assets/MariposaIcons/Calendar icon.svg"></ion-icon>
+                </ion-button>
+            </ion-col>
+        </ion-row>
 
-  <!-- SELECT TIME -->
+        <!-- SELECT TIME -->
 
-  <m-selectdate (result)="addtime($event,'timeList')"></m-selectdate>
+        <m-selectdate [times]="timeList" single="true" (result)="addtime($event,'timeList')"></m-selectdate>
 
-  <!-- END TIME -->
+        <!-- END TIME -->
 
-  <div class="nametag">
-    <ion-text position="floating" id="tag">Location (Optional)</ion-text>
-</div>
-<div>
-    <ion-input  mode="md" class="input" placeholder="Enter location"></ion-input>
-</div>
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Location (Optional)</ion-text>
+        </div>
+        <div>
+            <ion-input formControlName="location" mode="md" class="input" placeholder="Enter location"></ion-input>
+        </div>
 
-<div class="nametag">
-  <ion-text position="floating" id="tag">Assign To</ion-text>
-</div>
-<div>
-  <ion-select mode="ios" interface="popover" class="input" placeholder = "Mary (Default Shift)"></ion-select>
-</div>
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Assign To</ion-text>
+        </div>
+        <ion-select formControlName="assignedTo" mode="ios" [compareWith]="compareFn" interface="popover" class="input" placeholder="Assigned To">
+            <ion-select-option [value]="item" *ngFor="let item of careCircleDetails">{{item.assigned ? item.assigned.userName : 'Caregiver'}}</ion-select-option>
+        </ion-select>
 
-<!-- INSTRUCTIONS -->
+        <!-- INSTRUCTIONS -->
 
-<div class="nametag">
-    <ion-text position="floating" id="tag">Notes</ion-text>
-</div>
-<div>
-    <ion-textarea  style="height: 120px;" class="input" placeholder="Add notes about appointment"></ion-textarea>
-</div>
+        <div class="nametag">
+            <ion-text position="floating" id="tag">Notes</ion-text>
+        </div>
+        <div>
+            <ion-textarea formControlName="instructions" style="height: 120px;" class="input" placeholder="Add notes about appointment"></ion-textarea>
+        </div>
 
- <!-- ADD IMAGE -->
- <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
-
-
-
+        <!-- ADD IMAGE -->
+        <app-m-image-selector [(imageList)]="imageList"></app-m-image-selector>
 
     </ion-grid>
 </ion-content>
-  <ion-footer>
+<ion-footer [formGroup]="appointmentForm">
     <div id="button">
-        <ion-button [disabled]="false" class="btnblue" type="submit" id="signup">ADD</ion-button>
+        <ion-button [disabled]="appointmentForm.invalid" (click)="save()" class="btnblue" type="submit" id="signup">ADD</ion-button>
     </div>
 </ion-footer>

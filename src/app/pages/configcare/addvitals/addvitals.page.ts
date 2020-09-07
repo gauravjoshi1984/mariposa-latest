@@ -134,7 +134,6 @@ export class AddvitalsPage implements OnInit {
     return val1 && val2 ? val1.type === val2.type : val1 === val2;
   }
   compareFnValue(val1, val2): boolean {
-    console.log(val1, val2);
     return val1 === val2;
   }
 }
