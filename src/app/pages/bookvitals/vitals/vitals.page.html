@@ -31,7 +31,7 @@
   ></app-tab-header>
 </ion-header>
 
-<ion-content class="pagebckd" *ngIf="(userInfo.userType=='ADMIN' || userInfo.userType=='FAMILY') && segmentVar=='reports'">
+<ion-content class="pagebckd" *ngIf="(userInfo.userType=='ADMIN' || userInfo.userType=='FAMILY') || segmentVar=='reports'">
     <!-- <ng-container *ngIf="!showData">
     <ion-card class="reportcard">
     
@@ -205,7 +205,7 @@
 
     <!-- End Blood Glucose -->
 </ion-content>
-<ion-content class="pagebckd" *ngIf="userInfo.userType=='SENIOR' || segmentVar=='addvitals'">
+<ion-content class="pagebckd" *ngIf="userInfo.userType=='SENIOR' && segmentVar=='addvitals'">
     <ng-container *ngIf="vitalCards.length; else noVitals;">
         <ion-card class="cardstyle" (click)="gotoModel(item)" *ngFor="let item of vitalCards">
             <ion-row>

@@ -53,10 +53,10 @@ export class TabHeaderComponent implements OnInit {
     const tmp = await this._creatingCareService.getCareCircleDetails();
     const members = tmp && tmp.members ? tmp.members : null;
     // debugger;
-    // const user = members.find(member => member.userId === userData.userId);
-    const user = {
-      userType: "SENIOR",
-    };
+    const user = members.find(member => member.userId === userData.userId);
+    // const user = {
+    //   userType: "SENIOR",
+    // };
     return user;
   }
   toggleData() {
